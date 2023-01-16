@@ -50,6 +50,9 @@ function ProfileButton({ user }) {
           <ul className="profile-dropdown">
             <li id="profileinfo"><span id="bold">USERNAME:</span> {sessionUser.username}</li>
             <li id="profileinfo"><span id="bold">EMAIL: </span>{sessionUser.email}</li>
+            <li><Link to={'/posts'}>All Posts</Link></li>
+            <li><Link to={'/profile'}>Profile</Link></li>
+            <li><Link to={'/posts/new'}>Write a Post</Link></li>
             <li>
               <button id="logout" onClick={logout}>Log Out</button>
             </li>

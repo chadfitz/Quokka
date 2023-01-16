@@ -50,10 +50,9 @@ function NavBar () {
         
         <div className='nav-right'>
           <div className='profile-settings'>
-            {/* <HiMenu id="profile-more" /> */}
             <ProfileButton />
           </div>
-        {/* { getLinks() } */}
+        
         </div>
       </div>
     </nav>
