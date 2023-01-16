@@ -1,9 +1,9 @@
 
 
 .session-form-container { 
-    border: 1px solid black;
     border-radius: 10px;
     background-color: white;
+    box-shadow: 0 10px 20px grey;
 }
 
 .session-form { 
