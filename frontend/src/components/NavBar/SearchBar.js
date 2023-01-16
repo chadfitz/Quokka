@@ -1,5 +1,4 @@
 import React from 'react'
-import { fetchSearchListings } from '../../store/listings'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -19,7 +18,7 @@ function SearchBar() {
 
     const handleSubmit = (e) => { 
         e.preventDefault()
-        dispatch(fetchSearchListings(search))
+        //fetch search listings here
         .then(()=>history.push(`/search/${search}`))
     }
 
@@ -27,8 +26,8 @@ function SearchBar() {
     <>
         <form onSubmit={handleSubmit} className="search-form">
           <div className='search-search'>
-          <input className="search-field" placeholder='Search...' id="search-bar" type="search" onChange={handleChange} />
-          <button id="search-button">< GoSearch id='search-icon' /></button>
+            <input className="search-field" placeholder='Search...' id="search-bar" type="search" onChange={handleChange} />
+            <button id="search-button">< GoSearch id='search-icon' /></button>
           </div>
         </form>
       </>

@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import quokka from './quokka1.png'
 import './NavBar.css';
+import SearchBar from './SearchBar';
+import ProfileButton from './ProfileButton';
+import { HiMenu } from 'react-icons/hi'
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -33,10 +37,26 @@ function NavBar () {
   }
 
   return (
-    <>
-      <h1>Quokka</h1>
-      { getLinks() }
-    </>
+    <nav>
+      <div className='navbar'>
+        <div className='nav-left'>
+          <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
+          <h1 id="quokka-title">Quokka</h1>
+        </div>
+          
+        <div id="search-box">
+          <SearchBar />
+        </div>
+        
+        <div className='nav-right'>
+          <div className='profile-settings'>
+            <HiMenu />
+            <ProfileButton />
+          </div>
+        { getLinks() }
+        </div>
+      </div>
+    </nav>
   );
 }
 
