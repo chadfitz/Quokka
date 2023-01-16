@@ -40,6 +40,8 @@ nav {
 
 .drowdown-menu {
     position: relative;
+    display: flex;
+    flex-direction: column; 
 }
 
 .profile-dropdown {

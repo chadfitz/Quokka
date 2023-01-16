@@ -16,25 +16,25 @@ function NavBar () {
       dispatch(logout());
   }
 
-  const getLinks = () => {
-    if (loggedIn) {
-      return (
-        <div className="links-nav">
-          <Link to={'/posts'}>All Posts</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/posts/new'}>Write a Post</Link>
-          <button onClick={logoutUser}>Logout</button>
-        </div>
-      );
-    } else {
-      return (
-        <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
-        </div>
-      );
-    }
-  }
+  // const getLinks = () => {
+  //   if (loggedIn) {
+  //     return (
+  //       <div className="links-nav">
+  //         <Link to={'/posts'}>All Posts</Link>
+  //         <Link to={'/profile'}>Profile</Link>
+  //         <Link to={'/posts/new'}>Write a Post</Link>
+  //         <button onClick={logoutUser}>Logout</button>
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div className="links-auth">
+  //         <Link to={'/signup'}>Signup</Link>
+  //         <Link to={'/login'}>Login</Link>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   return (
     <nav>
@@ -53,7 +53,7 @@ function NavBar () {
             {/* <HiMenu id="profile-more" /> */}
             <ProfileButton />
           </div>
-        { getLinks() }
+        {/* { getLinks() } */}
         </div>
       </div>
     </nav>

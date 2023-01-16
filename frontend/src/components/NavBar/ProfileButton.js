@@ -6,6 +6,7 @@ import { HiMenu } from "react-icons/hi";
 import './NavBar.css'
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function ProfileButton({ user }) {
@@ -43,18 +44,29 @@ function ProfileButton({ user }) {
         <HiMenu id="profile-more" />
         <CgProfile className="fa-solid fa-user-circle" id="profile-picture"/>
       </button>
+      {sessionUser ? 
       <div className="dropdown-menu">
         {showMenu && (
           <ul className="profile-dropdown">
-            <li id="profileinfo"><span id="bold">USERNAME:</span> {user.username}</li>
-            <li id="profileinfo"><span id="bold">EMAIL: </span>{user.email}</li>
+            <li id="profileinfo"><span id="bold">USERNAME:</span> {sessionUser.username}</li>
+            <li id="profileinfo"><span id="bold">EMAIL: </span>{sessionUser.email}</li>
             <li>
               <button id="logout" onClick={logout}>Log Out</button>
             </li>
           </ul>
         )}
       </div>
+      :
+      <div className="dropdown-menu">
+        {showMenu && (
+          <>  
+            <Link to={'/signup'}>Signup</Link>
+            <Link to={'/login'}>Login</Link>
+          </>
+        )}
+      </div> }
     </div>
+
   </>
   );
 }
