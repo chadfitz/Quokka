@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import { CgProfile } from "react-icons/cg"
+import { HiMenu } from "react-icons/hi";
 import './NavBar.css'
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -39,7 +40,8 @@ function ProfileButton({ user }) {
   <>
     <div className='dropdown'>
       <button id="profile-button" onClick={openMenu}>
-        <CgProfile className="fa-solid fa-user-circle" id="profile-button"/>
+        <HiMenu id="profile-more" />
+        <CgProfile className="fa-solid fa-user-circle" id="profile-picture"/>
       </button>
       <div className="dropdown-menu">
         {showMenu && (
