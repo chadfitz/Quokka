@@ -1,0 +1,7 @@
+
+
+.splash-login-container { 
+    margin: 150px 200px;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,53 @@
+
+
+.session-form-container { 
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.session-form { 
+    padding: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+#login-input { 
+    font-size: 17px;
+    padding: 14px 16px;
+    width: 365px;
+    border-radius: 6px;
+}
+
+#login-submit {
+    font-size: 20px;
+    line-height: 48px;
+    padding: 0px 16px;
+    margin-top: 10px; 
+    width: 400px;
+    border-radius: 6px;
+    background-color: rgb(150, 1, 150);
+    color: white
+}
+
+#forgot { 
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#signup-submit { 
+    font-size: 20px;
+        line-height: 48px;
+        padding: 0px 16px;
+        margin-top: 10px;
+        width: 400px;
+        border-radius: 6px;
+        background-color: rgb(69, 195, 98);
+        color: white
+}
+
+hr { 
+    border-color: black;
+}
+
