@@ -54,9 +54,10 @@ nav {
     right: 0;
     width: 300px;
     font-family: proxima-nova, sans-serif;
+    list-style: none;
 }
 
-.profile-dropdown>li {
+.profile-dropdown > li {
     padding: 10px;
 }
 

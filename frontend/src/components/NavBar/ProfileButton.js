@@ -59,10 +59,10 @@ function ProfileButton({ user }) {
       :
       <div className="dropdown-menu">
         {showMenu && (
-          <>  
-            <Link to={'/signup'}>Signup</Link>
-            <Link to={'/login'}>Login</Link>
-          </>
+          <ul className="profile-dropdown">  
+            <li><Link to={'/signup'}>Signup</Link></li>
+            <li><Link to={'/login'}>Login</Link></li>
+          </ul>
         )}
       </div> }
     </div>
