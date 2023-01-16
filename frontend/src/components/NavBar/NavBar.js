@@ -16,32 +16,15 @@ function NavBar () {
       dispatch(logout());
   }
 
-  // const getLinks = () => {
-  //   if (loggedIn) {
-  //     return (
-  //       <div className="links-nav">
-  //         <Link to={'/posts'}>All Posts</Link>
-  //         <Link to={'/profile'}>Profile</Link>
-  //         <Link to={'/posts/new'}>Write a Post</Link>
-  //         <button onClick={logoutUser}>Logout</button>
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <div className="links-auth">
-  //         <Link to={'/signup'}>Signup</Link>
-  //         <Link to={'/login'}>Login</Link>
-  //       </div>
-  //     );
-  //   }
-  // }
 
   return (
     <nav>
       <div className='navbar'>
         <div className='nav-left'>
-          <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
-          <h1 id="quokka-title">Quokka</h1>
+          <Link to="/" className='nav-left'>
+            <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
+            <h1 id="quokka-title">Quokka</h1>
+          </Link>
         </div>
           
         <div id="search-box">

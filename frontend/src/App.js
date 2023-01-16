@@ -11,8 +11,8 @@ import SignupForm from './components/SessionForms/SignupForm';
 import Posts from './components/Posts/Posts';
 import Profile from './components/Profile/Profile';
 import PostCompose from './components/Posts/PostCompose';
-
 import { getCurrentUser } from './store/session';
+import MainPageSignup from './components/MainPage/MainPageSignup';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,8 +26,8 @@ function App() {
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
-        <AuthRoute exact path="/login" component={LoginForm} />
-        <AuthRoute exact path="/signup" component={SignupForm} />
+        <AuthRoute exact path="/login" component={MainPage} />
+        <AuthRoute exact path="/signup" component={MainPageSignup} />
 
         <ProtectedRoute exact path="/posts" component={Posts} />
         <ProtectedRoute exact path="/profile" component={Profile} />

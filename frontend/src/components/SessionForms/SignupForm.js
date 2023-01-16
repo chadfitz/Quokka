@@ -52,6 +52,7 @@ function SignupForm () {
   }
 
   return (
+    <div className='session-form-container'>
     <form className="session-form" onSubmit={usernameSubmit}>
       <h2>Sign Up Form</h2>
       <div className="errors">{errors?.email}</div>
@@ -61,6 +62,7 @@ function SignupForm () {
           value={email}
           onChange={update('email')}
           placeholder="Email"
+          id='login-input'
         />
       </label>
       <div className="errors">{errors?.username}</div>
@@ -70,6 +72,7 @@ function SignupForm () {
           value={username}
           onChange={update('username')}
           placeholder="Username"
+          id='login-input'
         />
       </label>
       <div className="errors">{errors?.password}</div>
@@ -79,6 +82,7 @@ function SignupForm () {
           value={password}
           onChange={update('password')}
           placeholder="Password"
+          id='login-input'
         />
       </label>
       <div className="errors">
@@ -90,14 +94,17 @@ function SignupForm () {
           value={password2}
           onChange={update('password2')}
           placeholder="Confirm Password"
+          id='login-input'
         />
       </label>
       <input
         type="submit"
         value="Sign Up"
         disabled={!email || !username || !password || password !== password2}
+        id="login-submit"
       />
     </form>
+    </div>
   );
 }
 
