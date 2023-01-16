@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Tweet = mongoose.model('Tweet');
+const Post = mongoose.model('Post');
 const { requireUser } = require('../../config/passport');
-const validateTweetInput = require('../../validations/tweets');
+const validatePostInput = require('../../validations/posts');
 
-/* GET tweets listing. */
+/* GET posts listing. */
 router.get('/', async (req, res) => {
   try {
-    const tweets = await Tweet.find()
+    const posts = await Post.find()
                               .populate("author", "_id, username")
                               .sort({ createdAt: -1 });
-    return res.json(tweets);
+    return res.json(posts);
   }
   catch(err) {
     return res.json([]);
@@ -30,10 +30,10 @@ router.get('/user/:userId', async (req, res, next) => {
     return next(error);
   }
   try {
-    const tweets = await Tweet.find({ author: user._id })
+    const posts = await Post.find({ author: user._id })
                               .sort({ createdAt: -1 })
                               .populate("author", "_id, username");
-    return res.json(tweets);
+    return res.json(posts);
   }
   catch(err) {
     return res.json([]);
@@ -42,32 +42,32 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const tweet = await Tweet.findById(req.params.id)
+    const post = await Post.findById(req.params.id)
                              .populate("author", "id, username");
-    return res.json(tweet);
+    return res.json(post);
   }
   catch(err) {
-    const error = new Error('Tweet not found');
+    const error = new Error('Post not found');
     error.statusCode = 404;
-    error.errors = { message: "No tweet found with that id" };
+    error.errors = { message: "No post found with that id" };
     return next(error);
   }
 });
 
 // Attach requireUser as a middleware before the route handler to gain access
 // to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validateTweetInput as a middleware before the 
+// current user.) Also attach validatePostInput as a middleware before the 
 // route handler.
-router.post('/', requireUser, validateTweetInput, async (req, res, next) => {
+router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   try {
-    const newTweet = new Tweet({
+    const newPost = new Post({
       text: req.body.text,
       author: req.user._id
     });
 
-    let tweet = await newTweet.save();
-    tweet = await tweet.populate('author', '_id, username');
-    return res.json(tweet);
+    let post = await newPost.save();
+    post = await post.populate('author', '_id, username');
+    return res.json(post);
   }
   catch(err) {
     next(err);

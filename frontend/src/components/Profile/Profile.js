@@ -1,28 +1,28 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserTweets, clearTweetErrors } from '../../store/tweets';
-import TweetBox from '../Tweets/TweetBox';
+import { fetchUserPosts, clearPostErrors } from '../../store/posts';
+import PostBox from '../Posts/PostBox';
 
 function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
-  const userTweets = useSelector(state => Object.values(state.tweets.user))
+  const userPosts = useSelector(state => Object.values(state.posts.user))
   
   useEffect(() => {
-    dispatch(fetchUserTweets(currentUser._id));
-    return () => dispatch(clearTweetErrors());
+    dispatch(fetchUserPosts(currentUser._id));
+    return () => dispatch(clearPostErrors());
   }, [currentUser, dispatch]);
 
-  if (userTweets.length === 0) {
-    return <div>{currentUser.username} has no Tweets</div>;
+  if (userPosts.length === 0) {
+    return <div>{currentUser.username} has no Posts</div>;
   } else {
     return (
       <>
-        <h2>All of {currentUser.username}'s Tweets</h2>
-        {userTweets.map(tweet => (
-          <TweetBox
-            key={tweet._id}
-            text={tweet.text}
+        <h2>All of {currentUser.username}'s Posts</h2>
+        {userPosts.map(post => (
+          <PostBox
+            key={post._id}
+            text={post.text}
           />
         ))}
       </>
