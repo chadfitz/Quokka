@@ -17,11 +17,6 @@ const reactionSchema = new mongoose.Schema({
     enum: ['Reaction'],
     required: true
   },
-  // Question: What if we show where post is reacted to from on map?
-  location: {
-    type: pointSchema,
-    required: true
-  },
 });
 
 module.exports = reactionSchema;

@@ -3,7 +3,7 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/top/User');
 const Post = require('../models/top/Post');
 
-const DEFAULT_PROFILE_IMAGE_URL = 'YOUR-URL-HERE'; // <- Insert the S3 URL that you copied above here
+const DEFAULT_PROFILE_IMAGE_URL = 'YOUR-URL-HERE'; // TODO: UPDATE <- Insert the S3 URL that you copied above here
 
 // Connect to database
 mongoose
