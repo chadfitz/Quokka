@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
+import Map from '../GoogleMap/Map';
 import PostBox from '../Posts/PostBox';
 
 function Profile () {
@@ -20,10 +21,13 @@ function Profile () {
       <>
         <h2>All of {currentUser.username}'s Posts</h2>
         {userPosts.map(post => (
-          <PostBox
-            key={post._id}
-            body={post.body}
-          />
+          <>
+            <PostBox
+              key={post._id}
+              body={post.body}
+            />
+            <Map key={post._id}/>
+          </>
         ))}
       </>
     );
