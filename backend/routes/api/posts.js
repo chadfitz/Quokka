@@ -59,6 +59,7 @@ router.get('/:id', async (req, res, next) => {
 // current user.) Also attach validatePostInput as a middleware before the
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
+
   try {
     const newPost = new Post({
       writer: req.user._id,
@@ -76,6 +77,7 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
     return res.json(post);
   }
   catch(err) {
+    // console.warn(xhr.responseText);
     next(err);
   }
 });

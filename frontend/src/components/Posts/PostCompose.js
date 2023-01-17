@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -9,6 +10,8 @@ import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
+
+
 
 function PostCompose () {
   const [body, setBody] = useState('');
@@ -24,11 +27,11 @@ function PostCompose () {
         37.7
       ]
     });
+
+  const x = <div children={body.toString()}></div>;
   // TODO: connect me
   // TODO: change default state if needed
   // const [reactions, setReactions] = useState(['smile']);
-  // const [body1, setBody1] = useState('');
-  // const [body2, setBody2] = useState('');
   const dispatch = useDispatch();
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
@@ -48,23 +51,6 @@ function PostCompose () {
     'list', 'bullet', 'indent',
     'link', 'image'
   ];
-  // const modules = {
-  //   toolbar: {
-  //     container: [
-  //       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  //       ['bold', 'italic', 'underline'],
-  //       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-  //       [{ 'align': [] }],
-  //       ['link', 'image'],
-  //       ['clean'],
-  //       [{ 'color': [] }]
-  //     ],
-  //     handlers: {
-  //       image: this.imageHandler
-  //     }
-  //   },
-  //   table: true
-  // }
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
@@ -97,33 +83,8 @@ function PostCompose () {
 
   };
 
-  // const update = e => setBody(e.currentTarget.value);
-
   console.log('body');
   console.log(body);
-
-  // let quillObj;
-
-  // const imageHandler = () => async dispatch => {
-  //   const input = document.createElement('input');
-
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', 'image/*');
-  //   input.click();
-
-  //   input.onchange = async () => {
-  //     var file = input.files[0];
-  //     var formData = new FormData();
-
-  //     formData.append('image', file);
-
-  //     var fileName = file.name;
-
-  //     const res = await this.uploadFiles(file, fileName, quillObj);
-  //   };
-  // }
-
-
 
   return (
     <>
@@ -152,7 +113,11 @@ function PostCompose () {
         onClick={handleSubmit}
       />
       <input type="submit" value="Submit" />
-      <PostBox body={newPost?.body} />
+      {/* <PostBox body={newPost?.body} /> */}
+      <div>
+        {body && <Markup content={body} />}
+        {/* <div>{writer}</div> */}
+      </div>
     </>
 
 
