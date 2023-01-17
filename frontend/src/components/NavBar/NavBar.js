@@ -21,7 +21,7 @@ function NavBar () {
     <nav>
       <div className='navbar'>
         <div className='nav-left'>
-          <Link to="/" className='nav-left'>
+          <Link to="/" className='nav-left' id="nav-left">
             <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
             <h1 id="quokka-title">Quokka</h1>
           </Link>

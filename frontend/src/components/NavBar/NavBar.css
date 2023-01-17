@@ -2,7 +2,7 @@ nav {
     display: flex;
     background-color: whitesmoke;
     width: 100vw;
-    height: 70px;
+    height: 80px;
     justify-content: space-between;
     padding-bottom: 8px;
     font-family: proxima-nova, sans-serif;
@@ -11,11 +11,11 @@ nav {
     left: 0;
 }
 
-Link { 
+#nav-left { 
     text-decoration: none;
 }
 
-Link:visited { 
+#nav-left:visited { 
     color: inherit;
 }
 
