@@ -5,7 +5,7 @@ const handleValidationErrors = require('./handleValidationErrors');
 // middleware to validate the keys in the body of a request to create/edit
 // a post
 const validatePostInput = [
-  check('text')
+  check('body')
     .exists({ checkFalsy: true })
     .isLength({ min: 5, max: 140 })
     .withMessage('Post must be between 5 and 140 characters'),

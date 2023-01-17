@@ -4,6 +4,7 @@ const User = require('../models/top/User');
 const Post = require('../models/top/Post');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
+const { bulkSave } = require("../models/top/User");
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_POSTS = 30;
@@ -13,36 +14,72 @@ const users = [];
 
 users.push(
   new User ({
-    // username: 'demo-user',
-    // email: 'demo-user@appacademy.io',
-    // hashedPassword: bcrypt.hashSync('starwars', 10)
+    username: 'demo-user',
+    email: 'demo-user@appacademy.io',
+    hashedPassword: bcrypt.hashSync('starwars', 10),
+    location: {
+      "type" : "Point",
+      "coordinates" : [
+        -122.5,
+        37.7
+      ]
+    },
+    profileImageUrl: "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQJ1Y27yyG3XtMj_ptfCOQai4XDeIK_5DI710Iog3UEk1fHwDV9-MGRIYE4J0Hqklfu9JVA-Cu6a_PbTbU",
+    backgroundColor: "blue",
+    primaryColor: "purple",
+    textColor: "black",
+    bio: "I AM DEMO DAN",
+    age: 40,
+    gender: "Demo"
   })
 )
 
-// for (let i = 1; i < NUM_SEED_USERS; i++) {
-//   const firstName = faker.name.firstName();
-//   const lastName = faker.name.lastName();
-//   users.push(
-//     new User ({
-//       username: faker.internet.userName(firstName, lastName),
-//       email: faker.internet.email(firstName, lastName),
-//       hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-//     })
-//   )
-// }
+for (let i = 1; i < NUM_SEED_USERS; i++) {
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+  users.push(
+    new User ({
+      username: faker.internet.userName(firstName, lastName),
+      email: faker.internet.email(firstName, lastName),
+      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+      location: {
+        "type" : "Point",
+        "coordinates" : [
+          -122,
+          37
+        ]
+      },
+      profileImageUrl: "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQJ1Y27yyG3XtMj_ptfCOQai4XDeIK_5DI710Iog3UEk1fHwDV9-MGRIYE4J0Hqklfu9JVA-Cu6a_PbTbU",
+      backgroundColor: "red",
+      primaryColor: "grey",
+      textColor: "black",
+      bio: "I AM NOT DEMO DAN",
+      age: 30,
+      gender: "Not Demo"
+    })
+  )
+}
 
-// // Create posts
-// const posts = [];
+// Create posts
+const posts = [];
 
-// for (let i = 0; i < NUM_SEED_POSTS; i++) {
-//   posts.push(
-//     new Post ({
-//       text: faker.hacker.phrase(),
-//       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
-
-//     })
-//   )
-// }
+for (let i = 0; i < NUM_SEED_POSTS; i++) {
+  posts.push(
+    new Post ({
+      writer: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      recipient: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      location: {
+        "type" : "Point",
+        "coordinates" : [
+          (-122+i),
+          (37+i)
+        ]
+      },
+      subject: "this is the subject line",
+      body: faker.hacker.phrase()
+    })
+  )
+}
 
 
 

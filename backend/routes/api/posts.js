@@ -10,7 +10,7 @@ const validatePostInput = require('../../validations/posts');
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
-                              .populate("author", "_id, username")
+                              .populate("writer", "_id, username")
                               .sort({ createdAt: -1 });
     return res.json(posts);
   }
@@ -30,9 +30,9 @@ router.get('/user/:userId', async (req, res, next) => {
     return next(error);
   }
   try {
-    const posts = await Post.find({ author: user._id })
+    const posts = await Post.find({ writer: user._id })
                               .sort({ createdAt: -1 })
-                              .populate("author", "_id, username");
+                              .populate("writer", "_id, username");
     return res.json(posts);
   }
   catch(err) {
@@ -43,7 +43,7 @@ router.get('/user/:userId', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
-                             .populate("author", "id, username");
+                             .populate("writer", "id, username");
     return res.json(post);
   }
   catch(err) {
@@ -55,18 +55,18 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // Attach requireUser as a middleware before the route handler to gain access
-// to req.user. (requireUser will return an error response if there is no 
-// current user.) Also attach validatePostInput as a middleware before the 
+// to req.user. (requireUser will return an error response if there is no
+// current user.) Also attach validatePostInput as a middleware before the
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   try {
     const newPost = new Post({
-      text: req.body.text,
-      author: req.user._id
+      body: req.body.body,
+      writer: req.user._id
     });
 
     let post = await newPost.save();
-    post = await post.populate('author', '_id, username');
+    post = await post.populate('writer', '_id, username');
     return res.json(post);
   }
   catch(err) {

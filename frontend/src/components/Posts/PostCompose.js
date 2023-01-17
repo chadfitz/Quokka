@@ -4,7 +4,7 @@ import { clearPostErrors, composePost } from '../../store/posts';
 import PostBox from './PostBox';
 
 function PostCompose () {
-  const [text, setText] = useState('');
+  const [body, setBody] = useState('');
   const dispatch = useDispatch();
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
@@ -15,25 +15,25 @@ function PostCompose () {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(composePost({ text })); 
-    setText('');
+    dispatch(composePost({ body }));
+    setBody('');
   };
 
-  const update = e => setText(e.currentTarget.value);
+  const update = e => setBody(e.currentTarget.value);
 
   return (
     <>
       <form className="composePost" onSubmit={handleSubmit}>
-        <input 
+        <input
           type="textarea"
-          value={text}
+          value={body}
           onChange={update}
           placeholder="Write your post..."
         />
-        <div className="errors">{errors && errors.text}</div>
+        <div className="errors">{errors && errors.body}</div>
         <input type="submit" value="Submit" />
       </form>
-      <PostBox text={newPost?.text} />
+      <PostBox body={newPost?.body} />
     </>
   )
 }

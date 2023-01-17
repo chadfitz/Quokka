@@ -7,7 +7,7 @@ function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
-  
+
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     return () => dispatch(clearPostErrors());
@@ -22,7 +22,7 @@ function Profile () {
         {userPosts.map(post => (
           <PostBox
             key={post._id}
-            text={post.text}
+            body={post.body}
           />
         ))}
       </>
