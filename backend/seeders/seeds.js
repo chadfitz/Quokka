@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
-const User = require('../models/User');
-const Post = require('../models/Post');
+const User = require('../models/top/User');
+const Post = require('../models/top/Post');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -26,11 +26,11 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
     new User ({
       username: faker.internet.userName(firstName, lastName),
       email: faker.internet.email(firstName, lastName),
-      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
+      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
     })
   )
 }
-  
+
 // Create posts
 const posts = [];
 
@@ -39,9 +39,12 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
     new Post ({
       text: faker.hacker.phrase(),
       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+
     })
   )
 }
+
+
 
 // Connect to database
 mongoose
