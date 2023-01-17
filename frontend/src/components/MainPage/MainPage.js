@@ -3,7 +3,7 @@ import './MainPage.css'
 
 
 function MainPage() {
-  
+  //css
   
   return (
     <div className="splash-container">
