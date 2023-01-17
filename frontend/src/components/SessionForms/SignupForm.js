@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
-import { signup, clearSessionErrors } from '../../store/session';
+import { signup, login, clearSessionErrors } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 
 function SignupForm () {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ function SignupForm () {
   const [password2, setPassword2] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   useEffect(() => {
     return () => {
@@ -49,6 +51,12 @@ function SignupForm () {
     };
 
     dispatch(signup(user)); 
+  }
+
+   const demoLogin = e => { 
+    e.preventDefault()
+    return dispatch(login({email:'demo-user@appacademy.io', password:'starwars'}))
+    .then(()=> history.push('/posts'))
   }
 
   return (
@@ -103,6 +111,12 @@ function SignupForm () {
         disabled={!email || !username || !password || password !== password2}
         id="login-submit"
       />
+       <input
+        type="submit"
+        value="Demo User"
+        id="signup-submit-two"
+        onClick={demoLogin}
+        />
     </form>
     </div>
   );
