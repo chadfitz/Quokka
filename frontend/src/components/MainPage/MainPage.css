@@ -1,7 +1,42 @@
 
 
 .splash-login-container { 
-    margin: 150px 200px;
     display: flex;
     justify-content: space-between;
+    max-width: 50%;
+    margin: auto;
+    margin-top: 150px;
 }
+
+.box { 
+    margin: 30px;
+    margin-top: 150px;
+    overflow: hidden;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    max-height: 35vh;
+    box-shadow: 0px 12px 18px 6px purple;
+    border-radius: 10px;
+}
+
+.box img { 
+    height: 100%;
+    width: auto;
+}
+
+.box-left, 
+.box-middle, 
+.box-right { 
+    margin: 20px
+}
+
+.grids { 
+    max-width: 60%;
+    margin: auto;
+}
+
+
+
+
+
