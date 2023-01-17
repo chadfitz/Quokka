@@ -9,11 +9,13 @@ function GoogleMaps() {
             <img src={gmaps} alt="google maps"/>
         </div>
         <div className='box-right'>
-            <h2>PostCards</h2>
+            <div className='box-right-up'>
+                <h2>PostCards</h2>
+            </div>
             <ul>
-                <li>Users communicate based on location</li>
-                <li>Users customize pin color based on friends/memory</li>
-                <li>Users blah blah blah blah</li>
+                <li className='splash-lists'>Users communicate based on location</li>
+                <li className='splash-lists'>Users customize pin color based on friends/memory</li>
+                <li className='splash-lists'>Users blah blah blah blah</li>
             </ul>
         </div>
     </div>
