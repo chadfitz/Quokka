@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './SessionForm.css';
-
 import { login, clearSessionErrors } from '../../store/session';
+import { useHistory } from 'react-router-dom';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+  const history = useHistory()
 
   useEffect(() => {
     return () => {
@@ -24,6 +25,10 @@ function LoginForm () {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password })); 
+  }
+
+  const handleClick = () =>  { 
+    history.push("/signup")
   }
 
   return (
@@ -58,6 +63,7 @@ function LoginForm () {
         type="submit"
         value="Create new account"
         id="signup-submit"
+        onClick={handleClick}
         />
     </form>
     </div>

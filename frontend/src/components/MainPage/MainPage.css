@@ -1,7 +1,87 @@
-
+.splash-container { 
+    font-family: proxima-nova, sans-serif;
+}
 
 .splash-login-container { 
-    margin: 150px 200px;
     display: flex;
     justify-content: space-between;
+    max-width: 50%;
+    margin: auto;
+    margin-top: 150px;
 }
+
+.box { 
+    margin: 30px;
+    margin-top: 150px;
+    overflow: hidden;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    max-height: 35vh;
+    box-shadow: 0px 24px 36px 12px rgb(171, 2, 171);
+    border-radius: 10px;
+}
+
+.box img { 
+    height: auto;
+    width: 40%;
+}
+
+.box-left, 
+.box-middle, 
+.box-right { 
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.grids { 
+    max-width: 65%;
+    margin: auto;
+}
+
+.splash-login-left { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.box-left-up,
+.box-middle-up,
+.box-right-up { 
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: -20px;
+}
+
+.splash-lists { 
+    font-size: 20px;
+    margin: 8px;
+}
+
+#main-title { 
+    font-size: 40px;
+    margin: 10px;
+}
+
+#main-subtitle { 
+    font-size: 30px;
+    margin: 10px;
+}
+
+#splash-statistics { 
+    margin-bottom: 150px;
+}
+
+#splash-postcard { 
+    width: 70%;
+    height: auto;
+}
+
+
+
+
+

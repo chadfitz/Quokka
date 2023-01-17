@@ -1,0 +1,17 @@
+.footer {
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(37, 37, 37);
+    box-shadow: 0px -5px 15px #838181;
+    color: white;
+    text-align: center;
+}
+
+#github,
+#linkedin { 
+    height: 40px
+}
