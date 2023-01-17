@@ -13,36 +13,36 @@ const users = [];
 
 users.push(
   new User ({
-    username: 'demo-user',
-    email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
+    // username: 'demo-user',
+    // email: 'demo-user@appacademy.io',
+    // hashedPassword: bcrypt.hashSync('starwars', 10)
   })
 )
 
-for (let i = 1; i < NUM_SEED_USERS; i++) {
-  const firstName = faker.name.firstName();
-  const lastName = faker.name.lastName();
-  users.push(
-    new User ({
-      username: faker.internet.userName(firstName, lastName),
-      email: faker.internet.email(firstName, lastName),
-      hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
-    })
-  )
-}
+// for (let i = 1; i < NUM_SEED_USERS; i++) {
+//   const firstName = faker.name.firstName();
+//   const lastName = faker.name.lastName();
+//   users.push(
+//     new User ({
+//       username: faker.internet.userName(firstName, lastName),
+//       email: faker.internet.email(firstName, lastName),
+//       hashedPassword: bcrypt.hashSync(faker.internet.password(), 10),
+//     })
+//   )
+// }
 
-// Create posts
-const posts = [];
+// // Create posts
+// const posts = [];
 
-for (let i = 0; i < NUM_SEED_POSTS; i++) {
-  posts.push(
-    new Post ({
-      text: faker.hacker.phrase(),
-      author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
+// for (let i = 0; i < NUM_SEED_POSTS; i++) {
+//   posts.push(
+//     new Post ({
+//       text: faker.hacker.phrase(),
+//       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
 
-    })
-  )
-}
+//     })
+//   )
+// }
 
 
 

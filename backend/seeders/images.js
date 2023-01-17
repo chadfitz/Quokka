@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
-const User = require('../models/User');
-const Tweet = require('../models/Tweet');
+const User = require('../models/top/User');
+const Post = require('../models/top/Post');
 
 const DEFAULT_PROFILE_IMAGE_URL = 'YOUR-URL-HERE'; // <- Insert the S3 URL that you copied above here
 
@@ -22,8 +22,8 @@ const initializeImages = async () => {
   console.log("Initializing profile avatars...");
   await User.updateMany({}, { profileImageUrl: DEFAULT_PROFILE_IMAGE_URL });
 
-  console.log("Initializing Tweet image URLs...");
-  await Tweet.updateMany({}, { imageUrls: [] });
+  console.log("Initializing Post image URLs...");
+  await Post.updateMany({}, { imageUrls: [] });
 
   console.log("Done!");
   mongoose.disconnect();

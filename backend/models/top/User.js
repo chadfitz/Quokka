@@ -1,3 +1,4 @@
+const pointSchema = require('../blocks/Point')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -21,6 +22,10 @@ const userSchema = Schema({
     required: true
   },
   // profile customization
+  profileImageUrl: {
+    type: String,
+    required: true
+  },
   backgroundColor: {
     type: String
   },
@@ -44,5 +49,7 @@ const userSchema = Schema({
 }, {
   timestamps: true
 });
+
+// export default
 
 module.exports = mongoose.model('User', userSchema);

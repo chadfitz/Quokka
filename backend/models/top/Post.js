@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// TODO: Try without next line to see what error is
-import pointSchema from '../blocks/Point';
-import reactionSchema from '../blocks/Reaction';
+const pointSchema = require('../blocks/Point');
+const reactionSchema = require('../blocks/Reaction');
+// import pointSchema from '../blocks/Point';
+// import reactionSchema from '../blocks/Reaction';
 
 const postSchema = Schema({
   writer: {
@@ -26,10 +27,16 @@ const postSchema = Schema({
     type: String,
     required: true
   },
-  images: {
-    type: Map,
-    of: String
+  // AA method
+  imageUrls: {
+    type: [String],
+    required: false
   },
+  // Better way?
+  // images: {
+  //   type: Map,
+  //   of: String
+  // },
   reactions: {
     type: reactionSchema
   }

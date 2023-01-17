@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const pointSchema = require('./Point');
 // https://mongoosejs.com/docs/geojson.html
 
 const reactionSchema = new mongoose.Schema({
@@ -23,7 +24,8 @@ const reactionSchema = new mongoose.Schema({
   },
 });
 
-export default reactionSchema;
+module.exports = reactionSchema;
+// export default reactionSchema;
 // reuse with
 // const citySchema = new mongoose.Schema({
 //   name: String,
