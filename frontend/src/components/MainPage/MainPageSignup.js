@@ -1,9 +1,9 @@
-import LoginForm from "../SessionForms/LoginForm";
+import SignupForm from "../SessionForms/SignupForm";
 import './MainPage.css'
 
 
-function MainPage() {
-  //css
+function MainPageSignup() {
+  
   
   return (
     <div className="splash-container">
@@ -12,7 +12,7 @@ function MainPage() {
           <h1>Quokka</h1>
           <h3>Meaningful meories. Real Connections.</h3>
         </div>
-        <LoginForm />
+        <SignupForm />
       </div>
 
       <p>Our Own Idividual App</p>
@@ -23,4 +23,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default MainPageSignup;
