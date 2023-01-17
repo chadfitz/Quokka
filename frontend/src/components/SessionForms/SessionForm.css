@@ -36,7 +36,8 @@
     margin-top: 10px;
 }
 
-#signup-submit { 
+#signup-submit,
+#signup-submit-two { 
     font-size: 20px;
         line-height: 48px;
         padding: 0px 16px;
