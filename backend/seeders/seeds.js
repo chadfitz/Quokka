@@ -71,8 +71,8 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       location: {
         "type" : "Point",
         "coordinates" : [
-          (-122+i),
-          (37+i)
+          (-122 + 0.1 * i), // Longitude
+          (37.8 + 0.1 * i) // Latitude
         ]
       },
       subject: "this is the subject line",
