@@ -7,7 +7,7 @@ const handleValidationErrors = require('./handleValidationErrors');
 const validatePostInput = [
   check('body')
     .exists({ checkFalsy: true })
-    .isLength({ min: 5, max: 140 })
+    .isLength({ min: 5, max: 5000 })
     .withMessage('Post must be between 5 and 140 characters'),
   handleValidationErrors
 ];
