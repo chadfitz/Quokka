@@ -131,7 +131,12 @@ nav {
 
 #quokka-title, 
 #search-box { 
-    margin: 20px
+    margin: 20px;
+    transition: all ease-in 500ms;
+}
+
+#quokka-title { 
+    width: 120px;
 }
 
 #quokka-logo { 
@@ -139,6 +144,11 @@ nav {
     width: 60px;
     border: 1px solid black;
     border-radius: 50%;
+    transition: all ease-in 500ms;
+}
+
+#quokka-logo:hover { 
+    box-shadow: 0 5px 15px #b7b7b7;
 }
 
 #profile-button { 
@@ -146,10 +156,15 @@ nav {
     padding:8px;
     border-radius: 30px;
     background-color: white;
+    transition: all ease-in 500ms;
 }
 
-#quokka-title { 
-    text-decoration: none;
+#profile-button:hover { 
+    box-shadow: 0 5px 15px #b7b7b7;
+}
+
+#quokka-title:hover { 
+    font-size: 26px;
 }
 
 
