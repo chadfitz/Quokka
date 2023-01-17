@@ -4,7 +4,7 @@ import './MainPage.css'
 
 function Quokkas() {
   return (
-    <div className='box' data-aos="fade-right">
+    <div className='box' data-aos="fade-up">
         <div className='box-left'>
             <div className='box-left-up'>
                 <h2>Mission Statement</h2>
