@@ -6,6 +6,7 @@ import Statistics from "./Statistics";
 import Aos from "aos"
 import "aos/dist/aos.css"
 import { useEffect } from "react";
+import Footer from "../Footer/Footer";
 
 
 function MainPage() {
@@ -30,9 +31,7 @@ function MainPage() {
       </div>
 
       <p>Our Own Idividual App</p>
-      <footer>
-        Copyright &copy; 2023 Quokka
-      </footer>
+      <Footer/>
     </div>
   );
 }
