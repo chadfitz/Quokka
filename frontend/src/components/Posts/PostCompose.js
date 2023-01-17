@@ -12,7 +12,7 @@ import useInput from '../../hooks/useInput';
 
 function PostCompose () {
   const [body, setBody] = useState('');
-  const writer = useSelector(state => state.session.user._id);
+  const writer = useSelector(state => state.session.user);
   const [subject, handleSubjectChange] = useInput('');
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(1);
@@ -20,7 +20,7 @@ function PostCompose () {
   const [location, setLocation] = useState({
       "type" : "Point",
       "coordinates" : [
-        -122.5,
+        50,
         37.7
       ]
     });
@@ -82,9 +82,11 @@ function PostCompose () {
     //
 
     dispatch(composePost({
-      writer, recipient,
+      writer,
+      recipient: writer,
       location,
-      subject, body, }));
+      subject,
+      body, }));
       // reactions }));
     setBody('');
 

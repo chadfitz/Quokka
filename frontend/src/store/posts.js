@@ -62,6 +62,8 @@ export const fetchUserPosts = id => async dispatch => {
 };
 
 export const composePost = data => async dispatch => {
+  console.log('data');
+  console.log(data);
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
