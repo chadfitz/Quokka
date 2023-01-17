@@ -18,13 +18,13 @@ const userSchema = Schema({
   },
   // mapping friends, etc.
   location: {
-    type: pointSchema,
-    required: true
+    type: pointSchema
+    // required: true
   },
   // profile customization
   profileImageUrl: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   backgroundColor: {
     type: String
@@ -38,14 +38,12 @@ const userSchema = Schema({
   bio: {
     type: String
   },
-  // Question: Why do we need info between these lines?
   age: {
-    type: String
+    type: Number
   },
   gender: {
     type: String
   }
-  // Question end
 }, {
   timestamps: true
 });
