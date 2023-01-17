@@ -16,7 +16,7 @@ function Quokkas() {
             </ul>
         </div>
         <div className='box-right'>
-            <img src={quokkas} alt="google maps"/>
+            <img src={quokkas} alt="google maps" id="splash-quokka"/>
         </div>
     </div>
   )

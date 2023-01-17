@@ -23,8 +23,8 @@
 }
 
 .box img { 
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 40%;
 }
 
 .box-left, 
@@ -33,6 +33,8 @@
     margin: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .grids { 
@@ -72,6 +74,11 @@
 
 #splash-statistics { 
     margin-bottom: 150px;
+}
+
+#splash-postcard { 
+    width: 70%;
+    height: auto;
 }
 
 

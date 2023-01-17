@@ -6,7 +6,7 @@ function GoogleMaps() {
   return (
     <div className='box' data-aos="fade-left">
         <div className='box-left'>
-            <img src={gmaps} alt="google maps"/>
+            <img src={gmaps} alt="google maps" id="splash-postcard"/>
         </div>
         <div className='box-right'>
             <div className='box-right-up'>

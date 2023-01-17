@@ -7,15 +7,17 @@ function Statistics() {
     <div className='box' data-aos="fade-up" id="splash-statistics">
         <div className='box-left'>
             <div className='box-left-up'>
-                <h2>Over 15 Registered users</h2>
+                <h2>Over 15 users</h2>
             </div>
             <h3>At least 30 friendships</h3>
             <h3>At least 5 pictures of Quokkas</h3>
+            <h3>Another interesting statistic</h3>
         </div>
         <div className='box-middle'>
             <div className='box-middle-up'>
-                <h2>Posts from every continent</h2>
+                <h2>Users from all over</h2>
             </div>
+            <h3>Posts from every continent</h3>
             <h3>Users from 4 different countries</h3>
             <h3>I don't know what to write here</h3>
             
