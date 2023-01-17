@@ -18,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     max-height: 35vh;
-    box-shadow: 0px 12px 18px 6px purple;
+    box-shadow: 0px 24px 36px 12px rgb(171, 2, 171);
     border-radius: 10px;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .grids { 
-    max-width: 60%;
+    max-width: 65%;
     margin: auto;
 }
 
