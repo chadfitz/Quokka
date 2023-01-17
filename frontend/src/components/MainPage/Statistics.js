@@ -4,7 +4,7 @@ import './MainPage.css'
 
 function Statistics() {
   return (
-    <div className='box' data-aos="fade-up">
+    <div className='box' data-aos="fade-up" id="splash-statistics">
         <div className='box-left'>
             <div className='box-left-up'>
                 <h2>Over 15 Registered users</h2>
