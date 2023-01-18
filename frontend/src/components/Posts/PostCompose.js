@@ -64,8 +64,8 @@ function PostCompose () {
       recipient: writer,
       location,
       subject,
-      body,
-      reactions }));
+      body,}));
+      // reactions
     setBody('');
   };
 
