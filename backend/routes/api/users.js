@@ -11,13 +11,6 @@ const validateLoginInput = require('../../validations/login');
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const DEFAULT_PROFILE_IMAGE_URL = 'https://quokka-pro.s3.us-west-2.amazonaws.com/public/defaultprofile1.png';
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  // res.send('Respond with a user resource edit');
-  res.json({
-    message: "GET /api/users"
-  });
-});
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
@@ -35,6 +28,15 @@ router.get('/current', restoreUser, (req, res) => {
     email: req.user.email
   });
 });
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  // res.send('Respond with a user resource edit');
+  res.json({
+    message: "GET /api/users"
+  });
+});
+
 
 // POST /api/users/register
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
