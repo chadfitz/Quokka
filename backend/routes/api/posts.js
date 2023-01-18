@@ -80,41 +80,10 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   }
 });
 
-
-
-
-router.delete('/:postId', async (req, res, next) => {
-  try {
-    const post = await Post.findById(req.params.postId).delete()
-    return res.json(post);
-  }
-  catch(err) {
-    const error = new Error('Post not found');
-    error.statusCode = 404;
-    error.errors = { message: "No post found with that id" };
-    return next(error);
-  }
-});
-
-router.delete('/:id', async (req, res, next) => {
-
-  // req.params.id, but could access any param by name
-  try {
-    const post = await Post.findById(req.params.id)
-    const x = await post.delete();
-    console.log(x)
-  }
-  catch(err) {
-    const error = new Error('User not found');
-    error.statusCode = 404;
-    error.errors = { message: "No user found with that id" };
-    return next(error);
-  }
-});
-
+// EDIT
 router.patch('/:id', async (req, res, next) => {
   try {
-    const updatedPost = Post.updateOne({id: req.params.id}, {  
+    const updatedPost = Post.updateOne({_id: req.params.id}, {  
       recipient: req.body.recipient,
       location: req.body.location,
       subject: req.body.subject,
@@ -127,6 +96,20 @@ router.patch('/:id', async (req, res, next) => {
           console.log("Updated Docs : ", docs);
       }}
     )
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
+
+// DELETE
+router.delete('/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postId).delete()
+    return res.json(post);
   }
   catch(err) {
     const error = new Error('Post not found');
