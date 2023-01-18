@@ -7,7 +7,7 @@ function Quokkas() {
     <div className='box' data-aos="fade-up">
         <div className='box-left'>
             <div className='box-left-up'>
-                <h2>Mission Statement</h2>
+                <h2 id="mission-statement">Mission Statement</h2>
             </div>
             <ul>
                 <li className='splash-lists'>We are focused on quality rather than quantity</li>

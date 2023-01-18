@@ -167,6 +167,41 @@ nav {
 #quokka-title:hover { 
     font-size: 26px;
 }
+#profile-links { 
+    text-decoration: none;
+    transition: all ease-in 500ms;
+}
 
+#profile-links:visited { 
+    color: inherit
+}
 
+#profile-links:hover { 
+    box-shadow: 0 5px 10px 0 rgba(239, 93, 237, 0.1);
+}
+
+#profileinfo:hover{ 
+    box-shadow: 0 10px 20px 0 rgba(253, 134, 239, 0.3);
+}
+
+#logout-dropdown { 
+    width: 100%;
+    transition: all ease-in 500ms;
+    background-color: rgb(150, 1, 150);
+    color: white;
+    font-size: 18px;
+    line-height: 36px;
+    border-radius: 4px;
+    padding: 0px 12px;
+}
+
+#logout-dropdown:hover { 
+    box-shadow: 0 10px 20px rgb(150, 1, 150);
+}
+
+.must-login { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
