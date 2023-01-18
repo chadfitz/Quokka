@@ -7,18 +7,6 @@ const { requireUser } = require('../../config/passport');
 const validatePostInput = require('../../validations/posts');
 const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
-/* GET posts listing. */
-router.get('/', async (req, res) => {
-  try {
-    const posts = await Post.find()
-                              .populate("writer", "_id, username profileImageUrl")
-                              .sort({ createdAt: -1 });
-    return res.json(posts);
-  }
-  catch(err) {
-    return res.json([]);
-  }
-});
 
 router.get('/user/:userId', async (req, res, next) => {
   let user;
@@ -40,6 +28,64 @@ router.get('/user/:userId', async (req, res, next) => {
     return res.json([]);
   }
 })
+
+
+
+
+
+router.delete('/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postId)
+    const deletedPost = await post.delete();
+    return res.json(post);
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
+
+router.patch('/:postId', async (req, res, next) => {
+  console.log('in the router');
+  console.log('req');
+  // console.log(req);
+  console.log('req.params.postId');
+  console.log(req.params.postId);
+  try {
+    console.log('backend try');
+    const filter = { _id: req.params.postId };
+    const update = { recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
+      body: req.body.body,
+      reactions: req.body.reactions,
+    }
+
+
+    const updatedPost = await Post.updateOne(filter, {
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
+      body: req.body.body,
+      reactions: req.body.reactions,
+    }, function (err, docs) {
+        if (err){
+          console.log('updatedPost erorrrrrrrr');
+          console.log(err)
+        } else {
+          console.log("Updated Docs : ", docs);
+      }}
+    )
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -88,7 +134,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
 // EDIT
 router.patch('/:id', async (req, res, next) => {
   try {
-    const updatedPost = Post.updateOne({_id: req.params.id}, {  
+    const updatedPost = Post.updateOne({_id: req.params.id}, {
       recipient: req.body.recipient,
       location: req.body.location,
       subject: req.body.subject,
