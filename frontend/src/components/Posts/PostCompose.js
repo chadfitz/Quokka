@@ -19,6 +19,7 @@ function PostCompose () {
   const [subject, handleSubjectChange] = useInput('');
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(1);
+  const [reactions, setReactions] = useState('');
   // TODO: connect me to google maps api
   const [location, setLocation] = useState({
       "type" : "Point",
@@ -57,34 +58,16 @@ function PostCompose () {
   }, [dispatch]);
 
   const handleSubmit = e => {
-    //
-    console.log('writer');
-    console.log(writer);
     e.preventDefault();
-    console.log('body');
-    console.log(body);
-    console.log('newPost - before');
-    console.log(newPost);
-    //
-
     dispatch(composePost({
       writer,
       recipient: writer,
       location,
       subject,
-      body, }));
-      // reactions }));
+      body,
+      reactions }));
     setBody('');
-
-    //
-    console.log('newPost - after');
-    console.log(newPost);
-    //
-
   };
-
-  console.log('body');
-  console.log(body);
 
   return (
     <>

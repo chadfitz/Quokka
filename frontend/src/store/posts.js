@@ -2,6 +2,7 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
+const REMOVE_POST = "posts/REMOVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
@@ -10,6 +11,11 @@ const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
+});
+
+const removePost = postId => ({
+  type: REMOVE_POST,
+  postId
 });
 
 const receiveUserPosts = posts => ({
@@ -36,8 +42,8 @@ export const fetchPosts = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/posts');
     const posts = await res.json();
-    console.log("hello from fetch posts")
-    console.log(posts);
+    // console.log("hello from fetch posts")
+    // console.log(posts);
     dispatch(receivePosts(posts));
   } catch (err) {
     const resBody = await err.json();
@@ -51,7 +57,7 @@ export const fetchUserPosts = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/posts/user/${id}`);
     const posts = await res.json();
-    console.log("hello from user posts")
+    // console.log("hello from user posts")
     dispatch(receiveUserPosts(posts));
   } catch(err) {
     const resBody = await err.json();
@@ -62,8 +68,6 @@ export const fetchUserPosts = id => async dispatch => {
 };
 
 export const composePost = data => async dispatch => {
-  console.log('data');
-  console.log(data);
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
@@ -79,6 +83,21 @@ export const composePost = data => async dispatch => {
   }
 };
 
+
+export const deletePost = postId => async dispatch => {
+  console.log('in frontend/src/store/posts#deletePost', postId);
+  try {
+    const res = await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    })
+    dispatch(removePost(postId))
+  } catch(err) {
+    const resBody = await err.json();
+    return dispatch(receiveErrors(resBody.errors));
+  }
+  // todo error handling
+}
+
 const nullErrors = null;
 
 export const postErrorsReducer = (state = nullErrors, action) => {
@@ -86,6 +105,8 @@ export const postErrorsReducer = (state = nullErrors, action) => {
     case RECEIVE_POST_ERRORS:
       return action.errors;
     case RECEIVE_NEW_POST:
+      // TODO: confirm this is wanted behavior
+      return { ...state, ...action.error };
     case CLEAR_POST_ERRORS:
       return nullErrors;
     default:
@@ -94,6 +115,11 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+  console.log('state');
+  console.log(state);
+  console.log('...state');
+  console.log({...state});
+  Object.freeze(state);
   switch(action.type) {
     case RECEIVE_POSTS:
       return { ...state, all: action.posts, new: undefined};
@@ -101,6 +127,11 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       return { ...state, user: action.posts, new: undefined};
     case RECEIVE_NEW_POST:
       return { ...state, new: action.post};
+    case REMOVE_POST:
+      return {
+          ...state,
+          all: state.all.filter((post) => post._id !== action.postId)
+      }
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
     default:
