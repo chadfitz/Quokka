@@ -78,8 +78,64 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   }
   catch(err) {
     // console.warn(xhr.responseText);
-    next(err);
+    // console.log('err');
+    // console.log(err);
+    return next(err);
   }
 });
+
+
+
+
+router.delete('/:postId', async (req, res, next) => {
+
+  // req.params.id, but could access any param by name
+  try {
+    console.log("line 89")
+    const post = await Post.findById(req.params.postId)
+    console.log('line 91');
+    const deletedPost = await post.delete();
+    console.log('line 93');
+    return res.json(deletedPost);
+  }
+  catch(err) {
+    const error = new Error('User not found');
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+});
+
+// router.delete('/:postId', async (req, res, next) => {
+//   console.log('In backend/routes/api/router.delete');
+
+//   try {
+//     await Post.findById(req.params.postId)
+//                              .delete()
+//     // return res.json(post);
+//   }
+//   catch(err) {
+//     const error = new Error('Post not found');
+//     error.statusCode = 404;
+//     error.errors = { message: "No post found with that id" };
+//     return next(error);
+//   }
+// });
+// router.delete('/post/:id', async (req, res, next) => {
+//   try {
+//     const post = await Post.findById(req.params.id)
+//                              .delete();
+//     console.log('postdsfasdfas');
+//     console.log(post);
+//                              res.json(post);
+//   }
+//   catch(err) {
+//     const error = new Error('Post not found');
+//     error.statusCode = 404;
+//     error.errors = { message: "No post found with that id" };
+//     return next(error);
+//   }
+// });
+
 
 module.exports = router;

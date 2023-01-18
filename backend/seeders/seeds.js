@@ -76,7 +76,7 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
         ]
       },
       subject: "this is the subject line",
-      body: [faker.hacker.phrase()]
+      body: faker.hacker.phrase()
     })
   )
 }
