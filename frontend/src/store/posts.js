@@ -85,20 +85,8 @@ export const composePost = data => async dispatch => {
   }
 };
 
-export const deletePost = postId => async dispatch => {
-  try {
-    const res = await jwtFetch(`/api/posts/${postId}`, {
-      method: 'DELETE'
-    })
-    dispatch(removePost(postId))
-  } catch(err) {
-    const resBody = await err.json();
-    return dispatch(receiveErrors(resBody.errors));
-  }
-  // todo error handling
-}
-
 export const updatePost = (post) => async (dispatch) => {
+  console.log("updatePost's post", post)
   try {
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
@@ -113,6 +101,19 @@ export const updatePost = (post) => async (dispatch) => {
     return dispatch(receiveErrors(resBody.errors));
   }
 } 
+
+export const deletePost = postId => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    })
+    dispatch(removePost(postId))
+  } catch(err) {
+    const resBody = await err.json();
+    return dispatch(receiveErrors(resBody.errors));
+  }
+  // todo error handling
+}
 
 const nullErrors = null;
 

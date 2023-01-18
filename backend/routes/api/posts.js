@@ -114,7 +114,7 @@ router.delete('/:id', async (req, res, next) => {
 
 router.patch('/:id', async (req, res, next) => {
   try {
-    const updatedPost = Post.updateOne({_id: req.params.id}, {  
+    const updatedPost = Post.updateOne({id: req.params.id}, {  
       recipient: req.body.recipient,
       location: req.body.location,
       subject: req.body.subject,

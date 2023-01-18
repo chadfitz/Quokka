@@ -6,35 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deletePost, updatePost } from '../../store/posts';import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
+import { useHistory } from 'react-router-dom';
 
 // import { useState } from 'react';
 
 function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const errors = useSelector(state => state.errors.posts)
-
-    // const [edit, setEdit] = useState(false);
 
     const handleDelete = (e) => {
         e.preventDefault();
-        console.log("IN P.I.I. HANDLE DELETE -- ID:")
-        console.log(post._id)
         dispatch(deletePost(post._id))
     }
 
     const handleEdit = e => {
         e.preventDefault();
-        dispatch(updatePost({...post, body: "<p>updated body</p>"}));
-        // dispatch(updatePost({
-        //     _id: post._id,
-        //     writer: post.writer,
-        //     recipient: post.recipient,
-        //     location: post.location,
-        //     subject: post.subject,
-        //     body: "updated body",
-        // }))
-        // console.log(post);
-        // console.log(post._id)
+        history.push(`/posts/${post._id}/edit`);
+        // dispatch(updatePost({...post, body: "<p>updated body</p>"}));
     }
 
   return (
@@ -61,12 +50,10 @@ function PostsIndexItem ({ post }) {
             <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
             <button>React</button>
             <button onClick={handleDelete}>DELETE</button>
-            {/* <button onClick={()=>setEdit(true)}>EDIT</button> */}
             <button onClick={handleEdit}>EDIT</button>
             <button>Reply</button>
             <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
         </div>
-        {/* {edit && <PostsEditForm post={post} setEdit={setEdit} />} */}
     </div>
   );
 }
