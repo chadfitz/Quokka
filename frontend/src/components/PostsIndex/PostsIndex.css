@@ -24,7 +24,10 @@ body {
 
 .post-index-date {
     min-width: 10%;
-    padding: 10px
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
 }
 
 .post-item-top {
