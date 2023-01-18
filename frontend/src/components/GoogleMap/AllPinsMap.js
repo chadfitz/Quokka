@@ -20,11 +20,12 @@ const AllPinsMap = ({userPosts, zoom}) => {
             <LocationMarker
                 lat={post.location.coordinates[1]}
                 lng={post.location.coordinates[0]}
-                // onClick={()=> setLocationInfo({id: lat, title: lng})}
+                onMouseOver={()=> setLocationInfo({ title: post.subject})}
+                onMouseOut={()=> setLocationInfo(false)}
             />
         )}
         </GoogleMapReact>
-        {/* {locationInfo && <LocationInfoBox info={locationInfo}/>} */}
+        {locationInfo && <LocationInfoBox info={locationInfo}/>}
     </div>
   )
 }
