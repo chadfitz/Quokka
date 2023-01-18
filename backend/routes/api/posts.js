@@ -59,8 +59,6 @@ router.get('/:id', async (req, res, next) => {
 // current user.) Also attach validatePostInput as a middleware before the
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
-
-
   try {
     const newPost = new Post({
       writer: req.user._id,
@@ -82,9 +80,32 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   }
 });
 
+// EDIT
+router.patch('/:id', async (req, res, next) => {
+  try {
+    const updatedPost = Post.updateOne({_id: req.params.id}, {  
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
+      body: req.body.body,
+      reactions: req.body.reactions,
+    }, function (err, docs) {
+        if (err){
+          console.log(err)
+        } else {
+          console.log("Updated Docs : ", docs);
+      }}
+    )
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
 
-
-
+// DELETE
 router.delete('/:postId', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.postId).delete()
@@ -97,8 +118,5 @@ router.delete('/:postId', async (req, res, next) => {
     return next(error);
   }
 });
-
-
-
 
 module.exports = router;

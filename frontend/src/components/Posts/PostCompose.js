@@ -3,37 +3,46 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
-import { clearPostErrors, composePost } from '../../store/posts';
+import { clearPostErrors, composePost, updatePost } from '../../store/posts';
 import PostBox from './PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
-
-
+import { useHistory, useParams } from 'react-router-dom';
 
 function PostCompose () {
-  const [body, setBody] = useState('');
-  const writer = useSelector(state => state.session.user);
-  const [subject, handleSubjectChange] = useInput('');
-  // TODO: convert recipient to props / etc. (not useState)
-  const [recipient, setRecipient] = useState(1);
-  const [reactions, setReactions] = useState('');
-  // TODO: connect me to google maps api
-  const [location, setLocation] = useState({
-      "type" : "Point",
-      "coordinates" : [
-        50,
-        37.7
-      ]
-    });
-
-  const x = <div children={body.toString()}></div>;
-  // TODO: connect me
-  // TODO: change default state if needed
-  // const [reactions, setReactions] = useState(['smile']);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
+  const writer = useSelector(state => state.session.user);
+  let { postId } = useParams();
+  let post = useSelector(store => {
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
+  })
+
+  const formType = postId ? 'Update' : 'Create';
+  if (formType === 'Create') {
+    post = {
+      writer, 
+      recipient: writer, 
+      location: {
+        "type": "Point",
+        "coordinates": [
+          50,
+          37.7
+        ]
+      },
+      subject: "", 
+      body: ""
+    }
+  }
+  const [subject, handleSubjectChange] = useInput(post.subject);
+  const [body, setBody] = useState(post.body);
+  // TODO: convert recipient to props / etc. (not useState)
+  const [recipient, setRecipient] = useState(post.recipient);
+  // TODO: connect me to google maps api
+  const [location, setLocation] = useState(post.location);
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
@@ -45,29 +54,47 @@ function PostCompose () {
       ['clean']
     ],
   };
-
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
     'link', 'image'
   ];
+  
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
+    
+    if (formType === 'Create'){
+      post = {writer, recipient, location, subject, body}
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = { ...post, writer, recipient, location, subject, body}
+      // dispatch(updatePost(post))
+      dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
+        // .then(history.push(`/posts`));
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
+
+    // TODO: CLEAR OTHER FIELDS (not just body)?
+    setBody('');
+  };
+
+
+  // useEffect(()=>{
+  //   if (postId) dispatch(**fetchpost**)
+  // },[dispatch, postId])
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location,
-      subject,
-      body,}));
-      // reactions
-    setBody('');
-  };
+ 
 
   return (
     <>
@@ -102,52 +129,6 @@ function PostCompose () {
         {/* <div>{writer}</div> */}
       </div>
     </>
-
-
-    // <>
-    // <ReactQuill
-    //           ref={(el) => {
-    //             quillObj = el;
-    //           }}
-    //           value={this.state.Description}
-    //           modules={{
-    //             toolbar: {
-    //               container: [
-    //                 [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    //                 ['bold', 'italic', 'underline'],
-    //                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    //                 [{ 'align': [] }],
-    //                 ['link', 'image'],
-    //                 ['clean'],
-    //                 [{ 'color': [] }]
-    //               ],
-    //               handlers: {
-    //                 image: this.imageHandler
-    //               }
-    //             },
-    //             table: true
-    //           }}
-    //           placeholder="Add a description of your event"
-    //           onChange={(content, delta, source, editor) => this.onDescriptionChange(content, editor)}
-    //           id="txtDescription"
-    //         />
-    // </>
-    // <>
-    //   <form className="composePost" onSubmit={handleSubmit}>
-    //     <ReactQuill them="snow" value={body} onChange={setBody} />
-    //     {/* <ReactQuill them="snow" value={body1} onChange={setBody1} />
-    //     <ReactQuill them="snow" value={body2} onChange={setBody2} /> */}
-    //     {/* <input
-    //       type="textarea"
-    //       value={body}
-    //       onChange={update}
-    //       placeholder="Write your post..."
-    //     /> */}
-    //     <div className="errors">{errors && errors.body}</div>
-    //     <input type="submit" value="Submit" />
-    //   </form>
-    //   <PostBox body={newPost?.body} />
-    // </>
   )
 }
 
