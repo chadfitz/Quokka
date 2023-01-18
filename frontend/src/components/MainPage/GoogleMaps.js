@@ -8,9 +8,9 @@ function GoogleMaps() {
         <div className='box-left'>
             <img src={gmaps} alt="google maps" id="splash-postcard"/>
         </div>
-        <div className='box-right'>
+        <div className='box-right' id="postcard-right">
             <div className='box-right-up'>
-                <h2>PostCards</h2>
+                <h2 id="postcards">PostCards</h2>
             </div>
             <ul>
                 <li className='splash-lists'>Users communicate based on location</li>
