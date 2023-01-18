@@ -31,5 +31,5 @@ function PostBox ({ key, postId, posty }) {
     </div>
   );
 }
-
+//
 export default PostBox;
