@@ -5,14 +5,8 @@ import LocationMarker from './LocationMarker';
 import LocationInfoBox from './LocationInfoBox';
 import "./Map.css"
 
-const Map = ({postId, center, zoom}) => {
+const SinglePinMap = ({lat, lng}) => {
     const [locationInfo, setLocationInfo] = useState(null);
-    const locationArray = useSelector(state => state.posts.user[postId].location);
-    console.log(locationArray)
-    const lat = locationArray.coordinates[1];
-    console.log(lat);
-    const lng = locationArray.coordinates[0];
-    console.log(lng)
   return (
     <div className='map'>
         <GoogleMapReact
@@ -25,8 +19,6 @@ const Map = ({postId, center, zoom}) => {
                 lng={lng}
                 onClick={()=> setLocationInfo({id: lat, title: lng})}
             />
-
-
         </GoogleMapReact>
         {/* {locationInfo && <LocationInfoBox info={locationInfo}/>} */}
     </div>
@@ -41,4 +33,4 @@ const Map = ({postId, center, zoom}) => {
 //     zoom: 6
 // }
 
-export default Map
+export default SinglePinMap

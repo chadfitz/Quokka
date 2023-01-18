@@ -1,5 +1,5 @@
 import {Icon} from '@iconify/react';
-import LocationIcon from '@iconify/icons-mdi/grass';
+import LocationIcon from '@iconify/icons-mdi/stadium-outline';
 
 const LocationMarker = ({lat, lng, onClick}) => {
   return (

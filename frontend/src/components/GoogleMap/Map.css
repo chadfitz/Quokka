@@ -1,13 +1,18 @@
 .map{
-    width: 100vw;
-    height: 60vh;
+    width: 100%;
+    height: 100%;
     position: relative;
+    border-radius: 10px;
   }
 
   .location-icon{
     font-size: 2rem;
     color: yellow;
-    border: 1px solid purple;
+    margin-left: -1rem;
+    margin-top: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .loader{
@@ -46,4 +51,8 @@
 
   .location-info li{
     padding: 5px 0;
+  }
+
+  .marker-styling{
+
   }
