@@ -8,11 +8,8 @@ import "./Map.css"
 const Map = ({postId, center, zoom}) => {
     const [locationInfo, setLocationInfo] = useState(null);
     const locationArray = useSelector(state => state.posts.user[postId].location);
-    console.log(locationArray)
     const lat = locationArray.coordinates[1];
-    console.log(lat);
     const lng = locationArray.coordinates[0];
-    console.log(lng)
   return (
     <div className='map'>
         <GoogleMapReact

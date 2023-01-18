@@ -11,7 +11,6 @@ function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
-  console.log(userPosts);
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     return () => dispatch(clearPostErrors());
@@ -32,7 +31,7 @@ function Profile () {
               body={post.body}
             /> */}
             <PostsIndexItem post={post}/>
-            <Map key={i} postId={i}/>
+            {/* <Map key={i} postId={i}/> */}
           </>
         ))}
       </div>

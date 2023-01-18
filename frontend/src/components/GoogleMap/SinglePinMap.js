@@ -7,12 +7,26 @@ import "./Map.css"
 
 const SinglePinMap = ({lat, lng}) => {
     const [locationInfo, setLocationInfo] = useState(null);
+
+    // var marker = new google.maps.Marker({
+    //     position: myLatLng,
+    //     map: map,
+    //     title: 'Hello World!'
+    // });
+    const handleApiLoaded = (map, maps) => {
+        return (
+            {disableDefaultUI:true}
+        )
+    };
+
   return (
     <div className='map'>
         <GoogleMapReact
             bootstrapURLKeys={{key:process.env.REACT_APP_MAPS_API_KEY}}
             defaultCenter={{lat: lat, lng: lng}}
             defaultZoom={5}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
             <LocationMarker
                 lat={lat}
