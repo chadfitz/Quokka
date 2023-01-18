@@ -2,9 +2,9 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
-const REMOVE_POST = "posts/REMOVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
+const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
@@ -28,15 +28,18 @@ const receiveNewPost = post => ({
   post
 });
 
-const receiveErrors = errors => ({
-  type: RECEIVE_POST_ERRORS,
-  errors
-});
+const receiveErrors = errors => {
+  console.log("IN RECEIVE ERRORS -- ERROR BELOW")
+  console.log(errors)
+  return ({type: RECEIVE_POST_ERRORS,
+  errors})
+};
 
 export const clearPostErrors = errors => ({
     type: CLEAR_POST_ERRORS,
     errors
 });
+
 
 export const fetchPosts = () => async dispatch => {
   try {
@@ -92,6 +95,22 @@ export const composePost = data => async dispatch => {
   }
 };
 
+export const updatePost = (post) => async (dispatch) => {
+  console.log("updatePost's post", post)
+  try {
+    const res = await jwtFetch(`/api/posts/${post._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(post)
+    })
+    if (res.ok) {
+      const newPost = await res.json();
+      dispatch(receiveNewPost(newPost));
+    }
+  } catch(err) {
+    const resBody = await err.json();
+    return dispatch(receiveErrors(resBody.errors));
+  }
+} 
 
 export const deletePost = postId => async dispatch => {
   try {
@@ -127,6 +146,10 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
   switch(action.type) {
     case RECEIVE_POSTS:
       return { ...state, all: action.posts, new: undefined};
+    case REMOVE_POST:
+      const newState = {...state}
+      delete newState[action.postId]
+      return newState;
     case RECEIVE_USER_POSTS:
       return { ...state, user: action.posts, new: undefined};
     case RECEIVE_NEW_POST:

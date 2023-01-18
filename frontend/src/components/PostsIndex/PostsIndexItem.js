@@ -2,22 +2,32 @@ import './PostsIndex.css'
 // import gmaps from './gmaps.png'
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
-import { Markup } from 'interweave';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost, updatePost } from '../../store/posts';import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
 import { deletePost } from '../../store/posts';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+// import { useState } from 'react';
 
-
-function PostsIndexItem ({ post, postId }) {
+function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
+    const history = useHistory();
+    const errors = useSelector(state => state.errors.posts)
 
-const handleDelete = (e) => {
-    e.preventDefault();
-    // console.log(postId)
-    dispatch(deletePost(postId));
-  }
+    const handleDelete = (e) => {
+        e.preventDefault();
+        dispatch(deletePost(post._id))
+    }
+
+    const handleEdit = e => {
+        e.preventDefault();
+        history.push(`/posts/${post._id}/edit`);
+        // dispatch(updatePost({...post, body: "<p>updated body</p>"}));
+    }
+
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
@@ -45,6 +55,8 @@ const handleDelete = (e) => {
             <h4>Post.reactions.count</h4>
             <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
             <button>React</button>
+            <button onClick={handleDelete}>DELETE</button>
+            <button onClick={handleEdit}>EDIT</button>
             <button>Reply</button>
             <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
         </div>
