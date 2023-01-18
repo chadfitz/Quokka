@@ -2,16 +2,23 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
+const RECEIVE_POST = "posts/RECEIVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
+// ACTION CREATORS
 const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
+
+const receivePost = post => ({
+  type: RECEIVE_POST,
+  post
+})
 
 const removePost = postId => ({
   type: REMOVE_POST,
@@ -40,7 +47,7 @@ export const clearPostErrors = errors => ({
     errors
 });
 
-
+// MIDDLEWARE ACTION CREATORS (Express?)
 export const fetchPosts = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/posts');
@@ -53,6 +60,19 @@ export const fetchPosts = () => async dispatch => {
     }
   }
 };
+
+export const fetchPost = (postId) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${postId}`);
+    const post = await res.json();
+    dispatch(receivePost(post));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 
 export const fetchUserPosts = id => async dispatch => {
   try {
