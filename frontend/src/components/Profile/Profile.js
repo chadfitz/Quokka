@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
+import AllPinsMap from '../GoogleMap/AllPinsMap';
 import Map from '../GoogleMap/Map';
 import PostBox from '../Posts/PostBox';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
@@ -22,6 +23,7 @@ function Profile () {
     return (
       <div className='profile-container'>
         <h2>All of {currentUser.username}'s Posts</h2>
+        <AllPinsMap userPosts={userPosts}/>
         {userPosts.map((post, i) => (
           <>
             {/* {console.log(post)} */}

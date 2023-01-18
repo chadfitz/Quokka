@@ -5,6 +5,11 @@
     border-radius: 10px;
   }
 
+  .all-pins-map{
+    width: 400px;
+    height: 400px;
+  }
+
   .location-icon{
     font-size: 2rem;
     color: yellow;
