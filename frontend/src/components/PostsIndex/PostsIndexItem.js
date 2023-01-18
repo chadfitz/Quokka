@@ -24,6 +24,7 @@ function PostsIndexItem ({ post }) {
 
     const handleEdit = e => {
         e.preventDefault();
+        dispatch(updatePost({...post, body: "<p>updated body</p>"}));
         // dispatch(updatePost({
         //     _id: post._id,
         //     writer: post.writer,
@@ -32,7 +33,6 @@ function PostsIndexItem ({ post }) {
         //     subject: post.subject,
         //     body: "updated body",
         // }))
-        // dispatch(updatePost({...post, body: "updated body"}));
         // console.log(post);
         // console.log(post._id)
     }

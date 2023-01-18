@@ -112,18 +112,21 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   try {
-    // const post = await Post.findById(req.params.id);
-    // const updatedPost = await post.update();
-    const updatedPost = await Post.findOneAndUpdate({_id: id}, {
-      writer: req.user._id,
+    const updatedPost = Post.updateOne({_id: req.params.id}, {  
       recipient: req.body.recipient,
       location: req.body.location,
       subject: req.body.subject,
       body: req.body.body,
       reactions: req.body.reactions,
-    })
+    }, function (err, docs) {
+        if (err){
+          console.log(err)
+        } else {
+          console.log("Updated Docs : ", docs);
+      }}
+    )
   }
   catch(err) {
     const error = new Error('Post not found');
