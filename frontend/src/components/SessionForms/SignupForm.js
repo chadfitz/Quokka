@@ -105,8 +105,12 @@ function SignupForm () {
         />
       </label>
       <label>
-        Profile image
-        <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
+        <h3 id="profile-image-input">Profile image</h3>
+        <input 
+         type="file"
+         accept=".jpg, .jpeg, .png" 
+         onChange={updateFile}
+         id="login-input" />
       </label>
       <input
         type="submit"
