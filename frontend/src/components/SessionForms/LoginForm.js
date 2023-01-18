@@ -31,6 +31,12 @@ function LoginForm () {
     history.push("/signup")
   }
 
+  const demoLogin = e => { 
+    e.preventDefault()
+    return dispatch(login({email:'demo-user@appacademy.io', password:'starwars'}))
+    .then(()=> history.push('/posts'))
+  }
+
   return (
     <div className="session-form-container">
     <form className="session-form" onSubmit={handleSubmit}>
@@ -65,6 +71,13 @@ function LoginForm () {
         id="signup-submit"
         onClick={handleClick}
         />
+      <input
+        type="submit"
+        value="Demo User"
+        id="signup-submit-two"
+        onClick={demoLogin}
+        />
+      
     </form>
     </div>
   );
