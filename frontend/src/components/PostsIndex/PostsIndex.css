@@ -1,8 +1,8 @@
-body { 
+body {
     background-color: whitesmoke;
     font-family: monospace;
 }
-.post-index-item { 
+.post-index-item {
     margin-top: 30px;
     background-color: white;
     box-shadow: 0px 12px 18px 6px rgb(199, 199, 199);
@@ -10,44 +10,45 @@ body {
     border-radius: 20px;
 }
 
-.posts-index-header { 
+.posts-index-header {
     margin-top: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.post-index-middle { 
-    width: 45vw;
+.post-index-middle {
+    min-width: 40%;
     padding: 20px;
 }
 
-.post-index-date { 
-    width: 10vw;
+.post-index-date {
+    min-width: 10%;
     padding: 10px
 }
 
-.post-item-top { 
+.post-item-top {
     display: flex;
     flex-direction: row;
 }
 
-.post-index-map { 
-    width: 45vw;
+.post-index-map {
+    min-width: 45%;
+    border-radius: 10px;
 }
 
-.post-index-container { 
+.post-index-container {
     max-width: 60vw;
     margin: auto;
 }
 
-.post-item-bottom { 
+.post-item-bottom {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.posts-index-filter { 
+.posts-index-filter {
     margin-top: 50px;
     display: flex;
     background-color: white;
@@ -55,7 +56,7 @@ body {
     width:35vw;
 }
 
-.filter-buttons { 
+.filter-buttons {
     border: none;
     background-color: transparent;
     font-family: monospace;
@@ -63,13 +64,12 @@ body {
     margin: 10px;
 }
 
-#filter-by { 
+#filter-by {
     padding: 0px 30px;
     font-size: 16px;
 }
 
-#post-google-map { 
+#post-google-map {
     width: 100%;
     box-shadow: 0 5px 15px #9f9e9e;
 }
-    

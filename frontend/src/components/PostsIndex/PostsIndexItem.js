@@ -1,6 +1,8 @@
 import './PostsIndex.css'
-import gmaps from './gmaps.png'
-import moment from 'moment'
+// import gmaps from './gmaps.png'
+import moment from 'moment';
+import SinglePinMap from '../GoogleMap/SinglePinMap';
+
 
 
 function PostsIndexItem ({ post }) {
@@ -8,7 +10,8 @@ function PostsIndexItem ({ post }) {
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
-                <img src={gmaps} alt="google maps location" id="post-google-map" />
+                {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
+                <SinglePinMap id="single-pin-map" lat={post.location.coordinates[1]} lng={post.location.coordinates[0]} />
             </div>
             <div className='post-index-middle'>
                 <h2>Subject: {post.subject}</h2>
