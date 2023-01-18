@@ -18,7 +18,7 @@ const postSchema = Schema({
     type: pointSchema,
     required: true
   },
-  // mongodb strings provided unlimited length
+  // mongodb strings provide unlimited length
   subject: {
     type: String,
     required: true
@@ -27,16 +27,6 @@ const postSchema = Schema({
     type: String,
     required: true
   },
-  // AA method
-  imageUrls: {
-    type: [String],
-    required: false
-  },
-  // Better way?
-  // images: {
-  //   type: Map,
-  //   of: String
-  // },
   reactions: {
     type: reactionSchema
   }
@@ -48,3 +38,20 @@ const postSchema = Schema({
 module.exports = mongoose.model('Post', postSchema);
 // TODO: try with this line instead (latest syntax)
 // export default Post = mongoose.model('Post', postSchema);
+
+
+// TODO: DELETE ME IF UNNEEDED
+// body: {
+  //   type: String,
+  //   required: true
+  // },
+  // // AA method
+  // imageUrls: {
+  //   type: [String],
+  //   required: false
+  // },
+  // Better way?
+  // images: {
+  //   type: Map,
+  //   of: String
+  // },

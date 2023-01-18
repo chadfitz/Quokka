@@ -59,19 +59,46 @@ router.get('/:id', async (req, res, next) => {
 // current user.) Also attach validatePostInput as a middleware before the
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
+
+
   try {
     const newPost = new Post({
+      writer: req.user._id,
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
       body: req.body.body,
-      writer: req.user._id
+      reactions: req.body.reactions,
     });
 
     let post = await newPost.save();
+    // command from mongoDB to return object with following dims
     post = await post.populate('writer', '_id, username');
+    post = await post.populate('recipient', '_id, username');
     return res.json(post);
   }
   catch(err) {
-    next(err);
+    return next(err);
   }
 });
+
+
+
+
+router.delete('/:postId', async (req, res, next) => {
+  try {
+    const post = await Post.findById(req.params.postId).delete()
+    return res.json(post);
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
+
+
+
 
 module.exports = router;

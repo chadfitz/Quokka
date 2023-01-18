@@ -4,6 +4,7 @@ const pointSchema = require('./Point');
 // https://mongoosejs.com/docs/geojson.html
 
 const reactionSchema = new mongoose.Schema({
+  // TBU
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
