@@ -5,14 +5,25 @@ import SinglePinMap from '../GoogleMap/SinglePinMap';
 import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
+import { useEffect, useState } from 'react';
+import Loader from '../GoogleMap/Loader';
 
 
 
 function PostsIndexItem ({ post }) {
+    // const [loading, setLoading] = useState(false);
+    // let mapPlaceholder;
+    // useEffect(()=> {
+    //     setLoading(true);
+    //     mapPlaceholder = <SinglePinMap id="single-pin-map" lat={post.location.coordinates[1]} lng={post.location.coordinates[0]} key={post._id} />
+    //     setLoading(false);
+    // },[])
+
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
+                {/* {loading ? <Loader/> : mapPlaceholder} */}
                 {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
                 <SinglePinMap id="single-pin-map" lat={post.location.coordinates[1]} lng={post.location.coordinates[0]} key={post._id} />
             </div>

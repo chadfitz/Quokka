@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
-import Map from '../GoogleMap/Map';
+import Map from '../GoogleMap/Map.js (NOT USED)';
 import PostBox from '../Posts/PostBox';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
 import "./Profile.css"
