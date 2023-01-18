@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -97,6 +98,26 @@ router.delete('/:postId', async (req, res, next) => {
     return next(error);
   }
 });
+
+// IN PROGRESS --- Creates a reaction to a post
+router.patch('/react/:postId', async (req, res, next) => {
+  try {
+    const { postId } = req.params
+    const post = await Post.findById(postId)
+
+    // need to modify and save post
+
+
+    // dummy return value
+    return res.json(post)
+
+  } catch(err) {
+    const error = new Error('Reaction could not be made');
+    error.statusCode = 422;
+    error.errors = { message: "User unable to react to post"};
+    return next(error)
+  }
+})
 
 
 

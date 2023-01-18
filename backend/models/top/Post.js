@@ -27,8 +27,9 @@ const postSchema = Schema({
     type: String,
     required: true
   },
+  // multiple reactions
   reactions: {
-    type: reactionSchema
+    type: [{reactionSchema}]
   }
 }, {
   timestamps: true
