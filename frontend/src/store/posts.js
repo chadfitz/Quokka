@@ -42,8 +42,6 @@ export const fetchPosts = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/posts');
     const posts = await res.json();
-    // console.log("hello from fetch posts")
-    // console.log(posts);
     dispatch(receivePosts(posts));
   } catch (err) {
     const resBody = await err.json();
@@ -57,7 +55,6 @@ export const fetchUserPosts = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/posts/user/${id}`);
     const posts = await res.json();
-    // console.log("hello from user posts")
     dispatch(receiveUserPosts(posts));
   } catch(err) {
     const resBody = await err.json();
@@ -85,7 +82,6 @@ export const composePost = data => async dispatch => {
 
 
 export const deletePost = postId => async dispatch => {
-  console.log('in frontend/src/store/posts#deletePost', postId);
   try {
     const res = await jwtFetch(`/api/posts/${postId}`, {
       method: 'DELETE'

@@ -8,16 +8,12 @@ function PostBox ({ key, postId, posty }) {
   const dispatch = useDispatch();
   const errors = useSelector(state => state.errors.posts);
   const post = useSelector(store => {
-    return Object.values(store.posts.all).find(obj => obj._id === postId)
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
   })
-
-  // console.log('post');
-  // console.log(post);
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("In src/components/post/PostBox handleDelete, postId: ", postId);
-    dispatch(deletePost(postId))
+    dispatch(deletePost(postId));
   }
 
   return (
