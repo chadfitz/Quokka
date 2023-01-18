@@ -85,7 +85,7 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
   });
 });
 
-router.post('/login', validateLoginInput, async (req, res, next) => {
+router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, res, next) => {
   passport.authenticate('local', async function(err, user) {
     if (err) return next(err);
     if (!user) {

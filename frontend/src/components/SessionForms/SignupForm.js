@@ -9,6 +9,7 @@ function SignupForm () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [image, setImage] = useState(null);
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
   const history = useHistory()
@@ -18,6 +19,8 @@ function SignupForm () {
       dispatch(clearSessionErrors());
     };
   }, [dispatch]);
+
+  const updateFile = e => setImage(e.target.files[0]);
 
   const update = field => {
     let setState;
@@ -38,7 +41,7 @@ function SignupForm () {
       default:
         throw Error('Unknown field in Signup Form');
     }
-
+    
     return e => setState(e.currentTarget.value);
   }
 
@@ -47,9 +50,9 @@ function SignupForm () {
     const user = {
       email,
       username,
+      image,
       password
     };
-
     dispatch(signup(user)); 
   }
 
@@ -65,7 +68,6 @@ function SignupForm () {
       <h2>Sign Up Form</h2>
       <div className="errors">{errors?.email}</div>
       <label>
-        <span>Email</span>
         <input type="text"
           value={email}
           onChange={update('email')}
@@ -75,7 +77,6 @@ function SignupForm () {
       </label>
       <div className="errors">{errors?.username}</div>
       <label>
-        <span>Username</span>
         <input type="text"
           value={username}
           onChange={update('username')}
@@ -85,7 +86,6 @@ function SignupForm () {
       </label>
       <div className="errors">{errors?.password}</div>
       <label>
-        <span>Password</span>
         <input type="password"
           value={password}
           onChange={update('password')}
@@ -97,13 +97,16 @@ function SignupForm () {
         {password !== password2 && 'Confirm Password field must match'}
       </div>
       <label>
-        <span>Confirm Password</span>
         <input type="password"
           value={password2}
           onChange={update('password2')}
           placeholder="Confirm Password"
           id='login-input'
         />
+      </label>
+      <label>
+        Profile image
+        <input type="file" accept=".jpg, .jpeg, .png" onChange={updateFile} />
       </label>
       <input
         type="submit"

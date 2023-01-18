@@ -76,3 +76,12 @@ body {
     width: 100%;
     box-shadow: 0 5px 15px #9f9e9e;
 }
+
+#profile-image-item { 
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 50%
+}
+
+
