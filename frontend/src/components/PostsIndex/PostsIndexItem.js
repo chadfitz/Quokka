@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deletePost, updatePost } from '../../store/posts';import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
-import { deletePost } from '../../store/posts';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // import { useState } from 'react';

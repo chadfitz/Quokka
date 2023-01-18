@@ -48,7 +48,7 @@ function PostCompose () {
     else setImageUrls([]);
   }
 
-  const x = <div children={body.toString()}></div>;
+  // const x = <div children={body.toString()}></div>;
   // TODO: connect me
   // TODO: change default state if needed
   // const [reactions, setReactions] = useState(['smile']);
