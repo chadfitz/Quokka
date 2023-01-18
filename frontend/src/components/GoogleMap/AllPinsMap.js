@@ -9,6 +9,8 @@ import Loader from './Loader';
 const AllPinsMap = ({userPosts, zoom}) => {
     const [locationInfo, setLocationInfo] = useState(null);
 
+    
+
   return (
     <div className='all-pins-map'>
         <GoogleMapReact
