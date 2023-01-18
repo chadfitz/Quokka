@@ -2,7 +2,6 @@ import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
-const REMOVE_POST = "posts/REMOVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
 const REMOVE_POST = "posts/REMOVE_POST"
@@ -28,15 +27,6 @@ const receiveNewPost = post => ({
   type: RECEIVE_NEW_POST,
   post
 });
-
-export const removePost = postId => {
-  console.log("in remove post action creator")
-  return {
-    type: REMOVE_POST,
-    postId
-  }
-}
-
 
 const receiveErrors = errors => {
   console.log("IN RECEIVE ERRORS -- ERROR BELOW")
@@ -95,28 +85,12 @@ export const composePost = data => async dispatch => {
   }
 };
 
-
 export const deletePost = postId => async dispatch => {
   try {
     const res = await jwtFetch(`/api/posts/${postId}`, {
       method: 'DELETE'
     })
     dispatch(removePost(postId))
-  } catch(err) {
-    const resBody = await err.json();
-    return dispatch(receiveErrors(resBody.errors));
-  }
-  // todo error handling
-}
-
-export const deletePost = postId => async dispatch => {
-  try {
-    const res = await jwtFetch(`/api/posts/${postId}`, {
-      method: 'DELETE'
-    })
-    if (res.ok) {
-      dispatch(removePost(postId))
-    }
   } catch(err) {
     const resBody = await err.json();
     return dispatch(receiveErrors(resBody.errors));
