@@ -39,10 +39,14 @@ function PostsIndexItem ({ post }) {
                 {post.body && <Markup content={post.body} />}
                 <h3>From, </h3>
                 <h3>{post.writer.username}</h3>
+                <div className='post-index-photos'>
+                    {post.imageUrls ? <img id="post-index-photo" src={post.imageUrls[0]} alt=""/> :
+                "" }
+                </div>
             </div>
             <div className='post-index-date'>
                 < FiEdit3 />
-                < FiTrash2 />
+                <button onClick={handleDelete}>< FiTrash2 /></button>
             </div>
         </div>
         <div className='post-item-bottom'>

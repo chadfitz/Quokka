@@ -56,7 +56,7 @@ body {
     display: flex;
     background-color: white;
     border-radius: 30px;
-    width:35vw;
+    width: 100%;
 }
 
 .filter-buttons {
@@ -82,6 +82,11 @@ body {
     width: 50px;
     border: 1px solid black;
     border-radius: 50%
+}
+
+#post-index-photo { 
+    height: 100px;
+    width: auto;
 }
 
 
