@@ -18,6 +18,8 @@ const app = express();
 app.use(logger('dev')); // log request components (URL/method) to terminal
 app.use(express.json()); // parse JSON request body
 app.use(express.urlencoded({ extended: false })); // parse urlencoded request body
+// const bodyParser = require("body-parser")
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser()); // parse cookies as an object on req.cookies
 
 app.use(passport.initialize()); // make Express use passport for authentication

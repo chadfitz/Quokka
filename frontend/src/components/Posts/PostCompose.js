@@ -4,7 +4,7 @@ import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-import { clearPostErrors, composePost,  } from '../../store/posts';
+import { clearPostErrors, composePost } from '../../store/posts';
 import PostBox from './PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
@@ -19,6 +19,7 @@ function PostCompose () {
   const [subject, handleSubjectChange] = useInput('');
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(1);
+  const [reactions, setReactions] = useState('');
   // TODO: connect me to google maps api
   const [location, setLocation] = useState({
       "type" : "Point",
@@ -61,19 +62,13 @@ function PostCompose () {
     console.log('writer');
     console.log(writer);
     e.preventDefault();
-    console.log('body');
-    console.log(body);
-    console.log('newPost - before');
-    console.log(newPost);
-    //
-
     dispatch(composePost({
       writer,
       recipient: writer,
       location,
       subject,
-      body, }));
-      // reactions }));
+      body,
+      reactions }));
     setBody('');
 
     //
@@ -82,9 +77,6 @@ function PostCompose () {
     //
 
   };
-
-  console.log('body');
-  console.log(body);
 
   return (
     <>
@@ -112,6 +104,7 @@ function PostCompose () {
         label="Submit Post"
         onClick={handleSubmit}
       />
+      <input type="submit" value="Submit" />
       {/* <PostBox body={newPost?.body} /> */}
       <div>
         {body && <Markup content={body} />}

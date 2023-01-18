@@ -17,7 +17,7 @@
     height: 500px;
     display: flex;
     justify-content: space-between;
-    max-height: 35vh;
+    max-height: 40vh;
     box-shadow: 0px 24px 36px 12px rgb(171, 2, 171);
     border-radius: 10px;
 }
@@ -46,6 +46,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-right: 5vw
 }
 
 .box-left-up,
@@ -55,6 +56,14 @@
     justify-content: center;
     font-size: 24px;
     margin-bottom: -20px;
+}
+
+.box-left-stat,
+.box-middle-stat,
+.box-right-stat { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .splash-lists { 
@@ -74,12 +83,30 @@
 
 #splash-statistics { 
     margin-bottom: 150px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #splash-postcard { 
     width: 70%;
     height: auto;
 }
+
+#mission-statement,
+#postcards,
+#statistics { 
+    margin: 10px;
+    font-size: 24px;
+}
+
+#postcard-right { 
+    min-width: 45%;
+}
+
+.box-right { 
+    width: 80%
+}
+
 
 
 

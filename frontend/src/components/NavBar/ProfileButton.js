@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
-  const favorites = useSelector(state => state.favorites);
   const sessionUser = useSelector(state => state.session.user)
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory()
@@ -29,6 +28,11 @@ function ProfileButton({ user }) {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
+  const handleSignup = (e) => { 
+    e.preventDefault();
+    history.push("/signup")
+  }
 
 
   const logout = (e) => {
@@ -50,11 +54,11 @@ function ProfileButton({ user }) {
           <ul className="profile-dropdown">
             <li id="profileinfo"><span id="bold">USERNAME:</span> {sessionUser.username}</li>
             <li id="profileinfo"><span id="bold">EMAIL: </span>{sessionUser.email}</li>
-            <li><Link to={'/posts'}>All Posts</Link></li>
-            <li><Link to={'/profile'}>Profile</Link></li>
-            <li><Link to={'/posts/new'}>Write a Post</Link></li>
+            <li id="profileinfo"><Link to={'/posts'} id="profile-links">All Posts</Link></li>
+            <li id="profileinfo"><Link to={'/profile'} id="profile-links">Profile</Link></li>
+            <li id="profileinfo"><Link to={'/posts/new'} id="profile-links">Write a Post</Link></li>
             <li>
-              <button id="logout" onClick={logout}>Log Out</button>
+              <button id="logout-dropdown" onClick={logout}>Log Out</button>
             </li>
           </ul>
         )}
@@ -62,10 +66,12 @@ function ProfileButton({ user }) {
       :
       <div className="dropdown-menu">
         {showMenu && (
-          <ul className="profile-dropdown">  
-            <li><Link to={'/signup'}>Signup</Link></li>
-            <li><Link to={'/login'}>Login</Link></li>
-          </ul>
+          <div className="profile-dropdown">
+            <div className="must-login">
+             <h3 >Must have an account to see posts</h3>
+            </div>  
+            <button id="logout-dropdown" onClick={handleSignup}>Signup</button>
+          </div>
         )}
       </div> }
     </div>

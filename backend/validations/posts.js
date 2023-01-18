@@ -5,10 +5,22 @@ const handleValidationErrors = require('./handleValidationErrors');
 // middleware to validate the keys in the body of a request to create/edit
 // a post
 const validatePostInput = [
+  check('writer')
+    .exists({ checkFalsy: true })
+    .withMessage('Post must have a writer'),
+  check('recipient')
+    .exists({ checkFalsy: true })
+    .withMessage('Post must have a recipient'),
+  check('location')
+    .exists({ checkFalsy: true })
+    .withMessage('Post must have a location'),
   check('body')
     .exists({ checkFalsy: true })
-    .isLength({ min: 5, max: 140 })
+    .isLength({ min: 5, max: 5000 })
     .withMessage('Post must be between 5 and 140 characters'),
+  check('subject')
+    .exists({ checkFalsy: true })
+    .withMessage('Post must contain a subject'),
   handleValidationErrors
 ];
 

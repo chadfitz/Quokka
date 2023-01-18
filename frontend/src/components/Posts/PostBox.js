@@ -1,55 +1,35 @@
-import { useEffect } from "react";
+import mongoose from "mongoose";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "../../blocks/Button";
 import { deletePost } from "../../store/posts";
+// const { ObjectId } = require('mongodb')
 
-
-function PostBox ({ body, username, id }) {
-
+function PostBox ({ key, postId, posty }) {
   const dispatch = useDispatch();
   const errors = useSelector(state => state.errors.posts);
-  // const post = useSelector(state => {
-  //   state.posts[id]
-  // })
+  const post = useSelector(store => {
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
+  })
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("IN HANDLE DELETE -- ID:")
-    console.log(id)
-    dispatch(deletePost(id))
+    dispatch(deletePost(postId));
   }
 
-  // useEffect(()=>{
-
-  // },[post])
-
-  // let content
-  // if (post) {
-  //   content = (<>
-  //     <div className="post">
-  //       <h3>{username ? `${username}:` : ""} {body} </h3>
-  //       <button onClick={handleDelete}>Delete above post</button>
-  //       <div className="errors">{errors && errors.message}</div>
-  //     </div>
-  //   </>)
-  // } else {
-  //   content = <></>
-  // }
-
   return (
-    // {content}
-  //   <>
-  //   { post && (<div className="post">
-  //   <h3>{username ? `${username}:` : ""} {body} </h3>
-  //   <button onClick={handleDelete}>Delete above post</button>
-  //   <div className="errors">{errors && errors.message}</div>
-  // </div>)}
-  // </>
-  <div className="post">
-    <h3>{username ? `${username}:` : ""} {body} </h3>
-    <button onClick={handleDelete}>Delete above post</button>
-    <div className="errors">{errors && errors.message}</div>
-  </div>
+    <div className="post">
+    {post &&
+    <>
+      <h3>{posty.username ? `${posty.username}:` : ""} {posty.body} </h3>
+      <Button
+        label="Delete Post"
+        onClick={handleDelete}
+      />
+      <div className="errors">{errors && errors.message}</div>
+    </>
+    }
+    </div>
   );
 }
-
+//
 export default PostBox;
