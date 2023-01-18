@@ -1,3 +1,8 @@
 .profile-container{
     margin-top: 100px;
 }
+
+#all-pins-map-container{
+    display: flex;
+    justify-content: center;
+}

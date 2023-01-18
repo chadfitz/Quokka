@@ -6,7 +6,7 @@ import LocationInfoBox from './LocationInfoBox';
 import "./Map.css";
 import Loader from './Loader';
 
-const AllPinsMap = ({userPosts}) => {
+const AllPinsMap = ({userPosts, zoom}) => {
     const [locationInfo, setLocationInfo] = useState(null);
 
   return (
@@ -14,7 +14,7 @@ const AllPinsMap = ({userPosts}) => {
         <GoogleMapReact
             bootstrapURLKeys={{key:process.env.REACT_APP_MAPS_API_KEY}}
             defaultCenter={{lat: 38, lng: -122}}
-            defaultZoom={3}
+            defaultZoom={zoom}
         >
         {userPosts.map((post) =>
             <LocationMarker

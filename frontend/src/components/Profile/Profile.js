@@ -23,7 +23,7 @@ function Profile () {
     return (
       <div className='profile-container'>
         <h2>All of {currentUser.username}'s Posts</h2>
-        <AllPinsMap userPosts={userPosts}/>
+        <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
         {userPosts.map((post, i) => (
           <>
             {/* {console.log(post)} */}
