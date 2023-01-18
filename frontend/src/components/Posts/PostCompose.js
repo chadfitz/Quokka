@@ -20,6 +20,8 @@ function PostCompose () {
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(1);
   const [reactions, setReactions] = useState('');
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
   // TODO: connect me to google maps api
   const [location, setLocation] = useState({
       "type" : "Point",
@@ -28,6 +30,25 @@ function PostCompose () {
         37.7
       ]
     });
+
+    const updateFiles = async e => {
+    const files = e.target.files;
+    setImages(files);
+    if (files.length !== 0) {
+      let filesLoaded = 0;
+      const urls = [];
+      Array.from(files).forEach((file, index) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          urls[index] = fileReader.result;
+          if (++filesLoaded === files.length) 
+            setImageUrls(urls);
+        }
+      });
+    }
+    else setImageUrls([]);
+  }
 
   const x = <div children={body.toString()}></div>;
   // TODO: connect me
@@ -63,10 +84,13 @@ function PostCompose () {
       writer,
       recipient: writer,
       location,
+      images,
       subject,
       body,}));
       // reactions
     setBody('');
+    setImages([]);
+    setImageUrls([]);
   };
 
   return (
@@ -95,6 +119,14 @@ function PostCompose () {
         label="Submit Post"
         onClick={handleSubmit}
       />
+        <label>
+          Images to Upload
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            multiple
+            onChange={updateFiles} />
+        </label>
       <input type="submit" value="Submit" />
       {/* <PostBox body={newPost?.body} /> */}
       <div>

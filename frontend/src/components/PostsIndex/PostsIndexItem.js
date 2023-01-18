@@ -5,16 +5,25 @@ import SinglePinMap from '../GoogleMap/SinglePinMap';
 import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
+import { deletePost } from '../../store/posts';
+import { useDispatch } from 'react-redux';
 
 
 
-function PostsIndexItem ({ post }) {
+function PostsIndexItem ({ post, postId }) {
+    const dispatch = useDispatch();
+
+const handleDelete = (e) => {
+    e.preventDefault();
+    // console.log(postId)
+    dispatch(deletePost(postId));
+  }
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
                 {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
-                <SinglePinMap id="single-pin-map" lat={post.location.coordinates[1]} lng={post.location.coordinates[0]} />
+                <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} />
             </div>
             <div className='post-index-middle'>
                 <h2>Subject: {post.subject}</h2>
@@ -22,10 +31,14 @@ function PostsIndexItem ({ post }) {
                 {post.body && <Markup content={post.body} />}
                 <h3>From, </h3>
                 <h3>{post.writer.username}</h3>
+                <div className='post-index-photos'>
+                    {post.imageUrls ? <img id="post-index-photo" src={post.imageUrls[0]} alt=""/> :
+                "" }
+                </div>
             </div>
             <div className='post-index-date'>
                 < FiEdit3 />
-                < FiTrash2 />
+                <button onClick={handleDelete}>< FiTrash2 /></button>
             </div>
         </div>
         <div className='post-item-bottom'>
