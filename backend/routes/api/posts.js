@@ -60,6 +60,7 @@ router.get('/:id', async (req, res, next) => {
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
 
+
   try {
     const newPost = new Post({
       writer: req.user._id,
