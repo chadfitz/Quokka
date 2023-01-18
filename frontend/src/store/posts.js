@@ -97,11 +97,15 @@ export const composePost = data => async dispatch => {
 
 export const updatePost = (post) => async (dispatch) => {
   console.log("updatePost's post", post)
+  console.log('post._id');
+  console.log(post._id);
   try {
+    console.log('frontend try');
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
       body: JSON.stringify(post)
     })
+    console.log('after await jwtFetch');
     if (res.ok) {
       const newPost = await res.json();
       dispatch(receiveNewPost(newPost));
@@ -110,7 +114,7 @@ export const updatePost = (post) => async (dispatch) => {
     const resBody = await err.json();
     return dispatch(receiveErrors(resBody.errors));
   }
-} 
+}
 
 export const deletePost = postId => async dispatch => {
   try {
@@ -146,10 +150,6 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
   switch(action.type) {
     case RECEIVE_POSTS:
       return { ...state, all: action.posts, new: undefined};
-    case REMOVE_POST:
-      const newState = {...state}
-      delete newState[action.postId]
-      return newState;
     case RECEIVE_USER_POSTS:
       return { ...state, user: action.posts, new: undefined};
     case RECEIVE_NEW_POST:

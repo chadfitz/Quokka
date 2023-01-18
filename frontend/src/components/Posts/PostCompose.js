@@ -64,8 +64,8 @@ function PostCompose () {
   const formType = postId ? 'Update' : 'Create';
   if (formType === 'Create') {
     post = {
-      writer, 
-      recipient: writer, 
+      writer,
+      recipient: writer,
       location: {
         "type": "Point",
         "coordinates": [
@@ -73,7 +73,7 @@ function PostCompose () {
           37.7
         ]
       },
-      subject: "", 
+      subject: "",
       body: ""
     }
   }
@@ -100,6 +100,7 @@ function PostCompose () {
     'list', 'bullet', 'indent',
     'link', 'image'
   ];
+<<<<<<< HEAD
   
   // const handleSubmit = async e => {
   //   e.preventDefault();
@@ -120,6 +121,32 @@ function PostCompose () {
   //     // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
   //       // .then(history.push(`/posts/${postId}`));
   //   }
+=======
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
+
+    // post = { ...post, writer, recipient, location, subject, body}
+    if (formType === 'Create'){
+      post = {...post, writer, recipient, location, subject, body}
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = {...post, body: "updated post body"}
+      console.log('post');
+      console.log(post);
+      // post = { ...post, writer, recipient, location, subject, body}
+      // dispatch(updatePost(post))
+      dispatch(updatePost(post));
+        // .then(history.push(`/posts`));
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
+>>>>>>> 1f98eea (update and delete work)
 
   //   // TODO: CLEAR OTHER FIELDS (not just body)?
   //   setBody('');
@@ -134,6 +161,7 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
+<<<<<<< HEAD
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(composePost({
@@ -148,7 +176,10 @@ function PostCompose () {
     setImages([]);
     setImageUrls([]);
   };
+=======
+>>>>>>> 1f98eea (update and delete work)
 
+  // if (!post) return null;
   return (
     <>
       <div className="text-editor">
