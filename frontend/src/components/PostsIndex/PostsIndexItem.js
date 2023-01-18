@@ -2,10 +2,38 @@ import './PostsIndex.css'
 // import gmaps from './gmaps.png'
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost, updatePost } from '../../store/posts';
+// import { useState } from 'react';
 
 function PostsIndexItem ({ post }) {
+    const dispatch = useDispatch();
+    const errors = useSelector(state => state.errors.posts)
+
+    // const [edit, setEdit] = useState(false);
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        console.log("IN P.I.I. HANDLE DELETE -- ID:")
+        console.log(post._id)
+        dispatch(deletePost(post._id))
+    }
+
+    const handleEdit = e => {
+        e.preventDefault();
+        // dispatch(updatePost({
+        //     _id: post._id,
+        //     writer: post.writer,
+        //     recipient: post.recipient,
+        //     location: post.location,
+        //     subject: post.subject,
+        //     body: "updated body",
+        // }))
+        // dispatch(updatePost({...post, body: "updated body"}));
+        // console.log(post);
+        // console.log(post._id)
+    }
+
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
@@ -27,9 +55,13 @@ function PostsIndexItem ({ post }) {
         <div className='post-item-bottom'>
             <h4>Post.reactions.count</h4>
             <button>React</button>
+            <button onClick={handleDelete}>DELETE</button>
+            {/* <button onClick={()=>setEdit(true)}>EDIT</button> */}
+            <button onClick={handleEdit}>EDIT</button>
             <button>Reply</button>
             <h4>post.replies.count</h4>
         </div>
+        {/* {edit && <PostsEditForm post={post} setEdit={setEdit} />} */}
     </div>
   );
 }

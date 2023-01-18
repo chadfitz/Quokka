@@ -13,12 +13,12 @@ function Posts () {
   }, [dispatch])
 
   if (posts.length === 0) return <div>There are no Posts</div>;
-
+  if (!posts) return <div>There are no posts</div>
   return (
     <>
       <h2>All Posts</h2>
       {posts.map(post => (
-        <PostBox key={post._id} body={post.body} username={post.writer.username} />
+        <PostBox key={post._id} body={post.body} username={post.writer.username} id={post._id} post={post} />
       ))}
     </>
   );

@@ -4,6 +4,7 @@ import { RECEIVE_USER_LOGOUT } from './session';
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
+const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
@@ -22,15 +23,27 @@ const receiveNewPost = post => ({
   post
 });
 
-const receiveErrors = errors => ({
-  type: RECEIVE_POST_ERRORS,
-  errors
-});
+export const removePost = postId => {
+  console.log("in remove post action creator")
+  return {
+    type: REMOVE_POST,
+    postId
+  }
+}
+
+
+const receiveErrors = errors => {
+  console.log("IN RECEIVE ERRORS -- ERROR BELOW")
+  console.log(errors)
+  return ({type: RECEIVE_POST_ERRORS,
+  errors})
+};
 
 export const clearPostErrors = errors => ({
     type: CLEAR_POST_ERRORS,
     errors
 });
+
 
 export const fetchPosts = () => async dispatch => {
   try {
@@ -62,6 +75,8 @@ export const fetchUserPosts = id => async dispatch => {
 };
 
 export const composePost = data => async dispatch => {
+  console.log('compose post data');
+  console.log(data);
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
@@ -77,6 +92,37 @@ export const composePost = data => async dispatch => {
   }
 };
 
+export const deletePost = postId => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${postId}`, {
+      method: 'DELETE'
+    })
+    if (res.ok) {
+      dispatch(removePost(postId))
+    }
+  } catch(err) {
+    const resBody = await err.json();
+    return dispatch(receiveErrors(resBody.errors));
+  }
+  // todo error handling
+}
+
+export const updatePost = (post) => async (dispatch) => {
+  try {
+    const res = await jwtFetch(`/api/posts/${post.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(post)
+    })
+    if (res.ok) {
+      const newPost = await res.json();
+      dispatch(receiveNewPost(newPost));
+    }
+  } catch(err) {
+    const resBody = await err.json();
+    return dispatch(receiveErrors(resBody.errors));
+  }
+} 
+
 const nullErrors = null;
 
 export const postErrorsReducer = (state = nullErrors, action) => {
@@ -84,6 +130,8 @@ export const postErrorsReducer = (state = nullErrors, action) => {
     case RECEIVE_POST_ERRORS:
       return action.errors;
     case RECEIVE_NEW_POST:
+      // should not return 0, but what is this doing?
+      return;
     case CLEAR_POST_ERRORS:
       return nullErrors;
     default:
@@ -95,6 +143,10 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
   switch(action.type) {
     case RECEIVE_POSTS:
       return { ...state, all: action.posts, new: undefined};
+    case REMOVE_POST:
+      const newState = {...state}
+      delete newState[action.postId]
+      return newState;
     case RECEIVE_USER_POSTS:
       return { ...state, user: action.posts, new: undefined};
     case RECEIVE_NEW_POST:

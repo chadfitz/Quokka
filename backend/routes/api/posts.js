@@ -59,18 +59,63 @@ router.get('/:id', async (req, res, next) => {
 // current user.) Also attach validatePostInput as a middleware before the
 // route handler.
 router.post('/', requireUser, validatePostInput, async (req, res, next) => {
+
   try {
     const newPost = new Post({
+      writer: req.user._id,
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
       body: req.body.body,
-      writer: req.user._id
+      reactions: req.body.reactions,
     });
 
     let post = await newPost.save();
+    // command from mongoDB to return object with following dims
     post = await post.populate('writer', '_id, username');
+    post = await post.populate('recipient', '_id, username');
     return res.json(post);
   }
   catch(err) {
+    // console.warn(xhr.responseText);
     next(err);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+
+  // req.params.id, but could access any param by name
+  try {
+    const post = await Post.findById(req.params.id)
+    const x = await post.delete();
+    console.log(x)
+  }
+  catch(err) {
+    const error = new Error('User not found');
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
+  }
+});
+
+router.patch('/:id', async (req, res) => {
+  try {
+    // const post = await Post.findById(req.params.id);
+    // const updatedPost = await post.update();
+    const updatedPost = await Post.findOneAndUpdate({_id: id}, {
+      writer: req.user._id,
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
+      body: req.body.body,
+      reactions: req.body.reactions,
+    })
+  }
+  catch(err) {
+    const error = new Error('Post not found');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
   }
 });
 
