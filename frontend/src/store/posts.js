@@ -115,10 +115,6 @@ export const postErrorsReducer = (state = nullErrors, action) => {
 };
 
 const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
-  console.log('state');
-  console.log(state);
-  console.log('...state');
-  console.log({...state});
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_POSTS:
@@ -129,8 +125,8 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       return { ...state, new: action.post};
     case REMOVE_POST:
       return {
-          ...state,
-          all: state.all.filter((post) => post._id !== action.postId)
+        ...state,
+        all: state.all.filter((post) => post._id !== action.postId)
       }
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
