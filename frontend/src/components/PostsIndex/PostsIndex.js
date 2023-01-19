@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, fetchPosts } from '../../store/posts';
 import PostsIndexItem from './PostsIndexItem';
-import { Link, NavLink } from 'react-router-dom';
-import './PostsIndex.css'
+import { Link } from 'react-router-dom';
+import AllPinsMap from '../GoogleMap/AllPinsMap';
+import './PostsIndex.css';
 
 function PostsIndex () {
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ function PostsIndex () {
     <div className='post-index-container'>
         <div className='posts-index-header'>
             <h2>You haven't written to RECEPIENT in awhile.</h2>
-            <Link to="/posts/new">Send them a poscard now?</Link>
+            <Link to="/posts/new">Send them a postcard now?</Link>
+            <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
         </div>
         <div className='posts-index-filter'>
             <h5 id="filter-by">Filter by: </h5>
@@ -28,11 +30,9 @@ function PostsIndex () {
             <button className='filter-buttons'>Posts</button>
             <button className='filter-buttons'>Responses</button>
         </div>
-      
+
       {posts.map(post => (
-          // <NavLink exact to={`/posts/${post._id}`}>
-            <PostsIndexItem key={post._id} post={post} />
-          // </NavLink>
+        <PostsIndexItem key={post._id} post={post} postId={post._id} />
       ))}
     </div>
   );

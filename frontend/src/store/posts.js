@@ -54,6 +54,7 @@ export const fetchPosts = () => async dispatch => {
     const posts = await res.json();
     dispatch(receivePosts(posts));
   } catch (err) {
+    // console.log(err)
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       dispatch(receiveErrors(resBody.errors));
@@ -88,12 +89,21 @@ export const fetchUserPosts = id => async dispatch => {
 };
 
 export const composePost = data => async dispatch => {
-  console.log('compose post data');
-  console.log(data);
+  const { images, subject, writer, body, location, recipient} = data
+  console.log(location)
+  const formData = new FormData();
+  formData.append("body", body);
+  formData.append("location", JSON.stringify(location));
+  formData.append("recipient", recipient._id);
+  formData.append("subject", subject);
+  formData.append("writer", writer);
+
+  Array.from(images).forEach(image => formData.append("images", image));
+  console.log(formData)
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: formData
     });
     const post = await res.json();
     dispatch(receiveNewPost(post));
