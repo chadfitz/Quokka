@@ -31,38 +31,34 @@ export const fetchFriends = () => async dispatch => {
 
 
 export const addFriend = data => async dispatch => {
+  const {requester, recipient, relation} = data;
   console.log('in addFriend');
-
-  console.log('data');
-  console.log(data);
-  const {requester, recipient}  = data;
-
-  console.log('requester');
-  console.log(requester);
-  console.log('recipient');
-  console.log(recipient);
-
   const formData = new FormData();
-  formData.append("requester", JSON.stringify(requester));
-  formData.append("recipient", recipient);
-  console.log(48);
-  formData.append("relation", 2);
-  console.log(50);
+  // formData.append("test1", 1)
+  // formData.append("test2", "2")
+  formData.append("requester", requester._id);
+  formData.append("recipient", recipient._id);
+  formData.append("relation", relation);
 
   console.log('formData');
   console.log(Array.from(formData.values()).join(" | "));
+  console.log('formData requester, recipient, relation');
+  console.log(formData.get("requester"));
+  console.log(formData.get("recipient"));
+  console.log(formData.get("relation"));
 
   try {
-    console.log(56);
     const res = await jwtFetch('/api/friends/', {
       method: 'POST',
-      body: formData
+      body: formData,
+      // headers: {
+      //   "Content-Type": "multipart/form-data"
+      // }
     });
-    console.log(60);
     const friend = await res.json();
     console.log('friend');
     console.log(friend);
-    return dispatch(receiveFriend(friend));
+    dispatch(receiveFriend(friend));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400 ) {
@@ -72,7 +68,9 @@ export const addFriend = data => async dispatch => {
   }
 }
 export const acceptFriend = data => async dispatch => {
-  const {requester, recipient}  = data;
+  console.log('store - acceptFriend TAC');
+  const {requester, recipient} = data;
+
   console.log('data');
   console.log(data);
 
@@ -87,6 +85,9 @@ export const acceptFriend = data => async dispatch => {
       body: formData
     });
     const friend = await res.json();
+    console.log('friend');
+    console.log(friend);
+
     dispatch(receiveFriend(friend));
   } catch (err) {
     const resBody = await err.json();
@@ -99,14 +100,18 @@ export const acceptFriend = data => async dispatch => {
 }
 
 
-const friendsReducer = (state = {}, action) => {
+const friendsReducer = (state = [], action) => {
+  console.log('in friendsReducer');
+  console.log('action');
+  console.log(action);
+
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_FRIENDS:
-      return { ...state, ...action.friends};
+      return [ ...state, ...action.friends];
     case RECEIVE_FRIEND:
       // state.all = { ...state.all, ...action.friend };
-      return { ...state, ...action.friend };
+      return [ ...state, action.friend ];
       // return state;
     default:
       return state;

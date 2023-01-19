@@ -1,13 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const User = mongoose.model('User');
 const Friend = mongoose.model('Friend');
+const multer = require('multer');
+const upload = multer();
+const bcrypt = require('bcryptjs');
 const { requireUser } = require('../../config/passport');
+const { json } = require('express');
 
-router.post('/', async (req, res, next) => {
-  console.log('in backend router addFriends');
+
+router.post('/', upload.none(), async (req, res, next) => {
+  // const {requester, recipient, relation} = req
   try {
 
     let existingRelation = (
@@ -19,39 +24,27 @@ router.post('/', async (req, res, next) => {
         $and: [{ recipient: req.body.requester }, { requester: req.body.recipient }]
       })
     );
-    console.log(22);
-    console.log('req.body');
-    console.log(req.body);
-
-    // if (existingRelation) throw new Error["Relation already exists"];
-
-    console.log(26);
-
-
+    // QUESTION: is this right? what shouuld i be doing instead?
+    if (existingRelation) return {};
     const newFriend = new Friend({
       requester: req.body.requester,
       recipient: req.body.recipient,
-      relation: 2
+      relation: req.body.relation
     })
-
-    console.log(34);
 
     let entry = await newFriend.save();
 
-    console.log('entry');
-    console.log(entry);
-
-    console.log(36);
-
     // entry = await entry.populate('name', '_id, username');
     // entry = await entry.populate('name', '_id, username');
-    return res.json(entry);
+    return res.json(newFriend);
   }
   catch (err) {
-    const error = new Error("Add Friend Error");
-    error.statusCode = 404;
-    error.errors = { message: "backend routes | post('/addFriend')" };
-    return next(error);
+    err.statusCode = 404;
+    console.log('in err');
+    return res.status(404).json({ message: err.message });
+    // const error = new Error("Add Friend Error");
+    // error.errors = { message: "backend routes | post('/addFriend')"};
+    // return next(err);
   }
 });
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const pointSchema = require('../blocks/Point');
-const relationSchema = require('../blocks/Friend');
+// const relationSchema = require('../blocks/Friend');
 
 const userSchema = new Schema({
   // auth

@@ -15,16 +15,8 @@ function PostCompose () {
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  // TODO: connect me to google maps api
-  // const [location, setLocation] = useState({
-    //   "type" : "Point",
-    //   "coordinates" : [
-    //     50,
-    //     37.7
-    //   ]
-    // });
 
-    const updateFiles = async e => {
+  const updateFiles = async e => {
     const files = e.target.files;
     setImages(files);
     if (files.length !== 0) {

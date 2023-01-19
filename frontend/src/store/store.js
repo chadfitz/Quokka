@@ -10,8 +10,8 @@ const rootReducer = combineReducers({
   session,
   errors,
   posts,
+  friends,
   users,
-  friends
 });
 
 let enhancer;
