@@ -18,8 +18,8 @@ const MapCoordinates = ({lat, setLat, lng, setLng}) => {
     // const [lng, setLng] = useState(-122.4194)
 
   const mapOptions={
-    fullscreenControl: false,
-    disableDefaultUI : true
+    // fullscreenControl: false,
+    // disableDefaultUI : true
   }
 
   const getCoordinates = (e)=>{

@@ -25,21 +25,6 @@ function PostCompose () {
   const [imageUrls, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
-  // const getCoordinates = () => {
-  //   console.log("IN PARENT")
-  // }
-
-  // TODO: connect me to google maps api
-  // const [location, setLocation] = useState({
-    //   "type" : "Point",
-    //   "coordinates" : [
-    //     50,
-    //     37.7
-    //   ]
-    // });
-
-    console.log(lat)
-    console.log(lng)
 
     const updateFiles = async e => {
     const files = e.target.files;
@@ -78,11 +63,12 @@ function PostCompose () {
     post = {
       writer,
       recipient: writer,
+      images,
       location: {
         "type": "Point",
         "coordinates": [
-          50,
-          37.7
+          lng,
+          lat
         ]
       },
       subject: "",
@@ -113,96 +99,119 @@ function PostCompose () {
     'link', 'image'
   ];
 
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!sessionUser) history.push('/login');
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
 
-  //   if (formType === 'Create'){
-  //     post = {writer, recipient, location, subject, body}
-  //     // TODO - add redirect functionality
-  //     // example:
-  //     const newPost = await dispatch(composePost(post));
-  //     // TODO: Update path to go to posts#show (instead of #index)
-  //     // if (newPost._id) history.push(`/posts`);
-  //   } else {
-  //     post = { ...post, writer, recipient, location, subject, body}
-  //     // dispatch(updatePost(post))
-  //     dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
-  //       // .then(history.push(`/posts`));
-  //     // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-  //       // .then(history.push(`/posts/${postId}`));
-  //   }
+    if (formType === 'Create'){
+      post = {
+        writer,
+        recipient,
+        location: {
+          "type": "Point",
+          "coordinates": [
+            lng,
+            lat
+          ]
+        },
+        images,
+        subject,
+        body
+      }
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = { ...post,
+                writer,
+                recipient,
+                location: {
+                  "type": "Point",
+                  "coordinates": [
+                    lng,
+                    lat
+                  ]
+                },
+                subject,
+                body
+              }
+      // dispatch(updatePost(post))
+      dispatch(updatePost(post));
+        // .then(history.push(`/posts`));
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
 
-  //   // TODO: CLEAR OTHER FIELDS (not just body)?
-  //   setBody('');
-  // };
-
-
-  // useEffect(()=>{
-  //   if (postId) dispatch(**fetchpost**)
-  // },[dispatch, postId])
+    // TODO: CLEAR OTHER FIELDS (not just body)?
+    setBody('');
+  };
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location,
-      images,
-      subject,
-      body,}));
-      // reactions
-    setBody('');
-    setImages([]);
-    setImageUrls([]);
-  };
-
   return (
-    <div className='whole-page-styling'>
-      <div> <Sidebar/> </div>
-      <div className='compose-form'>
-        <div className="text-editor">
-          <Input
-            label="Subject"
-            className="post-subject"
-            type="text"
-            value={subject}
-            onChange={handleSubjectChange}
-            placeholder="Subject"
-            required
-          />
-          <ReactQuill theme="snow"
-                      modules={modules}
-                      formats={formats}
-                      value={body}
-                      onChange={setBody}>
-          </ReactQuill>
+    <div className='compose-container'>
+      <div className="compose-top">
+        <div className='compose-map'>
+          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
         </div>
-        <div className="errors">{errors && errors.body}</div>
-        <Button
-          containername="submit-btn-ctnr"
-          className="submit-btn"
-          label="Submit Post"
-          onClick={handleSubmit}
-        />
-          <label>
-            Images to Upload
-            <input
+        <div className="text-editor">
+            <div className='compose-heading'>
+              <h2>Compose Post</h2>
+            </div>
+
+            <Input
+              // label="Subject"
+              className="post-subject"
+              type="text"
+              value={subject}
+              onChange={handleSubjectChange}
+              placeholder="Subject"
+              required
+              id="subject-compose"
+            />
+            <div className='quill-editor-compose'>
+              <ReactQuill theme="snow"
+                          modules={modules}
+                          formats={formats}
+                          value={body}
+                          onChange={setBody}
+                          id="reactquill">
+
+              </ReactQuill>
+            </div>
+            <div className='submit-compose-buttons'>
+              <div className='upload-images'>
+              <label>
+              Images to Upload</label>
+              <input
               type="file"
               accept=".jpg, .jpeg, .png"
               multiple
-              onChange={updateFiles} />
-          </label>
-        {/* <PostBox body={newPost?.body} /> */}
-        <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
-        <div>
-          {body && <Markup content={body} />}
-          {/* <div>{writer}</div> */}
+              onChange={updateFiles}
+              id="choose-files" />
+              </div>
+             <Button
+                containername="submit-btn-ctnr"
+                className="submit-btn"
+                label="Submit Post"
+                onClick={handleSubmit}
+              />
+            </div>
         </div>
+      </div>
+      <div className='compose-bottom'>
+        <div className="errors">{errors && errors.body}</div>
+
+
+        {/* <PostBox body={newPost?.body} /> */}
+     </div>
+      <div>
+        {body && <Markup content={body} />}
+        {/* <div>{writer}</div> */}
       </div>
     </div>
   )

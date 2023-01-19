@@ -1,4 +1,12 @@
 /* TODO Add site wide styles */
+:root{
+  --primary-color: rgb(150, 1, 150);
+  --primary-hover: rgb(107, 1, 107);
+  --secondary-color: rgb(69, 195, 98);
+  --secondary-hover: rgb(11, 141, 41);
+  --shadow-color: rgb(171, 2, 171);
+}
+
 form > .errors {
   color: red;
   font-size: 0.875em;
@@ -9,4 +17,21 @@ form > .errors {
 
 .whole-page-styling{
     display: flex;
+}
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+  box-sizing: border-box;
 }
