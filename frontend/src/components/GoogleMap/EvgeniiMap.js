@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import GoogleMapReact from "google-map-react";
-import LocationMarker from './LocationMarker';
+import LocationMarkerAllPins from './LocationMarkerAllPins';
 
 
 const AnyReactComponent = ({ text }) => <div id="map-pin">{text}</div>;
@@ -38,7 +38,7 @@ const MapCoordinates = ({lat, setLat, lng, setLng}) => {
         draggable={true}
         yesIWantToUseGoogleMapApiInternals
       >
-        <LocationMarker
+        <LocationMarkerAllPins
                 lat={lat}
                 lng={lng}
                 // onClick={()=> setLocationInfo({id: lat, title: lng})}
