@@ -1,10 +1,12 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
+// GENERAL
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_POST = "posts/RECEIVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
+
 const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
@@ -143,6 +145,53 @@ export const deletePost = postId => async dispatch => {
     return dispatch(receiveErrors(resBody.errors));
   }
   // todo error handling
+}
+
+
+// reactions
+
+export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        newEmotion
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
+}
+
+
+// copy pasta code. don't assume it works
+export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        emotionToRemove
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
 }
 
 const nullErrors = null;
