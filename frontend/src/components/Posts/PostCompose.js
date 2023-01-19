@@ -132,6 +132,7 @@ function PostCompose () {
   }, [dispatch]);
 
   const handleSubmit = e => {
+    if (formType === 'Create'){
     e.preventDefault();
     dispatch(composePost({
       writer,
@@ -145,12 +146,31 @@ function PostCompose () {
       },
       images,
       subject,
-      body,}));
+      body}));
       // reactions
     setBody('');
     setImages([]);
     setImageUrls([]);
-  };
+  } else { 
+
+    dispatch(updatePost({
+      _id: postId,
+      writer,
+      recipient: writer,
+      location: {
+        "type": "Point",
+        "coordinates": [
+          lng,
+          lat
+        ]
+      },
+      images: [],
+      subject,
+      body}))
+  }
+}
+
+
 
   return (
     <>
