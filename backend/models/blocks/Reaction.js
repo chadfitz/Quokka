@@ -22,6 +22,12 @@ const reactionSchema = new mongoose.Schema({
   },
 });
 
+
+// "Pasta is great"
+    // reactions
+        // JOHN
+          // ['LOL', 'ANGRY']
+
 module.exports = reactionSchema;
 // export default reactionSchema;
 // reuse with
