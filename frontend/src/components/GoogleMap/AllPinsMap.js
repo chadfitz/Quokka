@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {useSelector} from 'react-redux';
 import GoogleMapReact from 'google-map-react';
-import LocationMarker from './LocationMarkerAllPins';
+import LocationMarkerAllPins from './LocationMarkerAllPins';
 import LocationInfoBox from './LocationInfoBox';
 import "./Map.css";
 import Loader from './Loader';
@@ -18,7 +18,7 @@ const AllPinsMap = ({userPosts, zoom}) => {
             defaultZoom={zoom}
         >
         {userPosts.map((post) =>
-            <LocationMarker
+            <LocationMarkerAllPins
                 key={post._id}
                 lat={post.location.coordinates[1]}
                 lng={post.location.coordinates[0]}
