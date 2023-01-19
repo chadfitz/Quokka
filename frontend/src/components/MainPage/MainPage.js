@@ -1,12 +1,12 @@
 import LoginForm from "../SessionForms/LoginForm";
 import GoogleMaps from "./GoogleMaps";
-import './MainPage.css'
 import Quokkas from "./QuokkaModel";
 import Statistics from "./Statistics";
 import Aos from "aos"
-import "aos/dist/aos.css"
 import { useEffect } from "react";
 import Footer from "../Footer/Footer";
+import './MainPage.css'
+import "aos/dist/aos.css"
 
 
 function MainPage() {

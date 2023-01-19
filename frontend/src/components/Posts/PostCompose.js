@@ -98,79 +98,58 @@ function PostCompose () {
     'link', 'image'
   ];
 
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!sessionUser) history.push('/login');
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
 
-  //   if (formType === 'Create'){
-  //     post = {writer, recipient, location, subject, body}
-  //     // TODO - add redirect functionality
-  //     // example:
-  //     const newPost = await dispatch(composePost(post));
-  //     // TODO: Update path to go to posts#show (instead of #index)
-  //     // if (newPost._id) history.push(`/posts`);
-  //   } else {
-  //     post = { ...post, writer, recipient, location, subject, body}
-  //     // dispatch(updatePost(post))
-  //     dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
-  //       // .then(history.push(`/posts`));
-  //     // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-  //       // .then(history.push(`/posts/${postId}`));
-  //   }
+    if (formType === 'Create'){
+      post = {
+        writer,
+        recipient, 
+        location: {
+          "type": "Point",
+          "coordinates": [
+            lng,
+            lat
+          ]
+        }, 
+        images,
+        subject, 
+        body
+      }
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = { ...post, 
+                writer, 
+                recipient, 
+                location: {
+                  "type": "Point",
+                  "coordinates": [
+                    lng,
+                    lat
+                  ]
+                }, 
+                subject, 
+                body
+              }
+      // dispatch(updatePost(post))
+      dispatch(updatePost(post));
+        // .then(history.push(`/posts`));
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
 
-  //   // TODO: CLEAR OTHER FIELDS (not just body)?
-  //   setBody('');
-  // };
-
-
-  // useEffect(()=>{
-  //   if (postId) dispatch(**fetchpost**)
-  // },[dispatch, postId])
+    // TODO: CLEAR OTHER FIELDS (not just body)?
+    setBody('');
+  };
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
-
-  const handleSubmit = e => {
-    if (formType === 'Create'){
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location: {
-        "type": "Point",
-        "coordinates": [
-          lng,
-          lat
-        ]
-      },
-      images,
-      subject,
-      body}));
-      // reactions
-    setBody('');
-    setImages([]);
-    setImageUrls([]);
-  } else { 
-
-    dispatch(updatePost({
-      _id: postId,
-      writer,
-      recipient: writer,
-      location: {
-        "type": "Point",
-        "coordinates": [
-          lng,
-          lat
-        ]
-      },
-      images: [],
-      subject,
-      body}))
-  }
-}
-
-
 
   return (
     <div className='compose-container'>
