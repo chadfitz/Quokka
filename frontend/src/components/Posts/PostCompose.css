@@ -1,5 +1,68 @@
 /* delete me later? temporary fix to get posts to show */
 
-.text-editor {
+/* .text-editor {
   margin-top: 100px;
+} */
+
+.compose-container { 
+  margin: 150px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  width: 70vw;
+  border: 1px solid rgb(184, 183, 183);
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
+}
+
+.compose-top { 
+  display: flex;
+  /* justify-content: space-evenly; */
+}
+
+.compose-heading { 
+  margin: 5px 0px;
+  margin-bottom: -40px
+}
+
+.quill-editor-compose { 
+  margin: 10px 0px;
+}
+
+.text-editor { 
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  justify-content: flex-start;
+}
+
+.upload-images { 
+  display: flex;
+  flex-direction: column;
+}
+
+#subject-compose { 
+  padding: 5px 8px;
+  width: 92%
+}
+
+#react-quill { 
+  height: 400px;
+  width: 1000px
+}
+
+#choose-files { 
+  width: 100%;
+}
+
+.submit-btn { 
+  width: 100%;
+  height: 35px;
+  margin: 10px 0px;
+  background-color: rgb(101, 101, 253);
+  color: white;
+  font-size: 18px;
+  border-radius: 4px;
 }

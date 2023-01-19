@@ -34,6 +34,11 @@ function ProfileButton({ user }) {
     history.push("/signup")
   }
 
+  const handleLogin = (e) => { 
+    e.preventDefault();
+    history.push("/login")
+  }
+
 
   const logout = (e) => {
     e.preventDefault();
@@ -71,6 +76,7 @@ function ProfileButton({ user }) {
              <h3 >Must have an account to see posts</h3>
             </div>  
             <button id="logout-dropdown" onClick={handleSignup}>Signup</button>
+            <button id="logout-dropdown" onClick={handleLogin}>Login</button>
           </div>
         )}
       </div> }

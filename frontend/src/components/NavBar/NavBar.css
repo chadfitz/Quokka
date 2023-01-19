@@ -193,6 +193,7 @@ nav {
     line-height: 36px;
     border-radius: 4px;
     padding: 0px 12px;
+    margin-top: 5px;
 }
 
 #logout-dropdown:hover { 

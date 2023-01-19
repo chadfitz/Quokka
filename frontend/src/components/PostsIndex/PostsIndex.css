@@ -92,3 +92,23 @@ body {
     height: 100px;
     width: auto;
 }
+
+#post-index-compose { 
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+    transition: all ease-in 500ms;
+}
+
+#post-index-compose:hover { 
+    font-size: 22px;
+    color: blueviolet
+}
+
+#all-pins-map-container { 
+    transition: all ease-in 500ms;
+}
+
+#all-pins-map-container:hover {
+    box-shadow: 0 10px 15px #9f9e9e;
+ }
