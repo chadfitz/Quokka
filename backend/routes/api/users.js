@@ -44,6 +44,19 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// TODO: DELETE
+// render.post('/addFriend', async (req, res, next) => {
+//   const user = await User.findOne({
+//     $and: [{ friends: req.body.relations}]
+//   });
+// })
+
+// render.post('/acceptFriend', async (req, res, next) => {
+// })
+
+// render.post('/removeFriend', async (req, res, next) => {
+// })
+
 
 // POST /api/users/register
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
