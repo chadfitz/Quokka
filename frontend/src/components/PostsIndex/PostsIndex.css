@@ -45,6 +45,10 @@ body {
     margin: auto;
 }
 
+.post-index-icon{
+    cursor: pointer;
+}
+
 .post-item-bottom {
     margin-top: 20px;
     display: flex;
@@ -77,16 +81,14 @@ body {
     box-shadow: 0 5px 15px #9f9e9e;
 }
 
-#profile-image-item { 
+#profile-image-item {
     height: 50px;
     width: 50px;
     border: 1px solid black;
     border-radius: 50%
 }
 
-#post-index-photo { 
+#post-index-photo {
     height: 100px;
     width: auto;
 }
-
-

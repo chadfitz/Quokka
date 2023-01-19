@@ -10,6 +10,8 @@ import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
+import Map from '../GoogleMap/Map.js (NOT USED)';
+import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
 function PostCompose () {
   // const [body, setBody] = useState('');
@@ -20,6 +22,12 @@ function PostCompose () {
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [lat, setLat] = useState(37.776392)
+  const [lng, setLng] = useState(-122.4194)
+  // const getCoordinates = () => {
+  //   console.log("IN PARENT")
+  // }
+
   // TODO: connect me to google maps api
   // const [location, setLocation] = useState({
     //   "type" : "Point",
@@ -28,6 +36,9 @@ function PostCompose () {
     //     37.7
     //   ]
     // });
+
+    console.log(lat)
+    console.log(lng)
 
     const updateFiles = async e => {
     const files = e.target.files;
@@ -40,7 +51,7 @@ function PostCompose () {
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
           urls[index] = fileReader.result;
-          if (++filesLoaded === files.length) 
+          if (++filesLoaded === files.length)
             setImageUrls(urls);
         }
       });
@@ -64,8 +75,8 @@ function PostCompose () {
   const formType = postId ? 'Update' : 'Create';
   if (formType === 'Create') {
     post = {
-      writer, 
-      recipient: writer, 
+      writer,
+      recipient: writer,
       location: {
         "type": "Point",
         "coordinates": [
@@ -73,7 +84,7 @@ function PostCompose () {
           37.7
         ]
       },
-      subject: "", 
+      subject: "",
       body: ""
     }
   }
@@ -100,11 +111,11 @@ function PostCompose () {
     'list', 'bullet', 'indent',
     'link', 'image'
   ];
-  
+
   // const handleSubmit = async e => {
   //   e.preventDefault();
   //   if (!sessionUser) history.push('/login');
-    
+
   //   if (formType === 'Create'){
   //     post = {writer, recipient, location, subject, body}
   //     // TODO - add redirect functionality
@@ -183,8 +194,8 @@ function PostCompose () {
             multiple
             onChange={updateFiles} />
         </label>
-      <input type="submit" value="Submit" />
       {/* <PostBox body={newPost?.body} /> */}
+      <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
       <div>
         {body && <Markup content={body} />}
         {/* <div>{writer}</div> */}

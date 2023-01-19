@@ -5,23 +5,23 @@ import LocationMarker from './LocationMarker';
 import LocationInfoBox from './LocationInfoBox';
 import "./Map.css"
 
-const Map = ({postId, center, zoom}) => {
-    const [locationInfo, setLocationInfo] = useState(null);
-    const locationArray = useSelector(state => state.posts.user[postId].location);
-    const lat = locationArray.coordinates[1];
-    const lng = locationArray.coordinates[0];
+const Map = () => {
+    // const [locationInfo, setLocationInfo] = useState(null);
+    // const locationArray = useSelector(state => state.posts.user[postId].location);
+    // const lat = locationArray.coordinates[1];
+    // const lng = locationArray.coordinates[0];
   return (
-    <div className='map'>
+    <div className='create-post-map'>
         <GoogleMapReact
             bootstrapURLKeys={{key:process.env.REACT_APP_MAPS_API_KEY}}
-            defaultCenter={{lat: lat, lng: lng}}
+            defaultCenter={{lat: 37.8, lng: -122.8}}
             defaultZoom={5}
         >
-            <LocationMarker
+            {/* <LocationMarker
                 lat={lat}
                 lng={lng}
                 onClick={()=> setLocationInfo({id: lat, title: lng})}
-            />
+            /> */}
 
 
         </GoogleMapReact>
