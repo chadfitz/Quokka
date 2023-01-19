@@ -103,7 +103,20 @@ function PostCompose () {
     if (!sessionUser) history.push('/login');
 
     if (formType === 'Create'){
-      post = {writer, recipient, location, subject, body}
+      post = {
+        writer,
+        recipient, 
+        location: {
+          "type": "Point",
+          "coordinates": [
+            lng,
+            lat
+          ]
+        }, 
+        images,
+        subject, 
+        body
+      }
       // TODO - add redirect functionality
       // example:
       const newPost = await dispatch(composePost(post));
@@ -134,55 +147,9 @@ function PostCompose () {
     setBody('');
   };
 
-
-  // useEffect(()=>{
-  //   if (postId) dispatch(**fetchpost**)
-  // },[dispatch, postId])
-
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
-
-  const handleSubmit = e => {
-    if (formType === 'Create'){
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location: {
-        "type": "Point",
-        "coordinates": [
-          lng,
-          lat
-        ]
-      },
-      images,
-      subject,
-      body}));
-      // reactions
-    setBody('');
-    setImages([]);
-    setImageUrls([]);
-  } else { 
-
-    dispatch(updatePost({
-      _id: postId,
-      writer,
-      recipient: writer,
-      location: {
-        "type": "Point",
-        "coordinates": [
-          lng,
-          lat
-        ]
-      },
-      images: [],
-      subject,
-      body}))
-  }
-}
-
-
 
   return (
     <>
@@ -209,6 +176,7 @@ function PostCompose () {
         className="submit-btn"
         label="Submit Post"
         onClick={handleSubmit}
+        // onClick={secondHandleSubmit}
       />
         <label>
           Images to Upload

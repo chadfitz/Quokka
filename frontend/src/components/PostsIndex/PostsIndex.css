@@ -19,20 +19,47 @@ body {
 
 .post-index-middle {
     min-width: 40%;
-    padding: 20px;
+    padding: 0 20px;
 }
 
-.post-index-date {
+.post-index-middle h2{
+    margin: 0;
+    text-align: center;
+    font-size: 25px;
+    color: var(--primary-color);
+}
+
+.post-index-middle h3{
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+.dear{
+    margin: 10px 0;
+}
+.signature{
+    margin: 0;
+    margin-top: 15px;
+}
+
+.post-index-date{
     min-width: 10%;
-    padding: 10px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-index-date-lower {
+    min-width: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
     font-size: 20px;
 }
 
 .post-item-top {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .post-index-map {
@@ -46,13 +73,34 @@ body {
 }
 
 .post-index-icon{
+    height: 30px;
     cursor: pointer;
+    font-size: 25px;
+}
+
+.post-index-icon:hover{
+    color: var(--primary-color);
+    transform: scale(1.1);
+    transition: .3s;
 }
 
 .post-item-bottom {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+}
+
+.post-item-bottom button{
+    width: 100px;
+    border-radius: 15px;
+    font-size: 20px;
+    color: white;
+    background-color: var(--primary-color);
+}
+.post-item-bottom button:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    transition: .3s;
 }
 
 .posts-index-filter {
@@ -82,8 +130,9 @@ body {
 }
 
 #profile-image-item {
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
+    margin-bottom: 10px;
     border: 1px solid black;
     border-radius: 50%
 }
