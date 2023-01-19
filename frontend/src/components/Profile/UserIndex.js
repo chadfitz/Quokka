@@ -22,9 +22,8 @@ const UserIndex = () => {
   // if (!users) return null;
   return (
     <div className='user-index'>
-      
       {users && users.map(user => (
-        <UserTile key={user._id} user={user}/>
+        <UserTile key={user._id} recipient={user}/>
       ))}
       {/* {users.map(user => (
         <UserTile user={user}/>

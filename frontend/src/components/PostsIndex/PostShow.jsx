@@ -18,7 +18,7 @@ const PostShow = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const errors = useSelector(state => state.errors.posts)
+  const errors = useSelector(state => state.errors.posts);
 
   useEffect(() => {
     dispatch(fetchPosts());

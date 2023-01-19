@@ -3,17 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../blocks/Button'
 import { addFriend, fetchFriends } from '../../store/friends';
 
-const UserTile = ({user}) => {
+const UserTile = ({recipient}) => {
   const dispatch = useDispatch();
   const requester = useSelector(state => state.session.user);
   const isFriend = useSelector(state => {
-    return state.friends?.includes(user._id.toString())
+    return state.friends?.includes(recipient._id.toString())
   });
-  // const friends = useSelector(state => state.session.friends);
 
   let data = {
     requester: requester,
-    recipient: user,
+    recipient: recipient,
     relation: 2
   };
 
@@ -21,11 +20,17 @@ const UserTile = ({user}) => {
     dispatch(addFriend(data));
   }
 
+  const handleDeleteFriend = () => {
+    console.log('Delete Friend Clicked');
+    // dispatch(deleteFriend(data));
+  }
+
   return (
     <div>
-      <div>{user.username}</div>
+      <div>{recipient.username}</div>
       {isFriend
-       ? <div>Friends!</div>
+       ? (<Button label="Delete Friend"
+                  onClick={handleDeleteFriend} />)
        : (<Button label="Add Friend"
               onClick={handleAddFriend}/>)
       }
