@@ -43,6 +43,11 @@
     background-color: var(--primary-color);
     color: white
 }
+#login-submit:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    transition: .3s;
+}
 
 #forgot { 
     display: flex;
@@ -61,6 +66,12 @@
     border-radius: 6px;
     background-color: var(--secondary-color);
     color: white
+}
+#signup-submit:hover,
+#signup-submit-two:hover{
+    cursor: pointer;
+    background-color: var(--secondary-hover);
+    transition: 0.3s;
 }
 
 hr { 

@@ -4,7 +4,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/store';
-import './cssReset.css';
+// import './cssReset.css';
 import './index.css';
 
 let store = configureStore({});

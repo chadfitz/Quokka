@@ -124,9 +124,21 @@ function PostCompose () {
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
     } else {
-      post = { ...post, writer, recipient, location, subject, body}
+      post = { ...post, 
+                writer, 
+                recipient, 
+                location: {
+                  "type": "Point",
+                  "coordinates": [
+                    lng,
+                    lat
+                  ]
+                }, 
+                subject, 
+                body
+              }
       // dispatch(updatePost(post))
-      dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
+      dispatch(updatePost(post));
         // .then(history.push(`/posts`));
       // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
         // .then(history.push(`/posts/${postId}`));
