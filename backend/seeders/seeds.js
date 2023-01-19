@@ -2,12 +2,14 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/top/User');
 const Post = require('../models/top/Post');
+const Friend = require('../models/top/Friend');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const { bulkSave } = require("../models/top/User");
 
-const NUM_SEED_USERS = 10;
+const NUM_SEED_USERS = 20;
 const NUM_SEED_POSTS = 30;
+const NUM_SEED_FRIENDS = 2;
 
 // Create users
 const users = [];
@@ -81,6 +83,14 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   )
 }
 
+const friends = [];
+for (let i = 0; i < NUM_SEED_FRIENDS; i++) {
+  friends.push(new Friend ({
+    requester: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    recipient: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    relation: 3
+  }));
+}
 
 
 // Connect to database
@@ -100,8 +110,10 @@ const insertSeeds = () => {
 
   User.collection.drop()
                   .then(() => Post.collection.drop())
+                  .then(() => Friend.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Post.insertMany(posts))
+                  // .then(() => Friend.insertMany(friends))
                   .then(() => {
                     console.log("Done!");
                     mongoose.disconnect();

@@ -26,8 +26,7 @@ function PostsIndexItem ({ post }) {
         e.preventDefault();
         dispatch(deletePost(post._id))
     }
-
-    // useEffect(() => { 
+    // useEffect(() => {
     //     dispatch(fetchPosts())
     // }, [dispatch])
 
