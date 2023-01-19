@@ -6,3 +6,7 @@ form > .errors {
   display: flex;
   align-items: center;
 }
+
+.whole-page-styling{
+    display: flex;
+}

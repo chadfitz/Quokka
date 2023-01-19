@@ -12,6 +12,7 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import Sidebar from '../Sidebar/Sidebar';
 
 function PostCompose () {
   // const [body, setBody] = useState('');
@@ -161,46 +162,49 @@ function PostCompose () {
   };
 
   return (
-    <>
-      <div className="text-editor">
-        <Input
-          label="Subject"
-          className="post-subject"
-          type="text"
-          value={subject}
-          onChange={handleSubjectChange}
-          placeholder="Subject"
-          required
+    <div className='whole-page-styling'>
+      <div> <Sidebar/> </div>
+      <div className='compose-form'>
+        <div className="text-editor">
+          <Input
+            label="Subject"
+            className="post-subject"
+            type="text"
+            value={subject}
+            onChange={handleSubjectChange}
+            placeholder="Subject"
+            required
+          />
+          <ReactQuill theme="snow"
+                      modules={modules}
+                      formats={formats}
+                      value={body}
+                      onChange={setBody}>
+          </ReactQuill>
+        </div>
+        <div className="errors">{errors && errors.body}</div>
+        <Button
+          containername="submit-btn-ctnr"
+          className="submit-btn"
+          label="Submit Post"
+          onClick={handleSubmit}
         />
-        <ReactQuill theme="snow"
-                    modules={modules}
-                    formats={formats}
-                    value={body}
-                    onChange={setBody}>
-        </ReactQuill>
+          <label>
+            Images to Upload
+            <input
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              multiple
+              onChange={updateFiles} />
+          </label>
+        {/* <PostBox body={newPost?.body} /> */}
+        <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
+        <div>
+          {body && <Markup content={body} />}
+          {/* <div>{writer}</div> */}
+        </div>
       </div>
-      <div className="errors">{errors && errors.body}</div>
-      <Button
-        containername="submit-btn-ctnr"
-        className="submit-btn"
-        label="Submit Post"
-        onClick={handleSubmit}
-      />
-        <label>
-          Images to Upload
-          <input
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            multiple
-            onChange={updateFiles} />
-        </label>
-      {/* <PostBox body={newPost?.body} /> */}
-      <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
-      <div>
-        {body && <Markup content={body} />}
-        {/* <div>{writer}</div> */}
-      </div>
-    </>
+    </div>
   )
 }
 
