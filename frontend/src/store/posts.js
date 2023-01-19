@@ -1,10 +1,12 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
+// GENERAL
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
 const RECEIVE_POST = "posts/RECEIVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
+
 const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
@@ -90,7 +92,7 @@ export const fetchUserPosts = id => async dispatch => {
 
 export const composePost = data => async dispatch => {
   const { images, subject, writer, body, location, recipient} = data
-  console.log(location)
+  // console.log(location)
   const formData = new FormData();
   formData.append("body", body);
   formData.append("location", JSON.stringify(location));
@@ -99,7 +101,6 @@ export const composePost = data => async dispatch => {
   formData.append("writer", writer);
 
   Array.from(images).forEach(image => formData.append("images", image));
-  console.log(formData)
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
@@ -116,11 +117,20 @@ export const composePost = data => async dispatch => {
 };
 
 export const updatePost = (post) => async (dispatch) => {
-  console.log("updatePost's post", post)
+  // console.log("updatePost's post", post)
+  const { images, subject, writer, body, location, recipient} = post
+  const formData = new FormData();
+  formData.append("body", body);
+  formData.append("location", JSON.stringify(location));
+  formData.append("recipient", recipient._id);
+  formData.append("subject", subject);
+  formData.append("writer", writer);
+
+  Array.from(images).forEach(image => formData.append("images", image));
   try {
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
-      body: JSON.stringify(post)
+      body: formData
     })
     if (res.ok) {
       const newPost = await res.json();
@@ -143,6 +153,53 @@ export const deletePost = postId => async dispatch => {
     return dispatch(receiveErrors(resBody.errors));
   }
   // todo error handling
+}
+
+
+// reactions
+
+export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        newEmotion
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
+}
+
+
+// copy pasta code. don't assume it works
+export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        emotionToRemove
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
 }
 
 const nullErrors = null;
