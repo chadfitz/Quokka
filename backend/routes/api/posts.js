@@ -102,13 +102,24 @@ router.delete('/:postId', async (req, res, next) => {
 // IN PROGRESS --- Creates a reaction to a post
 router.patch('/react/:postId', async (req, res, next) => {
   try {
+    console.log('req body:', req.body)
     const { postId } = req.params
+    const { reactorId, newEmotion } = req.body
+
     const post = await Post.findById(postId)
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
 
-    // need to modify and save post
+    // AN INVALID USER ID WILL THROW AN ERROR
+    if (!userReactionObject) {
+      // CREATE NEW USER REACTION OBJECT IF IT DOESN'T EXIST
+      post.reactions.push({user: reactorId, emotions: newEmotion})
+    } else if (!userReactionObject.emotions.some( oldEmotion => (oldEmotion == newEmotion))) {
+      // ADD --NEW EMOTION-- TO EMOTION ARRAY
+      userReactionObject.emotions.push(newEmotion)
+    }
 
+    await post.save()
 
-    // dummy return value
     return res.json(post)
 
   } catch(err) {

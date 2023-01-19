@@ -9,6 +9,12 @@ import { FiTrash2 } from 'react-icons/fi'
 
 
 function PostsIndexItem ({ post }) {
+
+    const handleReaction = (e) => {
+        e.preventDefault();
+        //dispatch
+    }
+
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
@@ -31,7 +37,7 @@ function PostsIndexItem ({ post }) {
         <div className='post-item-bottom'>
             <h4>Post.reactions.count</h4>
             <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
-            <button>React</button>
+            <button onClick={handleReaction}>React</button>
             <button>Reply</button>
             <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
         </div>

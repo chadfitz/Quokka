@@ -3,23 +3,14 @@ const Schema = mongoose.Schema;
 const pointSchema = require('./Point');
 // https://mongoosejs.com/docs/geojson.html
 
-const reactionSchema = new mongoose.Schema({
+const reactionSchema = new Schema({
   // The user who reacts to a post
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  // I don't think this is necessary -- investigation
-  post: {
-    type: Schema.Types.ObjectId,
-    ref: 'Post'
-  },
-  // Possible Reactions
-  reactionType: {
-    type: String,
-    enum: ['Reaction'],
-    required: true
-  },
+  //
+  emotions: [String]
 });
 
 
