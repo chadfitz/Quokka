@@ -5,14 +5,14 @@ import LocationMarker from './LocationMarker';
 
 const AnyReactComponent = ({ text }) => <div id="map-pin">{text}</div>;
 
-const MapCoordinates = ({lat, setLat, lng, setLng}) => {
+const MapCoordinates = ({lat, setLat, lng, setLng, center}) => {
     const defaultProps = {
-        center: {
-            lat: 37.776392,
-            lng: -122.4194
+        // center: {
+        //     lat: 37.776392,
+        //     lng: -122.4194
 
-        },
-        zoom: 13
+        // },
+        zoom: 10
     };
     // const [lat, setLat] = useState(37.776392)
     // const [lng, setLng] = useState(-122.4194)
@@ -32,7 +32,7 @@ const MapCoordinates = ({lat, setLat, lng, setLng}) => {
     <div style={{ height: '400px', width: '400px' }}>
       <GoogleMapReact onClick={getCoordinates}
         bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_API_KEY }}
-        defaultCenter={defaultProps.center}
+        defaultCenter={center}
         defaultZoom={defaultProps.zoom}
         options = {mapOptions}
         draggable={true}

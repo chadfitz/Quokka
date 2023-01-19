@@ -12,8 +12,9 @@ function PostsIndex () {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    console.log("in useEffect")
     return () => dispatch(clearPostErrors());
-  }, [dispatch])
+  }, [dispatch, posts.length])
 
   if (posts.length === 0) return <div>There are no Posts</div>;
 

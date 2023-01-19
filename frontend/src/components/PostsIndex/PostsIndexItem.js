@@ -3,32 +3,32 @@ import './PostsIndex.css'
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost } from '../../store/posts';
+import { deletePost, fetchPosts } from '../../store/posts';
 import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
 import { useEffect, useState } from 'react';
 import Loader from '../GoogleMap/Loader';
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // import { useState } from 'react';
 
 function PostsIndexItem ({ post }) {
-    // const [loading, setLoading] = useState(false);
-    // let mapPlaceholder;
-    // useEffect(()=> {
-    //     setLoading(true);
-    //     mapPlaceholder = <SinglePinMap id="single-pin-map" lat={post.location.coordinates[1]} lng={post.location.coordinates[0]} key={post._id} />
-    //     setLoading(false);
-    // },[])
     const dispatch = useDispatch();
     const history = useHistory();
     const errors = useSelector(state => state.errors.posts)
+    const sessionUser = useSelector(state => state.session.user)
+    const { postId } = useParams()
 
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deletePost(post._id))
     }
+
+    // useEffect(() => { 
+    //     dispatch(fetchPosts())
+    // }, [dispatch])
 
     const handleEdit = e => {
         e.preventDefault();
@@ -39,7 +39,7 @@ function PostsIndexItem ({ post }) {
         e.preventDefault();
         history.push(`/posts/${post._id}`);
     }
-console.log(post)
+// console.log(post)
   return (
     <div className="post-index-item">
         <div className='post-item-top'>
@@ -62,10 +62,12 @@ console.log(post)
                 <div>
                     <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                 </div>
+                {sessionUser?._id === post.writer._id &&
                 <div className='post-index-date-lower'>
                     <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
                     <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
                 </div>
+                }
             </div>
         </div>
         <div className='post-item-bottom'>
