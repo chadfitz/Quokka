@@ -92,7 +92,7 @@ export const fetchUserPosts = id => async dispatch => {
 
 export const composePost = data => async dispatch => {
   const { images, subject, writer, body, location, recipient} = data
-  console.log(location)
+  // console.log(location)
   const formData = new FormData();
   formData.append("body", body);
   formData.append("location", JSON.stringify(location));
@@ -101,7 +101,6 @@ export const composePost = data => async dispatch => {
   formData.append("writer", writer);
 
   Array.from(images).forEach(image => formData.append("images", image));
-  console.log(formData)
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
@@ -118,11 +117,20 @@ export const composePost = data => async dispatch => {
 };
 
 export const updatePost = (post) => async (dispatch) => {
-  console.log("updatePost's post", post)
+  // console.log("updatePost's post", post)
+  const { images, subject, writer, body, location, recipient} = post
+  const formData = new FormData();
+  formData.append("body", body);
+  formData.append("location", JSON.stringify(location));
+  formData.append("recipient", recipient._id);
+  formData.append("subject", subject);
+  formData.append("writer", writer);
+
+  Array.from(images).forEach(image => formData.append("images", image));
   try {
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
-      body: JSON.stringify(post)
+      body: formData
     })
     if (res.ok) {
       const newPost = await res.json();

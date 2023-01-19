@@ -87,27 +87,40 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
 });
 
 // EDIT
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res, next) => {
   try {
-    const updatedPost = Post.updateOne({_id: req.params.id}, {  
-      recipient: req.body.recipient,
-      location: req.body.location,
+    // console.log(req.params)
+    // const post = await Post.findById(req.params.id);
+    // console.log(req.user);
+    // if(req.files) {
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+    // }
+    const updatedPost = await Post.updateOne({_id: req.params.id}, {  
+      location: JSON.parse(req.body.location),
       subject: req.body.subject,
       body: req.body.body,
-      reactions: req.body.reactions,
-    }, function (err, docs) {
-        if (err){
-          console.log(err)
-        } else {
-          console.log("Updated Docs : ", docs);
-      }}
-    )
+      imageUrls
+    })
+    // const updatedPost = await Post.updateOne({_id: req.params.id}, {  
+    //   location: JSON.parse(req.body.location),
+    //   subject: req.body.subject,
+    //   body: req.body.body,
+    //   imageUrls
+    //   // reactions: req.body.reactions
+    // }, function (err, docs) {
+    //     if (err){
+    //       console.log("llama", err)
+    //     } else {
+    //       console.log("Updated Docs : ", docs);
+    //   }}
+    // )
+    return res.json(updatedPost);
   }
   catch(err) {
     const error = new Error('Post not found');
     error.statusCode = 404;
     error.errors = { message: "No post found with that id" };
-    return next(error);
+    return next(err);
   }
 });
 
