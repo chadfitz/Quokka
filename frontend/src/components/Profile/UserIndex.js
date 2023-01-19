@@ -22,7 +22,7 @@ const UserIndex = () => {
   // if (!users) return null;
   return (
     <div className='user-index'>
-      UserIndex
+      
       {users && users.map(user => (
         <UserTile key={user._id} user={user}/>
       ))}

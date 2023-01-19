@@ -1,5 +1,5 @@
 import {Icon} from '@iconify/react';
-import LocationIcon from '@iconify/icons-mdi/cat';
+import LocationIcon from '@iconify/icons-mdi/kangaroo';
 
 const LocationMarker = ({lat, lng, post, onMouseOver, onMouseOut}) => {
 

@@ -22,7 +22,7 @@ const UserTile = ({user}) => {
   }
 
   return (
-    <div>UserTile
+    <div>
       <div>{user.username}</div>
       {isFriend
        ? <div>Friends!</div>

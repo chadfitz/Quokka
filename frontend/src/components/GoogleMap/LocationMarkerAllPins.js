@@ -1,5 +1,5 @@
 import {Icon} from '@iconify/react';
-import LocationIcon from '@iconify/icons-mdi/cat';
+import LocationIcon from '@iconify/icons-mdi/kangaroo';
 import { useHistory } from 'react-router-dom';
 
 const LocationMarkerAllPins = ({lat, lng, post, onMouseOver, onMouseOut}) => {
