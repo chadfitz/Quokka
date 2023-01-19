@@ -29,7 +29,17 @@ router.get('/user/:userId', async (req, res, next) => {
   }
 })
 
-
+router.get('/', async (req, res) => {
+  try {
+    const posts = await Post.find()
+                              .populate("writer", "_id, username profileImageUrl")
+                              .sort({ createdAt: -1 });
+    return res.json(posts);
+  }
+  catch(err) {
+    return res.json([]);
+  }
+});
 
 
 
