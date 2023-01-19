@@ -12,7 +12,7 @@
   width: 70vw;
   height: 560px;
   border: 1px solid rgb(184, 183, 183);
-  padding: 30px;
+  padding: 30px 60px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
@@ -49,6 +49,7 @@
 
 #compose-post-heading{
   margin: 0;
+  font-size: 25px;
 }
 
 #react-quill {
