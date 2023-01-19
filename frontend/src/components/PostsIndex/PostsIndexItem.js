@@ -3,7 +3,8 @@ import './PostsIndex.css'
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost, updatePost } from '../../store/posts';import { Markup } from 'interweave';
+import { deletePost } from '../../store/posts';
+import { Markup } from 'interweave';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
 import { useEffect, useState } from 'react';
@@ -32,7 +33,11 @@ function PostsIndexItem ({ post }) {
     const handleEdit = e => {
         e.preventDefault();
         history.push(`/posts/${post._id}/edit`);
-        // dispatch(updatePost({...post, body: "<p>updated body</p>"}));
+    }
+
+    const handleShow = e => {
+        e.preventDefault();
+        history.push(`/posts/${post._id}`);
     }
 
   return (
@@ -44,7 +49,7 @@ function PostsIndexItem ({ post }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-index-middle'>
-                <h2>Subject: {post.subject}</h2>
+                <h2 onClick={handleShow}>Subject: {post.subject}</h2>
                 <h3>Dear {post.recipient},</h3>
                 {post.body && <Markup content={post.body} />}
                 <h3>From, </h3>

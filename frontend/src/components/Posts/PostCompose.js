@@ -24,21 +24,6 @@ function PostCompose () {
   const [imageUrls, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
-  // const getCoordinates = () => {
-  //   console.log("IN PARENT")
-  // }
-
-  // TODO: connect me to google maps api
-  // const [location, setLocation] = useState({
-    //   "type" : "Point",
-    //   "coordinates" : [
-    //     50,
-    //     37.7
-    //   ]
-    // });
-
-    console.log(lat)
-    console.log(lng)
 
     const updateFiles = async e => {
     const files = e.target.files;
@@ -77,11 +62,12 @@ function PostCompose () {
     post = {
       writer,
       recipient: writer,
+      images,
       location: {
         "type": "Point",
         "coordinates": [
-          50,
-          37.7
+          lng,
+          lat
         ]
       },
       subject: "",
@@ -157,20 +143,46 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   dispatch(composePost({
-  //     writer,
-  //     recipient: writer,
-  //     location,
-  //     images,
-  //     subject,
-  //     body,}));
-  //     // reactions
-  //   setBody('');
-  //   setImages([]);
-  //   setImageUrls([]);
-  // };
+  const handleSubmit = e => {
+    if (formType === 'Create'){
+    e.preventDefault();
+    dispatch(composePost({
+      writer,
+      recipient: writer,
+      location: {
+        "type": "Point",
+        "coordinates": [
+          lng,
+          lat
+        ]
+      },
+      images,
+      subject,
+      body}));
+      // reactions
+    setBody('');
+    setImages([]);
+    setImageUrls([]);
+  } else { 
+
+    dispatch(updatePost({
+      _id: postId,
+      writer,
+      recipient: writer,
+      location: {
+        "type": "Point",
+        "coordinates": [
+          lng,
+          lat
+        ]
+      },
+      images: [],
+      subject,
+      body}))
+  }
+}
+
+
 
   return (
     <>

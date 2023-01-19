@@ -104,7 +104,7 @@ const SinglePinMap = ({lat, lng}) => {
         <GoogleMapReact
             bootstrapURLKeys={{key:process.env.REACT_APP_MAPS_API_KEY}}
             defaultCenter={{lat: lat, lng: lng}}
-            defaultZoom={5}
+            defaultZoom={10}
             yesIWantToUseGoogleMapApiInternals
             options={mapOptions}
             // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
