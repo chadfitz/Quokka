@@ -1,4 +1,10 @@
 /* TODO Add site wide styles */
+:root{
+  --primary-color: rgb(150, 1, 150);
+  --secondary-color: rgb(69, 195, 98);
+  --shadow-color: rgb(171, 2, 171);
+}
+
 form > .errors {
   color: red;
   font-size: 0.875em;

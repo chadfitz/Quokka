@@ -9,14 +9,27 @@
 .session-form { 
     padding: 20px;
     width: 400px;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
+
 #login-input { 
     font-size: 17px;
     padding: 14px 16px;
-    width: 365px;
+    /* width: 365px; */
+    width: 100%;
+    border: 1px solid black;
     border-radius: 6px;
+}
+
+#login-input:hover {
+    border: 1px solid var(--primary-color);
+}
+
+#login-input:focus-visible{
+    border: 1px solid var(--primary-color);
+    outline: 1px solid var(--primary-color);
 }
 
 #login-submit {
@@ -24,9 +37,10 @@
     line-height: 48px;
     padding: 0px 16px;
     margin-top: 10px; 
-    width: 400px;
+    /* width: 400px; */
+    width: 100%;
     border-radius: 6px;
-    background-color: rgb(150, 1, 150);
+    background-color: var(--primary-color);
     color: white
 }
 
@@ -39,13 +53,14 @@
 #signup-submit,
 #signup-submit-two { 
     font-size: 20px;
-        line-height: 48px;
-        padding: 0px 16px;
-        margin-top: 10px;
-        width: 400px;
-        border-radius: 6px;
-        background-color: rgb(69, 195, 98);
-        color: white
+    line-height: 48px;
+    padding: 0px 16px;
+    margin-top: 10px;
+    /* width: 400px; */
+    width: 100%;
+    border-radius: 6px;
+    background-color: var(--secondary-color);
+    color: white
 }
 
 hr { 

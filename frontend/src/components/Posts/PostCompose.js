@@ -112,29 +112,29 @@ function PostCompose () {
     'link', 'image'
   ];
 
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!sessionUser) history.push('/login');
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
 
-  //   if (formType === 'Create'){
-  //     post = {writer, recipient, location, subject, body}
-  //     // TODO - add redirect functionality
-  //     // example:
-  //     const newPost = await dispatch(composePost(post));
-  //     // TODO: Update path to go to posts#show (instead of #index)
-  //     // if (newPost._id) history.push(`/posts`);
-  //   } else {
-  //     post = { ...post, writer, recipient, location, subject, body}
-  //     // dispatch(updatePost(post))
-  //     dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
-  //       // .then(history.push(`/posts`));
-  //     // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-  //       // .then(history.push(`/posts/${postId}`));
-  //   }
+    if (formType === 'Create'){
+      post = {writer, recipient, location, subject, body}
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = { ...post, writer, recipient, location, subject, body}
+      // dispatch(updatePost(post))
+      dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
+        // .then(history.push(`/posts`));
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
 
-  //   // TODO: CLEAR OTHER FIELDS (not just body)?
-  //   setBody('');
-  // };
+    // TODO: CLEAR OTHER FIELDS (not just body)?
+    setBody('');
+  };
 
 
   // useEffect(()=>{
@@ -145,20 +145,20 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location,
-      images,
-      subject,
-      body,}));
-      // reactions
-    setBody('');
-    setImages([]);
-    setImageUrls([]);
-  };
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   dispatch(composePost({
+  //     writer,
+  //     recipient: writer,
+  //     location,
+  //     images,
+  //     subject,
+  //     body,}));
+  //     // reactions
+  //   setBody('');
+  //   setImages([]);
+  //   setImageUrls([]);
+  // };
 
   return (
     <>
