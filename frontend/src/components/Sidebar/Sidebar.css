@@ -1,13 +1,8 @@
-/* .sidebar-container{
-    position: sticky;
-    top: 80px;
-} */
-
 .sidebar{
     width: 85px;
     height: 100vh;
     border-right: 1px solid purple;
-    position: sticky;
+    position: fixed;
     top:80px;
     display: flex;
     flex-direction: column;

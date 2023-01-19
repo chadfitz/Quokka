@@ -22,9 +22,8 @@ function NavBar () {
       <div className='navbar'>
 
 
-        <div className='navbar-container'>
           <div className='nav-left'>
-            <Link to="/" className='nav-left' id="nav-left">
+            <Link to="/" className='nav-left'>
               <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
               <h1 id="quokka-title">Quokka</h1>
             </Link>
@@ -40,7 +39,6 @@ function NavBar () {
             </div>
           </div>
           
-        </div>
       </div>
     </nav>
   );

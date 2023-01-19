@@ -12,7 +12,6 @@ const Sidebar = () => {
         <div><Link to={"/"}><BsBook/></Link></div>
         <div><Link to={"/posts/new"}><BsFillPencilFill/></Link></div>
         <div><Link to={"/"}><FaUserFriends/></Link></div>
-
     </div>
   )
 }
