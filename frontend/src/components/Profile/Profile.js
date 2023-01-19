@@ -10,7 +10,7 @@ function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
-  console.log(userPosts);
+
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     return () => dispatch(clearPostErrors());
@@ -24,11 +24,6 @@ function Profile () {
         <h2>All of {currentUser.username}'s Posts</h2>
         {userPosts.map((post, i) => (
           <>
-            {/* {console.log(post)} */}
-            {/* <PostBox
-              key={post._id}
-              body={post.body}
-            /> */}
             <PostsIndexItem post={post}/>
             <Map key={i} postId={i}/>
           </>

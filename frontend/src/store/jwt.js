@@ -21,8 +21,6 @@ async function jwtFetch(url, options = {}) {
   // "CSRF-TOKEN" cookie.
   if (options.method.toUpperCase() !== "GET") {
     options.headers["CSRF-Token"] = getCookie("CSRF-TOKEN");
-    console.log('options.body instanceof FormData');
-    console.log(options.body instanceof FormData);
     if (!options.headers["Content-Type"] && !(options.body instanceof FormData)) {
       options.headers["Content-Type"] = "application/json";
     }

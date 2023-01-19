@@ -9,6 +9,24 @@ const upload = multer();
 const bcrypt = require('bcryptjs');
 const { requireUser } = require('../../config/passport');
 const { json } = require('express');
+const ObjectUtil = require("../../util/ObjectUtil")
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    let user;
+    user = await User.findById(req.params.userId);
+    const friends = await Friend.find(
+      { $or: [{ requester: user._id }, { recipient: user._id }] }
+    );
+    var object1 = friends.map(friend => [friend.requester, friend.recipient]);
+    var object2 = object1.flat().filter( el => {
+      return el.toString() !== user._id.toString();``
+    })
+    return res.json(object2)
+  } catch(err) {
+    return res.status(404).json({ message: err.message });
+  }
+})
 
 
 router.post('/', upload.none(), async (req, res, next) => {

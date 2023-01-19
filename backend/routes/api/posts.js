@@ -21,7 +21,7 @@ router.get('/user/:userId', async (req, res, next) => {
   try {
     const posts = await Post.find({ writer: user._id })
                               .sort({ createdAt: -1 })
-                              .populate("writer", "_id, username profileImageUrl");
+                              .populate("writer", "_id, username, profileImageUrl");
     return res.json(posts);
   }
   catch(err) {
@@ -30,15 +30,11 @@ router.get('/user/:userId', async (req, res, next) => {
 })
 
 router.get('/', async (req, res) => {
-  try {
-    const posts = await Post.find()
-                              .populate("writer", "_id, username profileImageUrl")
-                              .sort({ createdAt: -1 });
-    return res.json(posts);
-  }
-  catch(err) {
-    return res.json([]);
-  }
+  const posts = await Post.find()
+                          .populate("recipient", "_id, username")
+                          .populate("writer", "_id, username profileImageUrl")
+                          .sort({ createdAt: -1 });
+  return res.json(posts);
 });
 
 router.delete('/:postId', async (req, res, next) => {
@@ -56,13 +52,7 @@ router.delete('/:postId', async (req, res, next) => {
 });
 
 router.patch('/:postId', async (req, res, next) => {
-  console.log('in the router');
-  console.log('req');
-  // console.log(req);
-  console.log('req.params.postId');
-  console.log(req.params.postId);
   try {
-    console.log('backend try');
     const filter = { _id: req.params.postId };
     const update = { recipient: req.body.recipient,
       location: req.body.location,

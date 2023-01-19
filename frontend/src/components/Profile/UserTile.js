@@ -6,34 +6,29 @@ import { addFriend, fetchFriends } from '../../store/friends';
 const UserTile = ({user}) => {
   const dispatch = useDispatch();
   const requester = useSelector(state => state.session.user);
-  const friends = useSelector(state => {
-    const filter1 = { requester: requester._id, recipient: user._id }
-    const filter2 = { requester: user._id, recipient: requester._id }
-    // const direction1 = s
-
-
-    return state.session.friends;
+  const isFriend = useSelector(state => {
+    return state.friends?.includes(user._id.toString())
   });
+  // const friends = useSelector(state => state.session.friends);
+
   let data = {
     requester: requester,
     recipient: user,
     relation: 2
   };
 
-  // useEffect(() => {
-  //   dispatch(fetchFriends())
-  // }, [dispatch])
-
   const handleAddFriend = () => {
-    console.log('clicked');
     dispatch(addFriend(data));
   }
 
   return (
     <div>UserTile
       <div>{user.username}</div>
-      <Button label="Add Friend"
-              onClick={handleAddFriend}/>
+      {isFriend
+       ? <div>Friends!</div>
+       : (<Button label="Add Friend"
+              onClick={handleAddFriend}/>)
+      }
     </div>
   )
 }

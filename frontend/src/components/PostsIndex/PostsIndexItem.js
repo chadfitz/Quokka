@@ -35,7 +35,7 @@ function PostsIndexItem ({ post }) {
             </div>
             <div className='post-index-middle'>
                 <h2>Subject: {post.subject}</h2>
-                <h3>Dear {post.recipient},</h3>
+                <h3>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <h3>From, </h3>
                 <h3>{post.writer.username}</h3>

@@ -15,10 +15,7 @@ export const fetchUsers = () => async dispatch => {
     dispatch(receiveUsers(users));
   } catch(err) {
     const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      // dispatch(receive)
-      console.log('TODO - add errors reducer');
-    }
+    if (resBody.statusCode === 400) { /* TODO */ }
   }
 };
 

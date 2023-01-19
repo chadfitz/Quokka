@@ -29,8 +29,6 @@ const receiveNewPost = post => ({
 });
 
 const receiveErrors = errors => {
-  console.log("IN RECEIVE ERRORS -- ERROR BELOW")
-  console.log(errors)
   return ({type: RECEIVE_POST_ERRORS, errors})
 };
 
@@ -46,7 +44,6 @@ export const fetchPosts = () => async dispatch => {
     const posts = await res.json();
     dispatch(receivePosts(posts));
   } catch (err) {
-    // console.log(err)
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       dispatch(receiveErrors(resBody.errors));
@@ -69,7 +66,6 @@ export const fetchUserPosts = id => async dispatch => {
 
 export const composePost = data => async dispatch => {
   const { images, subject, writer, body, location, recipient} = data
-  console.log(location)
   const formData = new FormData();
   formData.append("body", body);
   formData.append("location", JSON.stringify(location));
@@ -78,7 +74,6 @@ export const composePost = data => async dispatch => {
   formData.append("writer", writer);
 
   Array.from(images).forEach(image => formData.append("images", image));
-  console.log(formData)
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
@@ -95,16 +90,11 @@ export const composePost = data => async dispatch => {
 };
 
 export const updatePost = (post) => async (dispatch) => {
-  console.log("updatePost's post", post)
-  console.log('post._id');
-  console.log(post._id);
   try {
-    console.log('frontend try');
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
       body: JSON.stringify(post)
     })
-    console.log('after await jwtFetch');
     if (res.ok) {
       const newPost = await res.json();
       dispatch(receiveNewPost(newPost));
