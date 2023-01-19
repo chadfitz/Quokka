@@ -1,5 +1,5 @@
 import {Icon} from '@iconify/react';
-import LocationIcon from '@iconify/icons-mdi/pin-outline';
+import LocationIcon from '@iconify/icons-mdi/cat';
 
 const LocationMarker = ({lat, lng, onMouseOver, onMouseOut, onClick}) => {
   return (

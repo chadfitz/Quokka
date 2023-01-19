@@ -12,6 +12,7 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import Sidebar from '../Sidebar/Sidebar';
 
 function PostCompose () {
   // const [body, setBody] = useState('');
@@ -105,16 +106,16 @@ function PostCompose () {
     if (formType === 'Create'){
       post = {
         writer,
-        recipient, 
+        recipient,
         location: {
           "type": "Point",
           "coordinates": [
             lng,
             lat
           ]
-        }, 
+        },
         images,
-        subject, 
+        subject,
         body
       }
       // TODO - add redirect functionality
@@ -123,17 +124,17 @@ function PostCompose () {
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
     } else {
-      post = { ...post, 
-                writer, 
-                recipient, 
+      post = { ...post,
+                writer,
+                recipient,
                 location: {
                   "type": "Point",
                   "coordinates": [
                     lng,
                     lat
                   ]
-                }, 
-                subject, 
+                },
+                subject,
                 body
               }
       // dispatch(updatePost(post))
@@ -152,65 +153,67 @@ function PostCompose () {
   }, [dispatch]);
 
   return (
-    <div className='compose-container'>
-      <div className="compose-top">
-        <div className='compose-map'>
-          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
-        </div>
-        <div className="text-editor">
-            <div className='compose-heading'>
-              <h2>Compose Post</h2>
-            </div>
-            
-            <Input
-              // label="Subject"
-              className="post-subject"
-              type="text"
-              value={subject}
-              onChange={handleSubjectChange}
-              placeholder="Subject"
-              required
-              id="subject-compose"
-            />
-            <div className='quill-editor-compose'>
-              <ReactQuill theme="snow"
-                          modules={modules}
-                          formats={formats}
-                          value={body}
-                          onChange={setBody}
-                          id="reactquill">
-                          
-              </ReactQuill>
-            </div>
-            <div className='submit-compose-buttons'>
-              <div className='upload-images'>
-              <label>
-              Images to Upload</label>
-              <input
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              multiple
-              onChange={updateFiles}
-              id="choose-files" />
+    <div className='whole-page-styling'>
+      <div className='sidebar-container'> <Sidebar/> </div>
+      <div className='compose-container'>
+        <div className="compose-top">
+          <div className='compose-map'>
+            <div id='compose-map-container'> <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/> </div>
+            <div id='choose-your-location'>Choose your location on the map!</div>
+          </div>
+          <div className="text-editor">
+              <div className='compose-heading'>
+                <h2 id='compose-post-heading'>Compose Post</h2>
               </div>
-             <Button
-                containername="submit-btn-ctnr"
-                className="submit-btn"
-                label="Submit Post"
-                onClick={handleSubmit}
+
+              <Input
+                // label="Subject"
+                className="post-subject"
+                type="text"
+                value={subject}
+                onChange={handleSubjectChange}
+                placeholder="Subject"
+                required
+                id="subject-compose"
               />
-            </div>
+              <div className='quill-editor-compose'>
+                <ReactQuill theme="snow"
+                            modules={modules}
+                            formats={formats}
+                            value={body}
+                            onChange={setBody}
+                            id="reactquill">
+
+                </ReactQuill>
+              </div>
+              <div className='submit-compose-buttons'>
+                <div className='upload-images'>
+                <label>
+                Images to Upload</label>
+                <input
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                onChange={updateFiles}
+                id="choose-files" />
+                </div>
+              <Button
+                  containername="submit-btn-ctnr"
+                  className="submit-btn"
+                  label="Submit Post"
+                  onClick={handleSubmit}
+                />
+              </div>
+          </div>
         </div>
-      </div>
-      <div className='compose-bottom'>
-        <div className="errors">{errors && errors.body}</div>
-       
-          
-        {/* <PostBox body={newPost?.body} /> */}
-     </div>
-      <div>
-        {body && <Markup content={body} />}
-        {/* <div>{writer}</div> */}
+        <div className='compose-bottom'>
+          <div className="errors">{errors && errors.body}</div>
+          {/* <PostBox body={newPost?.body} /> */}
+        </div>
+        <div>
+          {body && <Markup content={body} />}
+          {/* <div>{writer}</div> */}
+        </div>
       </div>
     </div>
   )

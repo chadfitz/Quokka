@@ -1,0 +1,16 @@
+.sidebar{
+    width: 85px;
+    height: 100vh;
+    border-right: 1px solid purple;
+    position: sticky;
+    top:80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar > * {
+    margin: 40px 0 0 0;
+    height: 70px;
+    font-size: 30px;
+}

@@ -6,9 +6,9 @@ const Input = ({label, containername, className, ...props}) => {
 
   return (
     <div className={containername}>
-      <h4 className={className}>
+      <h6 className={className}>
         {label}
-      </h4>
+      </h6>
       <br/>
       <input {...props} />
     </div>
