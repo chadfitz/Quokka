@@ -1,7 +1,7 @@
-.sidebar-container{
-    position: absolute;
+/* .sidebar-container{
+    position: sticky;
     top: 80px;
-}
+} */
 
 .sidebar{
     width: 85px;
