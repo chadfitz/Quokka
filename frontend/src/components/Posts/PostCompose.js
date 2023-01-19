@@ -211,7 +211,7 @@ function PostCompose () {
           {/* <PostBox body={newPost?.body} /> */}
         </div>
         <div>
-          {body && <Markup content={body} />}
+          {/* {body && <Markup content={body} />} */}
           {/* <div>{writer}</div> */}
         </div>
     </div>
