@@ -12,8 +12,6 @@ import { useHistory } from 'react-router-dom';
 import './PostIndexItem.css';
 import './PostsIndex.css';
 
-// import { useState } from 'react';
-
 function PostsIndexItem ({ post }) {
     // const [loading, setLoading] = useState(false);
     // let mapPlaceholder;
