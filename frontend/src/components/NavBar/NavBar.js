@@ -20,22 +20,25 @@ function NavBar () {
   return (
     <nav>
       <div className='navbar'>
-        <div className='nav-left'>
-          <Link to="/" className='nav-left' id="nav-left">
-            <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
-            <h1 id="quokka-title">Quokka</h1>
-          </Link>
-        </div>
-          
+
         <div id="search-box">
           <SearchBar />
         </div>
-        
-        <div className='nav-right'>
-          <div className='profile-settings'>
-            <ProfileButton />
+
+        <div className='navbar-container'>
+          <div className='nav-left'>
+            <Link to="/" className='nav-left' id="nav-left">
+              <img src={quokka} alt="quokka logo" id="quokka-logo"></img>
+              <h1 id="quokka-title">Quokka</h1>
+            </Link>
           </div>
-        
+          
+          <div className='nav-right'>
+            <div className='profile-settings'>
+              <ProfileButton />
+            </div>
+          </div>
+          
         </div>
       </div>
     </nav>
