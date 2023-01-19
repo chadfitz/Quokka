@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -130,29 +131,84 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
 });
 
 // EDIT
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res, next) => {
   try {
-    const updatedPost = Post.updateOne({_id: req.params.id}, {
-      recipient: req.body.recipient,
-      location: req.body.location,
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
+    const updatedPost = await Post.updateOne({_id: req.params.id}, {
+      location: JSON.parse(req.body.location),
       subject: req.body.subject,
       body: req.body.body,
-      reactions: req.body.reactions,
-    }, function (err, docs) {
-        if (err){
-          console.log(err)
-        } else {
-          console.log("Updated Docs : ", docs);
-      }}
-    )
+      imageUrls
+    })
+    return res.json(updatedPost);
   }
   catch(err) {
     const error = new Error('Post not found');
     error.statusCode = 404;
     error.errors = { message: "No post found with that id" };
-    return next(error);
+    return next(err);
   }
 });
+
+// IN PROGRESS --- Creates a reaction to a post
+router.patch('/createReaction/:postId', async (req, res, next) => {
+  try {
+    const { postId } = req.params
+    const { reactorId, newEmotion } = req.body
+
+    const post = await Post.findById(postId)
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+
+    // AN INVALID USER ID WILL THROW AN ERROR
+    if (!userReactionObject) {
+      // CREATE NEW USER REACTION OBJECT IF IT DOESN'T EXIST
+      post.reactions.push({user: reactorId, emotions: newEmotion})
+    } else if (!userReactionObject.emotions.some( oldEmotion => (oldEmotion == newEmotion))) {
+      // ADD --NEW EMOTION-- TO EMOTION ARRAY
+      userReactionObject.emotions.push(newEmotion)
+    }
+
+    await post.save()
+
+    return res.json(post)
+
+  } catch(err) {
+    const error = new Error('Reaction could not be made');
+    error.statusCode = 422;
+    error.errors = { message: "User unable to react to post"};
+    return next(error)
+  }
+})
+
+
+// IN PROGRESS -- Removes reaction to a post
+router.patch('/removeReaction/:postId', async (req, res, next) => {
+  try {
+    const { postId } = req.params
+    const { reactorId, emotionToRemove } = req.body
+
+    const post = await Post.findById(postId)
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+
+    if (!userReactionObject) {
+      // If no user reaction object, user cannot remove reaction so no operation is done
+
+    } else if (userReactionObject.emotions.some( oldEmotion => (oldEmotion == emotionToRemove))) {
+      // If user reaction object exists and includes the emotion to remove, remove it
+      userReactionObject.emotions.pull(emotionToRemove)
+    }
+
+    await post.save()
+
+    return res.json(post)
+
+  } catch (err) {
+    const error = new Error ('Reaction couldn\'t be made');
+    error.statusCode = 422;
+    error.errors = { message: "User could not remove reaction to post"}
+    return next(error)
+  }
+})
 
 // DELETE
 router.delete('/:postId', async (req, res, next) => {

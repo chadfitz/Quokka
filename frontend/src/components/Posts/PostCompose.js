@@ -4,17 +4,22 @@ import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { clearPostErrors, composePost, updatePost } from '../../store/posts';
-import PostBox from './PostBox';
+import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
+import Map from '../GoogleMap/Map.js (NOT USED)';
+import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import Sidebar from '../Sidebar/Sidebar';
 
 function PostCompose () {
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [lat, setLat] = useState(37.776392)
+  const [lng, setLng] = useState(-122.4194)
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -51,11 +56,12 @@ function PostCompose () {
     post = {
       writer,
       recipient: writer,
+      images,
       location: {
         "type": "Point",
         "coordinates": [
-          50,
-          37.7
+          lng,
+          lat
         ]
       },
       subject: "",
@@ -86,92 +92,120 @@ function PostCompose () {
     'link', 'image'
   ];
 
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   if (!sessionUser) history.push('/login');
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!sessionUser) history.push('/login');
 
-  //   if (formType === 'Create'){
-  //     post = {writer, recipient, location, subject, body}
-  //     // TODO - add redirect functionality
-  //     // example:
-  //     const newPost = await dispatch(composePost(post));
-  //     // TODO: Update path to go to posts#show (instead of #index)
-  //     // if (newPost._id) history.push(`/posts`);
-  //   } else {
-  //     post = { ...post, writer, recipient, location, subject, body}
-  //     // dispatch(updatePost(post))
-  //     dispatch(updatePost({ ...post, writer, recipient, location, subject, body}));
-  //       // .then(history.push(`/posts`));
-  //     // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-  //       // .then(history.push(`/posts/${postId}`));
-  //   }
+    if (formType === 'Create'){
+      post = {
+        writer,
+        recipient,
+        location: {
+          "type": "Point",
+          "coordinates": [
+            lng,
+            lat
+          ]
+        },
+        images,
+        subject,
+        body
+      }
+      // TODO - add redirect functionality
+      // example:
+      const newPost = await dispatch(composePost(post));
+      history.push("/posts")
+      // TODO: Update path to go to posts#show (instead of #index)
+      // if (newPost._id) history.push(`/posts`);
+    } else {
+      post = { ...post,
+                writer,
+                recipient,
+                location: {
+                  "type": "Point",
+                  "coordinates": [
+                    lng,
+                    lat
+                  ]
+                },
+                subject,
+                images,
+                body
+              }
+      // dispatch(updatePost(post))
+      dispatch(updatePost(post));
+      history.push("/posts")
+      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
+        // .then(history.push(`/posts/${postId}`));
+    }
 
-  //   // TODO: CLEAR OTHER FIELDS (not just body)?
-  //   setBody('');
-  // };
-
-
-  // useEffect(()=>{
-  //   if (postId) dispatch(**fetchpost**)
-  // },[dispatch, postId])
+    // TODO: CLEAR OTHER FIELDS (not just body)?
+    setBody('');
+  };
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(composePost({
-      writer,
-      recipient: writer,
-      location,
-      images,
-      subject,
-      body,}));
-      // reactions
-    setBody('');
-    setImages([]);
-    setImageUrls([]);
-  };
-
-  // if (!post) return null;
   return (
-    <>
-      <div className="text-editor">
-        <Input
-          label="Subject"
-          className="post-subject"
-          type="text"
-          value={subject}
-          onChange={handleSubjectChange}
-          placeholder="Subject"
-          required />
-        <ReactQuill theme="snow"
-                    modules={modules}
-                    formats={formats}
-                    value={body}
-                    onChange={setBody} />
-      </div>
-      <div className="errors">{errors && errors.body}</div>
-      <Button
-        containername="submit-btn-ctnr"
-        className="submit-btn"
-        label="Submit Post"
-        onClick={handleSubmit}/>
-      <label>
-        Images to Upload
-        <input
-          type="file"
-          accept=".jpg, .jpeg, .png"
-          multiple
-          onChange={updateFiles} />
-      </label>
-      {/* <PostBox body={newPost?.body} /> */}
-      <div>
-        {body && <Markup content={body} />}
-        {/* <div>{writer}</div> */}
-      </div>
-    </>
+    <div className='compose-container'>
+      <div className="compose-top">
+        <div className='compose-map'>
+          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+        </div>
+        <div className="text-editor">
+            <div className='compose-heading'>
+              <h2>Compose Post</h2>
+            </div>
+
+            <Input
+              // label="Subject"
+              className="post-subject"
+              type="text"
+              value={subject}
+              onChange={handleSubjectChange}
+              placeholder="Subject"
+              required
+              id="subject-compose"
+            />
+              <div className='quill-editor-compose'>
+                <ReactQuill theme="snow"
+                            modules={modules}
+                            formats={formats}
+                            value={body}
+                            onChange={setBody}
+                            id="reactquill">
+
+                </ReactQuill>
+              </div>
+              <div className='submit-compose-buttons'>
+                <div className='upload-images'>
+                <label>
+                Images to Upload</label>
+                <input
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                onChange={updateFiles}
+                id="choose-files" />
+                </div>
+              <Button
+                  containername="submit-btn-ctnr"
+                  className="submit-btn"
+                  label="Submit Post"
+                  onClick={handleSubmit}
+                />
+              </div>
+          </div>
+        </div>
+        <div className='compose-bottom'>
+          <div className="errors">{errors && errors.body}</div>
+        </div>
+        <div>
+          {/* {body && <Markup content={body} />} */}
+          {/* <div>{writer}</div> */}
+        </div>
+    </div>
   )
 }
 

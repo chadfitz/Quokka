@@ -5,7 +5,7 @@ const reactionSchema = require('../blocks/Reaction');
 // import pointSchema from '../blocks/Point';
 // import reactionSchema from '../blocks/Reaction';
 
-const postSchema = Schema({
+const postSchema = new Schema({
   writer: {
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -31,9 +31,9 @@ const postSchema = Schema({
     type: String,
     required: true
   },
-  reactions: {
-    type: reactionSchema
-  }
+  // multiple reactions
+  reactions: [reactionSchema]
+  // reactions: [reactionSchema]
 }, {
   timestamps: true
 });

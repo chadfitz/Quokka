@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
-import Map from '../GoogleMap/Map';
+import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostBox from '../Posts/PostBox';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
+import Sidebar from '../Sidebar/Sidebar';
 import "./Profile.css"
 
 function Profile () {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
-
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     return () => dispatch(clearPostErrors());
@@ -20,14 +20,23 @@ function Profile () {
     return <div>{currentUser.username} has no Posts</div>;
   } else {
     return (
-      <div className='profile-container'>
-        <h2>All of {currentUser.username}'s Posts</h2>
-        {userPosts.map((post, i) => (
-          <>
-            <PostsIndexItem post={post}/>
-            <Map key={i} postId={i}/>
-          </>
-        ))}
+      <div className='whole-page-styling'>
+        <div className='sidebar-container'><Sidebar/></div>
+        <div className='profile-container'>
+          <h2>All of {currentUser.username}'s Posts</h2>
+          <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
+          {userPosts.map((post, i) => (
+            <>
+              {/* {console.log(post)} */}
+              {/* <PostBox
+                key={post._id}
+                body={post.body}
+              /> */}
+              <PostsIndexItem post={post}/>
+              {/* <Map key={i} postId={i}/> */}
+            </>
+          ))}
+        </div>
       </div>
     );
   }

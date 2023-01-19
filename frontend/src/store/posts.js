@@ -1,17 +1,26 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
 
+// GENERAL
 const RECEIVE_POSTS = "posts/RECEIVE_POSTS";
+const RECEIVE_POST = "posts/RECEIVE_POST";
 const RECEIVE_USER_POSTS = "posts/RECEIVE_USER_POSTS";
 const RECEIVE_NEW_POST = "posts/RECEIVE_NEW_POST";
+
 const REMOVE_POST = "posts/REMOVE_POST"
 const RECEIVE_POST_ERRORS = "posts/RECEIVE_POST_ERRORS";
 const CLEAR_POST_ERRORS = "posts/CLEAR_POST_ERRORS";
 
+// ACTION CREATORS
 const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
+
+const receivePost = post => ({
+  type: RECEIVE_POST,
+  post
+})
 
 const removePost = postId => ({
   type: REMOVE_POST,
@@ -37,7 +46,7 @@ export const clearPostErrors = errors => ({
     errors
 });
 
-
+// MIDDLEWARE ACTION CREATORS (Express?)
 export const fetchPosts = () => async dispatch => {
   try {
     const res = await jwtFetch ('/api/posts');
@@ -50,6 +59,19 @@ export const fetchPosts = () => async dispatch => {
     }
   }
 };
+
+export const fetchPost = (postId) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/posts/${postId}`);
+    const post = await res.json();
+    dispatch(receivePost(post));
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 
 export const fetchUserPosts = id => async dispatch => {
   try {
@@ -90,10 +112,20 @@ export const composePost = data => async dispatch => {
 };
 
 export const updatePost = (post) => async (dispatch) => {
+  // console.log("updatePost's post", post)
+  const { images, subject, writer, body, location, recipient} = post
+  const formData = new FormData();
+  formData.append("body", body);
+  formData.append("location", JSON.stringify(location));
+  formData.append("recipient", recipient._id);
+  formData.append("subject", subject);
+  formData.append("writer", writer);
+
+  Array.from(images).forEach(image => formData.append("images", image));
   try {
     const res = await jwtFetch(`/api/posts/${post._id}`, {
       method: 'PATCH',
-      body: JSON.stringify(post)
+      body: formData
     })
     if (res.ok) {
       const newPost = await res.json();
@@ -118,6 +150,53 @@ export const deletePost = postId => async dispatch => {
   // todo error handling
 }
 
+
+// reactions
+
+export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        newEmotion
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
+}
+
+
+// copy pasta code. don't assume it works
+export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
+  try {
+    console.log("THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+      method: 'PATCH',
+      body: JSON.stringify({
+        reactorId,
+        emotionToRemove
+      })
+    })
+    const updatedPost = await res.json();
+    if (res.ok) {
+      console.log("RESPONSE WAS OKAY")
+      dispatch(receiveNewPost(updatedPost))
+    }
+
+  } catch {
+    console.error("CREATE REACTION FAILED")
+  }
+}
+
 const nullErrors = null;
 
 export const postErrorsReducer = (state = nullErrors, action) => {
@@ -139,6 +218,12 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
   switch(action.type) {
     case RECEIVE_POSTS:
       return { ...state, all: action.posts, new: undefined};
+    case RECEIVE_POST:
+      return {...state, all: action.post};
+    case REMOVE_POST:
+      const newState = {...state}
+      delete newState[action.postId]
+      return newState;
     case RECEIVE_USER_POSTS:
       return { ...state, user: action.posts, new: undefined};
     case RECEIVE_NEW_POST:

@@ -3,22 +3,21 @@ const Schema = mongoose.Schema;
 const pointSchema = require('./Point');
 // https://mongoosejs.com/docs/geojson.html
 
-const reactionSchema = new mongoose.Schema({
-  // TBU
+const reactionSchema = new Schema({
+  // The user who reacts to a post
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  post: {
-    type: Schema.Types.ObjectId,
-    ref: 'Post'
-  },
-  reactionType: {
-    type: String,
-    enum: ['Reaction'],
-    required: true
-  },
+  //
+  emotions: [String]
 });
+
+
+// "Pasta is great"
+    // reactions
+        // JOHN
+          // ['LOL', 'ANGRY']
 
 module.exports = reactionSchema;
 // export default reactionSchema;
