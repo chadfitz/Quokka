@@ -11,13 +11,6 @@ const validateLoginInput = require('../../validations/login');
 const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const DEFAULT_PROFILE_IMAGE_URL = 'https://quokka-pro.s3.us-west-2.amazonaws.com/public/defaultprofile1.png';
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  // res.send('Respond with a user resource edit');
-  res.json({
-    message: "GET /api/users"
-  });
-});
 
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
@@ -35,6 +28,35 @@ router.get('/current', restoreUser, (req, res) => {
     email: req.user.email
   });
 });
+
+/* GET users listing. */
+router.get('/', async (req, res, next) => {
+  // res.send('Respond with a user resource edit');
+  // return res.json('success')
+  try {
+    const users = await User.find();
+    return res.json(users);
+  } catch (err) {
+    const error = new Error('Users not found');
+    error.statusCode = 404;
+    error.errors = { message: "No users found" };
+    return next(error);
+  }
+});
+
+// TODO: DELETE
+// render.post('/addFriend', async (req, res, next) => {
+//   const user = await User.findOne({
+//     $and: [{ friends: req.body.relations}]
+//   });
+// })
+
+// render.post('/acceptFriend', async (req, res, next) => {
+// })
+
+// render.post('/removeFriend', async (req, res, next) => {
+// })
+
 
 // POST /api/users/register
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
