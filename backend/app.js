@@ -50,6 +50,7 @@ app.use(
 const postsRouter = require('./routes/api/posts');
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
+// const friendsRouter = require('./routes/api/friends')
 app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);

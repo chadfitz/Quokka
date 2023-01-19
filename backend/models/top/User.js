@@ -2,7 +2,7 @@ const pointSchema = require('../blocks/Point')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = Schema({
+const userSchema = new Schema({
   // auth
   username: {
     type: String,
@@ -26,6 +26,10 @@ const userSchema = Schema({
     type: String
     // required: true
   },
+  friends: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Friends'
+  }],
   backgroundColor: {
     type: String
   },

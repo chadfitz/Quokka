@@ -30,11 +30,18 @@ router.get('/current', restoreUser, (req, res) => {
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', async (req, res, next) => {
   // res.send('Respond with a user resource edit');
-  res.json({
-    message: "GET /api/users"
-  });
+  // return res.json('success')
+  try {
+    const users = await User.find();
+    return res.json(users);
+  } catch (err) {
+    const error = new Error('Users not found');
+    error.statusCode = 404;
+    error.errors = { message: "No users found" };
+    return next(error);
+  }
 });
 
 
