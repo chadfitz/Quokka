@@ -13,17 +13,16 @@ import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
-function PostCompose () {
-  // const [body, setBody] = useState('');
-  // const writer = useSelector(state => state.session.user);
-  // const [subject, handleSubjectChange] = useInput('');
-  // TODO: convert recipient to props / etc. (not useState)
-  // const [recipient, setRecipient] = useState(1);
+function PostEdit () {
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  const [lat, setLat] = useState(37.776392)
-  const [lng, setLng] = useState(-122.4194)
+ 
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
+  const writer = useSelector(state => state.session.user);
+  const { postId } = useParams();
 
     const updateFiles = async e => {
     const files = e.target.files;
@@ -44,42 +43,36 @@ function PostCompose () {
     else setImageUrls([]);
   }
 
-  // const x = <div children={body.toString()}></div>;
-  // TODO: connect me
-  // TODO: change default state if needed
-  // const [reactions, setReactions] = useState(['smile']);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const writer = useSelector(state => state.session.user);
-  let { postId } = useParams();
+  
   let post = useSelector(store => {
     return Object.values(store.posts.all).find(obj => obj._id === postId);
   })
 
-  const formType = postId ? 'Update' : 'Create';
-  if (formType === 'Create') {
-    post = {
-      writer,
-      recipient: writer,
-      images,
-      location: {
-        "type": "Point",
-        "coordinates": [
-          lng,
-          lat
-        ]
-      },
-      subject: "",
-      body: ""
-    }
-  }
+//   const formType = postId ? 'Update' : 'Create';
+//   if (formType === 'Create') {
+//     post = {
+//       writer,
+//       recipient: writer,
+//       images,
+//       location: {
+//         "type": "Point",
+//         "coordinates": [
+//           lng,
+//           lat
+//         ]
+//       },
+//       subject: "",
+//       body: ""
+//     }
+//   }
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(post.recipient);
   // TODO: connect me to google maps api
   const [location, setLocation] = useState(post.location);
+   const [lat, setLat] = useState(location.coordinates[1])
+  const [lng, setLng] = useState(location.coordinates[0])
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
@@ -102,28 +95,10 @@ function PostCompose () {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
 
-    if (formType === 'Create'){
-      post = {
-        writer,
-        recipient, 
-        location: {
-          "type": "Point",
-          "coordinates": [
-            lng,
-            lat
-          ]
-        }, 
-        images,
-        subject, 
-        body
-      }
-      // TODO - add redirect functionality
-      // example:
-      const newPost = await dispatch(composePost(post));
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
-    } else {
-      post = { ...post, 
+        console.log(postId)
+      post = { _id: postId, 
                 writer, 
                 recipient, 
                 location: {
@@ -133,19 +108,19 @@ function PostCompose () {
                     lat
                   ]
                 }, 
-                subject, 
+                subject,
+                images, 
                 body
               }
       // dispatch(updatePost(post))
-      dispatch(updatePost(post));
-        // .then(history.push(`/posts`));
-      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-        // .then(history.push(`/posts/${postId}`));
+      dispatch(updatePost(post))
+      .then(
+      history.push("/posts?update"))
+     
     }
-
     // TODO: CLEAR OTHER FIELDS (not just body)?
-    setBody('');
-  };
+    // setBody('');
+  
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
@@ -155,7 +130,7 @@ function PostCompose () {
     <div className='compose-container'>
       <div className="compose-top">
         <div className='compose-map'>
-          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
+          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: lat, lng: lng}}/>
         </div>
         <div className="text-editor">
             <div className='compose-heading'>
@@ -206,14 +181,14 @@ function PostCompose () {
         <div className="errors">{errors && errors.body}</div>
        
           
-        {/* <PostBox body={newPost?.body} /> */}
+      
      </div>
       <div>
         {body && <Markup content={body} />}
-        {/* <div>{writer}</div> */}
+    
       </div>
     </div>
   )
 }
 
-export default PostCompose;
+export default PostEdit;

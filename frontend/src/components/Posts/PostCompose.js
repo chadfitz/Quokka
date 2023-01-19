@@ -4,7 +4,7 @@ import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { clearPostErrors, composePost, updatePost } from '../../store/posts';
-import PostBox from './PostBox';
+import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
@@ -12,6 +12,7 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import Sidebar from '../Sidebar/Sidebar';
 
 function PostCompose () {
   // const [body, setBody] = useState('');
@@ -105,16 +106,16 @@ function PostCompose () {
     if (formType === 'Create'){
       post = {
         writer,
-        recipient, 
+        recipient,
         location: {
           "type": "Point",
           "coordinates": [
             lng,
             lat
           ]
-        }, 
+        },
         images,
-        subject, 
+        subject,
         body
       }
       // TODO - add redirect functionality
@@ -124,9 +125,9 @@ function PostCompose () {
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
     } else {
-      post = { ...post, 
-                writer, 
-                recipient, 
+      post = { ...post,
+                writer,
+                recipient,
                 location: {
                   "type": "Point",
                   "coordinates": [
@@ -175,46 +176,44 @@ function PostCompose () {
               required
               id="subject-compose"
             />
-            <div className='quill-editor-compose'>
-              <ReactQuill theme="snow"
-                          modules={modules}
-                          formats={formats}
-                          value={body}
-                          onChange={setBody}
-                          id="reactquill">
-                          
-              </ReactQuill>
-            </div>
-            <div className='submit-compose-buttons'>
-              <div className='upload-images'>
-              <label>
-              Images to Upload</label>
-              <input
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              multiple
-              onChange={updateFiles}
-              id="choose-files" />
+              <div className='quill-editor-compose'>
+                <ReactQuill theme="snow"
+                            modules={modules}
+                            formats={formats}
+                            value={body}
+                            onChange={setBody}
+                            id="reactquill">
+
+                </ReactQuill>
               </div>
-             <Button
-                containername="submit-btn-ctnr"
-                className="submit-btn"
-                label="Submit Post"
-                onClick={handleSubmit}
-              />
-            </div>
+              <div className='submit-compose-buttons'>
+                <div className='upload-images'>
+                <label>
+                Images to Upload</label>
+                <input
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                onChange={updateFiles}
+                id="choose-files" />
+                </div>
+              <Button
+                  containername="submit-btn-ctnr"
+                  className="submit-btn"
+                  label="Submit Post"
+                  onClick={handleSubmit}
+                />
+              </div>
+          </div>
         </div>
-      </div>
-      <div className='compose-bottom'>
-        <div className="errors">{errors && errors.body}</div>
-       
-          
-        {/* <PostBox body={newPost?.body} /> */}
-     </div>
-      <div>
-        {body && <Markup content={body} />}
-        {/* <div>{writer}</div> */}
-      </div>
+        <div className='compose-bottom'>
+          <div className="errors">{errors && errors.body}</div>
+          {/* <PostBox body={newPost?.body} /> */}
+        </div>
+        <div>
+          {body && <Markup content={body} />}
+          {/* <div>{writer}</div> */}
+        </div>
     </div>
   )
 }

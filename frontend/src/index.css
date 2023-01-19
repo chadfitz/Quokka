@@ -1,10 +1,17 @@
 /* TODO Add site wide styles */
 :root{
-  --primary-color: rgb(150, 1, 150);
+  --primary-color: rgb(72, 31, 110);
   --primary-hover: rgb(107, 1, 107);
-  --secondary-color: rgb(69, 195, 98);
-  --secondary-hover: rgb(11, 141, 41);
-  --shadow-color: rgb(171, 2, 171);
+  --secondary-color: rgb(21, 40, 180);
+  --secondary-hover: rgb(0, 30, 255);
+  --shadow-color: rgba(0, 0, 0, 0.212);
+  --width: 1080px;
+  --background-color: #FEF7F1;
+  --accent-color: rgba(255, 255, 255, 0.5);
+}
+
+body{
+  background: var(--background-color);
 }
 
 form > .errors {
@@ -13,6 +20,10 @@ form > .errors {
   height: 15px;
   display: flex;
   align-items: center;
+}
+
+.whole-page-styling{
+    display: flex;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -24,8 +35,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video, input {
   box-sizing: border-box;
