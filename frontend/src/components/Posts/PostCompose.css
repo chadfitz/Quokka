@@ -4,7 +4,7 @@
   margin-top: 100px;
 } */
 
-.compose-container { 
+.compose-container {
   margin: 150px;
   display: flex;
   flex-direction: column;
@@ -17,47 +17,48 @@
   box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
 }
 
-.compose-top { 
+.compose-top {
   display: flex;
+  width: 100%;
+  height: 100%;
   /* justify-content: space-evenly; */
 }
 
-.compose-heading { 
-  margin: 5px 0px;
-  margin-bottom: -40px
-}
-
-.quill-editor-compose { 
+.quill-editor-compose {
   margin: 10px 0px;
 }
 
-.text-editor { 
+.text-editor {
   display: flex;
   flex-direction: column;
   margin-left: 50px;
   justify-content: flex-start;
 }
 
-.upload-images { 
+.upload-images {
   display: flex;
   flex-direction: column;
 }
 
-#subject-compose { 
+#subject-compose {
   padding: 5px 8px;
   width: 92%
 }
 
-#react-quill { 
+#compose-post-heading{
+  margin: 0;
+}
+
+#react-quill {
   height: 400px;
   width: 1000px
 }
 
-#choose-files { 
+#choose-files {
   width: 100%;
 }
 
-.submit-btn { 
+.submit-btn {
   width: 100%;
   height: 35px;
   margin: 10px 0px;
@@ -65,4 +66,19 @@
   color: white;
   font-size: 18px;
   border-radius: 4px;
+}
+
+.ql-editor{
+  height: 200px;
+}
+
+.input #subject-compose{
+  width: 100%;
+  margin-top: -10px;
+}
+
+.input{
+  height: auto;
+  margin: 0;
+  padding: 0;
 }

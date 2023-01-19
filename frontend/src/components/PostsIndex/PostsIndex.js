@@ -38,7 +38,6 @@ function PostsIndex () {
           <PostsIndexItem key={post._id} post={post} postId={post._id} />
         ))}
       </div>
-
     </div>
   );
 }
