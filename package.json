@@ -1,9 +1,8 @@
 {
   "name": "quokka",
   "version": "1.0.0",
-  "description": "Backend for Quokka built with the MERN stack",
+  "description": "Real Connections. Real Memories.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "backend-install": "npm install --prefix backend",
     "backend": "npm run dev --prefix backend",
     "frontend-install": "npm install --prefix frontend",
@@ -24,5 +23,6 @@
   "engines": {
     "node": "16.x"
   },
-  "homepage": "https://https://github.com/chadfitz/Quokka#readme"
+  "homepage": "https://https://github.com/chadfitz/Quokka#readme",
+  "main": "index.js"
 }

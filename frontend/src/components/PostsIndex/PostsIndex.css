@@ -2,61 +2,44 @@ body {
     background-color: whitesmoke;
     font-family: monospace;
 }
-.post-index-item {
-    margin-top: 30px;
-    background-color: white;
-    box-shadow: 0px 12px 18px 6px rgb(199, 199, 199);
-    padding: 30px;
-    border-radius: 20px;
+
+
+.post-index-container {
+    max-width: 75vw;
+    width: 75vw;
+    margin: auto;
 }
 
 .posts-index-header {
     margin-top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.post-index-middle {
-    min-width: 40%;
-    padding: 20px;
-}
-
-.post-index-date {
-    min-width: 10%;
-    padding: 10px;
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 20px;
-}
-
-.post-item-top {
-    display: flex;
-    flex-direction: row;
-}
-
-.post-index-map {
-    min-width: 45%;
-    border-radius: 10px;
-}
-
-.post-index-container {
-    max-width: 75vw;
+#all-pins-map-container { 
     margin: auto;
+    transition: all ease-in 500ms;
 }
 
-.post-item-bottom {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-}
+#all-pins-map-container:hover {
+    box-shadow: 0 10px 15px #9f9e9e;
+ }
 
 .posts-index-filter {
     margin-top: 50px;
     display: flex;
     background-color: white;
     border-radius: 30px;
-    width:35vw;
+    width: 100%;
+}
+
+#filter-by {
+    padding: 0px 30px;
+    font-size: 16px;
 }
 
 .filter-buttons {
@@ -67,21 +50,32 @@ body {
     margin: 10px;
 }
 
-#filter-by {
-    padding: 0px 30px;
-    font-size: 16px;
-}
-
 #post-google-map {
     width: 100%;
     box-shadow: 0 5px 15px #9f9e9e;
 }
 
-#profile-image-item { 
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
+#profile-image-item {
+    height: 75px;
+    width: 75px;
+    margin-bottom: 10px;
+    /* border: 1px solid black; */
     border-radius: 50%
 }
 
+#post-item-photo {
+    height: 100px;
+    width: auto;
+}
 
+#post-index-compose { 
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+    transition: all ease-in 500ms;
+}
+
+#post-index-compose:hover { 
+    font-size: 22px;
+    color: blueviolet
+}

@@ -16,7 +16,11 @@ const postSchema = new Schema({
   },
   location: {
     type: pointSchema,
-    required: true
+    // required: true
+  },
+  imageUrls: {
+    type: [String],
+    required: false
   },
   // mongodb strings provide unlimited length
   subject: {

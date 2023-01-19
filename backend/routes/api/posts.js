@@ -6,6 +6,7 @@ const User = mongoose.model('User');
 const Post = mongoose.model('Post');
 const { requireUser } = require('../../config/passport');
 const validatePostInput = require('../../validations/posts');
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
 /* GET posts listing. */
 router.get('/', async (req, res) => {
@@ -59,16 +60,18 @@ router.get('/:id', async (req, res, next) => {
 // to req.user. (requireUser will return an error response if there is no
 // current user.) Also attach validatePostInput as a middleware before the
 // route handler.
-router.post('/', requireUser, validatePostInput, async (req, res, next) => {
+router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput, async (req, res, next) => {
 
+  const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
 
   try {
     const newPost = new Post({
       writer: req.user._id,
       recipient: req.body.recipient,
-      location: req.body.location,
+      location: JSON.parse(req.body.location),
       subject: req.body.subject,
       body: req.body.body,
+      imageUrls, 
       reactions: req.body.reactions,
     });
 
@@ -83,13 +86,22 @@ router.post('/', requireUser, validatePostInput, async (req, res, next) => {
   }
 });
 
-
-
-
-router.delete('/:postId', async (req, res, next) => {
+// EDIT
+router.patch('/:id', async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.postId).delete()
-    return res.json(post);
+    const updatedPost = Post.updateOne({_id: req.params.id}, {  
+      recipient: req.body.recipient,
+      location: req.body.location,
+      subject: req.body.subject,
+      body: req.body.body,
+      reactions: req.body.reactions,
+    }, function (err, docs) {
+        if (err){
+          console.log(err)
+        } else {
+          console.log("Updated Docs : ", docs);
+      }}
+    )
   }
   catch(err) {
     const error = new Error('Post not found');
@@ -159,7 +171,21 @@ router.patch('/removeReaction/:postId', async (req, res, next) => {
   }
 })
 
-
-
+// DELETE
+router.delete('/:postId', async (req, res, next) => {
+  try {
+    console.log(req.params.postId)
+    const post = await Post.findById(req.params.postId)
+    await post.delete()
+    // Post.deleteOne({_id: req.params.postId})
+    return res.json(null);
+  }
+  catch(err) {
+    const error = new Error('Post not found in delete');
+    error.statusCode = 404;
+    error.errors = { message: "No post found with that id" };
+    return next(error);
+  }
+});
 
 module.exports = router;

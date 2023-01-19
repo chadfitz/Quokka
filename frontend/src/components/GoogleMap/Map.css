@@ -5,6 +5,17 @@
     border-radius: 10px;
   }
 
+  .all-pins-map{
+    width: 75vw;
+    height: 400px;
+  }
+
+  .create-post-map{
+    width: 70vw;
+    height: 400px;
+
+  }
+
   .location-icon{
     font-size: 2rem;
     color: yellow;
@@ -20,7 +31,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
   }
 
   .loader img{
@@ -32,11 +43,11 @@
   }
 
   .location-info{
-    position: absolute;
-    top: 80px;
-    right: 50px;
-    width: 400px;
-    min-height: 200px;
+    position: relative;
+    bottom: 350px;
+    left: 25px;
+    width: fit-content;
+    min-height: 50px;
     padding: 20px;
     background-color: rgba(0,0,0,0.6);
     border-radius: 10px;
