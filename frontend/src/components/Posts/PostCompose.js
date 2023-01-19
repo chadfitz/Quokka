@@ -158,7 +158,8 @@ function PostCompose () {
       <div className='compose-container'>
         <div className="compose-top">
           <div className='compose-map'>
-            <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/>
+            <div id='compose-map-container'> <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng}/> </div>
+            <div id='choose-your-location'>Choose your location on the map!</div>
           </div>
           <div className="text-editor">
               <div className='compose-heading'>

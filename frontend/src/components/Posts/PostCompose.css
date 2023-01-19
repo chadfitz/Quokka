@@ -10,6 +10,7 @@
   flex-direction: column;
   /* justify-content: space-evenly; */
   width: 70vw;
+  height: 560px;
   border: 1px solid rgb(184, 183, 183);
   padding: 30px;
   border-radius: 10px;
@@ -31,8 +32,9 @@
 .text-editor {
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
+  margin-left: 35px;
   justify-content: flex-start;
+  height: 0px;
 }
 
 .upload-images {
@@ -42,7 +44,7 @@
 
 #subject-compose {
   padding: 5px 8px;
-  width: 92%
+  width: 100%
 }
 
 #compose-post-heading{
@@ -69,7 +71,7 @@
 }
 
 .ql-editor{
-  height: 200px;
+  height: 250px;
 }
 
 .input #subject-compose{
@@ -81,4 +83,21 @@
   height: auto;
   margin: 0;
   padding: 0;
+}
+
+.compose-map{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#compose-map-container{
+}
+
+#choose-your-location{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  font-size: 17px;
 }
