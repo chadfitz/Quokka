@@ -50,7 +50,7 @@ function PostsIndexItem ({ post }) {
             </div>
             <div className='post-item-middle'>
                 <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
-                <h3 className='dear'>Dear {post.recipient},</h3>
+                <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
                     {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
