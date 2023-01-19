@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearPostErrors, fetchPosts } from '../../store/posts';
 import PostsIndexItem from './PostsIndexItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './PostsIndex.css'
 
 function PostsIndex () {
@@ -30,7 +30,9 @@ function PostsIndex () {
         </div>
       
       {posts.map(post => (
-        <PostsIndexItem key={post._id} post={post} />
+          // <NavLink exact to={`/posts/${post._id}`}>
+            <PostsIndexItem key={post._id} post={post} />
+          // </NavLink>
       ))}
     </div>
   );

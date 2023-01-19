@@ -14,7 +14,7 @@ import PostCompose from './components/Posts/PostCompose';
 import { getCurrentUser } from './store/session';
 import MainPageSignup from './components/MainPage/MainPageSignup';
 import PostsIndex from './components/PostsIndex/PostsIndex';
-import PostsIndexItem from './components/PostsIndex/PostsIndexItem';
+import PostShow from './components/PostsIndex/PostShow';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,7 +35,7 @@ function App() {
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
         <ProtectedRoute exact path="/posts/:postId/edit" component={PostCompose} />
-        <ProtectedRoute exact path="/posts/:postId" component={PostsIndexItem} />
+        <ProtectedRoute exact path="/posts/:postId" component={PostShow} />
       </Switch>
     </>
   );
