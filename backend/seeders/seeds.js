@@ -82,11 +82,11 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   )
 }
 
-let friend = new Friend ({
+let friend = [new Friend ({
   requester: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
   recipient: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
   relation: 3
-})
+})]
 
 // Connect to database
 mongoose
@@ -108,7 +108,7 @@ const insertSeeds = () => {
                   .then(() => Friend.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Post.insertMany(posts))
-                  .then(() => Friend.insertOne(friend))
+                  .then(() => Friend.insertMany(friends))
                   .then(() => {
                     console.log("Done!");
                     mongoose.disconnect();

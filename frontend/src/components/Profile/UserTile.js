@@ -1,15 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../blocks/Button'
+import { addFriend } from '../../store/friends';
 
 const UserTile = ({user}) => {
-  const requestor = useSelector(state => state.session.user);
-  const recipient = user;
+  const dispatch = useDispatch();
+  const requester = useSelector(state => state.session.user);
+  let data = {
+    requester: requester._id,
+    recipient: user._id
+  };
 
-  const addFriend = (e) => {
-    e.preventDefault();
+
+  const handleAddFriend = () => {
     console.log('clicked');
-
+    dispatch(addFriend(data));
   }
 
   console.log('user');
@@ -17,9 +22,9 @@ const UserTile = ({user}) => {
 
   return (
     <div>UserTile
-      <div>{recipient.email}</div>
+      <div>{user.username}</div>
       <Button label="Add Friend"
-              onClick={addFriend}/>
+              onClick={handleAddFriend}/>
     </div>
   )
 }

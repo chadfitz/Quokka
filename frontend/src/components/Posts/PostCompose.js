@@ -12,11 +12,6 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 
 function PostCompose () {
-  // const [body, setBody] = useState('');
-  // const writer = useSelector(state => state.session.user);
-  // const [subject, handleSubjectChange] = useInput('');
-  // TODO: convert recipient to props / etc. (not useState)
-  // const [recipient, setRecipient] = useState(1);
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
@@ -48,8 +43,6 @@ function PostCompose () {
     else setImageUrls([]);
   }
 
-  // const x = <div children={body.toString()}></div>;
-  // TODO: connect me
   // TODO: change default state if needed
   // const [reactions, setReactions] = useState(['smile']);
   const dispatch = useDispatch();
@@ -160,31 +153,27 @@ function PostCompose () {
           value={subject}
           onChange={handleSubjectChange}
           placeholder="Subject"
-          required
-        />
+          required />
         <ReactQuill theme="snow"
                     modules={modules}
                     formats={formats}
                     value={body}
-                    onChange={setBody}>
-        </ReactQuill>
+                    onChange={setBody} />
       </div>
       <div className="errors">{errors && errors.body}</div>
       <Button
         containername="submit-btn-ctnr"
         className="submit-btn"
         label="Submit Post"
-        onClick={handleSubmit}
-      />
-        <label>
-          Images to Upload
-          <input
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            multiple
-            onChange={updateFiles} />
-        </label>
-      <input type="submit" value="Submit" />
+        onClick={handleSubmit}/>
+      <label>
+        Images to Upload
+        <input
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          multiple
+          onChange={updateFiles} />
+      </label>
       {/* <PostBox body={newPost?.body} /> */}
       <div>
         {body && <Markup content={body} />}
