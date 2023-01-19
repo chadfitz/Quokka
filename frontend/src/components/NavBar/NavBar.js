@@ -21,9 +21,6 @@ function NavBar () {
     <nav>
       <div className='navbar'>
 
-        <div id="search-box">
-          <SearchBar />
-        </div>
 
         <div className='navbar-container'>
           <div className='nav-left'>
@@ -33,6 +30,10 @@ function NavBar () {
             </Link>
           </div>
           
+          <div id="search-box">
+            <SearchBar />
+          </div>
+
           <div className='nav-right'>
             <div className='profile-settings'>
               <ProfileButton />

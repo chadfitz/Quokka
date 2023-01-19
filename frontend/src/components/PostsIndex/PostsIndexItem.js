@@ -50,7 +50,7 @@ function PostsIndexItem ({ post }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
-                <h2 onClick={handleShow}>{post.subject}</h2>
+                <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
                 <h3 className='dear'>Dear {post.recipient},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>

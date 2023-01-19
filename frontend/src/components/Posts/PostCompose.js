@@ -4,7 +4,7 @@ import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { clearPostErrors, composePost, updatePost } from '../../store/posts';
-import PostBox from './PostBox';
+import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';

@@ -16,7 +16,6 @@
 }
 
 .post-item-top {
-  /* border: 1px solid orange; */
   height: 84%;
   display: flex;
   flex-direction: row;
@@ -32,7 +31,6 @@
 }
 
 .post-item-middle {
-  /* border: 1px solid red; */
   min-width: 40%;
   padding: 0 20px;
   display: flex;
@@ -46,10 +44,15 @@
   font-size: 25px;
   color: var(--primary-color);
 }
+.post-item-subject:hover{
+  cursor: pointer;
+  /* transform: translateY(-2px); */
+  transform: scale(1.04);
+  transition: 0.3s;
+}
 
 .post-item-middle h3{
   font-size: 18px;
-  color: var(--secondary-color);
 }
 .dear{
   margin: 10px 0;
@@ -87,7 +90,6 @@
 }
 
 .post-item-bottom-container{
-  /* border: 1px solid blue; */
   width: 100%;
   margin-top: 20px;
   display: flex;
@@ -95,7 +97,6 @@
 }
 
 .post-item-bottom {
-  /* border: 1px solid black; */
   width: 50%;
   padding-left: 20px;
   align-self: right;
@@ -114,4 +115,8 @@
   cursor: pointer;
   background-color: var(--primary-hover);
   transition: .3s;
+}
+
+.post-show{
+  margin-top: 100px;
 }
