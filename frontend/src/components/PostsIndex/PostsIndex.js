@@ -20,9 +20,9 @@ function PostsIndex () {
   return (
     <div className='post-index-container'>
         <div className='posts-index-header'>
-            <h2>You haven't written to RECEPIENT in awhile.</h2>
-            <Link to="/posts/new">Send them a postcard now?</Link>
             <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
+             <h2>You haven't written to RECIPIENT in awhile.</h2>
+            <Link to="/posts/new" id="post-index-compose">Send them a postcard now?</Link>
         </div>
         <div className='posts-index-filter'>
             <h5 id="filter-by">Filter by: </h5>
