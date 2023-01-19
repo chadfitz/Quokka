@@ -100,9 +100,8 @@ router.delete('/:postId', async (req, res, next) => {
 });
 
 // IN PROGRESS --- Creates a reaction to a post
-router.patch('/react/:postId', async (req, res, next) => {
+router.patch('/createReaction/:postId', async (req, res, next) => {
   try {
-    console.log('req body:', req.body)
     const { postId } = req.params
     const { reactorId, newEmotion } = req.body
 
@@ -126,6 +125,36 @@ router.patch('/react/:postId', async (req, res, next) => {
     const error = new Error('Reaction could not be made');
     error.statusCode = 422;
     error.errors = { message: "User unable to react to post"};
+    return next(error)
+  }
+})
+
+
+// IN PROGRESS -- Removes reaction to a post
+router.patch('/removeReaction/:postId', async (req, res, next) => {
+  try {
+    const { postId } = req.params
+    const { reactorId, emotionToRemove } = req.body
+
+    const post = await Post.findById(postId)
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+
+    if (!userReactionObject) {
+      // If no user reaction object, user cannot remove reaction so no operation is done
+
+    } else if (userReactionObject.emotions.some( oldEmotion => (oldEmotion == emotionToRemove))) {
+      // If user reaction object exists and includes the emotion to remove, remove it
+      userReactionObject.emotions.pull(emotionToRemove)
+    }
+
+    await post.save()
+
+    return res.json(post)
+
+  } catch (err) {
+    const error = new Error ('Reaction couldn\'t be made');
+    error.statusCode = 422;
+    error.errors = { message: "User could not remove reaction to post"}
     return next(error)
   }
 })
