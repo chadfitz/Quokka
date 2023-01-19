@@ -31,8 +31,7 @@ const receiveNewPost = post => ({
 const receiveErrors = errors => {
   console.log("IN RECEIVE ERRORS -- ERROR BELOW")
   console.log(errors)
-  return ({type: RECEIVE_POST_ERRORS,
-  errors})
+  return ({type: RECEIVE_POST_ERRORS, errors})
 };
 
 export const clearPostErrors = errors => ({
@@ -155,10 +154,8 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
     case RECEIVE_NEW_POST:
       return { ...state, new: action.post};
     case REMOVE_POST:
-      return {
-        ...state,
-        all: state.all.filter((post) => post._id !== action.postId)
-      }
+      return { ...state,
+        all: state.all.filter((post) => post._id !== action.postId) };
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
     default:

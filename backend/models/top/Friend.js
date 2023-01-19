@@ -4,17 +4,19 @@ const Schema = mongoose.Schema;
 
 const friendsSchema = new Schema({
   requester: { type: Schema.Types.ObjectId, ref: 'Users'},
-  requester: { type: Schema.Types.ObjectId, ref: 'Users'},
+  recipient: { type: Schema.Types.ObjectId, ref: 'Users'},
   status: {
     type: Number,
     enums: [
-      0, // add friend
-      1, // requested
-      2, // pending
-      3, // friends
-      4, // blocked
+      1, // add friend
+      2, // requested
+      3, // pending
+      4, // friends
+      5, // blocked
     ]
   }
 });
 
-module.exports = mongoose.model('Friends', friendsSchema);
+// const Friend = mongoose.model('Friend', friendsSchema);
+// module.exports = Friend;
+module.exports = mongoose.model('Friend', friendsSchema);

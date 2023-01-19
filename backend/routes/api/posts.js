@@ -41,8 +41,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
 router.delete('/:postId', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.postId)
@@ -73,7 +71,6 @@ router.patch('/:postId', async (req, res, next) => {
       reactions: req.body.reactions,
     }
 
-
     const updatedPost = await Post.updateOne(filter, {
       recipient: req.body.recipient,
       location: req.body.location,
@@ -89,6 +86,7 @@ router.patch('/:postId', async (req, res, next) => {
       }}
     )
   }
+
   catch(err) {
     const error = new Error('Post not found');
     error.statusCode = 404;
@@ -126,7 +124,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validatePostInput,
       location: JSON.parse(req.body.location),
       subject: req.body.subject,
       body: req.body.body,
-      imageUrls, 
+      imageUrls,
       reactions: req.body.reactions,
     });
 

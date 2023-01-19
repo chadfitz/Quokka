@@ -28,7 +28,7 @@ function PostsIndex () {
             <button className='filter-buttons'>Posts</button>
             <button className='filter-buttons'>Responses</button>
         </div>
-      
+
       {posts.map(post => (
         <PostsIndexItem key={post._id} post={post} postId={post._id} />
       ))}
