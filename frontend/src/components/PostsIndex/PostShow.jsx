@@ -23,7 +23,7 @@ const PostShow = () => {
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch, postId])
-  
+
   const handleDelete = (e) => {
       e.preventDefault();
       dispatch(deletePost(postId))
@@ -47,7 +47,7 @@ const PostShow = () => {
               </div>
               <div className='post-item-middle'>
                   <h2>{post.subject}</h2>
-                  <h3 className='dear'>Dear {post.recipient},</h3>
+                  <h3 className='dear'>Dear {post.recipient.username},</h3>
                   {post.body && <Markup content={post.body} />}
                   <div className='post-item-photos'>
                       {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :

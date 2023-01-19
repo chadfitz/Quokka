@@ -42,20 +42,10 @@ export const addFriend = data => async dispatch => {
   formData.append("recipient", recipient._id);
   formData.append("relation", relation);
 
-  console.log('formData');
-  console.log(Array.from(formData.values()).join(" | "));
-  console.log('formData requester, recipient, relation');
-  console.log(formData.get("requester"));
-  console.log(formData.get("recipient"));
-  console.log(formData.get("relation"));
-
   try {
     const res = await jwtFetch('/api/friends/', {
       method: 'POST',
-      body: formData,
-      // headers: {
-      //   "Content-Type": "multipart/form-data"
-      // }
+      body: formData
     });
     const friend = await res.json();
     dispatch(receiveFriend(recipient._id));
