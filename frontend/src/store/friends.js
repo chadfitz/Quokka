@@ -4,6 +4,7 @@ import { RECEIVE_USER_LOGOUT } from "./session";
 
 const RECEIVE_FRIENDS = "friends/RECEIVE_FRIENDS";
 const RECEIVE_FRIEND = "friends/RECEIVE_FRIEND";
+const REMOVE_FRIEND = "friends/REMOVE_FRIEND";
 
 const receiveFriends = friends => ({
   type: RECEIVE_FRIENDS,
@@ -15,12 +16,19 @@ const receiveFriend = friend => ({
   friend
 });
 
+const removeFriend = friendId => ({
+  type: REMOVE_FRIEND,
+  friendId
+});
+
 export const fetchFriends = (user) => async dispatch => {
   try {
     const res = await jwtFetch(`/api/friends/${user._id}`);
     if (res.ok) {
       const friends = await res.json();
-      dispatch(receiveFriends(friends));
+      console.log('friends');
+      console.log(friends);
+      dispatch(receiveFriends(Object.values(friends)));
     }
   } catch (err) {
     const resBody = await err.json();
@@ -34,10 +42,7 @@ export const fetchFriends = (user) => async dispatch => {
 
 export const addFriend = data => async dispatch => {
   const {requester, recipient, relation} = data;
-  console.log('in addFriend');
   const formData = new FormData();
-  // formData.append("test1", 1)
-  // formData.append("test2", "2")
   formData.append("requester", requester._id);
   formData.append("recipient", recipient._id);
   formData.append("relation", relation);
@@ -47,7 +52,7 @@ export const addFriend = data => async dispatch => {
       method: 'POST',
       body: formData
     });
-    const friend = await res.json();
+    // const friend = await res.json();
     dispatch(receiveFriend(recipient._id));
   } catch (err) {
     const resBody = await err.json();
@@ -57,6 +62,18 @@ export const addFriend = data => async dispatch => {
 
   }
 }
+
+export const deleteFriend = friendId => async dispatch => {
+  const res = await jwtFetch(`/api/friends/${friendId}`, {
+    method: "DELETE"
+  })
+
+  if (res.ok) {
+    dispatch(removeFriend(friendId));
+  }
+}
+
+
 export const acceptFriend = data => async dispatch => {
   const {requester, recipient} = data;
 
@@ -70,8 +87,6 @@ export const acceptFriend = data => async dispatch => {
       method: 'PATCH',
       body: formData
     });
-    const friend = await res.json();
-
     dispatch(receiveFriend(recipient._id));
   } catch (err) {
     const resBody = await err.json();
@@ -89,6 +104,15 @@ const friendsReducer = (state = [], action) => {
       return [ ...state, ...action.friends];
     case RECEIVE_FRIEND:
       return [ ...state, action.friend ];
+    case REMOVE_FRIEND:
+      console.log('in friendsReducer#REMOVE_FRIEND ');
+      const newState = [...state];
+      const index = newState.indexOf(action.friendId);
+      if (index > -1) { // only splice array when item is found
+        newState.splice(index, 1); // 2nd parameter means remove one item only
+      }
+      // delete state[action.friendId];
+      return newState;
     default:
       return state;
   }
