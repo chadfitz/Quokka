@@ -76,6 +76,9 @@ const PostShow = () => {
               </div>
           </div>
       </div>
+      <div className="replies">
+        Replies
+      </div>
     </div>
   );
 }

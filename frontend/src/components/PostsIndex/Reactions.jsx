@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { createReaction, removeReaction } from "../../store/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { createReaction, removeReaction, selectPost, selectReactions } from "../../store/posts";
 import './Reactions.css'
 
-const Reactions = ({ post, user }) => {
-
-  // like
-  // remember
-  // tom
-  // NERD!
-
+const Reactions = ({ user, postId }) => {
+  const sessionUser = useSelector(state => state.session.user);
+  const post = useSelector(selectPost(postId));
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
+
 
   const openMenu = () => {
     if (showMenu) return;
@@ -31,7 +28,7 @@ const Reactions = ({ post, user }) => {
     e.preventDefault();
 
     const userReactionObject = post.reactions.find((reaction) => {
-      return reaction.user == user._id
+      return reaction.user == sessionUser._id
     })
 
     const userAlreadyReacted = userReactionObject?.emotions.some((oldEmotion) => {
@@ -43,11 +40,11 @@ const Reactions = ({ post, user }) => {
     if ( !(userAlreadyReacted) ) {
       // If no user reaction object exists, send the reaction to the backend
       // if the user raection object exists but doesn't have the emotion
-      dispatch(createReaction(user._id, post._id, newEmotion))
+      dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     } else {
       // if the user reaction object has the target emotion, remove it
       console.log("about to remove reaction")
-      dispatch(removeReaction(user._id, post._id, newEmotion))
+      dispatch(removeReaction(sessionUser._id, post._id, newEmotion))
     }
 
   }
