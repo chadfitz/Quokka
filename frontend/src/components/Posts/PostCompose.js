@@ -19,6 +19,8 @@ function PostCompose () {
   const [imageUrls, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
+   const friends = useSelector(state => state.friends);
+  const users = useSelector(state => Object.values(state.users));
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -67,6 +69,37 @@ function PostCompose () {
       body: ""
     }
   }
+
+  const findFriends = () => { 
+    let friendGroup = []
+    users.map(user => { 
+      if (friends.includes(user._id)) { 
+        friendGroup.push(user)
+      }
+    })
+    return friendGroup
+  }
+
+  const shuffle = (array) => {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array[0];
+}
+  // console.log(findFriends())
+  // console.log(shuffle(findFriends()))
+
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
   // TODO: convert recipient to props / etc. (not useState)
