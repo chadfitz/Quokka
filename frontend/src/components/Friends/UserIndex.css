@@ -1,6 +1,16 @@
+#friends-welcome-sign{
+  margin-top: 100px;
+  margin-left: 240px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+
+
+}
+
 .user-index {
   margin-left: 240px;
-  margin-top: 100px;
   display: grid;
   grid-template-columns: auto auto auto;
   row-gap: 15px;
