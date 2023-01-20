@@ -1,8 +1,8 @@
-.splash-container { 
+.splash-container {
     font-family: proxima-nova, sans-serif;
 }
 
-.splash-login-container { 
+.splash-login-container {
     display: flex;
     justify-content: space-between;
     max-width: 50%;
@@ -10,7 +10,7 @@
     margin-top: 150px;
 }
 
-.box { 
+.box {
     margin: 30px;
     margin-top: 150px;
     overflow: hidden;
@@ -23,14 +23,14 @@
     background-color: var(--accent-color);
 }
 
-.box img { 
+.box img {
     height: auto;
     width: 40%;
 }
 
-.box-left, 
-.box-middle, 
-.box-right { 
+.box-left,
+.box-middle,
+.box-right {
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -38,21 +38,34 @@
     align-items: center;
 }
 
-.grids { 
+.grids {
     max-width: 65%;
     margin: auto;
 }
 
-.splash-login-left { 
+.splash-login-top {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-right: 5vw
+    /* margin-right: 5vw */
+}
+
+.splash-login-left{
+    width: 375px;
+}
+
+#login-quokka-photo{
+    width: 320px;
+    height: 220px;
+}
+
+#signup-quokka-photo{
+    width: 320px;
 }
 
 .box-left-up,
 .box-middle-up,
-.box-right-up { 
+.box-right-up {
     display: flex;
     justify-content: center;
     font-size: 24px;
@@ -61,55 +74,55 @@
 
 .box-left-stat,
 .box-middle-stat,
-.box-right-stat { 
+.box-right-stat {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.splash-lists { 
+.splash-lists {
     font-size: 20px;
     margin: 8px;
 }
 
-#main-title { 
+#main-title {
     font-size: 40px;
     margin: 10px;
 }
 
-#main-subtitle { 
+#main-subtitle {
     font-size: 30px;
     margin: 10px;
 }
 
-#splash-statistics { 
+#splash-statistics {
     margin-bottom: 150px;
     display: flex;
     justify-content: space-between;
 }
 
-#splash-postcard { 
+#splash-postcard {
     width: 70%;
     height: auto;
 }
 
 #mission-statement,
 #postcards,
-#statistics { 
+#statistics {
     margin: 10px;
     font-size: 24px;
 }
 
-#postcard-right { 
+#postcard-right {
     min-width: 45%;
 }
 
-.box-right { 
-    width: 80%
+.box-right {
+    width: 80%;
+    height: 290px;
 }
 
-
-
-
-
-
+#splash-quokka{
+    height: 100%;
+    width: auto;
+}

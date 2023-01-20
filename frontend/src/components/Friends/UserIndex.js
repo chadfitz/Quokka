@@ -23,16 +23,14 @@ const UserIndex = () => {
   return (
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
-        <div id='friends-welcome-sign'>Available Friends</div>
+        <div id='friends-welcome-sign'>
+            Available Friends
+        </div>
         <div className='user-index'>
           {users && users.map(user => (
             <UserTile key={user._id} recipient={user} backgroundColor={user.backgroundColor}/>
           ))}
-          {/* {users.map(user => (
-            <UserTile user={user}/>
-          ))} */}
         </div>
-
       </div>
     </div>
   );
