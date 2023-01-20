@@ -31,7 +31,7 @@ function Profile () {
                   key={post._id}
                   body={post.body}
                 /> */}
-                <PostsIndexItem post={post}/>
+                <PostsIndexItem postId={post._id}/>
                 {/* <Map key={i} postId={i}/> */}
               </>
             ))}
