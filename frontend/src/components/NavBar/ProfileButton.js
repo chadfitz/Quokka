@@ -57,14 +57,12 @@ function ProfileButton({ user }) {
       <div className="dropdown-menu">
         {showMenu && (
           <ul className="profile-dropdown">
-            <li id="profileinfo"><span id="bold">USERNAME:</span> {sessionUser.username}</li>
-            <li id="profileinfo"><span id="bold">EMAIL: </span>{sessionUser.email}</li>
-            <li id="profileinfo"><Link to={'/posts'} id="profile-links">All Posts</Link></li>
-            <li id="profileinfo"><Link to={'/profile'} id="profile-links">Profile</Link></li>
-            <li id="profileinfo"><Link to={'/posts/new'} id="profile-links">Write a Post</Link></li>
-            <li>
-              <button id="logout-dropdown-button" onClick={logout}>Log Out</button>
-            </li>
+            <li id="profile-info"><Link to={'/profile'} id="profile-links">&nbsp;&nbsp;Profile</Link></li>
+            <li id="profile-info"><Link to={'/posts'} id="profile-links">&nbsp;&nbsp;All Posts</Link></li>
+            <li id="profile-info"><Link to={'/posts/new'} id="profile-links">&nbsp;&nbsp;Write a Post</Link></li>
+            {/* <li> */}
+            <button id="logout-dropdown-button" onClick={logout}>Log Out</button>
+            {/* </li> */}
           </ul>
         )}
       </div>

@@ -112,16 +112,18 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid black; */
     border-radius: 35px;
 }
 
 #profile-button {
     border: 1px solid black;
+    width: 80px;
     padding: 8px;
     border-radius: 30px;
     background-color: white;
-    /* transition: all ease-in 500ms; */
+    font-size: 20px;
+    color: #2a4e49;
+    cursor: pointer;
 }
 #profile-button:hover {
     background-color: var(--link-hover);
@@ -146,43 +148,18 @@ nav {
     list-style: none;
 }
 
-.profile-dropdown > li {
-    padding: 0 10px;
+.profile-info-container:hover{
+    background-color: var(--link-hover);
+}
+
+#profile-info{
     line-height: 2.8;
     width: 100%;
-}
-
-.profile-dropdown>button {
-    background-color: rgb(50, 49, 49);
-    color: white;
-    /* transition: all ease-in 500ms; */
-}
-
-.profile-dropdown>button:hover {
-    background-color: black;
-    color: white;
-}
-
-.dropdown>button {
-    border: none;
-    background: transparent;
-    /* transition: all ease-in 500ms; */
-    width: 80px;
-    /* margin-right: 30px; */
-}
-
-.dropdown>button {
-    transform: translateX(-1px);
-    transform: translateY(-1px);
-    font-size: 20px;
-    color: #2a4e49;
-    cursor: pointer;
 }
 
 #profile-links {
     display: inline-block;
     text-decoration: none;
-    /* transition: all ease-in 500ms; */
     width: 100%;
     height: 100;
 }
@@ -192,17 +169,11 @@ nav {
 }
 
 #profile-links:hover {
-    /* box-shadow: 0 5px 10px 0 rgba(239, 93, 237, 0.1); */
-    background-color: rgb(150, 1, 150);
-}
-
-#profileinfo:hover{
-    /* box-shadow: 0 10px 20px 0 rgba(253, 134, 239, 0.3); */
     background-color: var(--link-hover);
 }
 
 #logout-dropdown-button{
-    width: 100%;
+    width: 300px;
     transition: all ease-in 500ms;
     background-color: var(--primary-color);
     color: white;
@@ -210,8 +181,10 @@ nav {
     line-height: 36px;
     border-radius: 4px;
     padding: 0px 12px;
-    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 50px;
     margin-top: 5px;
+    cursor: pointer;
 }
 #logout-dropdown-button:hover {
     cursor: pointer;
