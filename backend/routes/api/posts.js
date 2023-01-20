@@ -52,39 +52,39 @@ router.delete('/:postId', async (req, res, next) => {
   }
 });
 
-router.patch('/:postId', async (req, res, next) => {
-  try {
-    const filter = { _id: req.params.postId };
-    const update = { recipient: req.body.recipient,
-      location: req.body.location,
-      subject: req.body.subject,
-      body: req.body.body,
-      reactions: req.body.reactions,
-    }
+// router.patch('/:postId', async (req, res, next) => {
+//   try {
+//     const filter = { _id: req.params.postId };
+//     const update = { recipient: req.body.recipient,
+//       location: req.body.location,
+//       subject: req.body.subject,
+//       body: req.body.body,
+//       reactions: req.body.reactions,
+//     }
 
-    const updatedPost = await Post.updateOne(filter, {
-      recipient: req.body.recipient,
-      location: req.body.location,
-      subject: req.body.subject,
-      body: req.body.body,
-      reactions: req.body.reactions,
-    }, function (err, docs) {
-        if (err){
-          console.log('updatedPost erorrrrrrrr');
-          console.log(err)
-        } else {
-          console.log("Updated Docs : ", docs);
-      }}
-    )
-  }
+//     const updatedPost = await Post.updateOne(filter, {
+//       recipient: req.body.recipient,
+//       location: req.body.location,
+//       subject: req.body.subject,
+//       body: req.body.body,
+//       reactions: req.body.reactions,
+//     }, function (err, docs) {
+//         if (err){
+//           console.log('updatedPost erorrrrrrrr');
+//           console.log(err)
+//         } else {
+//           console.log("Updated Docs : ", docs);
+//       }}
+//     )
+//   }
 
-  catch(err) {
-    const error = new Error('Post not found');
-    error.statusCode = 404;
-    error.errors = { message: "No post found with that id" };
-    return next(error);
-  }
-});
+//   catch(err) {
+//     const error = new Error('Post not found');
+//     error.statusCode = 404;
+//     error.errors = { message: "No post found with that id" };
+//     return next(error);
+//   }
+// });
 
 router.get('/:id', async (req, res, next) => {
   try {

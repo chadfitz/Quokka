@@ -184,7 +184,7 @@ function PostEdit () {
       
      </div>
       <div>
-        {body && <Markup content={body} />}
+        {/* {body && <Markup content={body} />} */}
     
       </div>
     </div>
