@@ -1,18 +1,16 @@
 import "./Sidebar.css"
-import {CgProfile} from 'react-icons/cg';
-import {BsFillPencilFill} from 'react-icons/bs';
-import {BsBook} from 'react-icons/bs';
-import {FaUserFriends} from 'react-icons/fa';
+import {BsBookFill, BsFillPencilFill} from 'react-icons/bs';
+import {FaUser, FaUserFriends} from 'react-icons/fa';
+
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
-        <div><Link to={"/profile"}><CgProfile/></Link></div>
-        <div><Link to={"/"}><BsBook/></Link></div>
-        <div><Link to={"/posts/new"}><BsFillPencilFill/></Link></div>
-        <div><Link to={"/users"}><FaUserFriends/></Link></div>
-
+        <div><Link to={"/profile"} className='sidebar-link'><FaUser/>&nbsp;Profile</Link></div>
+        <div><Link to={"/"} className='sidebar-link'><BsBookFill/>&nbsp;Book</Link></div>
+        <div><Link to={"/posts/new"} className='sidebar-link'><BsFillPencilFill/>&nbsp;Create</Link></div>
+        <div><Link to={"/"} className='sidebar-link'><FaUserFriends/>&nbsp;Friends</Link></div>
     </div>
   )
 }

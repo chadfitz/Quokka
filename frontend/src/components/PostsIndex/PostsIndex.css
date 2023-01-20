@@ -7,7 +7,8 @@ body {
 .post-index-container {
     max-width: 75vw;
     width: 75vw;
-    margin: auto;
+    align-self: center;
+    margin-left: var(--sidebar-width);
 }
 
 .posts-index-header {
