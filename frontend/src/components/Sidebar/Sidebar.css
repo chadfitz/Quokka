@@ -24,5 +24,6 @@
 }
 
 .sidebar div:hover{
+    border-radius: 5px;
     background-color: var(--link-hover);
 }
