@@ -65,6 +65,16 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 // Create posts
 const posts = [];
 
+// const longRange = [-122.52, -122.09];
+// const latRange = [37.67, 37.83];``
+const longRange = [-122.52, -120.09];
+const latRange = [36.67, 38.83];
+
+const randomPoint = (arr) => {
+  const range = arr[1] - arr[0];
+  return arr[0] + Math.random() * range;
+}
+
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
   posts.push(
     new Post ({
@@ -73,8 +83,8 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       location: {
         "type" : "Point",
         "coordinates" : [
-          (-122 + 0.1 * i), // Longitude
-          (37.8 + 0.1 * i) // Latitude
+          randomPoint(longRange), // Longitude
+          randomPoint(latRange) // Latitude
         ]
       },
       subject: "this is the subject line",
