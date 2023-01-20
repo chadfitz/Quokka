@@ -23,15 +23,11 @@ function PostsIndexItem ({ postId }) {
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
     })
-    // const post = useSelector(state => state)
 
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deletePost(postId))
     }
-    // useEffect(() => {
-    //     dispatch(fetchPosts())
-    // }, [dispatch])
 
     const handleEdit = e => {
         e.preventDefault();
