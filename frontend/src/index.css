@@ -44,3 +44,15 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video, input {
   box-sizing: border-box;
 }
+
+/*Spin Stuff*/
+.location-icon:hover{
+  transform: translateY(1px);
+  z-index: 500;
+  animation: spin 3s linear infinite
+}
+
+@keyframes spin {
+0% {transform: rotate(0);}
+100%{transform: rotate(360deg);}
+}

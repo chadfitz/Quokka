@@ -1,8 +1,9 @@
-const pointSchema = require('../blocks/Point')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const pointSchema = require('../blocks/Point');
+// const relationSchema = require('../blocks/Friend');
 
-const userSchema = Schema({
+const userSchema = new Schema({
   // auth
   username: {
     type: String,

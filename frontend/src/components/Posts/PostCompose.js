@@ -14,18 +14,13 @@ import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
 function PostCompose () {
-  // const [body, setBody] = useState('');
-  // const writer = useSelector(state => state.session.user);
-  // const [subject, handleSubjectChange] = useInput('');
-  // TODO: convert recipient to props / etc. (not useState)
-  // const [recipient, setRecipient] = useState(1);
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
 
-    const updateFiles = async e => {
+  const updateFiles = async e => {
     const files = e.target.files;
     setImages(files);
     if (files.length !== 0) {
@@ -44,8 +39,6 @@ function PostCompose () {
     else setImageUrls([]);
   }
 
-  // const x = <div children={body.toString()}></div>;
-  // TODO: connect me
   // TODO: change default state if needed
   // const [reactions, setReactions] = useState(['smile']);
   const dispatch = useDispatch();
@@ -133,15 +126,14 @@ function PostCompose () {
                     lng,
                     lat
                   ]
-                }, 
+                },
                 subject,
-                images, 
+                images,
                 body
               }
       // dispatch(updatePost(post))
       dispatch(updatePost(post));
       history.push("/posts")
-        // .then(history.push(`/posts`));
       // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
         // .then(history.push(`/posts/${postId}`));
     }
@@ -167,7 +159,7 @@ function PostCompose () {
             <div className='compose-heading'>
               <h2>Compose Post</h2>
             </div>
-            
+
             <Input
               // label="Subject"
               className="post-subject"
@@ -210,7 +202,6 @@ function PostCompose () {
         </div>
         <div className='compose-bottom'>
           <div className="errors">{errors && errors.body}</div>
-          {/* <PostBox body={newPost?.body} /> */}
         </div>
         <div>
           {/* {body && <Markup content={body} />} */}

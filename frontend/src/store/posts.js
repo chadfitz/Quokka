@@ -38,10 +38,7 @@ const receiveNewPost = post => ({
 });
 
 const receiveErrors = errors => {
-  console.log("IN RECEIVE ERRORS -- ERROR BELOW")
-  console.log(errors)
-  return ({type: RECEIVE_POST_ERRORS,
-  errors})
+  return ({type: RECEIVE_POST_ERRORS, errors})
 };
 
 export const clearPostErrors = errors => ({
@@ -56,7 +53,6 @@ export const fetchPosts = () => async dispatch => {
     const posts = await res.json();
     dispatch(receivePosts(posts));
   } catch (err) {
-    // console.log(err)
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       dispatch(receiveErrors(resBody.errors));
@@ -92,7 +88,6 @@ export const fetchUserPosts = id => async dispatch => {
 
 export const composePost = data => async dispatch => {
   const { images, subject, writer, body, location, recipient} = data
-  // console.log(location)
   const formData = new FormData();
   formData.append("body", body);
   formData.append("location", JSON.stringify(location));
@@ -140,7 +135,7 @@ export const updatePost = (post) => async (dispatch) => {
     const resBody = await err.json();
     return dispatch(receiveErrors(resBody.errors));
   }
-} 
+}
 
 export const deletePost = postId => async dispatch => {
   try {
@@ -234,10 +229,8 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
     case RECEIVE_NEW_POST:
       return { ...state, new: action.post};
     case REMOVE_POST:
-      return {
-        ...state,
-        all: state.all.filter((post) => post._id !== action.postId)
-      }
+      return { ...state,
+        all: state.all.filter((post) => post._id !== action.postId) };
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
     default:
