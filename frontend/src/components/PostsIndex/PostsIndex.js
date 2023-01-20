@@ -20,11 +20,11 @@ function PostsIndex () {
 
   return (
     <div className='whole-page-styling'>
-      <div className='post-index-container'>
+      <div className='inner-page-styling'>
           <div className='posts-index-header'>
+              <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
               <h2>You haven't written to anyone in awhile. </h2>
               <Link to="/posts/new" className='posts-index-compose-link'><button>Send a postcard now?</button></Link>
-              <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
           </div>
           <div className='posts-index-filter'>
               <h5 id="filter-by">Filter by: </h5>

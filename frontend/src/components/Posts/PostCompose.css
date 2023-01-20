@@ -5,7 +5,8 @@
 }
 
 .compose-container {
-  margin-top: 125px;
+  /* margin-top: 125px; */
+  margin-top: var(--margin-top);
   width: var(--width);
   height: 550px;
   border: 1px solid rgb(184, 183, 183);

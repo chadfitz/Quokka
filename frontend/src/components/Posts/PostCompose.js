@@ -142,68 +142,68 @@ function PostCompose () {
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
-      <div className='post-index-container'>
-      <div className='compose-container'>
-        <div className="compose-top">
-          <div className='compose-map'>
-            <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
-            <div id='choose-your-location'>
-              Click on the map to choose your location
-            </div>
-          </div>
-          <div className="text-editor">
-              <div className='compose-heading'>
-                <h2>Compose Post</h2>
+      <div className='inner-page-styling'>
+        <div className='compose-container'>
+          <div className="compose-top">
+            <div className='compose-map'>
+              <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+              <div id='choose-your-location'>
+                Click on the map to choose your location
               </div>
-
-              <Input
-                // label="Subject"
-                className="post-subject"
-                type="text"
-                value={subject}
-                onChange={handleSubjectChange}
-                placeholder="Subject"
-                required
-                id="subject-compose"
-              />
-                <div className='quill-editor-compose'>
-                  <ReactQuill theme="snow"
-                              modules={modules}
-                              formats={formats}
-                              value={body}
-                              onChange={setBody}
-                              id="reactquill">
-
-                  </ReactQuill>
-                </div>
-                <div className='submit-compose-buttons'>
-                  <div className='upload-images'>
-                  <label>
-                  Images to Upload</label>
-                  <input
-                  type="file"
-                  accept=".jpg, .jpeg, .png"
-                  multiple
-                  onChange={updateFiles}
-                  id="choose-files" />
-                  </div>
-                <Button
-                    containername="submit-btn-ctnr"
-                    className="submit-btn"
-                    label="Submit Post"
-                    onClick={handleSubmit}
-                  />
-                </div>
             </div>
-          </div>
-          <div className='compose-bottom'>
-            <div className="errors">{errors && errors.body}</div>
-          </div>
-          <div>
-            {/* {body && <Markup content={body} />} */}
-            {/* <div>{writer}</div> */}
-          </div>
-      </div>
+            <div className="text-editor">
+                <div className='compose-heading'>
+                  <h2>Compose Post</h2>
+                </div>
+
+                <Input
+                  // label="Subject"
+                  className="post-subject"
+                  type="text"
+                  value={subject}
+                  onChange={handleSubjectChange}
+                  placeholder="Subject"
+                  required
+                  id="subject-compose"
+                />
+                  <div className='quill-editor-compose'>
+                    <ReactQuill theme="snow"
+                                modules={modules}
+                                formats={formats}
+                                value={body}
+                                onChange={setBody}
+                                id="reactquill">
+
+                    </ReactQuill>
+                  </div>
+                  <div className='submit-compose-buttons'>
+                    <div className='upload-images'>
+                    <label>
+                    Images to Upload</label>
+                    <input
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                    multiple
+                    onChange={updateFiles}
+                    id="choose-files" />
+                    </div>
+                  <Button
+                      containername="submit-btn-ctnr"
+                      className="submit-btn"
+                      label="Submit Post"
+                      onClick={handleSubmit}
+                    />
+                  </div>
+              </div>
+            </div>
+            <div className='compose-bottom'>
+              <div className="errors">{errors && errors.body}</div>
+            </div>
+            <div>
+              {/* {body && <Markup content={body} />} */}
+              {/* <div>{writer}</div> */}
+            </div>
+        </div>
       </div>
     </div>
   )
