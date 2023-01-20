@@ -2,12 +2,14 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/top/User');
 const Post = require('../models/top/Post');
+const Friend = require('../models/top/Friend');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const { bulkSave } = require("../models/top/User");
 
-const NUM_SEED_USERS = 10;
+const NUM_SEED_USERS = 20;
 const NUM_SEED_POSTS = 30;
+const NUM_SEED_FRIENDS = 2;
 
 // Create users
 const users = [];
@@ -63,6 +65,16 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 // Create posts
 const posts = [];
 
+// const longRange = [-122.52, -122.09];
+// const latRange = [37.67, 37.83];``
+const longRange = [-122.52, -120.09];
+const latRange = [36.67, 38.83];
+
+const randomPoint = (arr) => {
+  const range = arr[1] - arr[0];
+  return arr[0] + Math.random() * range;
+}
+
 for (let i = 0; i < NUM_SEED_POSTS; i++) {
   posts.push(
     new Post ({
@@ -71,8 +83,8 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
       location: {
         "type" : "Point",
         "coordinates" : [
-          (-122 + 0.1 * i), // Longitude
-          (37.8 + 0.1 * i) // Latitude
+          randomPoint(longRange), // Longitude
+          randomPoint(latRange) // Latitude
         ]
       },
       subject: "this is the subject line",
@@ -81,6 +93,14 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   )
 }
 
+const friends = [];
+for (let i = 0; i < NUM_SEED_FRIENDS; i++) {
+  friends.push(new Friend ({
+    requester: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    recipient: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    relation: 3
+  }));
+}
 
 
 // Connect to database
@@ -100,8 +120,10 @@ const insertSeeds = () => {
 
   User.collection.drop()
                   .then(() => Post.collection.drop())
+                  .then(() => Friend.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Post.insertMany(posts))
+                  // .then(() => Friend.insertMany(friends))
                   .then(() => {
                     console.log("Done!");
                     mongoose.disconnect();

@@ -22,7 +22,7 @@ function PostsIndex () {
     <div className='whole-page-styling'>
       <div className='post-index-container'>
           <div className='posts-index-header'>
-              <h2>You haven't written to RECEPIENT in awhile.</h2>
+              <h2>You haven't written to RECEPIENT in awhile. </h2>
               <Link to="/posts/new">Send them a postcard now?</Link>
               <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
           </div>
