@@ -20,20 +20,22 @@ function Profile () {
   } else {
     return (
       <div className='whole-page-styling'>
-        <div className='profile-container'>
-          <h2>All of {currentUser.username}'s Posts</h2>
-          <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
-          {userPosts.map((post, i) => (
-            <>
-              {/* {console.log(post)} */}
-              {/* <PostBox
-                key={post._id}
-                body={post.body}
-              /> */}
-              <PostsIndexItem post={post}/>
-              {/* <Map key={i} postId={i}/> */}
-            </>
-          ))}
+        <div className='inner-page-styling'>
+          <div className='profile-container'>
+            <h2 className='profile-header'>All of {currentUser.username}'s Posts</h2>
+            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
+            {userPosts.map((post, i) => (
+              <>
+                {/* {console.log(post)} */}
+                {/* <PostBox
+                  key={post._id}
+                  body={post.body}
+                /> */}
+                <PostsIndexItem post={post}/>
+                {/* <Map key={i} postId={i}/> */}
+              </>
+            ))}
+          </div>
         </div>
       </div>
     );
