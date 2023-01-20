@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../blocks/Button'
-import { addFriend, fetchFriends } from '../../store/friends';
+import { addFriend, deleteFriend } from '../../store/friends';
 
 const UserTile = ({recipient, backgroundColor}) => {
   const dispatch = useDispatch();
@@ -26,7 +26,9 @@ const UserTile = ({recipient, backgroundColor}) => {
 
   const handleDeleteFriend = () => {
     console.log('Delete Friend Clicked');
-    // dispatch(deleteFriend(data));
+
+
+    dispatch(deleteFriend(recipient._id));
   }
 
   return (
