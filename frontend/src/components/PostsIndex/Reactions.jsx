@@ -53,7 +53,7 @@ const Reactions = ({ post, user }) => {
   }
 
   return(<>
-    <div className='dropdown'>
+    <div className='reactions-dropdown'>
 
       <button className="reaction-button create-reaction" onClick={openMenu}>🤔</button>
 

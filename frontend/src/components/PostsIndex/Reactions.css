@@ -1,6 +1,5 @@
-.dropdown {
+.reactions-dropdown {
   position: relative;
-  border: 2px solid red;
 }
 
 .reaction-wrapper {
@@ -20,13 +19,15 @@
 .reaction-button.create-reaction {
   width: auto;
   height: auto;
-  padding: 18px;
+  padding: 5px;
   border-radius: 50%;
-  background-color: whitesmoke;
+  background-color: rgb(221, 221, 221);
+  font-size: 30px;
+  border: none;
 }
 
 .reaction-button.create-reaction:hover {
-  background-color: root(--primary-color);
+  cursor: pointer;
 }
 
 .reaction-icon.toolbar {
@@ -35,8 +36,10 @@
   width: auto;
   padding: 5px;
   font-size: 35px;
+  border-radius: 25px;
 }
 .reaction-icon.toolbar:hover {
+  cursor: pointer;
   background-color: lightgray;
   border: none;
   width: auto;

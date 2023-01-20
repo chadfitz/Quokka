@@ -42,12 +42,24 @@
     max-width: 65%;
     margin: auto;
 }
-
-.splash-login-left { 
+.splash-login-top {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-right: 5vw
+    /* margin-right: 5vw */
+}
+
+.splash-login-left{
+    width: 375px;
+}
+
+#login-quokka-photo{
+    width: 320px;
+    height: 220px;
+}
+
+#signup-quokka-photo{
+    width: 320px;
 }
 
 .box-left-up,
@@ -104,12 +116,12 @@
     min-width: 45%;
 }
 
-.box-right { 
-    width: 80%
+.box-right {
+    width: 80%;
+    height: 290px;
 }
 
-
-
-
-
-
+#splash-quokka{
+    height: 100%;
+    width: auto;
+}
