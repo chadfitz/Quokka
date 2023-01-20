@@ -13,7 +13,7 @@ import PostCompose from './components/Posts/PostCompose';
 import { getCurrentUser } from './store/session';
 import MainPageSignup from './components/MainPage/MainPageSignup';
 import PostsIndex from './components/PostsIndex/PostsIndex';
-import UserIndex from './components/Profile/UserIndex';
+import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
 

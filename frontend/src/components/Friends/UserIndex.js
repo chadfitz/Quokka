@@ -23,7 +23,7 @@ const UserIndex = () => {
   return (
     <div className='user-index'>
       {users && users.map(user => (
-        <UserTile key={user._id} recipient={user}/>
+        <UserTile key={user._id} recipient={user} backgroundColor={user.backgroundColor}/>
       ))}
       {/* {users.map(user => (
         <UserTile user={user}/>

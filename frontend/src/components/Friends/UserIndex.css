@@ -1,0 +1,40 @@
+.user-index {
+  margin-left: 240px;
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 15px;
+  column-gap: 10px;
+}
+
+#friend-container{
+  /* border: 1px solid red; */
+  width: 25vw;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#friend-username{
+  font-size: x-large;
+}
+
+#user-profile-image{
+  height: 75px;
+  width: 75px;
+  border-radius: 75px;
+}
+
+#friend-button button{
+  background-color: var(--primary-color);
+  cursor: pointer;
+  border-radius: 10px;
+  color: whitesmoke
+}
+
+#friend-button button:hover{
+  background-color: var(--primary-hover);
+  border-radius: 10px;
+  color: white;
+}
