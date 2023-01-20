@@ -120,3 +120,9 @@
 .post-show{
   margin-top: 100px;
 }
+
+.reaction-bar {
+  font-size: 25px;
+  list-style-type: none;
+  display: flex;
+}

@@ -20,7 +20,7 @@ nav {
     color: inherit;
 }
 
-.navbar { 
+.navbar {
     background-color: var(--accent-color);
     width: 100%;
     height: 100%;
@@ -47,7 +47,7 @@ nav {
     margin: 10px 0;
 }
 
-.nav-right { 
+.nav-right {
     margin: 0;
     padding: 0;
     display: flex;

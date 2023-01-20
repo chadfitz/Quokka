@@ -156,6 +156,7 @@ export const deletePost = postId => async dispatch => {
 export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
   try {
     console.log("THUNK ACTION CREATOR")
+    console.log("new emotion:", newEmotion)
     const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
       method: 'PATCH',
       body: JSON.stringify({
@@ -179,7 +180,7 @@ export const createReaction = (reactorId, postId, newEmotion) => async dispatch 
 export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
   try {
     console.log("THUNK ACTION CREATOR")
-    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
+    const res = await jwtFetch(`/api/posts/removeReaction/${postId}`,{
       method: 'PATCH',
       body: JSON.stringify({
         reactorId,

@@ -152,9 +152,12 @@ router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res
 
 // IN PROGRESS --- Creates a reaction to a post
 router.patch('/createReaction/:postId', async (req, res, next) => {
+  console.log
   try {
     const { postId } = req.params
     const { reactorId, newEmotion } = req.body
+
+    console.log("new emotion:", newEmotion)
 
     const post = await Post.findById(postId)
     const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )

@@ -11,9 +11,11 @@ import Loader from '../GoogleMap/Loader';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
+
 // import { useState } from 'react';
 import './PostIndexItem.css';
 import './PostsIndex.css';
+import Reaction from './Reactions';
 
 function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
@@ -39,6 +41,14 @@ function PostsIndexItem ({ post }) {
         e.preventDefault();
         history.push(`/posts/${post._id}`);
     }
+
+
+
+
+    const reactionObject = post.reactions?.find((reaction) => {
+        return reaction.user == sessionUser._id
+      })
+    const emotions = reactionObject ? reactionObject.emotions : null
 
     return (
     <div className="post-index-item">
@@ -74,8 +84,15 @@ function PostsIndexItem ({ post }) {
             <div className='post-item-bottom'>
                 {/* <h4>Post.reactions.count</h4> */}
                 {/* <button>React</button> */}
-                <h4>:) :( :D :_( -_-</h4>
-                <button>Reply</button>
+                <ul className="reaction-bar">
+                    {emotions?.map(emotion=>{
+                        if (emotion == "like") return <li>😀</li>
+                        if (emotion == "remember") return <li>🥲</li>
+                        if (emotion == "tom") return <li>😎</li>
+                        if (emotion == "NERD!") return <li>🤓</li>
+                    })}
+                </ul>
+                <Reaction post={post} user={sessionUser}></Reaction>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>
