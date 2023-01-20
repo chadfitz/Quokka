@@ -110,12 +110,8 @@ function PostCompose () {
         subject,
         body
       }
-      // TODO - add redirect functionality
-      // example:
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
-      // TODO: Update path to go to posts#show (instead of #index)
-      // if (newPost._id) history.push(`/posts`);
     } else {
       post = { ...post,
                 writer,
@@ -131,11 +127,8 @@ function PostCompose () {
                 images,
                 body
               }
-      // dispatch(updatePost(post))
       dispatch(updatePost(post));
       history.push("/posts")
-      // TODO: UNCOMMENT ME WHEN POST SHOW IS COMPLETE
-        // .then(history.push(`/posts/${postId}`));
     }
 
     // TODO: CLEAR OTHER FIELDS (not just body)?
