@@ -6,7 +6,7 @@
   }
 
   .all-pins-map{
-    width: 75vw;
+    width: var(--width);
     height: 400px;
   }
 
