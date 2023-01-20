@@ -1,18 +1,19 @@
-/* delete me later? temporary fix to get posts to show */
-
-/* .text-editor {
-  margin-top: 100px;
-} */
+.compose-window{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 .compose-container {
   margin: 150px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-evenly; */
-  width: 70vw;
+  width: var(--width);
   height: 600px;
+  /* height: auto; */
   border: 1px solid rgb(184, 183, 183);
   padding: 30px 60px;
+  margin-left: var(--sidebar-width);
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
@@ -22,11 +23,20 @@
   display: flex;
   width: 100%;
   height: 100%;
-  /* justify-content: space-evenly; */
 }
 
-.quill-editor-compose {
-  margin: 10px 0px;
+.compose-map{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#choose-your-location{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  font-size: 17px;
 }
 
 .text-editor {
@@ -37,12 +47,25 @@
   height: 0px;
 }
 
+.compose-heading > h2{
+  margin: 0 0;
+}
+
+.post-subject{
+  margin: 0;
+}
+
+.quill-editor-compose {
+  margin: 10px 0px;
+}
+
 .upload-images {
   display: flex;
   flex-direction: column;
 }
 
 #subject-compose {
+  margin: 0;
   padding: 5px 8px;
   width: 100%
 }
@@ -80,27 +103,15 @@
   height: 250px;
 }
 
-.input #subject-compose{
-  width: 100%;
-  margin-top: -10px;
-}
-
-.input{
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
-
-.compose-map{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-#choose-your-location{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20%;
-  font-size: 17px;
+@media(max-width: 1200px){
+  .compose-top{
+    display: flex;
+    flex-direction: column;
+  }
+  .compose-container{
+    height: 980px;
+  }
+  .compose-map{
+    align-self: center;
+  }
 }
