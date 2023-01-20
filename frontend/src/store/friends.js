@@ -105,7 +105,6 @@ const friendsReducer = (state = [], action) => {
     case RECEIVE_FRIEND:
       return [ ...state, action.friend ];
     case REMOVE_FRIEND:
-      console.log('in friendsReducer#REMOVE_FRIEND ');
       const newState = [...state];
       const index = newState.indexOf(action.friendId);
       if (index > -1) { // only splice array when item is found
