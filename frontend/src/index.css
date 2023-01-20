@@ -47,7 +47,7 @@ time, mark, audio, video, input {
 }
 
 /*Spin Stuff*/
-.location-icon:hover{
+/* .location-icon:hover{
   transform: translateY(1px);
   z-index: 500;
   animation: spin 3s linear infinite
@@ -56,4 +56,16 @@ time, mark, audio, video, input {
 @keyframes spin {
 0% {transform: rotate(0);}
 100%{transform: rotate(360deg);}
+} */
+
+@keyframes jump {
+  0%   {transform: translate3d(0,0,0) scale3d(1.5,1,1);}
+  25%  {transform: translate3d(0,-25%,0) scale3d(1.2,1.5,1);}
+  50%  {transform: translate3d(0,-100%,0) scale3d(1,1.5,1);}
+  75%  {transform: translate3d(0,-25%,0) scale3d(1.2,1.5,1);}
+  100% {transform: translate3d(0,0,0) scale3d(1.5,1,1);}
+}
+.location-icon:hover{
+  transform-origin: 50% 50%;
+  animation: jump 2s linear alternate infinite;
 }

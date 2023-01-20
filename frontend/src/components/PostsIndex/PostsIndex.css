@@ -21,7 +21,7 @@ body {
     align-items: center;
 }
 
-#all-pins-map-container { 
+#all-pins-map-container {
     margin: auto;
     transition: all ease-in 500ms;
 }
@@ -60,7 +60,7 @@ body {
 #profile-image-item {
     height: 75px;
     width: 75px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     /* border: 1px solid black; */
     border-radius: 50%
 }
@@ -70,14 +70,14 @@ body {
     width: auto;
 }
 
-#post-index-compose { 
+#post-index-compose {
     text-decoration: none;
     color: inherit;
     font-size: 20px;
     transition: all ease-in 500ms;
 }
 
-#post-index-compose:hover { 
+#post-index-compose:hover {
     font-size: 22px;
     color: blueviolet
 }

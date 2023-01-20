@@ -16,26 +16,32 @@
 }
 
 .post-item-top {
-  height: 84%;
+  height: 92%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 .post-index-map {
-  min-width: 50%;
   width: 50%;
   height: calc(-58px + var(--post-index-height));
   padding-right: 20px;
   border-radius: 10px;
 }
 
+#post-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
 .post-item-middle {
-  min-width: 40%;
+  min-width: 50%;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .post-item-middle h2{
@@ -65,8 +71,9 @@
 .post-index-date{
   min-width: 10%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
 }
 
 .post-index-date-lower {
@@ -91,9 +98,10 @@
 
 .post-item-bottom-container{
   width: 100%;
-  margin-top: 20px;
+  padding-top: 20px;
   display: flex;
   justify-content: right;
+  padding: 0;
 }
 
 .post-item-bottom {
@@ -119,4 +127,24 @@
 
 .post-show{
   margin-top: 100px;
+}
+
+#reply-button-index-item{
+  height: 40px;
+}
+
+#lower-right-corner-index-item{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.post-item-middle > * {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.post-item-photos{
+  display: flex;
+  justify-content: center;
 }
