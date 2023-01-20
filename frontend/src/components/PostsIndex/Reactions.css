@@ -1,0 +1,45 @@
+.dropdown {
+  position: relative;
+  border: 2px solid red;
+}
+
+.reaction-wrapper {
+  top: -80%;
+  right: -20%;
+  border-radius: 25px;
+
+  background-color: #efefef;
+  font-size: 18px;
+
+  font-family: proxima-nova, sans-serif;
+  display: flex;
+
+  position: absolute;
+}
+
+.reaction-button.create-reaction {
+  width: auto;
+  height: auto;
+  padding: 18px;
+  border-radius: 50%;
+  background-color: whitesmoke;
+}
+
+.reaction-button.create-reaction:hover {
+  background-color: root(--primary-color);
+}
+
+.reaction-icon.toolbar {
+  background-color: #efefef;
+  border: none;
+  width: auto;
+  padding: 5px;
+  font-size: 35px;
+}
+.reaction-icon.toolbar:hover {
+  background-color: lightgray;
+  border: none;
+  width: auto;
+  padding: 5px;
+  font-size: 35px;
+}
