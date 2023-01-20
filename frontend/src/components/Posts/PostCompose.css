@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   width: var(--width);
-  height: 600px;
+  height: 550px;
   /* height: auto; */
   border: 1px solid rgb(184, 183, 183);
   padding: 30px 60px;
@@ -26,6 +26,7 @@
 }
 
 .compose-map{
+  align-self: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -35,8 +36,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 20px;
   font-size: 17px;
+  padding-top: 35px;
 }
 
 .text-editor {
@@ -110,6 +112,9 @@
   }
   .compose-container{
     height: 980px;
+  }
+  #choose-your-location{
+    padding-bottom: 35px;
   }
   .compose-map{
     align-self: center;
