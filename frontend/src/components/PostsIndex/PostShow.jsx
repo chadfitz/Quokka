@@ -13,8 +13,7 @@ const PostShow = () => {
   const post = useSelector(store => {
     return Object.values(store.posts.all).find(obj => obj._id === postId);
   })
-  console.log(postId);
-  console.log(post);
+  const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -59,10 +58,12 @@ const PostShow = () => {
                   <div>
                       <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                   </div>
-                  <div className='post-index-date-lower'>
-                      <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
-                      <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
-                  </div>
+                    {sessionUser?._id === post.writer._id &&
+                    <div className='post-index-date-lower'>
+                        <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
+                        <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
+                    </div>
+                    }
               </div>
           </div>
           <div className='post-item-bottom-container'>

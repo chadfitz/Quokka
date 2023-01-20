@@ -1,7 +1,8 @@
 /* TODO Add site wide styles */
 :root{
   --primary-color: rgb(72, 31, 110);
-  --primary-hover: rgb(107, 1, 107);
+  /* --primary-hover: rgba(72, 31, 110, 0.932); */
+  --primary-hover: rgb(81, 0, 148);
   --secondary-color: rgb(21, 40, 180);
   --secondary-hover: rgb(0, 30, 255);
   --link-hover: rgba(50, 49, 49, 0.192);

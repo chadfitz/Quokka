@@ -3,7 +3,6 @@ body {
     font-family: monospace;
 }
 
-
 .post-index-container {
     max-width: 75vw;
     width: 75vw;
@@ -23,7 +22,7 @@ body {
 
 .posts-index-compose-link{
     text-decoration: none;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 .posts-index-compose-link > button{
     padding: 5px 20px;

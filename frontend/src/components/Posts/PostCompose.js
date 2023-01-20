@@ -140,7 +140,9 @@ function PostCompose () {
   }, [dispatch]);
 
   return (
-    <div className='compose-window'>
+    // <div className='compose-window'>
+    <div className='whole-page-styling'>
+      <div className='post-index-container'>
       <div className='compose-container'>
         <div className="compose-top">
           <div className='compose-map'>
@@ -201,6 +203,7 @@ function PostCompose () {
             {/* {body && <Markup content={body} />} */}
             {/* <div>{writer}</div> */}
           </div>
+      </div>
       </div>
     </div>
   )

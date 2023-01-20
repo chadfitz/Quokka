@@ -3,7 +3,7 @@
 }
 
 .post-index-item {
-  background-image: url(../../assets/greeting_card.png);
+  background: var(--accent-color);
   margin-top: 30px;
   height: var(--post-index-height);
   width: var(--width);
@@ -12,7 +12,7 @@
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
-  /* border-radius: 20px; */
+  border-radius: 20px;
 }
 
 .post-item-top {
@@ -27,7 +27,7 @@
   width: 50%;
   height: calc(-58px + var(--post-index-height));
   padding-right: 20px;
-  border-radius: 10px;
+  border-right: 1px solid gray;
 }
 
 .post-item-middle {
