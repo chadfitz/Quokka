@@ -21,6 +21,24 @@ body {
     align-items: center;
 }
 
+.posts-index-compose-link{
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+.posts-index-compose-link > button{
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+}
+.posts-index-compose-link > button:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    transition: 0.3s;
+}
+
 #all-pins-map-container { 
     margin: auto;
     transition: all ease-in 500ms;

@@ -22,8 +22,8 @@ function PostsIndex () {
     <div className='whole-page-styling'>
       <div className='post-index-container'>
           <div className='posts-index-header'>
-              <h2>You haven't written to RECEPIENT in awhile. </h2>
-              <Link to="/posts/new">Send them a postcard now?</Link>
+              <h2>You haven't written to anyone in awhile. </h2>
+              <Link to="/posts/new" className='posts-index-compose-link'><button>Send a postcard now?</button></Link>
               <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
           </div>
           <div className='posts-index-filter'>
