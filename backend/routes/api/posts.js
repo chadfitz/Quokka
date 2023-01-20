@@ -183,12 +183,15 @@ router.patch('/createReaction/:postId', async (req, res, next) => {
 
 // IN PROGRESS -- Removes reaction to a post
 router.patch('/removeReaction/:postId', async (req, res, next) => {
+  console.log(req.body)
   try {
     const { postId } = req.params
     const { reactorId, emotionToRemove } = req.body
 
     const post = await Post.findById(postId)
     const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+
+    
 
     if (!userReactionObject) {
       // If no user reaction object, user cannot remove reaction so no operation is done
