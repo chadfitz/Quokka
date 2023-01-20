@@ -16,7 +16,6 @@ nav {
     background-color: var(--accent-color);
     width: 100vw;
     height: 100%;
-    padding-right: 35px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,14 +45,14 @@ nav {
 }
 .nav-left:hover{
     cursor: pointer;
-    transform: scale(1.01);
     transition: 0.3s;
-    background-color:var(--link-hover);
+    background-color: var(--link-hover);
 }
 
 .nav-right { 
     margin: 0;
     padding: 0;
+    padding-right: 25px;
     display: flex;
 }
 

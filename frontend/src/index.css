@@ -24,7 +24,9 @@ form > .errors {
 }
 
 .whole-page-styling{
+    width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 html, body, div, span, applet, object, iframe,

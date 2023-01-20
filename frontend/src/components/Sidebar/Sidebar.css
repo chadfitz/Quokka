@@ -1,16 +1,28 @@
+:root{
+    --sidebar-width: 200px;
+}
+
 .sidebar{
-    width: 85px;
-    height: 100vh;
-    border-right: 1px solid purple;
+    width: var(--sidebar-width);
+    position: sticky;
     position: fixed;
-    top:80px;
+    top: 80px;
+    left: 0;
     display: flex;
     flex-direction: column;
+    justify-content: left;
     align-items: center;
 }
 
-.sidebar > * {
-    margin: 40px 0 0 0;
-    height: 70px;
+.sidebar-link{
+    width: var(--sidebar-width);
+    display: flex;
+    text-decoration: none;
+    color: var(--primary-color);
     font-size: 30px;
+    padding: 20px 10px;
+}
+
+.sidebar div:hover{
+    background-color: var(--link-hover);
 }
