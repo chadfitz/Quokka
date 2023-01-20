@@ -5,18 +5,19 @@
 }
 
 .compose-container {
-  margin: 150px;
-  display: flex;
-  flex-direction: column;
+  /* margin-top: 125px; */
+  margin-top: var(--margin-top);
   width: var(--width);
   height: 550px;
-  /* height: auto; */
   border: 1px solid rgb(184, 183, 183);
-  padding: 30px 60px;
-  margin-left: var(--sidebar-width);
-  border-radius: 10px;
-  background-color: white;
   box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
+  padding: 30px 60px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  background-color: var(--accent-color);
+  display: flex;
+  flex-direction: column;
 }
 
 .compose-top {

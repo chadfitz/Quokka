@@ -3,7 +3,6 @@ body {
     font-family: monospace;
 }
 
-
 .post-index-container {
     max-width: 75vw;
     width: 75vw;
@@ -12,13 +11,32 @@ body {
 }
 
 .posts-index-header {
-    margin-top: 120px;
+    /* margin-top: 120px; */
+    margin-top: var(--margin-top);
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.posts-index-compose-link{
+    text-decoration: none;
+    margin-bottom: 50px;
+}
+.posts-index-compose-link > button{
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+}
+.posts-index-compose-link > button:hover{
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    transition: 0.3s;
 }
 
 #all-pins-map-container {
