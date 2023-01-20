@@ -2,11 +2,14 @@ body {
     background-color: whitesmoke;
     font-family: monospace;
 }
-.post-index-item {
-    margin-top: 30px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 20px;
+
+
+
+.post-index-container {
+    max-width: 75vw;
+    width: 75vw;
+    align-self: center;
+    margin-left: var(--sidebar-width);
 }
 
 .posts-index-header {
@@ -51,7 +54,15 @@ body {
     display: flex;
     background-color: white;
     border-radius: 30px;
-    width:35vw;
+
+    width: 100%;
+    box-shadow: 0 0 2px gray;
+}
+
+#filter-by {
+    padding: 0px 30px;
+    font-size: 16px;
+
 }
 
 .filter-buttons {

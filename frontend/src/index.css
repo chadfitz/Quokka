@@ -4,10 +4,12 @@
   --primary-hover: rgb(107, 1, 107);
   --secondary-color: rgb(21, 40, 180);
   --secondary-hover: rgb(0, 30, 255);
+  --link-hover: rgba(50, 49, 49, 0.192);
   --shadow-color: rgba(0, 0, 0, 0.212);
   --width: 1080px;
   --background-color: #FEF7F1;
   --accent-color: rgba(255, 255, 255, 0.5);
+  --sidebar-width: 200px;
 }
 
 body{
@@ -23,7 +25,9 @@ form > .errors {
 }
 
 .whole-page-styling{
+    width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -40,4 +44,16 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video, input {
   box-sizing: border-box;
+}
+
+/*Spin Stuff*/
+.location-icon:hover{
+  transform: translateY(1px);
+  z-index: 500;
+  animation: spin 3s linear infinite
+}
+
+@keyframes spin {
+0% {transform: rotate(0);}
+100%{transform: rotate(360deg);}
 }

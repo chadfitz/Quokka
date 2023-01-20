@@ -104,14 +104,14 @@
   justify-content: space-between;
 }
 
-.post-item-bottom button{
+.post-item-bottom > button{
   width: 100px;
   border-radius: 15px;
   font-size: 20px;
   color: white;
   background-color: var(--primary-color);
 }
-.post-item-bottom button:hover{
+.post-item-bottom > button:hover{
   cursor: pointer;
   background-color: var(--primary-hover);
   transition: .3s;

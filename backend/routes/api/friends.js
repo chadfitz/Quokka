@@ -11,6 +11,41 @@ const { requireUser } = require('../../config/passport');
 const { json } = require('express');
 const ObjectUtil = require("../../util/ObjectUtil")
 
+router.delete('/:friendId', requireUser, async (req, res, next) => {
+  console.log('in friends router delete');
+  const userId1 = req.user._id.toString();
+  const userId2 = req.params.friendId;
+
+  console.log('user1');
+  console.log(userId1);
+  console.log('userId2');
+  console.log(userId2);
+
+  friendship = Friend.find()
+  let relation1 = await Friend.findOne({
+    $and: [{ requester: userId1 }, { recipient: userId2 }]
+  });
+  let relation2 = await Friend.findOne({
+    $and: [{ recipient: userId1 }, { requester: userId2 }]
+  });
+
+
+  // TODO: add && relationtype here or in search
+  let deletedFriend;
+  if (relation1) {
+    console.log('deleting relation 1');
+    deletedFriend = await relation1.delete();
+    return res.status(200).json(deletedFriend);
+  } else if (relation2) {
+    console.log('deleting relation 2');
+    deletedFriend = await relation2.delete();
+    return res.status(200).json(deletedFriend);
+  } else {
+    throw new Error("Friend request not found");
+  }
+});
+
+
 router.get('/:userId', async (req, res, next) => {
   try {
     let user;

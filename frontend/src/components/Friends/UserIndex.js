@@ -21,14 +21,17 @@ const UserIndex = () => {
 
   // if (!users) return null;
   return (
-    <div className='user-index'>
-      UserIndex
-      {users && users.map(user => (
-        <UserTile key={user._id} user={user}/>
-      ))}
-      {/* {users.map(user => (
-        <UserTile user={user}/>
-      ))} */}
+    <div>
+      <div id='friends-welcome-sign'>Available Friends</div>
+      <div className='user-index'>
+        {users && users.map(user => (
+          <UserTile key={user._id} recipient={user} backgroundColor={user.backgroundColor}/>
+        ))}
+        {/* {users.map(user => (
+          <UserTile user={user}/>
+        ))} */}
+      </div>
+
     </div>
   );
 };

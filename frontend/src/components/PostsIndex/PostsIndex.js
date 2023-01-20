@@ -5,7 +5,6 @@ import PostsIndexItem from './PostsIndexItem';
 import { Link } from 'react-router-dom';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import './PostsIndex.css';
-import Sidebar from '../Sidebar/Sidebar';
 
 function PostsIndex () {
   const dispatch = useDispatch();
@@ -21,7 +20,6 @@ function PostsIndex () {
 
   return (
     <div className='whole-page-styling'>
-      <div className='sidebar-container'><Sidebar/></div>
       <div className='post-index-container'>
           <div className='posts-index-header'>
               <h2>You haven't written to RECEPIENT in awhile. </h2>

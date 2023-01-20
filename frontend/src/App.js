@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
@@ -13,31 +13,34 @@ import PostCompose from './components/Posts/PostCompose';
 import { getCurrentUser } from './store/session';
 import MainPageSignup from './components/MainPage/MainPageSignup';
 import PostsIndex from './components/PostsIndex/PostsIndex';
-<<<<<<< HEAD
-import UserIndex from './components/Profile/UserIndex';
+import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
-=======
->>>>>>> e758208 (styled post index items)
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
+  
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
 
   return loaded && (
     <>
-      <NavBar />
+      {sessionUser && (
+        <>
+          <NavBar />
+          <Sidebar />
+        </>
+      )}
       <Switch>
         <AuthRoute exact path="/" component={MainPage} />
         <AuthRoute exact path="/login" component={MainPage} />
         <AuthRoute exact path="/signup" component={MainPageSignup} />
 
-<<<<<<< HEAD
+
         <ProtectedRoute exact path="/users" component={UserIndex} />
-=======
->>>>>>> e758208 (styled post index items)
         <ProtectedRoute exact path="/posts" component={PostsIndex} />
         <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
