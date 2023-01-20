@@ -34,7 +34,7 @@ function PostsIndex () {
           </div>
 
         {posts.map(post => (
-          <PostsIndexItem key={post._id} post={post} postId={post._id} />
+          <PostsIndexItem key={post._id} postId={post._id} />
         ))}
       </div>
     </div>

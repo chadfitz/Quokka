@@ -39,17 +39,9 @@ router.get('/', async (req, res) => {
 });
 
 router.delete('/:postId', async (req, res, next) => {
-  try {
-    const post = await Post.findById(req.params.postId)
-    const deletedPost = await post.delete();
-    return res.json(post);
-  }
-  catch(err) {
-    const error = new Error('Post not found');
-    error.statusCode = 404;
-    error.errors = { message: "No post found with that id" };
-    return next(error);
-  }
+  const post = await Post.findById(req.params.postId)
+  const deletedPost = await post.delete();
+  return res.json(deletedPost);
 });
 
 // router.patch('/:postId', async (req, res, next) => {

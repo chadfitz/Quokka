@@ -17,29 +17,28 @@ import './PostIndexItem.css';
 import './PostsIndex.css';
 import Reactions from './Reactions';
 
-function PostsIndexItem ({ post }) {
+function PostsIndexItem ({ postId }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const errors = useSelector(state => state.errors.posts)
-    const sessionUser = useSelector(state => state.session.user)
-    const { postId } = useParams()
+    const errors = useSelector(state => state.errors.posts);
+    const sessionUser = useSelector(state => state.session.user);
+    const post = useSelector(store => {
+        return Object.values(store.posts.all).find(obj => obj._id === postId);
+    })
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deletePost(post._id))
+        dispatch(deletePost(postId))
     }
-    // useEffect(() => {
-    //     dispatch(fetchPosts())
-    // }, [dispatch])
 
     const handleEdit = e => {
         e.preventDefault();
-        history.push(`/posts/${post._id}/edit`);
+        history.push(`/posts/${postId}/edit`);
     }
 
     const handleShow = e => {
         e.preventDefault();
-        history.push(`/posts/${post._id}`);
+        history.push(`/posts/${postId}`);
     }
 
     const reactionObject = post.reactions?.find((reaction) => {
