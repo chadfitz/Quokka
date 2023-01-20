@@ -12,7 +12,6 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
-import Sidebar from '../Sidebar/Sidebar';
 
 function PostCompose () {
   const [reactions, setReactions] = useState('');
@@ -152,6 +151,9 @@ function PostCompose () {
       <div className="compose-top">
         <div className='compose-map'>
           <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+          <div id='choose-your-location'>
+            Click on the map to choose your location
+          </div>
         </div>
         <div className="text-editor">
             <div className='compose-heading'>

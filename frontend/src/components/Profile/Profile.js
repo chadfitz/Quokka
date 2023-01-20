@@ -4,7 +4,6 @@ import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostBox from '../Posts/PostBox';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
-import Sidebar from '../Sidebar/Sidebar';
 import "./Profile.css"
 
 function Profile () {
@@ -21,7 +20,6 @@ function Profile () {
   } else {
     return (
       <div className='whole-page-styling'>
-        <div className='sidebar-container'><Sidebar/></div>
         <div className='profile-container'>
           <h2>All of {currentUser.username}'s Posts</h2>
           <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
