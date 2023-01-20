@@ -49,6 +49,58 @@ nav {
     background-color: var(--link-hover);
 }
 
+#quokka-title {
+    width: 120px;
+}
+
+#quokka-logo {
+    height: 60px;
+    width: 60px;
+    border: 1px solid black;
+    border-radius: 50%;
+    transition: all ease-in 500ms;
+}
+
+#quokka-title,
+#search-box {
+    margin: 20px;
+    transition: all ease-in 500ms;
+}
+
+#search-box {
+    /* margin: auto; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    /* flex: 1; */
+    border-radius: 3px;
+}
+
+#search-bar {
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 4px;
+    outline: none;
+    width: 30vw;
+    height: 35px;
+    padding: 5px
+}
+
+#search-button {
+    border: none;
+    background-color: transparent;
+    margin-left: -30px
+}
+
+#search-button:hover {
+    cursor: pointer;
+}
+
+#search-bar:focus {
+    outline: none;
+}
+
 .nav-right { 
     margin: 0;
     padding: 0;
@@ -62,6 +114,17 @@ nav {
     justify-content: center;
     /* border: 1px solid black; */
     border-radius: 35px;
+}
+
+#profile-button {
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 30px;
+    background-color: white;
+    /* transition: all ease-in 500ms; */
+}
+#profile-button:hover {
+    background-color: var(--link-hover);
 }
 
 .drowdown-menu {
@@ -116,79 +179,6 @@ nav {
     cursor: pointer;
 }
 
-#search-box {
-    /* margin: auto; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30vw;
-    /* flex: 1; */
-    border-radius: 3px;
-}
-
-#search-bar {
-    font-size: 18px;
-    border: 1px solid black;
-    border-radius: 4px;
-    outline: none;
-    width: 30vw;
-    height: 35px;
-    padding: 5px
-}
-
-#search-button {
-    border: none;
-    background-color: transparent;
-    margin-left: -30px
-}
-
-#search-button:hover {
-    cursor: pointer;
-}
-
-#search-bar:focus {
-    outline: none;
-}
-
-#quokka-title,
-#search-box {
-    margin: 20px;
-    transition: all ease-in 500ms;
-}
-
-#quokka-title {
-    width: 120px;
-}
-
-#quokka-logo {
-    height: 60px;
-    width: 60px;
-    border: 1px solid black;
-    border-radius: 50%;
-    transition: all ease-in 500ms;
-}
-
-/* #quokka-logo:hover {
-    box-shadow: 0 5px 15px #b7b7b7;
-} */
-
-#profile-button {
-    border: 1px solid black;
-    padding: 8px;
-    border-radius: 30px;
-    background-color: white;
-    /* transition: all ease-in 500ms; */
-}
-
-#profile-button:hover {
-    /* box-shadow: 0 5px 15px #b7b7b7; */
-    background-color: rgb(150, 1, 150);
-}
-/* 
-#quokka-title:hover {
-    font-size: 26px;
-} */
-
 #profile-links {
     display: inline-block;
     text-decoration: none;
@@ -208,13 +198,13 @@ nav {
 
 #profileinfo:hover{
     /* box-shadow: 0 10px 20px 0 rgba(253, 134, 239, 0.3); */
-    background-color: rgb(150, 1, 150);
+    background-color: var(--link-hover);
 }
 
-#logout-dropdown {
+#logout-dropdown-button{
     width: 100%;
     transition: all ease-in 500ms;
-    background-color: rgb(150, 1, 150);
+    background-color: var(--primary-color);
     color: white;
     font-size: 18px;
     line-height: 36px;
@@ -223,10 +213,10 @@ nav {
     cursor: pointer;
     margin-top: 5px;
 }
-
-#logout-dropdown:hover {
-    box-shadow: 0 10px 20px rgb(150, 1, 150);
-
+#logout-dropdown-button:hover {
+    cursor: pointer;
+    background-color: var(--primary-hover);
+    transition: 0.3s;
 }
 
 .must-login {

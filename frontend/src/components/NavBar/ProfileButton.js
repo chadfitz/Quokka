@@ -63,7 +63,7 @@ function ProfileButton({ user }) {
             <li id="profileinfo"><Link to={'/profile'} id="profile-links">Profile</Link></li>
             <li id="profileinfo"><Link to={'/posts/new'} id="profile-links">Write a Post</Link></li>
             <li>
-              <button id="logout-dropdown" onClick={logout}>Log Out</button>
+              <button id="logout-dropdown-button" onClick={logout}>Log Out</button>
             </li>
           </ul>
         )}
