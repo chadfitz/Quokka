@@ -72,7 +72,7 @@ export const acceptFriend = data => async dispatch => {
     });
     const friend = await res.json();
 
-    dispatch(receiveFriend(friend));
+    dispatch(receiveFriend(recipient._id));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400 ) {
