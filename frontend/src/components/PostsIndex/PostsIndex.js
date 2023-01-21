@@ -5,15 +5,30 @@ import PostsIndexItem from './PostsIndexItem';
 import { Link } from 'react-router-dom';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import './PostsIndex.css';
+import { fetchFriends } from '../../store/friends';
+import { fetchUsers } from '../../store/users';
+
 
 function PostsIndex () {
   const dispatch = useDispatch();
   const posts = useSelector(state => Object.values(state.posts.all));
   const friends = useSelector(state => state.friends)
+  const currentUser = useSelector(state => state.session.user);
+
+  useEffect(()=> { 
+    dispatch(fetchUsers());
+    dispatch(fetchFriends(currentUser))
+  }, [])
+
+  const findFriend= () => {
+    
+    if (!friends.length) return null 
+    const index = Math.floor(Math.random() * friends.length)
+    return friends[index]
+  }
 
   useEffect(() => {
     dispatch(fetchPosts());
-    console.log("in useEffect")
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
 
@@ -24,7 +39,7 @@ function PostsIndex () {
       <div className='inner-page-styling'>
           <div className='posts-index-header'>
               <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
-              <h2>You haven't written to anyone in awhile. </h2>
+              <h2>You haven't written to {findFriend()} in awhile. </h2>
               <Link to="/posts/new" className='posts-index-compose-link'><button>Send a postcard now?</button></Link>
           </div>
           <div className='posts-index-filter'>
