@@ -16,6 +16,7 @@ import PostsIndex from './components/PostsIndex/PostsIndex';
 import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
+import UserProfile from './components/Profile/UsersProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +43,7 @@ function App() {
         <ProtectedRoute exact path="/users" component={UserIndex} />
         <ProtectedRoute exact path="/posts" component={PostsIndex} />
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/profile/:userId" component={UserProfile}/>
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
         <ProtectedRoute exact path="/posts/:postId/edit" component={PostEdit} />
         <ProtectedRoute exact path="/posts/:postId" component={PostShow} />
