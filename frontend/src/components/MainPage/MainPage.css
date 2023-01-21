@@ -74,9 +74,10 @@
 .box-left-stat,
 .box-middle-stat,
 .box-right-stat { 
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .splash-lists { 
@@ -118,7 +119,8 @@
 
 .box-right {
     width: 80%;
-    height: 290px;
+    /* height: 270px; */
+    margin: 10px 0;
 }
 
 #splash-quokka{
