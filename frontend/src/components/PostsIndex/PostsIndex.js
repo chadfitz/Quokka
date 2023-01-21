@@ -9,6 +9,7 @@ import './PostsIndex.css';
 function PostsIndex () {
   const dispatch = useDispatch();
   const posts = useSelector(state => Object.values(state.posts.all));
+  const friends = useSelector(state => state.friends)
 
   useEffect(() => {
     dispatch(fetchPosts());
