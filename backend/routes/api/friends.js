@@ -37,7 +37,6 @@ router.delete('/:friendId', requireUser, async (req, res, next) => {
   }
 });
 
-
 router.get('/:userId', async (req, res, next) => {
   try {
     let user;
@@ -78,17 +77,12 @@ router.post('/', upload.none(), async (req, res, next) => {
 
     let entry = await newFriend.save();
 
-    // entry = await entry.populate('name', '_id, username');
-    // entry = await entry.populate('name', '_id, username');
     return res.json(newFriend);
   }
   catch (err) {
     err.statusCode = 404;
     console.log('in err');
     return res.status(404).json({ message: err.message });
-    // const error = new Error("Add Friend Error");
-    // error.errors = { message: "backend routes | post('/addFriend')"};
-    // return next(err);
   }
 });
 
