@@ -46,6 +46,10 @@ function PostsIndexItem ({ postId }) {
       })
     const emotions = reactionObject ? reactionObject.emotions : null
 
+    // useEffect(()=>{
+
+    // }, [])
+
     return (
     <div className="post-index-item">
         <div className='post-item-top'>
