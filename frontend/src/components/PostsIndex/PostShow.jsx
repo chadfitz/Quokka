@@ -19,6 +19,7 @@ const PostShow = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const errors = useSelector(state => state.errors.posts);
+//   console.log(post.reactions[0].emotions.length);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -33,16 +34,23 @@ const PostShow = () => {
       e.preventDefault();
       history.push(`/posts/${postId}/edit`);
   }
-
-  if (!post) return null;
-
-  const reactionObject = post.reactions?.find((reaction) => {
-    return reaction.user == sessionUser._id
-  })
-  const emotions = reactionObject ? reactionObject.emotions : null
-
-
-  return (
+  
+//   useEffect(()=>{
+//       console.log(emotions)
+//       emotions = reactionObject ? reactionObject.emotions : null
+//       console.log(emotions)
+//     }, [emotions])
+    
+    // this needs to be above the reactionObject & emotions, otherwise 
+    // there's errors on refresh, but then we can't use the useEffect
+    if (!post) return null;
+    
+    const reactionObject = post.reactions?.find((reaction) => {
+        return reaction.user == sessionUser._id
+      })
+      let emotions = reactionObject ? reactionObject.emotions : null
+    
+    return (
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
             <div className='post-show'>

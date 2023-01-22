@@ -44,11 +44,7 @@ function PostsIndexItem ({ postId }) {
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
-    const emotions = reactionObject ? reactionObject.emotions : null
-
-    // useEffect(()=>{
-
-    // }, [])
+    let emotions = reactionObject ? reactionObject.emotions : null
 
     return (
     <div className="post-index-item">
