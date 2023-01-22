@@ -80,7 +80,7 @@ function SignupForm () {
         <input type="text"
           value={username}
           onChange={update('username')}
-          placeholder="Username"
+          placeholder="First Name"
           id='login-input'
         />
       </label>

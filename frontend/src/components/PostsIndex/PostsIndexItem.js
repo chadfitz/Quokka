@@ -64,8 +64,14 @@ function PostsIndexItem ({ postId }) {
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
-                    {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" }
+                    {post.imageUrls ? post.imageUrls.map(image => { 
+                        {console.log("image")}
+                        {console.log(image)}
+                        return <img id="post-item-photo" src={image} alt=""/>
+                    }) : 
+                    ""}
+                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
+                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>
