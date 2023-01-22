@@ -88,35 +88,6 @@ function PostCompose () {
     }
   }
 
-//   const findFriends = () => { 
-//     let friendGroup = []
-//     users.map(user => { 
-//       if (friends.includes(user._id)) { 
-//         friendGroup.push(user)
-//       }
-//     })
-//     return friendGroup
-//   }
-
-//   const shuffle = (array) => {
-//   let currentIndex = array.length,  randomIndex;
-
-//   // While there remain elements to shuffle.
-//   while (currentIndex != 0) {
-
-//     // Pick a remaining element.
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex--;
-
-//     // And swap it with the current element.
-//     [array[currentIndex], array[randomIndex]] = [
-//       array[randomIndex], array[currentIndex]];
-//   }
-
-//   return array[0];
-// }
-  // console.log(findFriends())
-  // console.log(shuffle(findFriends()))
 
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
@@ -161,6 +132,7 @@ function PostCompose () {
         subject,
         body
       }
+      console.log(body)
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -261,3 +233,35 @@ function PostCompose () {
 }
 
 export default PostCompose;
+
+
+
+//   const findFriends = () => { 
+//     let friendGroup = []
+//     users.map(user => { 
+//       if (friends.includes(user._id)) { 
+//         friendGroup.push(user)
+//       }
+//     })
+//     return friendGroup
+//   }
+
+//   const shuffle = (array) => {
+//   let currentIndex = array.length,  randomIndex;
+
+//   // While there remain elements to shuffle.
+//   while (currentIndex != 0) {
+
+//     // Pick a remaining element.
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
+
+//     // And swap it with the current element.
+//     [array[currentIndex], array[randomIndex]] = [
+//       array[randomIndex], array[currentIndex]];
+//   }
+
+//   return array[0];
+// }
+  // console.log(findFriends())
+  // console.log(shuffle(findFriends()))
