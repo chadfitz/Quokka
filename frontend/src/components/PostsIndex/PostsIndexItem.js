@@ -65,8 +65,6 @@ function PostsIndexItem ({ postId }) {
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
                     {post.imageUrls ? post.imageUrls.map(image => { 
-                        {console.log("image")}
-                        {console.log(image)}
                         return <img id="post-item-photo" src={image} alt=""/>
                     }) : 
                     ""}
