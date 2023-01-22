@@ -78,21 +78,19 @@ function PostsIndexItem ({ postId }) {
         </div>
         <div className='post-item-bottom-container'>
             <div className='post-item-bottom'>
-            <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li>😀</li>
-                        if (emotion == "remember") return <li>🥲</li>
-                        if (emotion == "tom") return <li>😎</li>
-                        if (emotion == "NERD!") return <li>🤓</li>
+                        if (emotion == "like") return <li className='reaction'>😀</li>
+                        if (emotion == "remember") return <li className='reaction'>🥲</li>
+                        if (emotion == "tom") return <li className='reaction'>😎</li>
+                        if (emotion == "NERD!") return <li className='reaction'>🤓</li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
-                <Reactions user={sessionUser} post={post}></Reactions>
+                <Reactions user={sessionUser} post={post} postId={post._id}></Reactions>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>
-    </div>
     </div>
   );
 }

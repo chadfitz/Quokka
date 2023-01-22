@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const pointSchema = require('../blocks/Point');
 const reactionSchema = require('../blocks/Reaction');
-const replySchema = require('../blocks/Reply');
 // import pointSchema from '../blocks/Point';
 // import reactionSchema from '../blocks/Reaction';
 
@@ -34,7 +33,6 @@ const postSchema = new Schema({
   },
   // multiple reactions
   reactions: [reactionSchema],
-  replies: [replySchema]
   // reactions: [reactionSchema]
 }, {
   timestamps: true

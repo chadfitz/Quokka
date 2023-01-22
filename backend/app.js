@@ -8,6 +8,7 @@ const csurf = require('csurf');
 const userModel = require('./models/top/User');
 const postModel = require('./models/top/Post');
 const friendModel = require('./models/top/Friend');
+const replyModel = require('./models/top/Reply');
 /* ------------------------------------------------------------- */
 require('./config/passport'); // Need to import to configure passport module
 const passport = require('passport');
@@ -51,10 +52,12 @@ app.use(
 const usersRouter = require('./routes/api/users');
 const postsRouter = require('./routes/api/posts');
 const friendsRouter = require('./routes/api/friends');
+const repliesRouter = require('./routes/api/replies');
 const csrfRouter = require('./routes/api/csrf');
 app.use('/api/users', usersRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/friends', friendsRouter);
+app.use('/api/replies', repliesRouter);
 app.use('/api/csrf', csrfRouter);
 
 // Serve static React build files statically in production

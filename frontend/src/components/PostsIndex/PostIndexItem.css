@@ -102,6 +102,19 @@
   align-self: right;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.reaction-bar{
+  width: 33%;
+  list-style:none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.reaction {
+  font-size: 25px;
 }
 
 .post-item-bottom > button{
@@ -119,4 +132,9 @@
 
 .post-show{
   margin-top: 100px;
+}
+
+#time-ago{
+  width: 33%;
+  text-align: right;
 }
