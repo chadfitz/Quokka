@@ -22,12 +22,9 @@ const removeFriend = friendId => ({
 });
 
 export const fetchFriends = (user) => async dispatch => {
-  console.log('in friends store fetchFriends');
   let res;
   try {
-    console.log('in try block');
     res = await jwtFetch(`/api/friends/${user._id}`);
-    console.log(29);
 
   } catch (err) {
     const resBody = await err.json();
@@ -40,14 +37,7 @@ export const fetchFriends = (user) => async dispatch => {
   if (res.ok) {
     const payload = await res.json();
 
-    //
-    console.log(33);
-    // console.log('friends');
-    // console.log(friends);
-    // dispatch(receiveFriends(Object.values(friends)));
-
     dispatch(receiveFriends(payload));
-    console.log(38);
   }
 }
 
