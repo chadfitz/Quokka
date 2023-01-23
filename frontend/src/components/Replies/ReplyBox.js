@@ -2,8 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../blocks/Button';
 import { deleteReply } from '../../store/replies';
+import './Reply.css';
 
-const ReplyBox = ({replyId}) => {
+const ReplyBox = ({ replyId }) => {
   const dispatch = useDispatch();
 
   const reply = useSelector(store => {
@@ -16,12 +17,11 @@ const ReplyBox = ({replyId}) => {
   }
 
   if (!reply) return <div></div>;
+
   return (
     <div className='reply-box'>
       <div className='reply-body'>{reply.body}</div>
-      <Button label="delete"
-              onClick={handleDelete}
-      />
+      <Button className='reply-delete-btn' label="delete" onClick={handleDelete} />
     </div>
   )
 }

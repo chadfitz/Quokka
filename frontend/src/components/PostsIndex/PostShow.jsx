@@ -20,7 +20,8 @@ import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png'
 import { composeReply, fetchReplies } from '../../store/replies';
-import ReplyBox from './ReplyBox';
+import ReplyBox from '../Replies/ReplyBox';
+import ReplyIndex from '../Replies/ReplyIndex';
 
 const PostShow = () => {
   const [reply, replyChange] = useInput('');
@@ -42,13 +43,13 @@ const PostShow = () => {
   }, [dispatch, postId])
 
   const handleDelete = (e) => {
-      e.preventDefault();
-      dispatch(deletePost(postId))
+    e.preventDefault();
+    dispatch(deletePost(postId))
   }
 
   const handleEdit = e => {
-      e.preventDefault();
-      history.push(`/posts/${postId}/edit`);
+    e.preventDefault();
+    history.push(`/posts/${postId}/edit`);
   }
 
   const handleReply = e => {
@@ -137,8 +138,27 @@ const PostShow = () => {
                             </div>
                     </div>
                 </div>
+                {/* <div className='reply-index-container'>
+                    <ReplyIndex post={post} />
+                </div> */}
             </div>
             <div className='replies-show'>
+              <textarea label=""
+                className="reply-input"
+                value={reply}
+                onChange={replyChange}
+                wrap="hard"
+                rows="2"
+              />
+              <Button className="reply-btn" label="Reply"
+                type="submit" onClick={handleReply}
+              />
+              {replies.map(reply => {return (
+                <ReplyBox key={reply._id} replyId={reply._id} />
+              )})}
+
+            </div>
+            {/* <div className='replies-show'>
               {replies.map(reply => {return (
                 <ReplyBox key={reply._id} replyId={reply._id}/>
               )})},
@@ -152,7 +172,7 @@ const PostShow = () => {
               <Button className="reply-btn" label="Reply"
                 type="submit" onClick={handleReply}
               />
-            </div>
+            </div> */}
         </div>
     </div>
   );
