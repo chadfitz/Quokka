@@ -132,17 +132,6 @@ const friendsReducer = (state = {}, action) => {
       return { ...state, ...action.friend }
     case REMOVE_FRIEND:
       newState = { ...state };
-      // newState.friends = { ...state.friends, ...action.friend };
-      // delete newState.friends[action.friendId];
-      // console.log('delFriend');
-      // console.log(delFriend);
-      // newState.nonFriends = { ...state.nonFriends, ...delFriend };
-      // newState.nonFriends = { ...state.nonFriends, ...action.nonFriend };
-      // TODO - FIX / UPDATE ME!
-      // const index = newState.indexOf(action.friendId);
-      // if (index > -1) { // only splice array when item is found
-        // newState.splice(index, 1); // 2nd parameter means remove one item only
-      // }
       delete newState[action.friendId];
       return newState;
     default:
