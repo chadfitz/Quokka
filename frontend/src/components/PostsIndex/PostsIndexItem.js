@@ -31,7 +31,7 @@ function PostsIndexItem ({ postId }) {
     const sessionUser = useSelector(state => state.session.user);
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
-    })
+    });
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -48,7 +48,7 @@ function PostsIndexItem ({ postId }) {
         history.push(`/posts/${postId}`);
     }
 
-    const handleProfile = e => { 
+    const handleProfile = e => {
         e.preventDefault()
         history.push(`/profile/${post.writer._id}`)
   }
@@ -71,9 +71,9 @@ function PostsIndexItem ({ postId }) {
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
-                    {post.imageUrls ? post.imageUrls.map(image => { 
+                    {post.imageUrls ? post.imageUrls.map(image => {
                         return <img id="post-item-photo" src={image} alt=""/>
-                    }) : 
+                    }) :
                     ""}
                     {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
                 "" } */}
@@ -103,7 +103,7 @@ function PostsIndexItem ({ postId }) {
                                 <img src={hungry} className='reaction-image'/>
                             </li>
                         if (emotion == "tom") return <li className='reaction'>
-                                <img src={laughing} className='reaction-image'/> 
+                                <img src={laughing} className='reaction-image'/>
                             </li>
                         if (emotion == "NERD!") return <li className='reaction'>
                                 <img src={love} className='reaction-image'/>
