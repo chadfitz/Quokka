@@ -1,4 +1,3 @@
-const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -183,7 +182,7 @@ router.patch('/removeReaction/:postId', async (req, res, next) => {
     const post = await Post.findById(postId)
     const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
 
-    
+
 
     if (!userReactionObject) {
       // If no user reaction object, user cannot remove reaction so no operation is done

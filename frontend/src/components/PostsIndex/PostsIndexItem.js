@@ -87,7 +87,7 @@ function PostsIndexItem ({ postId }) {
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
-                <Reactions user={sessionUser} post={post}></Reactions>
+                <Reactions user={sessionUser} post={post} postId={post._id}></Reactions>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>
