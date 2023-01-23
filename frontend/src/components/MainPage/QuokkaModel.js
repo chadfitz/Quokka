@@ -10,13 +10,13 @@ function Quokkas() {
                 <h2 id="mission-statement">Mission Statement</h2>
             </div>
             <ul>
-                <li className='splash-lists'>We are focused on quality rather than quantity</li>
-                <li className='splash-lists'>Users are limited to how often they can post</li>
-                <li className='splash-lists'>Users interact with random members of their friend group</li>
+                <li className='splash-lists'>At Quokka, we are focused on enriching the quality of users' posts</li>
+                <li className='splash-lists'>Users are limited to how often they can post to ensure meaningful connections</li>
+                <li className='splash-lists'>Users must interact with random members of their friend group</li>
             </ul>
         </div>
         <div className='box-right'>
-            <img src={quokkas} alt="google maps" id="splash-quokka"/>
+            <img src={quokkas} alt="cute quokkas" id="splash-quokka"/>
         </div>
     </div>
   )

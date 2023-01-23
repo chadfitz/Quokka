@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, deletePost } from '../../store/posts';
+import useInput from '../../hooks/useInput';
+import Button from '../../blocks/Button';
+import Input from '../../blocks/Input';
 import Reactions from './Reactions';
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
@@ -16,14 +19,18 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png'
+import { composeReply, fetchReplies } from '../../store/replies';
+import ReplyBox from './ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
 
 const PostShow = () => {
+  const [reply, replyChange] = useInput('');
   const { postId } = useParams();
   const post = useSelector(store => {
     return Object.values(store.posts.all).find(obj => obj._id === postId);
   })
   const sessionUser = useSelector(state => state.session.user);
+  const replies = useSelector(state => Object.values(state.replies));
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -32,6 +39,7 @@ const PostShow = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchReplies(postId));
   }, [dispatch, postId])
 
   const handleDelete = (e) => {
@@ -44,13 +52,35 @@ const PostShow = () => {
     history.push(`/posts/${postId}/edit`);
   }
 
-  if (!post) return null;
+  const handleReply = e => {
+    e.preventDefault();
+    let replyObject = {
+        user: sessionUser._id,
+        post: post._id,
+        body: reply
+    };
+    console.log('replyObject');
+    console.log(replyObject);
+    dispatch(composeReply(replyObject));
+    console.log('in handle reply');
+  }
 
-  const reactionObject = post.reactions?.find((reaction) => {
-    return reaction.user == sessionUser._id
-  })
-  let emotions = reactionObject ? reactionObject.emotions : null
-    
+//   useEffect(()=>{
+//       console.log(emotions)
+//       emotions = reactionObject ? reactionObject.emotions : null
+//       console.log(emotions)
+//     }, [emotions])
+
+    // this needs to be above the reactionObject & emotions, otherwise
+    // there's errors on refresh, but then we can't use the useEffect
+    if (!post) return null;
+
+    const reactionObject = post.reactions?.find((reaction) => {
+        return reaction.user == sessionUser._id;
+    })
+
+    let emotions = reactionObject ? reactionObject.emotions : null
+
     return (
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
@@ -95,7 +125,7 @@ const PostShow = () => {
                                                 <img src={hungry} className='reaction-image'/>
                                             </li>
                                         if (emotion == "tom") return <li className='reaction'>
-                                                <img src={laughing} className='reaction-image'/> 
+                                                <img src={laughing} className='reaction-image'/>
                                             </li>
                                         if (emotion == "NERD!") return <li className='reaction'>
                                                 <img src={love} className='reaction-image'/>
@@ -108,9 +138,39 @@ const PostShow = () => {
                             </div>
                     </div>
                 </div>
-                <div className='reply-index-container'>
+                {/* <div className='reply-index-container'>
                     <ReplyIndex post={post} />
-                </div>
+                </div> */}
+            </div>
+            <div className='replies-show'>
+              {replies.map(reply => {return (
+                <ReplyBox key={reply._id} replyId={reply._id}/>
+              )})},
+              <Input label=""
+                className="reply-input"
+                type="textarea"
+                value={reply}
+                onChange={replyChange}
+              />
+
+              <Button className="reply-btn" label="Reply"
+                type="submit" onClick={handleReply}
+              />
+            </div>
+            <div className='replies-show'>
+              {replies.map(reply => {return (
+                <ReplyBox key={reply._id} replyId={reply._id}/>
+              )})},
+              <Input label=""
+                className="reply-input"
+                type="textarea"
+                value={reply}
+                onChange={replyChange}
+              />
+
+              <Button className="reply-btn" label="Reply"
+                type="submit" onClick={handleReply}
+              />
             </div>
         </div>
     </div>

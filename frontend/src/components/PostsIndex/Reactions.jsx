@@ -79,10 +79,10 @@ const Reactions = ({ user, postId }) => {
                 <img src={hungry} className='reaction-image'/>
               </button>
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "tom")}>
-                <img src={laughing} className='reaction-image'/> 
+                <img src={laughing} className='reaction-image'/>
               </button>
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "NERD!")}>
-                <img src={love} className='reaction-image'/> 
+                <img src={love} className='reaction-image'/>
               </button>
           </div>
 

@@ -31,7 +31,7 @@ function PostsIndexItem ({ postId }) {
     const sessionUser = useSelector(state => state.session.user);
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
-    })
+    });
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -48,6 +48,11 @@ function PostsIndexItem ({ postId }) {
         history.push(`/posts/${postId}`);
     }
 
+    const handleProfile = e => {
+        e.preventDefault()
+        history.push(`/profile/${post.writer._id}`)
+  }
+
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
@@ -57,8 +62,6 @@ function PostsIndexItem ({ postId }) {
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
-                {/* {loading ? <Loader/> : mapPlaceholder} */}
-                {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
@@ -66,13 +69,17 @@ function PostsIndexItem ({ postId }) {
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
-                    {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" }
+                    {post.imageUrls ? post.imageUrls.map(image => {
+                        return <img id="post-item-photo" src={image} alt=""/>
+                    }) :
+                    ""}
+                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
+                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>
             <div className='post-index-date'>
-                <div>
+                <div id="to-profile-page" onClick={handleProfile}>
                     <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                 </div>
                 {sessionUser?._id === post.writer._id &&
@@ -94,7 +101,7 @@ function PostsIndexItem ({ postId }) {
                                 <img src={hungry} className='reaction-image'/>
                             </li>
                         if (emotion == "tom") return <li className='reaction'>
-                                <img src={laughing} className='reaction-image'/> 
+                                <img src={laughing} className='reaction-image'/>
                             </li>
                         if (emotion == "NERD!") return <li className='reaction'>
                                 <img src={love} className='reaction-image'/>
