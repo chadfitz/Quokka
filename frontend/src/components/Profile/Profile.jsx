@@ -54,7 +54,7 @@ function Profile () {
                 {userFriends.map((friend, i) => (
                   <div id="single-friend">
                     {/* {friend} */}
-                    <SingleFriend recipientId={friend}/>
+                    <SingleFriend recipientId={friend} key={friend.uniqueId}/>
                     {/* <UserTile recipient={friend}/> */}
                   </div>
                  ))}
@@ -65,7 +65,7 @@ function Profile () {
             </div>
             {userPosts.map((post, i) => (
               <>
-                <PostsIndexItem2 post={post} key={i}/>
+                <PostsIndexItem2 post={post} key={post.uniqueId}/>
               </>
             ))}
           </div>
