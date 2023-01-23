@@ -2,13 +2,18 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../blocks/Button'
 import { addFriend, deleteFriend } from '../../store/friends';
+import { useHistory } from 'react-router-dom';
 
 const UserTile = ({recipient, backgroundColor}) => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const requester = useSelector(state => state.session.user);
   const isFriend = useSelector(state => {
-    return state.friends?.includes(recipient._id.toString())
+    return state.friends?.hasOwnProperty(recipient?._id.toString());
   });
+
+  console.log('recipient');
+  console.log(recipient);
 
   let data = {
     requester: requester,
@@ -26,16 +31,21 @@ const UserTile = ({recipient, backgroundColor}) => {
 
   const handleDeleteFriend = () => {
     console.log('Delete Friend Clicked');
-
-
     dispatch(deleteFriend(recipient._id));
+  }
+
+  const handleProfile = e => { 
+    e.preventDefault()
+    history.push(`/profile/${recipient._id}`)
   }
 
   return (
     // <div id='friend-container' style={{backgroundColor: backgroundColor, opacity: 0.1}}>
     <div id='friend-container'>
-      <div id='friend-username'>{recipient.username}</div>
-      <div><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
+      <div id='friend-username' onClick={handleProfile}>{recipient.username}</div>
+      
+      <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
+      <div id='friend-button' onClick={handleProfile}><button>VISIT</button></div>
       <div>{recipient.bio}</div>
       <div id='friend-button'>
         {isFriend

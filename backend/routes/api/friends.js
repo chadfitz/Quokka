@@ -11,6 +11,70 @@ const { requireUser } = require('../../config/passport');
 const { json } = require('express');
 const ObjectUtil = require("../../util/ObjectUtil")
 
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    let user = await User.findById(req.params.userId);;
+
+    const friendObjects = await Friend.find({
+      $or: [{ requester: user._id }, { recipient: user._id }]
+    });
+
+    const friendsFilter = friendObjects.map(friend => {
+      return [friend.requester.toString(), friend.recipient.toString()];
+    });
+
+    const friendIds = friendsFilter.flat().filter( el => {
+      return el.toString() !== user._id.toString();``
+    })
+
+    const friendsArray = await User.find({
+      '_id': { $in: friendIds }
+    });
+
+    const friendsObject = friendsArray.reduce((obj, item) => (obj[item._id] = item, obj) , {});
+
+    return res.json(friendsObject);
+  } catch(err) {
+    return res.status(404).json({ message: err.message });
+  }
+})
+
+router.post('/', upload.none(), async (req, res, next) => {
+  // const {requester, recipient, relation} = req
+  try {
+    let existingRelation = (
+      await Friend.findOne({
+        $and: [{ requester: req.body.requester }, { recipient: req.body.recipient }]
+      })
+      ||
+      await Friend.findOne({
+        $and: [{ recipient: req.body.requester }, { requester: req.body.recipient }]
+      })
+    );
+    // QUESTION: is this right? what should i be doing instead?
+    if (existingRelation) return {};
+    const newFriend = new Friend({
+      requester: req.body.requester,
+      recipient: req.body.recipient,
+      relation: req.body.relation
+    })
+
+    let entry = await newFriend.save();
+
+    const friendUser = await User.findById(req.body.recipient);
+    let friendObject = {[req.body.recipient]: friendUser};
+
+    return res.json(friendObject);
+  }
+  catch (err) {
+    err.statusCode = 404;
+    console.log('in err');
+    return res.status(404).json({ message: err.message });
+  }
+});
+
+
 router.delete('/:friendId', requireUser, async (req, res, next) => {
   const userId1 = req.user._id.toString();
   const userId2 = req.params.friendId;
@@ -38,61 +102,8 @@ router.delete('/:friendId', requireUser, async (req, res, next) => {
 });
 
 
-router.get('/:userId', async (req, res, next) => {
-  try {
-    let user;
-    user = await User.findById(req.params.userId);
-    const friends = await Friend.find(
-      { $or: [{ requester: user._id }, { recipient: user._id }] }
-    );
-    var object1 = friends.map(friend => [friend.requester, friend.recipient]);
-    var object2 = object1.flat().filter( el => {
-      return el.toString() !== user._id.toString();``
-    })
-    return res.json(object2)
-  } catch(err) {
-    return res.status(404).json({ message: err.message });
-  }
-})
 
-
-router.post('/', upload.none(), async (req, res, next) => {
-  // const {requester, recipient, relation} = req
-  try {
-    let existingRelation = (
-      await Friend.findOne({
-        $and: [{ requester: req.body.requester }, { recipient: req.body.recipient }]
-      })
-      ||
-      await Friend.findOne({
-        $and: [{ recipient: req.body.requester }, { requester: req.body.recipient }]
-      })
-    );
-    // QUESTION: is this right? what shouuld i be doing instead?
-    if (existingRelation) return {};
-    const newFriend = new Friend({
-      requester: req.body.requester,
-      recipient: req.body.recipient,
-      relation: req.body.relation
-    })
-
-    let entry = await newFriend.save();
-
-    // entry = await entry.populate('name', '_id, username');
-    // entry = await entry.populate('name', '_id, username');
-    return res.json(newFriend);
-  }
-  catch (err) {
-    err.statusCode = 404;
-    console.log('in err');
-    return res.status(404).json({ message: err.message });
-    // const error = new Error("Add Friend Error");
-    // error.errors = { message: "backend routes | post('/addFriend')"};
-    // return next(err);
-  }
-});
-
-
+/*
 router.post('/acceptFriend', requireUser, async (req, res, next) => {
   // TODO: confirm that friendship does not already exist
   try {
@@ -119,7 +130,7 @@ router.post('/acceptFriend', requireUser, async (req, res, next) => {
     return next(error);
   }
 })
-
+*/
 
 // TODO: DELETE
   // let friend;

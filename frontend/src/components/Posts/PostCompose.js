@@ -12,6 +12,9 @@ import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import { fetchUsers } from '../../store/users';
+import { fetchFriends } from '../../store/friends';
+
 
 function PostCompose () {
   const [reactions, setReactions] = useState('');
@@ -19,8 +22,23 @@ function PostCompose () {
   const [imageUrls, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
-   const friends = useSelector(state => state.friends);
+  const friends = useSelector(state => state.friends);
   const users = useSelector(state => Object.values(state.users));
+  const currentUser = useSelector(state => state.session.user);
+
+    useEffect(()=> { 
+    dispatch(fetchUsers());
+    dispatch(fetchFriends(currentUser))
+  }, [])
+
+  const findFriend= () => {
+    
+    if (!friends.length) return null 
+    const index = Math.floor(Math.random() * friends.length)
+    // setRecipient(friends[index])
+    return friends[index]
+  }
+  const fart = findFriend()
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -70,35 +88,6 @@ function PostCompose () {
     }
   }
 
-  const findFriends = () => { 
-    let friendGroup = []
-    users.map(user => { 
-      if (friends.includes(user._id)) { 
-        friendGroup.push(user)
-      }
-    })
-    return friendGroup
-  }
-
-  const shuffle = (array) => {
-  let currentIndex = array.length,  randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-
-  return array[0];
-}
-  // console.log(findFriends())
-  // console.log(shuffle(findFriends()))
 
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
@@ -143,6 +132,7 @@ function PostCompose () {
         subject,
         body
       }
+      console.log(body)
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -186,7 +176,7 @@ function PostCompose () {
             </div>
             <div className="text-editor">
                 <div className='compose-heading'>
-                  <h2>Compose Post</h2>
+                  <h2>Compose Post to {fart} </h2>
                 </div>
 
                 <Input
@@ -243,3 +233,35 @@ function PostCompose () {
 }
 
 export default PostCompose;
+
+
+
+//   const findFriends = () => { 
+//     let friendGroup = []
+//     users.map(user => { 
+//       if (friends.includes(user._id)) { 
+//         friendGroup.push(user)
+//       }
+//     })
+//     return friendGroup
+//   }
+
+//   const shuffle = (array) => {
+//   let currentIndex = array.length,  randomIndex;
+
+//   // While there remain elements to shuffle.
+//   while (currentIndex != 0) {
+
+//     // Pick a remaining element.
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
+
+//     // And swap it with the current element.
+//     [array[currentIndex], array[randomIndex]] = [
+//       array[randomIndex], array[currentIndex]];
+//   }
+
+//   return array[0];
+// }
+  // console.log(findFriends())
+  // console.log(shuffle(findFriends()))

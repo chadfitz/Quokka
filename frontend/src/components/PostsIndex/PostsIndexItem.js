@@ -10,7 +10,14 @@ import { useEffect, useState } from 'react';
 import Loader from '../GoogleMap/Loader';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import angry from '../../assets/quokka-angry.png';
+import button from '../../assets/quokka-button.png';
+import happy from '../../assets/quokka-happy.png';
+import hungry from '../../assets/quokka-hungry.png';
+import laughing from '../../assets/quokka-laughing.png';
+import love from '../../assets/quokka-love.png';
+import sad from '../../assets/quokka-sad.png';
+import sleepy from '../../assets/quokka-sleepy.png';
 
 // import { useState } from 'react';
 import './PostIndexItem.css';
@@ -24,7 +31,7 @@ function PostsIndexItem ({ postId }) {
     const sessionUser = useSelector(state => state.session.user);
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
-    })
+    });
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -41,17 +48,20 @@ function PostsIndexItem ({ postId }) {
         history.push(`/posts/${postId}`);
     }
 
+    const handleProfile = e => {
+        e.preventDefault()
+        history.push(`/profile/${post.writer._id}`)
+  }
+
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
-    const emotions = reactionObject ? reactionObject.emotions : null
+    let emotions = reactionObject ? reactionObject.emotions : null
 
     return (
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
-                {/* {loading ? <Loader/> : mapPlaceholder} */}
-                {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
@@ -61,13 +71,17 @@ function PostsIndexItem ({ postId }) {
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
-                    {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" }
+                    {post.imageUrls ? post.imageUrls.map(image => {
+                        return <img id="post-item-photo" src={image} alt=""/>
+                    }) :
+                    ""}
+                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
+                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>
             <div className='post-index-date'>
-                <div>
+                <div id="to-profile-page" onClick={handleProfile}>
                     <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                 </div>
                 {sessionUser?._id === post.writer._id &&
@@ -82,14 +96,22 @@ function PostsIndexItem ({ postId }) {
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li className='reaction'>😀</li>
-                        if (emotion == "remember") return <li className='reaction'>🥲</li>
-                        if (emotion == "tom") return <li className='reaction'>😎</li>
-                        if (emotion == "NERD!") return <li className='reaction'>🤓</li>
+                        if (emotion == "like") return <li className='reaction'>
+                                <img src={happy} className='reaction-image'/>
+                            </li>
+                        if (emotion == "remember") return <li className='reaction'>
+                                <img src={hungry} className='reaction-image'/>
+                            </li>
+                        if (emotion == "tom") return <li className='reaction'>
+                                <img src={laughing} className='reaction-image'/>
+                            </li>
+                        if (emotion == "NERD!") return <li className='reaction'>
+                                <img src={love} className='reaction-image'/>
+                            </li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
-                <Reactions user={sessionUser} post={post}></Reactions>
+                <Reactions user={sessionUser} post={post} postId={post._id}></Reactions>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>

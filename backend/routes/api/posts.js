@@ -1,4 +1,3 @@
-const { json } = require('express');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -184,11 +183,8 @@ router.patch('/removeReaction/:postId', async (req, res, next) => {
     const post = await Post.findById(postId)
     const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
 
-
-
     if (!userReactionObject) {
       // If no user reaction object, user cannot remove reaction so no operation is done
-
     } else if (userReactionObject.emotions.some( oldEmotion => (oldEmotion == emotionToRemove))) {
       // If user reaction object exists and includes the emotion to remove, remove it
       userReactionObject.emotions.pull(emotionToRemove)
@@ -207,9 +203,8 @@ router.patch('/removeReaction/:postId', async (req, res, next) => {
 })
 
 // DELETE
-router.delete('/:postId', async (req, res, next) => {
+router.delete('/:postId', requireUser, async (req, res, next) => {
   try {
-    console.log(req.params.postId)
     const post = await Post.findById(req.params.postId)
     await post.delete()
     // Post.deleteOne({_id: req.params.postId})

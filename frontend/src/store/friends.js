@@ -22,20 +22,31 @@ const removeFriend = friendId => ({
 });
 
 export const fetchFriends = (user) => async dispatch => {
+  console.log('in friends store fetchFriends');
+  let res;
   try {
-    const res = await jwtFetch(`/api/friends/${user._id}`);
-    if (res.ok) {
-      const friends = await res.json();
-      // console.log('friends');
-      // console.log(friends);
-      dispatch(receiveFriends(Object.values(friends)));
-    }
+    console.log('in try block');
+    res = await jwtFetch(`/api/friends/${user._id}`);
+    console.log(29);
+
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       // TODO:
       // dispatch(receiveErrors(resBody.errors))
     }
+  }
+  if (res.ok) {
+    const payload = await res.json();
+
+    //
+    console.log(33);
+    // console.log('friends');
+    // console.log(friends);
+    // dispatch(receiveFriends(Object.values(friends)));
+
+    dispatch(receiveFriends(payload));
+    console.log(38);
   }
 }
 
@@ -61,15 +72,16 @@ export const addFriend = data => async dispatch => {
   const formData = new FormData();
   formData.append("requester", requester._id);
   formData.append("recipient", recipient._id);
-  formData.append("relation", relation);
+  // formData.append("relation", relation);
 
   try {
     const res = await jwtFetch('/api/friends/', {
       method: 'POST',
       body: formData
     });
-    // const friend = await res.json();
-    dispatch(receiveFriend(recipient._id));
+    // dispatch(receiveFriend(recipient._id));
+    const friend = await res.json();
+    dispatch(receiveFriend(friend));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400 ) {
@@ -84,26 +96,31 @@ export const deleteFriend = friendId => async dispatch => {
     method: "DELETE"
   })
 
+  console.log('friend store #deleteFriend');
+  console.log('friendId');
+  console.log(friendId);
   if (res.ok) {
     dispatch(removeFriend(friendId));
   }
 }
 
-
+/*
 export const acceptFriend = data => async dispatch => {
-  const {requester, recipient} = data;
+  const {requester, recipient, relation} = data;
 
   const formData = new FormData();
   formData.append("requester", requester);
   formData.append("recipient", recipient);
-  // formData.append("status", status);
+  formData.append("relation", relation);
 
   try {
     const res = await jwtFetch('/api/friends/acceptFriend', {
       method: 'PATCH',
       body: formData
     });
-    dispatch(receiveFriend(recipient._id));
+    // dispatch(receiveFriend(recipient._id));
+    const friend = await res.json();
+    dispatch(receiveFriend(friend));
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400 ) {
@@ -111,22 +128,26 @@ export const acceptFriend = data => async dispatch => {
     }
   }
 }
+*/
 
 
-const friendsReducer = (state = [], action) => {
+const friendsReducer = (state = {}, action) => {
+  let newState;
   Object.freeze(state);
+
   switch(action.type) {
     case RECEIVE_FRIENDS:
-      return [ ...state, ...action.friends];
+      return { ...action.friends };
     case RECEIVE_FRIEND:
-      return [ ...state, action.friend ];
+      // newState = { ...state };
+      // newState.friends = { ...state.friends, ...action.friend };
+      // delete newState.nonFriends[action.friendId];
+      console.log('action.friend');
+      console.log(action.friend);
+      return { ...state, ...action.friend }
     case REMOVE_FRIEND:
-      const newState = [...state];
-      const index = newState.indexOf(action.friendId);
-      if (index > -1) { // only splice array when item is found
-        newState.splice(index, 1); // 2nd parameter means remove one item only
-      }
-      // delete state[action.friendId];
+      newState = { ...state };
+      delete newState[action.friendId];
       return newState;
     default:
       return state;
