@@ -17,28 +17,26 @@ import './PostIndexItem.css';
 import './PostsIndex.css';
 import Reactions from './Reactions';
 
-function PostsIndexItem ({ postId }) {
+function PostsIndexItem2 ({ post }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const errors = useSelector(state => state.errors.posts);
     const sessionUser = useSelector(state => state.session.user);
-    const post = useSelector(store => {
-        return Object.values(store.posts.all).find(obj => obj._id === postId);
-    })
+
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deletePost(postId))
+        dispatch(deletePost(post._id))
     }
 
     const handleEdit = e => {
         e.preventDefault();
-        history.push(`/posts/${postId}/edit`);
+        history.push(`/posts/${post._id}/edit`);
     }
 
     const handleShow = e => {
         e.preventDefault();
-        history.push(`/posts/${postId}`);
+        history.push(`/posts/${post._id}`);
     }
 
     const reactionObject = post.reactions?.find((reaction) => {
@@ -55,10 +53,10 @@ function PostsIndexItem ({ postId }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
-                {/* {console.log('post', post)} */}
-
                 <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
+                {/* {console.log('post', post)} */}
+                {/* <h4>{post.recipient}</h4> */}
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
                     {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
@@ -97,4 +95,4 @@ function PostsIndexItem ({ postId }) {
   );
 }
 
-export default PostsIndexItem;
+export default PostsIndexItem2;

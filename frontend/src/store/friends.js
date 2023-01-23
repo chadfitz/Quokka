@@ -26,9 +26,25 @@ export const fetchFriends = (user) => async dispatch => {
     const res = await jwtFetch(`/api/friends/${user._id}`);
     if (res.ok) {
       const friends = await res.json();
-      console.log('friends');
-      console.log(friends);
+      // console.log('friends');
+      // console.log(friends);
       dispatch(receiveFriends(Object.values(friends)));
+    }
+  } catch (err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      // TODO:
+      // dispatch(receiveErrors(resBody.errors))
+    }
+  }
+}
+
+export const fetchFriend = (userId) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/friends/${userId}`);
+    if (res.ok) {
+      const friend = await res.json();
+      dispatch(receiveFriend(friend));
     }
   } catch (err) {
     const resBody = await err.json();
@@ -118,5 +134,3 @@ const friendsReducer = (state = [], action) => {
 }
 
 export default friendsReducer;
-
-
