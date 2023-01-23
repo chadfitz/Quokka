@@ -166,9 +166,10 @@ function PostCompose () {
 
   const changeRecipient = (friend) => { 
     console.log(friend)
-    setRecipient(friend)
+    setRecipient(friend._id)
   }
-
+  console.log("recipient")
+  console.log(recipient)
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
@@ -183,11 +184,11 @@ function PostCompose () {
             </div>
             <div className="text-editor">
                 <div className='compose-heading'>
-                  <h2>Compose Post to </h2> <label for={recipient}></label>
-                    <select name="recipient" id="recipient">
-                      {findFriend().map((friend, index) => { 
+                  <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
+                    <select name="recipient" id="recipient" onChange={e => setRecipient(e.target.value)}>
+                      {findFriend()?.map((friend, index) => { 
                         // {console.log(friend)}
-                        return <option key={index} value={recipient} onClick={e => changeRecipient(e.target.value)}>{friend.username}</option>
+                        return <option key={index} value={friend._id}>{friend.username}</option>
                       })}
                     </select>
                 </div>
