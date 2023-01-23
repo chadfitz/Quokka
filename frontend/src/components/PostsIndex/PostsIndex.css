@@ -19,27 +19,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 20px;
 }
 
 .posts-index-compose-link{
     text-decoration: none;
     margin-bottom: 50px;
 }
-.posts-index-compose-link > button{
-    padding: 5px 20px;
-    border-radius: 5px;
-    background-color: var(--primary-color);
-    color: #fff;
-    font: inherit;
-    font-size: 15px;
-}
+
 .posts-index-compose-link > button:hover{
     cursor: pointer;
     background-color: var(--primary-hover);
     transition: 0.3s;
 }
 
-#all-pins-map-container { 
+#all-pins-map-container {
     margin: auto;
     transition: all ease-in 500ms;
 }
@@ -51,23 +45,34 @@ body {
 .posts-index-filter {
     margin-top: 50px;
     display: flex;
-    background-color: white;
-    border-radius: 30px;
-    width: 100%;
-    box-shadow: 0 0 2px gray;
+    border-radius: 20px;
+}
+
+.posts-index-filter-bar {
+    display: flex;
+    background-color: var(--offwhite-color);
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 #filter-by {
     padding: 0px 30px;
-    font-size: 16px;
+    font-size: 22px;
+    font-weight: 400;
 }
 
 .filter-buttons {
     border: none;
     background-color: transparent;
-    font-family: monospace;
-    font-size: 18px;
+    font-size: 22px;
+    border-radius: 20px;
+    padding: 10px;
     margin: 10px;
+}
+
+.filter-buttons:hover {
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 #post-google-map {
@@ -88,18 +93,29 @@ body {
     width: auto;
 }
 
-#post-index-compose { 
+#post-index-compose {
     text-decoration: none;
     color: inherit;
     font-size: 20px;
     transition: all ease-in 500ms;
 }
 
-#post-index-compose:hover { 
+#post-index-compose:hover {
     font-size: 22px;
     color: blueviolet
 }
 
+
+.write-cta-wrapper {
+    background-color: var(--offwhite-color);
+    border-radius: 20px;
+    margin: 50px 0px;
+    padding: 50px 100px 50px 100px;
+    text-align: center;
+    font-size: 22px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  }
 #to-profile-page:hover { 
     cursor: pointer;
 }
+

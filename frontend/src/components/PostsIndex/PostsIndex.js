@@ -44,15 +44,18 @@ function PostsIndex () {
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
           <div className='posts-index-header'>
-              <div id='all-pins-map-container'><AllPinsMap userPosts={posts} zoom={8}/></div>
-              <h2>You haven't written to {findFriend()} in awhile. </h2>
-              <Link to="/posts/new" className='posts-index-compose-link'><button>Send a postcard now?</button></Link>
+            <div className='write-cta-wrapper'>
+              <p>You haven't written to anyone in awhile. </p>
+              <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
+            </div>
           </div>
           <div className='posts-index-filter'>
+            <div className='posts-index-filter-bar' >
               <h5 id="filter-by">Filter by: </h5>
               <button className='filter-buttons'>All</button>
               <button className='filter-buttons'>Posts</button>
               <button className='filter-buttons'>Responses</button>
+            </div>
           </div>
 
         {posts.map(post => (

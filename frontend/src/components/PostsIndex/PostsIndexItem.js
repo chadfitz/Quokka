@@ -62,8 +62,6 @@ function PostsIndexItem ({ postId }) {
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
-                {/* {loading ? <Loader/> : mapPlaceholder} */}
-                {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>

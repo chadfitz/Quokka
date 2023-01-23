@@ -3,17 +3,20 @@
 }
 
 .post-index-item {
-  background: var(--accent-color);
+  background: var(--offwhite-color);
+  width: 100%;
   margin-top: 30px;
   height: var(--post-index-height);
-  width: var(--width);
   /* background-color: white; */
-  box-shadow: 0px 12px 18px 6px rgb(199, 199, 199);
+
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+
 
 .post-item-top {
   height: 84%;
@@ -138,3 +141,4 @@
   width: 33%;
   text-align: right;
 }
+
