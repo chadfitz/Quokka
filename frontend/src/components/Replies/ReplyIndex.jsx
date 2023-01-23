@@ -17,7 +17,7 @@ const ReplyIndex = ({ post }) => {
   return (
     <>
       ReplyIndex
-      {replies.map(reply => )}
+      {/* {replies.map(reply => )} */}
     </>
   )
 }
