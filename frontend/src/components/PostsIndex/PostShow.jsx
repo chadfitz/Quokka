@@ -20,7 +20,7 @@ import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png'
 import { composeReply, fetchReplies } from '../../store/replies';
-import ReplyBox from './ReplyBox';
+import ReplyBox from '../Replies/ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
 
 const PostShow = () => {
@@ -143,6 +143,22 @@ const PostShow = () => {
                 </div> */}
             </div>
             <div className='replies-show'>
+              <textarea label=""
+                className="reply-input"
+                value={reply}
+                onChange={replyChange}
+                wrap="hard"
+                rows="2"
+              />
+              <Button className="reply-btn" label="Reply"
+                type="submit" onClick={handleReply}
+              />
+              {replies.map(reply => {return (
+                <ReplyBox key={reply._id} replyId={reply._id} />
+              )})}
+
+            </div>
+            {/* <div className='replies-show'>
               {replies.map(reply => {return (
                 <ReplyBox key={reply._id} replyId={reply._id}/>
               )})},
@@ -156,22 +172,7 @@ const PostShow = () => {
               <Button className="reply-btn" label="Reply"
                 type="submit" onClick={handleReply}
               />
-            </div>
-            <div className='replies-show'>
-              {replies.map(reply => {return (
-                <ReplyBox key={reply._id} replyId={reply._id}/>
-              )})},
-              <Input label=""
-                className="reply-input"
-                type="textarea"
-                value={reply}
-                onChange={replyChange}
-              />
-
-              <Button className="reply-btn" label="Reply"
-                type="submit" onClick={handleReply}
-              />
-            </div>
+            </div> */}
         </div>
     </div>
   );
