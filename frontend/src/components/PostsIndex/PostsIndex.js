@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPostErrors, fetchPosts } from '../../store/posts';
+import { clearPostErrors, fetchPosts, fetchUserPosts } from '../../store/posts';
 import PostsIndexItem from './PostsIndexItem';
 import { Link } from 'react-router-dom';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
@@ -14,6 +14,12 @@ function PostsIndex () {
   const posts = useSelector(state => Object.values(state.posts.all));
   const friends = useSelector(state => state.friends)
   const currentUser = useSelector(state => state.session.user);
+  const userPosts = useSelector(state => Object.values(state.posts.user))
+  
+    useEffect(() => {
+    dispatch(fetchUserPosts(currentUser._id));
+    return () => dispatch(clearPostErrors());
+  }, [currentUser, dispatch]);
 
   useEffect(()=> { 
     dispatch(fetchUsers());
