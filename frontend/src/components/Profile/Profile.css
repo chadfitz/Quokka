@@ -1,21 +1,21 @@
-.profile-container{
+.profile-container {
     /* margin-top: 100px; */
     margin-top: var(--margin-top);
     margin-left: auto;
     margin-right: auto;
 }
 
-#welcome-corner{
+#welcome-corner {
     display: flex;
     justify-content: space-between;
 }
 
-#welcome-corner > h1 {
+#welcome-corner>h1 {
     margin: 0;
     padding: 0;
 }
 
-#welcome-corner img{
+#welcome-corner img {
     width: 60px;
     height: 60px;
     border-radius: 50px;
@@ -23,18 +23,18 @@
 
 
 
-#all-pins-map-container{
+#all-pins-map-container {
     display: flex;
     justify-content: center;
 }
 
-#friend-click-button{
+#friend-click-button {
     /* background-color: lightgrey; */
     width: fit-content;
     cursor: pointer;
 }
 
-#all-friends-container{
+#all-friends-container {
     margin-left: auto;
     margin-right: auto;
     display: grid;
@@ -47,6 +47,4 @@
 
 
 
-#single-friend{
-
-}
+#single-friend {}

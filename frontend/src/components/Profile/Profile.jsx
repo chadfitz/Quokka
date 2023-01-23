@@ -54,7 +54,7 @@ function Profile () {
                 {userFriends.map((friend, i) => (
                   <div id="single-friend">
                     {/* {friend} */}
-                    <SingleFriend recipientId={friend} key={friend.uniqueId}/>
+                    <SingleFriend friend={friend} key={friend.uniqueId}/>
                     {/* <UserTile recipient={friend}/> */}
                   </div>
                  ))}
