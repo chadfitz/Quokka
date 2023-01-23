@@ -32,39 +32,8 @@ router.get('/:userId', async (req, res, next) => {
       '_id': { $in: friendIds }
     });
 
-    const nonFriendsArray = await User.find({
-      '_id': { $nin: friendIds }
-    });
-
-    // var arr = [{key:"11", value:"1100"},{key:"22", value:"2200"}];
-    // const friendsObject = friendsArray.reduce(
-    //   (obj, item) => Object.assign(obj, { [item.key]: item.value }), {}
-    // );
-
-    console.log('friendsArray');
-    console.log(friendsArray);
-    console.log('nonFriendsArray');
-    console.log(nonFriendsArray);
-
     const friendsObject = friendsArray.reduce((obj, item) => (obj[item._id] = item, obj) , {});
-    // const nonFriendsObject = nonFriendsArray.reduce((obj, item) => (obj[item._id] = item, obj) ,{})
 
-    // let friends = {};
-    // friendIds.forEach(async friendId => {
-    //   console.log('friendId');
-    //   console.log(friendId);
-    //   let friend = await User.findById(friendId.toString());
-    //   console.log('friend');
-    //   console.log(friend);
-    //   friends[friendId] = friend;
-    //   console.log('friends');
-    //   console.log(friends);
-    // });
-
-    console.log('friends');
-    console.log(friendsObject);
-    // const res = await friends.json();
-    // var object2 = friendObjects;
     return res.json(friendsObject);
   } catch(err) {
     return res.status(404).json({ message: err.message });
