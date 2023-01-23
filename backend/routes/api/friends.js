@@ -65,10 +65,7 @@ router.get('/:userId', async (req, res, next) => {
     console.log(friendsObject);
     // const res = await friends.json();
     // var object2 = friendObjects;
-    return res.json(
-      friendsObject
-      // nonFriends: nonFriendsObject
-    );
+    return res.json(friendsObject);
   } catch(err) {
     return res.status(404).json({ message: err.message });
   }
