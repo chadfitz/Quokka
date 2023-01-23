@@ -30,6 +30,7 @@
 .reply-btn:hover{
   cursor: pointer;
   background-color: var(--primary-hover);
+  /* border: 1px solid #05256b; */
   transition: 0.3s;
 }
 

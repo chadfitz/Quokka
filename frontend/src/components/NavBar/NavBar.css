@@ -178,6 +178,7 @@ nav {
     width: 300px;
     transition: all ease-in 500ms;
     background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     color: white;
     font-size: 18px;
     line-height: 36px;
@@ -191,6 +192,7 @@ nav {
 #logout-dropdown-button:hover {
     cursor: pointer;
     background-color: var(--primary-hover);
+    border: 2px solid var(--primary-hover);
     transition: 0.3s;
 }
 

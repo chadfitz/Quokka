@@ -19,9 +19,11 @@
     color: var(--primary-color);
     font-size: 22px;
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 10px;
     padding: 10px;
-
+    /* line-height makes the words in line with the images */
+    line-height: 22px;
 }
 
 .sidebar div:hover{

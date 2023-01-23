@@ -12,7 +12,8 @@
 :root{
   --primary-color: #2A3347;
   /* --primary-hover: rgba(72, 31, 110, 0.932); */
-  --primary-hover: #70808F;;
+  /* --primary-hover: #70808F; */
+  --primary-hover: #05256b;
   --secondary-color: #70808F;
   --secondary-hover: #8194a5;
   --link-hover: rgba(50, 49, 49, 0.192);
