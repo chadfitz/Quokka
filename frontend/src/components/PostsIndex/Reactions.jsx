@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { createReaction, removeReaction } from "../../store/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { createReaction, removeReaction, selectPost, selectReactions } from "../../store/posts";
 import angry from '../../assets/quokka-angry.png';
 import button from '../../assets/quokka-button.png';
 import happy from '../../assets/quokka-happy.png';
@@ -10,8 +10,6 @@ import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png';
 
-import { useDispatch, useSelector } from "react-redux";
-import { createReaction, removeReaction, selectPost, selectReactions } from "../../store/posts";
 
 import './Reactions.css'
 

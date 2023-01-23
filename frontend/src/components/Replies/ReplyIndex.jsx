@@ -1,17 +1,24 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchReplies } from '../../store/replies';
 
-const ReplyIndex = () => {
-  const sessionUser = useSelector(state => state.session.user)
+const ReplyIndex = ({ post }) => {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user)
+  const replies = useSelector(store => {
+    return Object.values(store.replies).find(obj => obj._id === post._id)
+  })
 
-
+  useEffect(()=>{
+    dispatch(fetchReplies());
+  }, [dispatch])
 
   return (
-    <div className='reply-container'>
+    <>
       ReplyIndex
-      {/* add reply index item here */}
-    </div>
+      {replies.map(reply => )}
+    </>
   )
 }
 

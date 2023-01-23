@@ -16,6 +16,7 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png'
+import ReplyIndex from '../Replies/ReplyIndex';
 
 const PostShow = () => {
   const { postId } = useParams();
@@ -34,29 +35,21 @@ const PostShow = () => {
   }, [dispatch, postId])
 
   const handleDelete = (e) => {
-      e.preventDefault();
-      dispatch(deletePost(postId))
+    e.preventDefault();
+    dispatch(deletePost(postId))
   }
 
   const handleEdit = e => {
-      e.preventDefault();
-      history.push(`/posts/${postId}/edit`);
+    e.preventDefault();
+    history.push(`/posts/${postId}/edit`);
   }
-  
-//   useEffect(()=>{
-//       console.log(emotions)
-//       emotions = reactionObject ? reactionObject.emotions : null
-//       console.log(emotions)
-//     }, [emotions])
-    
-    // this needs to be above the reactionObject & emotions, otherwise 
-    // there's errors on refresh, but then we can't use the useEffect
-    if (!post) return null;
-    
-    const reactionObject = post.reactions?.find((reaction) => {
-        return reaction.user == sessionUser._id
-      })
-      let emotions = reactionObject ? reactionObject.emotions : null
+
+  if (!post) return null;
+
+  const reactionObject = post.reactions?.find((reaction) => {
+    return reaction.user == sessionUser._id
+  })
+  let emotions = reactionObject ? reactionObject.emotions : null
     
     return (
       <div className='whole-page-styling'>
@@ -114,6 +107,9 @@ const PostShow = () => {
                                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
                             </div>
                     </div>
+                </div>
+                <div className='reply-index-container'>
+                    <ReplyIndex post={post} />
                 </div>
             </div>
         </div>
