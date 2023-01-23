@@ -7,8 +7,11 @@ const UserTile = ({recipient, backgroundColor}) => {
   const dispatch = useDispatch();
   const requester = useSelector(state => state.session.user);
   const isFriend = useSelector(state => {
-    return state.friends?.includes(recipient._id.toString())
+    return state.friends?.hasOwnProperty(recipient?._id.toString());
   });
+
+  console.log('recipient');
+  console.log(recipient);
 
   let data = {
     requester: requester,
@@ -26,8 +29,6 @@ const UserTile = ({recipient, backgroundColor}) => {
 
   const handleDeleteFriend = () => {
     console.log('Delete Friend Clicked');
-
-
     dispatch(deleteFriend(recipient._id));
   }
 

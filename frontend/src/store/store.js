@@ -5,11 +5,13 @@ import errors from './errors';
 import posts from './posts';
 import users from './users';
 import friends from './friends';
+import replies from './replies';
 
 const rootReducer = combineReducers({
   session,
   errors,
   posts,
+  replies,
   friends,
   users,
 });

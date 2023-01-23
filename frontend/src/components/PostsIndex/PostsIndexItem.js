@@ -10,7 +10,14 @@ import { useEffect, useState } from 'react';
 import Loader from '../GoogleMap/Loader';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import angry from '../../assets/quokka-angry.png';
+import button from '../../assets/quokka-button.png';
+import happy from '../../assets/quokka-happy.png';
+import hungry from '../../assets/quokka-hungry.png';
+import laughing from '../../assets/quokka-laughing.png';
+import love from '../../assets/quokka-love.png';
+import sad from '../../assets/quokka-sad.png';
+import sleepy from '../../assets/quokka-sleepy.png';
 
 // import { useState } from 'react';
 import './PostIndexItem.css';
@@ -44,7 +51,7 @@ function PostsIndexItem ({ postId }) {
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
-    const emotions = reactionObject ? reactionObject.emotions : null
+    let emotions = reactionObject ? reactionObject.emotions : null
 
     return (
     <div className="post-index-item">
@@ -80,14 +87,22 @@ function PostsIndexItem ({ postId }) {
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li className='reaction'>😀</li>
-                        if (emotion == "remember") return <li className='reaction'>🥲</li>
-                        if (emotion == "tom") return <li className='reaction'>😎</li>
-                        if (emotion == "NERD!") return <li className='reaction'>🤓</li>
+                        if (emotion == "like") return <li className='reaction'>
+                                <img src={happy} className='reaction-image'/>
+                            </li>
+                        if (emotion == "remember") return <li className='reaction'>
+                                <img src={hungry} className='reaction-image'/>
+                            </li>
+                        if (emotion == "tom") return <li className='reaction'>
+                                <img src={laughing} className='reaction-image'/> 
+                            </li>
+                        if (emotion == "NERD!") return <li className='reaction'>
+                                <img src={love} className='reaction-image'/>
+                            </li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
-                <Reactions user={sessionUser} post={post}></Reactions>
+                <Reactions user={sessionUser} post={post} postId={post._id}></Reactions>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>
