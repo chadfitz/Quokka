@@ -1,16 +1,50 @@
-.profile-container{
+.profile-container {
     /* margin-top: 100px; */
     margin-top: var(--margin-top);
     margin-left: auto;
     margin-right: auto;
 }
 
-.profile-header{
-    /* move because of map borders on sides */
-    padding-left: 20px;
+#welcome-corner {
+    display: flex;
+    justify-content: space-between;
 }
 
-#all-pins-map-container{
+#welcome-corner>h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#welcome-corner img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+
+
+#all-pins-map-container {
     display: flex;
     justify-content: center;
 }
+
+#friend-click-button {
+    /* background-color: lightgrey; */
+    width: fit-content;
+    cursor: pointer;
+}
+
+#all-friends-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 50px;
+    column-gap: 10px;
+}
+
+
+
+
+
+#single-friend {}

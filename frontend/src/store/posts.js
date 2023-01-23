@@ -79,10 +79,10 @@ export const fetchUserPosts = id => async dispatch => {
     const posts = await res.json();
     dispatch(receiveUserPosts(posts));
   } catch(err) {
-    const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      return dispatch(receiveErrors(resBody.errors));
-    }
+    // const resBody = await err.json();
+    // if (resBody.statusCode === 400) {
+    //   return dispatch(receiveErrors(resBody.errors));
+    // }
   }
 };
 
