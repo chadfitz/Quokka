@@ -175,6 +175,7 @@ export const createReaction = (reactorId, postId, newEmotion) => async dispatch 
 }
 
 
+
 // copy pasta code. don't assume it works
 export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
   try {
@@ -196,6 +197,12 @@ export const removeReaction = (reactorId, postId, emotionToRemove) => async disp
     console.error("CREATE REACTION FAILED")
   }
 }
+
+// SELECTORS
+export const selectPost = (postId) => store => {
+  return Object.values(store.posts.all).find(obj => obj._id === postId);
+}
+
 
 const nullErrors = null;
 

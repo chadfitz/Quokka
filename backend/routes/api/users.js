@@ -98,7 +98,8 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
       try {
         newUser.hashedPassword = hashedPassword;
         const user = await newUser.save();
-        return res.json({ user });
+        // return res.json({ user });
+        return res.json(await loginUser(user));
       }
       catch(err) {
         next(err);

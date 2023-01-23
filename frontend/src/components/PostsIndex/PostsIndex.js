@@ -1,18 +1,40 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPostErrors, fetchPosts } from '../../store/posts';
+import { clearPostErrors, fetchPosts, fetchUserPosts } from '../../store/posts';
 import PostsIndexItem from './PostsIndexItem';
 import { Link } from 'react-router-dom';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import './PostsIndex.css';
+import { fetchFriends } from '../../store/friends';
+import { fetchUsers } from '../../store/users';
+
 
 function PostsIndex () {
   const dispatch = useDispatch();
   const posts = useSelector(state => Object.values(state.posts.all));
+  const friends = useSelector(state => state.friends)
+  const currentUser = useSelector(state => state.session.user);
+  const userPosts = useSelector(state => Object.values(state.posts.user))
+  
+    useEffect(() => {
+    dispatch(fetchUserPosts(currentUser._id));
+    return () => dispatch(clearPostErrors());
+  }, [currentUser, dispatch]);
+
+  useEffect(()=> { 
+    dispatch(fetchUsers());
+    dispatch(fetchFriends(currentUser))
+  }, [])
+
+  const findFriend= () => {
+    
+    if (!friends.length) return null 
+    const index = Math.floor(Math.random() * friends.length)
+    return friends[index]
+  }
 
   useEffect(() => {
     dispatch(fetchPosts());
-    console.log("in useEffect")
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
 

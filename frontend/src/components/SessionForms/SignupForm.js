@@ -9,6 +9,7 @@ function SignupForm () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [bio, setBio] = useState('');
   const [image, setImage] = useState(null);
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
@@ -32,6 +33,9 @@ function SignupForm () {
       case 'username':
         setState = setUsername;
         break;
+      case 'bio':
+        setState = setBio;
+        break;
       case 'password':
         setState = setPassword;
         break;
@@ -51,8 +55,10 @@ function SignupForm () {
       email,
       username,
       image,
-      password
+      password,
+      bio
     };
+    console.log(user)
     dispatch(signup(user)); 
   }
 
@@ -80,8 +86,17 @@ function SignupForm () {
         <input type="text"
           value={username}
           onChange={update('username')}
-          placeholder="Username"
+          placeholder="First Name"
           id='login-input'
+        />
+      </label>
+        <div className="errors">{errors?.bio}</div>
+      <label>
+        <textarea type="text"
+          value={bio}
+          onChange={update('bio')}
+          placeholder="Bio"
+          id='login-textarea'
         />
       </label>
       <div className="errors">{errors?.password}</div>
