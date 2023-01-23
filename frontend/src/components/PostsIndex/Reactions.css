@@ -17,17 +17,18 @@
 }
 
 .reaction-button.create-reaction {
-  width: auto;
-  height: auto;
+  width: 50px;
+  height: 50px;
   padding: 5px;
   border-radius: 50%;
-  background-color: rgb(221, 221, 221);
+  background-color: root(--offwhite-color);
   font-size: 30px;
   border: none;
 }
 
 .reaction-button.create-reaction:hover {
   cursor: pointer;
+  background-color: var(--primary-color);
 }
 
 .reaction-icon.toolbar {
