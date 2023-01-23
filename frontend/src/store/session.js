@@ -31,11 +31,12 @@ export const signup = user => startSession(user, 'api/users/register');
 export const login = user => startSession(user, 'api/users/login');
 
 const startSession = (userInfo, route) => async dispatch => {
-  const { image, username, password, email } = userInfo;
+  const { image, username, password, email, bio } = userInfo;
   const formData = new FormData();
   formData.append("username", username);
   formData.append("password", password);
   formData.append("email", email);
+  formData.append("bio", bio)
 
   if (image) formData.append("image", image);
 

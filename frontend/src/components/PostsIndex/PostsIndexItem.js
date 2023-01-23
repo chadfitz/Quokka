@@ -48,6 +48,11 @@ function PostsIndexItem ({ postId }) {
         history.push(`/posts/${postId}`);
     }
 
+    const handleProfile = e => { 
+        e.preventDefault()
+        history.push(`/profile/${post.writer._id}`)
+  }
+
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
@@ -66,13 +71,17 @@ function PostsIndexItem ({ postId }) {
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
-                    {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" }
+                    {post.imageUrls ? post.imageUrls.map(image => { 
+                        return <img id="post-item-photo" src={image} alt=""/>
+                    }) : 
+                    ""}
+                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
+                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>
             <div className='post-index-date'>
-                <div>
+                <div id="to-profile-page" onClick={handleProfile}>
                     <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                 </div>
                 {sessionUser?._id === post.writer._id &&
