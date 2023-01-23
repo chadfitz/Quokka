@@ -21,7 +21,8 @@ router.get('/user/:userId', async (req, res, next) => {
   try {
     const posts = await Post.find({ writer: user._id })
                               .sort({ createdAt: -1 })
-                              .populate("writer", "_id, username, profileImageUrl");
+                              .populate("recipient", "_id, username")
+                              .populate("writer", "_id, username profileImageUrl");
     return res.json(posts);
   }
   catch(err) {

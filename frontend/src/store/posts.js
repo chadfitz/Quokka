@@ -91,9 +91,12 @@ export const composePost = data => async dispatch => {
   const formData = new FormData();
   formData.append("body", body);
   formData.append("location", JSON.stringify(location));
-  formData.append("recipient", recipient._id);
+  // console.log("recipient")
+  // console.log(recipient)
+  formData.append("recipient", recipient);
   formData.append("subject", subject);
   formData.append("writer", writer);
+  // console.log(formData)
 
   Array.from(images).forEach(image => formData.append("images", image));
   try {

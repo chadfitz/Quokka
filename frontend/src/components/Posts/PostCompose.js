@@ -32,13 +32,14 @@ function PostCompose () {
   }, [])
 
   const findFriend= () => {
+    if (!Object.values(friends).length) return null 
+    const allFriends = Object.values(friends)
     
-    if (!friends.length) return null 
-    const index = Math.floor(Math.random() * friends.length)
+    
     // setRecipient(friends[index])
-    return friends[index]
+    return allFriends
   }
-  const fart = findFriend()
+ 
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -74,7 +75,7 @@ function PostCompose () {
   if (formType === 'Create') {
     post = {
       writer,
-      recipient: writer,
+      //,
       images,
       location: {
         "type": "Point",
@@ -92,7 +93,7 @@ function PostCompose () {
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
   // TODO: convert recipient to props / etc. (not useState)
-  const [recipient, setRecipient] = useState(post.recipient);
+  const [recipient, setRecipient] = useState("");
   // TODO: connect me to google maps api
   const [location, setLocation] = useState(post.location);
   const newPost = useSelector(state => state.posts.new);
@@ -132,7 +133,7 @@ function PostCompose () {
         subject,
         body
       }
-      console.log(body)
+     
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -157,11 +158,18 @@ function PostCompose () {
     // TODO: CLEAR OTHER FIELDS (not just body)?
     setBody('');
   };
+ 
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
+  const changeRecipient = (friend) => { 
+    console.log(friend)
+    setRecipient(friend._id)
+  }
+  console.log("recipient")
+  console.log(recipient)
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
@@ -176,7 +184,13 @@ function PostCompose () {
             </div>
             <div className="text-editor">
                 <div className='compose-heading'>
-                  <h2>Compose Post to {fart} </h2>
+                  <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
+                    <select name="recipient" id="recipient" onChange={e => setRecipient(e.target.value)}>
+                      {findFriend()?.map((friend, index) => { 
+                        // {console.log(friend)}
+                        return <option key={index} value={friend._id}>{friend.username}</option>
+                      })}
+                    </select>
                 </div>
 
                 <Input
@@ -222,10 +236,6 @@ function PostCompose () {
             <div className='compose-bottom'>
               <div className="errors">{errors && errors.body}</div>
             </div>
-            <div>
-              {/* {body && <Markup content={body} />} */}
-              {/* <div>{writer}</div> */}
-            </div>
         </div>
       </div>
     </div>
@@ -235,33 +245,3 @@ function PostCompose () {
 export default PostCompose;
 
 
-
-//   const findFriends = () => { 
-//     let friendGroup = []
-//     users.map(user => { 
-//       if (friends.includes(user._id)) { 
-//         friendGroup.push(user)
-//       }
-//     })
-//     return friendGroup
-//   }
-
-//   const shuffle = (array) => {
-//   let currentIndex = array.length,  randomIndex;
-
-//   // While there remain elements to shuffle.
-//   while (currentIndex != 0) {
-
-//     // Pick a remaining element.
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex--;
-
-//     // And swap it with the current element.
-//     [array[currentIndex], array[randomIndex]] = [
-//       array[randomIndex], array[currentIndex]];
-//   }
-
-//   return array[0];
-// }
-  // console.log(findFriends())
-  // console.log(shuffle(findFriends()))
