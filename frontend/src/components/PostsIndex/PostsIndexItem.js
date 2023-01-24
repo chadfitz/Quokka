@@ -29,6 +29,7 @@ function PostsIndexItem ({ postId }) {
     const history = useHistory();
     const errors = useSelector(state => state.errors.posts);
     const sessionUser = useSelector(state => state.session.user);
+    const allReactions = useSelector(state => state.reactions)
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
     });
@@ -56,7 +57,15 @@ function PostsIndexItem ({ postId }) {
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
-    let emotions = reactionObject ? reactionObject.emotions : null
+
+
+       // need to get just reactions per post, so must turn obj to array
+    console.log("all reactions", allReactions)
+    const emotions = Object.entries(allReactions).filter((item)=>{
+        return (item == item)
+    })
+
+    console.log(emotions)
 
     return (
     <div className="post-index-item">
@@ -96,18 +105,19 @@ function PostsIndexItem ({ postId }) {
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li className='reaction'>
-                                <img src={happy} className='reaction-image'/>
-                            </li>
-                        if (emotion == "remember") return <li className='reaction'>
-                                <img src={hungry} className='reaction-image'/>
-                            </li>
-                        if (emotion == "tom") return <li className='reaction'>
-                                <img src={laughing} className='reaction-image'/>
-                            </li>
-                        if (emotion == "NERD!") return <li className='reaction'>
-                                <img src={love} className='reaction-image'/>
-                            </li>
+                        // if (emotion == "like") return <li className='reaction'>
+                        //         <img src={happy} className='reaction-image'/>
+                        //     </li>
+                        // if (emotion == "remember") return <li className='reaction'>
+                        //         <img src={hungry} className='reaction-image'/>
+                        //     </li>
+                        // if (emotion == "tom") return <li className='reaction'>
+                        //         <img src={laughing} className='reaction-image'/>
+                        //     </li>
+                        // if (emotion == "NERD!") return <li className='reaction'>
+                        //         <img src={love} className='reaction-image'/>
+                        //     </li>
+                        <li>{emotion}</li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
