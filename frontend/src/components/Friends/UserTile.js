@@ -12,9 +12,6 @@ const UserTile = ({recipient, backgroundColor}) => {
     return state.friends?.hasOwnProperty(recipient?._id.toString());
   });
 
-  console.log('recipient');
-  console.log(recipient);
-
   let data = {
     requester: requester,
     recipient: recipient,
@@ -45,7 +42,7 @@ const UserTile = ({recipient, backgroundColor}) => {
       <div id='friend-username' onClick={handleProfile}>{recipient.username}</div>
 
       <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
-      <div id='friend-button' onClick={handleProfile}><button>VISIT</button></div>
+      {/* <div id='friend-button' onClick={handleProfile}><button>VISIT</button></div> */}
       <div>{recipient.bio}</div>
       <div id='friend-button'>
         {isFriend

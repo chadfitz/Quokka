@@ -18,7 +18,6 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png';
-
 // import { useState } from 'react';
 import './PostIndexItem.css';
 import './PostsIndex.css';

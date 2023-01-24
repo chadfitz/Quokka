@@ -21,10 +21,10 @@ function UserProfile () {
     
 
   useEffect(() => {  
-    // const userG = FindUser()
-    dispatch(fetchUserPosts(user?._id));
+    
+    dispatch(fetchUserPosts(userId));
     return () => dispatch(clearPostErrors());
-  }, [user, dispatch]);
+  }, [user, userId, dispatch]);
 
   if (!user) return null
 
@@ -35,17 +35,14 @@ function UserProfile () {
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
           <div className='profile-container'>
-            <h2 className='profile-header'>All of {user?.username}'s Posts</h2>
+            <div id='welcome-corner'>
+              <h2 className='profile-header'>All of {user?.username}'s Posts</h2>
+              <img src={user?.profileImageUrl} alt="profile-pic"/>
+            </div>
             <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
             {userPosts.map((post, i) => (
               <>
-                {/* {console.log(post)} */}
-                {/* <PostBox
-                  key={post._id}
-                  body={post.body}
-                /> */}
                 <PostsIndexItem postId={post._id}/>
-                {/* <Map key={i} postId={i}/> */}
               </>
             ))}
           </div>
