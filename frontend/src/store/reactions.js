@@ -69,16 +69,14 @@ export const createReaction = (userId, postId, style) => async dispatch => {
   }
 }
 
-// wont work -- needs to be refactored for top level reaction id
+// REFACTORING --
 export const deleteReaction = (reactionId) => async dispatch => {
   try {
-    console.log("DELETE THUNK ACTION CREATOR")
     const res = await jwtFetch(`/api/reactions/deleteReaction/${reactionId}`,{
       method: 'DELETE'})
-    const newasdf = await res.json();
+    const data = await res.json();
     if (res.ok) {
-      console.log("RESPONSE WAS OKAY")
-      dispatch(removeReaction(newasdf))
+      dispatch(removeReaction(reactionId))
     }
 
   } catch {
@@ -87,7 +85,7 @@ export const deleteReaction = (reactionId) => async dispatch => {
 }
 
 const initialState = {
-  // todo
+  // Used During Testing
 }
 
 const reactionsReducer = (state = initialState, action) => {
