@@ -11,10 +11,14 @@ const { requireUser } = require('../../config/passport');
 //// PostId
 //// Emotion
 
-router.patch('/createReaction/', async (req, res, next) => {
-  console.log("hitting the intended rout")
+router.post('/createReaction/', async (req, res, next) => {
+  console.log("hitting create reaction")
   return res.json({msg: "Success"})
 });
+
+router.delete('/deleteReaction/:id', async (req, res, next) => {
+  console.log("hitting delete reaction")
+})
 
 
 router.get('/:postId', async (req, res, next) => {

@@ -40,19 +40,18 @@ export const fetchReaction = (postId) => async dispatch => {
   dispatch(receiveReactions(reactions));
 }
 
-export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
+export const createReaction = (reactorId, postId, body) => async dispatch => {
   try {
-    console.log("THUNK ACTION CREATOR")
-    const res = await jwtFetch(`/api/reactions/createReaction/${postId}`,{
-      method: 'PATCH',
+    const res = await jwtFetch(`/api/reactions/createReaction`,{
+      method: 'POST',
       body: JSON.stringify({
         reactorId,
-        newEmotion
+        postId,
+        body
       })
     })
     const reaction = await res.json();
     if (res.ok) {
-      console.log("GOOD REACTION RESPONSE:", reaction)
       dispatch(receiveReaction(reaction))
     }
   } catch {
@@ -61,25 +60,19 @@ export const createReaction = (reactorId, postId, newEmotion) => async dispatch 
 }
 
 // wont work -- needs to be refactored for top level reaction id
-export const deleteReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
+export const deleteReaction = (reactionId) => async dispatch => {
   try {
-    console.log("THUNK ACTION CREATOR")
-    const res = await jwtFetch(`/api/reactions/removeReaction/${postId}`,{
-      method: 'PATCH',
-      body: JSON.stringify({
-        reactorId,
-        emotionToRemove
-      })
-    })
-    // broken code
-    const reactionId = await res.json();
+    console.log("DELETE THUNK ACTION CREATOR")
+    const res = await jwtFetch(`/api/reactions/deleteReaction/${reactionId}`,{
+      method: 'DELETE'})
+    const newasdf = await res.json();
     if (res.ok) {
       console.log("RESPONSE WAS OKAY")
-      dispatch(removeReaction(reactionId))
+      dispatch(removeReaction(newasdf))
     }
 
   } catch {
-    console.error("CREATE REACTION FAILED")
+    console.error("DELETE REACTION FAILED")
   }
 }
 

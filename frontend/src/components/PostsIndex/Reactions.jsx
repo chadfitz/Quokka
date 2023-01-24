@@ -54,7 +54,7 @@ const Reactions = ({ user, postId }) => {
     } else {
       // if the user reaction object has the target emotion, remove it
       console.log("about to remove reaction")
-      dispatch(deleteReaction(sessionUser._id, post._id, newEmotion))
+      dispatch(deleteReaction(1))
     }
 
   }
