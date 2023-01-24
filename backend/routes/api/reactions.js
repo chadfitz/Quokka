@@ -12,8 +12,18 @@ const { requireUser } = require('../../config/passport');
 //// Emotion
 
 router.post('/createReaction/', async (req, res, next) => {
-  console.log("hitting create reaction")
-  return res.json({msg: "Success"})
+  const { userId, postId, style } = req.body
+  const newReaction = new Reaction({
+    userId,
+    postId,
+    style
+  });
+
+
+  let reaction = await newReaction.save();
+  const reactionObject = {[reaction._id]: reaction};
+
+  return res.json(reactionObject);
 });
 
 router.delete('/deleteReaction/:id', async (req, res, next) => {
@@ -21,21 +31,21 @@ router.delete('/deleteReaction/:id', async (req, res, next) => {
 })
 
 
-router.get('/:postId', async (req, res, next) => {
-  let repliesArray;
-  try {
-    repliesArray = await Reply.find({post: req.params.postId})
-                         .populate("user", "_id, username profileImageUrl")
-                         .sort({ createdAt: -1 })
-  } catch (err) {
-    const error = new Error('Reply not found');
-    error.statusCode = 404;
-    error.errors = { message: "No reply found with that id" };
-    return next(error);
-  }
-  const repliesObject = repliesArray.reduce((obj, item) => (obj[item._id] = item, obj) , {});
-  return res.json(repliesObject);
-});
+// router.get('/:postId', async (req, res, next) => {
+//   let repliesArray;
+//   try {
+//     repliesArray = await Reply.find({post: req.params.postId})
+//                          .populate("user", "_id, username profileImageUrl")
+//                          .sort({ createdAt: -1 })
+//   } catch (err) {
+//     const error = new Error('Reply not found');
+//     error.statusCode = 404;
+//     error.errors = { message: "No reply found with that id" };
+//     return next(error);
+//   }
+//   const repliesObject = repliesArray.reduce((obj, item) => (obj[item._id] = item, obj) , {});
+//   return res.json(repliesObject);
+// });
 
 // router.post('/:postId', requireUser, upload.none(), async (req, res, next) => {
 //   const newReply = new Reply({

@@ -11,7 +11,7 @@ const reactionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  body: String
+  style: String
 });
 
 module.exports = mongoose.model('Reaction', reactionSchema);
