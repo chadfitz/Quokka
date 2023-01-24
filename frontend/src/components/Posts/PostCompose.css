@@ -54,6 +54,15 @@
   margin: 0 0;
 }
 
+.compose-heading > label { 
+  margin-left: 10px;
+}
+
+.compose-heading { 
+  display: flex;
+}
+
+
 .post-subject{
   margin: 0;
 }

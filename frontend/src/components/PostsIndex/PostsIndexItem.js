@@ -74,8 +74,6 @@ function PostsIndexItem ({ postId }) {
                         return <img id="post-item-photo" src={image} alt=""/>
                     }) :
                     ""}
-                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>

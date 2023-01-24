@@ -91,6 +91,7 @@ body {
 #post-item-photo {
     height: 100px;
     width: auto;
+    margin-right: 15px;
 }
 
 #post-index-compose {
