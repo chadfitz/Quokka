@@ -58,8 +58,12 @@ function PostsIndexItem ({ postId }) {
         return reaction.user == sessionUser._id
       })
 
-       // the next few lines of code should stay in the post index item, but are going here for testing
-    const emotions = Object.entries(allReactions).filter(item=>(item[1].postId == postId && item[1].userId == sessionUser._id))
+    //    // the next few lines of code should stay in the post index item, but are going here for testing
+    // const sessionUserReactions = Object.entries(allReactions).filter(item=>(item[1].postId == postId && item[1].userId == sessionUser._id))
+
+    const postReactions = Object.entries(allReactions).filter(item => item[1].postId == postId)
+
+    const sessionUserReactions = postReactions.filter(item => item[1].userId == sessionUser._id)
 
 
     return (
@@ -99,7 +103,7 @@ function PostsIndexItem ({ postId }) {
         <div className='post-item-bottom-container'>
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
-                    {emotions?.map(emotion=>{
+                    {sessionUserReactions?.map(emotion=>{
                         if (emotion.type == "like") return <li className='reaction'>
                                 <img src={happy} className='reaction-image'/>
                             </li>
