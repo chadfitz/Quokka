@@ -79,7 +79,10 @@ router.delete('/deleteReaction/:id', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   let reactions = await Reaction.find()
-  return res.json(reactions);
+  let formatted = reactions.reduce((prev, cur)=>{
+    return { ...prev, [cur._id]: cur}
+  }, {})
+  return res.json(formatted);
 });
 
 module.exports = router;

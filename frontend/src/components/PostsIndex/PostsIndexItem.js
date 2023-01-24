@@ -65,7 +65,7 @@ function PostsIndexItem ({ postId }) {
         return (item == item)
     })
 
-    console.log(emotions)
+    console.log("EMOTIONS:", emotions)
 
     return (
     <div className="post-index-item">
