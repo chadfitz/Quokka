@@ -40,14 +40,14 @@ export const fetchReaction = (postId) => async dispatch => {
   dispatch(receiveReactions(reactions));
 }
 
-export const createReaction = (reactorId, postId, body) => async dispatch => {
+export const createReaction = (userId, postId, style) => async dispatch => {
   try {
     const res = await jwtFetch(`/api/reactions/createReaction`,{
       method: 'POST',
       body: JSON.stringify({
-        reactorId,
+        userId,
         postId,
-        body
+        style
       })
     })
     const reaction = await res.json();

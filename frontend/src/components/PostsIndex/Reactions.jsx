@@ -15,9 +15,16 @@ import { selectPost } from "../../store/posts";
 const Reactions = ({ user, postId }) => {
   const sessionUser = useSelector(state => state.session.user);
   const post = useSelector(selectPost(postId));
+  const allReactions = useSelector(state => state.reactions)
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
 
+  // need to get just reactions per post, so must turn obj to array
+  console.log("all reactions", allReactions)
+  const stepOne = Object.entries(allReactions).filter((item)=>{
+    return (item[1])
+  })
+  console.log("step one:", stepOne)
 
 
   const openMenu = () => {
