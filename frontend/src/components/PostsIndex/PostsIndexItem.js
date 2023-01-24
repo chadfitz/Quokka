@@ -102,22 +102,24 @@ function PostsIndexItem ({ postId }) {
         </div>
         <div className='post-item-bottom-container'>
             <div className='post-item-bottom'>
+                <p>{postReactions.length} reactions</p>
                 <ul className="reaction-bar">
                     {sessionUserReactions?.map(emotion=>{
-                        if (emotion.type == "like") return <li className='reaction'>
+                        if (emotion[1].style === "like") return <li className='reaction'>😎
                                 <img src={happy} className='reaction-image'/>
                             </li>
-                        if (emotion.type == "remember") return <li className='reaction'>
+                        if (emotion[1].style == "remember") return <li className='reaction'>
                                 <img src={hungry} className='reaction-image'/>
                             </li>
-                        if (emotion.type == "tom") return <li className='reaction'>
+                        if (emotion[1].style == "tom") return <li className='reaction'>
                                 <img src={laughing} className='reaction-image'/>
                             </li>
-                        if (emotion.type == "NERD!") return <li className='reaction'>
+                        if (emotion[1].style == "NERD!") return <li className='reaction'>
                                 <img src={love} className='reaction-image'/>
                             </li>
-                        {console.log(emotion[0])}
-                        return <li>{emotion[0]}</li>
+                        // {console.log(emotion[0])}
+                        // //{emotion[1].style}
+                        // return <li className='reaction'>😎</li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
