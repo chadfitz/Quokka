@@ -6,6 +6,7 @@ import posts from './posts';
 import users from './users';
 import friends from './friends';
 import replies from './replies';
+import reactions from './reactions';
 
 const rootReducer = combineReducers({
   session,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   replies,
   friends,
   users,
+  reactions
 });
 
 let enhancer;

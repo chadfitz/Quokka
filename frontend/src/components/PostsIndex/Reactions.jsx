@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReaction, removeReaction, selectPost, selectReactions } from "../../store/posts";
+import { createReaction, deleteReaction } from "../../store/reactions";
 import angry from '../../assets/quokka-angry.png';
 import button from '../../assets/quokka-button.png';
 import happy from '../../assets/quokka-happy.png';
@@ -9,15 +9,15 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png';
-
-
 import './Reactions.css'
+import { selectPost } from "../../store/posts";
 
 const Reactions = ({ user, postId }) => {
   const sessionUser = useSelector(state => state.session.user);
   const post = useSelector(selectPost(postId));
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
+
 
 
   const openMenu = () => {
@@ -54,7 +54,7 @@ const Reactions = ({ user, postId }) => {
     } else {
       // if the user reaction object has the target emotion, remove it
       console.log("about to remove reaction")
-      dispatch(removeReaction(sessionUser._id, post._id, newEmotion))
+      dispatch(deleteReaction(sessionUser._id, post._id, newEmotion))
     }
 
   }
