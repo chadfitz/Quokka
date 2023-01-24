@@ -7,6 +7,7 @@ import AllPinsMap from '../GoogleMap/AllPinsMap';
 import './PostsIndex.css';
 import { fetchFriends } from '../../store/friends';
 import { fetchUsers } from '../../store/users';
+import { fetchReactions } from '../../store/reactions';
 
 
 function PostsIndex () {
@@ -15,20 +16,22 @@ function PostsIndex () {
   const friends = useSelector(state => state.friends)
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
-  
+
     useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     return () => dispatch(clearPostErrors());
   }, [currentUser, dispatch]);
 
-  useEffect(()=> { 
+  useEffect(()=> {
     dispatch(fetchUsers());
-    dispatch(fetchFriends(currentUser))
+    dispatch(fetchFriends(currentUser));
+    dispatch(fetchReactions());
   }, [])
 
+
   const findFriend= () => {
-    
-    if (!friends.length) return null 
+
+    if (!friends.length) return null
     const index = Math.floor(Math.random() * friends.length)
     return friends[index]
   }
@@ -37,6 +40,10 @@ function PostsIndex () {
     dispatch(fetchPosts());
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
+
+       // need to get just reactions per post, so must turn obj to array
+    // console.log("all reactions", allReactions)
+
 
   if (posts.length === 0) return <div>There are no Posts</div>;
 

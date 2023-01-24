@@ -156,50 +156,12 @@ export const deletePost = postId => async dispatch => {
 
 // reactions
 
-export const createReaction = (reactorId, postId, newEmotion) => async dispatch => {
-  try {
-    console.log("THUNK ACTION CREATOR")
-    const res = await jwtFetch(`/api/posts/createReaction/${postId}`,{
-      method: 'PATCH',
-      body: JSON.stringify({
-        reactorId,
-        newEmotion
-      })
-    })
-    const updatedPost = await res.json();
-    if (res.ok) {
-      console.log("RESPONSE WAS OKAY")
-      dispatch(receiveNewPost(updatedPost))
-    }
 
-  } catch {
-    console.error("CREATE REACTION FAILED")
-  }
-}
 
 
 
 // copy pasta code. don't assume it works
-export const removeReaction = (reactorId, postId, emotionToRemove) => async dispatch => {
-  try {
-    console.log("THUNK ACTION CREATOR")
-    const res = await jwtFetch(`/api/posts/removeReaction/${postId}`,{
-      method: 'PATCH',
-      body: JSON.stringify({
-        reactorId,
-        emotionToRemove
-      })
-    })
-    const updatedPost = await res.json();
-    if (res.ok) {
-      console.log("RESPONSE WAS OKAY")
-      dispatch(receiveNewPost(updatedPost))
-    }
 
-  } catch {
-    console.error("CREATE REACTION FAILED")
-  }
-}
 
 // SELECTORS
 export const selectPost = (postId) => store => {
