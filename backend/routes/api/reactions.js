@@ -27,7 +27,9 @@ router.post('/createReaction/', async (req, res, next) => {
 });
 
 router.delete('/deleteReaction/:id', async (req, res, next) => {
-  console.log("hitting delete reaction")
+  const { id } = req.params
+  const reaction  = await Reaction.deleteOne({_id: id})
+  return res.json(reaction)
 })
 
 
@@ -75,5 +77,9 @@ router.delete('/deleteReaction/:id', async (req, res, next) => {
 //   }
 // });
 
+router.get('/', async (req, res, next) => {
+  let reactions = await Reaction.find()
+  return res.json(reactions);
+});
 
 module.exports = router;
