@@ -28,6 +28,7 @@ function PostsIndex () {
     dispatch(fetchReactions());
   }, [])
 
+
   const findFriend= () => {
 
     if (!friends.length) return null
@@ -39,6 +40,10 @@ function PostsIndex () {
     dispatch(fetchPosts());
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
+
+       // need to get just reactions per post, so must turn obj to array
+    // console.log("all reactions", allReactions)
+
 
   if (posts.length === 0) return <div>There are no Posts</div>;
 

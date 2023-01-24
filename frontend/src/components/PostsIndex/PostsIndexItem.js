@@ -58,14 +58,9 @@ function PostsIndexItem ({ postId }) {
         return reaction.user == sessionUser._id
       })
 
+       // the next few lines of code should stay in the post index item, but are going here for testing
+    const emotions = Object.entries(allReactions).filter(item=>(item[1].postId == postId && item[1].userId == sessionUser._id))
 
-       // need to get just reactions per post, so must turn obj to array
-    console.log("all reactions", allReactions)
-    const emotions = Object.entries(allReactions).filter((item)=>{
-        return (item == item)
-    })
-
-    console.log("EMOTIONS:", emotions)
 
     return (
     <div className="post-index-item">
@@ -105,19 +100,20 @@ function PostsIndexItem ({ postId }) {
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        // if (emotion == "like") return <li className='reaction'>
-                        //         <img src={happy} className='reaction-image'/>
-                        //     </li>
-                        // if (emotion == "remember") return <li className='reaction'>
-                        //         <img src={hungry} className='reaction-image'/>
-                        //     </li>
-                        // if (emotion == "tom") return <li className='reaction'>
-                        //         <img src={laughing} className='reaction-image'/>
-                        //     </li>
-                        // if (emotion == "NERD!") return <li className='reaction'>
-                        //         <img src={love} className='reaction-image'/>
-                        //     </li>
-                        <li>{emotion}</li>
+                        if (emotion.type == "like") return <li className='reaction'>
+                                <img src={happy} className='reaction-image'/>
+                            </li>
+                        if (emotion.type == "remember") return <li className='reaction'>
+                                <img src={hungry} className='reaction-image'/>
+                            </li>
+                        if (emotion.type == "tom") return <li className='reaction'>
+                                <img src={laughing} className='reaction-image'/>
+                            </li>
+                        if (emotion.type == "NERD!") return <li className='reaction'>
+                                <img src={love} className='reaction-image'/>
+                            </li>
+                        {console.log(emotion[0])}
+                        return <li>{emotion[0]}</li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}
