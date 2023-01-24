@@ -168,8 +168,7 @@ function PostCompose () {
     console.log(friend)
     setRecipient(friend._id)
   }
-  console.log("recipient")
-  console.log(recipient)
+ 
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>

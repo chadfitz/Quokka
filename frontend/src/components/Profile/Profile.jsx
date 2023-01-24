@@ -39,7 +39,7 @@ function Profile () {
   if(!currentUser) return null;
 
   if (userPosts.length === 0) {
-    return <div>{currentUser.username} has no Posts</div>;
+    return <div className="no-posts">{currentUser.username} has no Posts</div>;
   } else {
     return (
       <div className='whole-page-styling'>

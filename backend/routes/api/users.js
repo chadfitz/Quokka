@@ -88,7 +88,8 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
     const newUser = new User({
       username: req.body.username,
       profileImageUrl,
-      email: req.body.email
+      email: req.body.email,
+      bio: req.body.bio
     });
 
   bcrypt.genSalt(10, (err, salt) => {

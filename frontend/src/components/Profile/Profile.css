@@ -44,7 +44,12 @@
 }
 
 
+.no-posts { 
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
 
+}
 
 
 #single-friend {}

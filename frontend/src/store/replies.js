@@ -37,8 +37,6 @@ export const fetchReplies = (postId) => async dispatch => {
   }
 
   const replies = await res.json();
-  // console.log('replies');
-  // console.log(replies);
   dispatch(receiveReplies(replies));
 }
 
