@@ -21,8 +21,8 @@ function UserProfile () {
     
 
   useEffect(() => {  
-    
-    dispatch(fetchUserPosts(userId));
+    //this should be userId
+    dispatch(fetchUserPosts(user._id));
     return () => dispatch(clearPostErrors());
   }, [user, userId, dispatch]);
 
