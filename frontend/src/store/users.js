@@ -1,5 +1,4 @@
 import jwtFetch from "./jwt";
-import { RECEIVE_USER_LOGOUT } from "./session";
 
 const RECEIVE_USERS = "users/RECEIVE_USERS";
 

@@ -16,13 +16,19 @@ import { fetchUsers } from '../../store/users';
 import { fetchFriends } from '../../store/friends';
 
 function PostCompose () {
-  const [reactions, setReactions] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
+  const writer = useSelector(state => state.session.user);
+  let { postId } = useParams();
+  let post = useSelector(store => {
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
+  })
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
   const friends = useSelector(state => state.friends);
-  const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
   const oldPosts = useSelector(state => Object.values(state.posts.user));
@@ -36,9 +42,6 @@ function PostCompose () {
     dispatch(fetchUserPosts(currentUser._id));
   }, [])
 
-  // if a user has old posts, check to see if 5 minutes have passed since
-  // their last post. If so, set showCreate to false and timeDifference
-  // to the time until they can make their next post.
   useEffect(()=>{
     if (oldPosts[0]) {
       const postCreationTime = new Date(oldPosts[0].createdAt);
@@ -55,13 +58,13 @@ function PostCompose () {
 
   const findFriend= () => {
     const almostAllFriends = []
-    if (!Object.values(friends).length) return null 
-    Object.values(friends).map(friend => { 
+    if (!Object.values(friends).length) return null
+    Object.values(friends).map(friend => {
       if (friend._id !== badRecipient) almostAllFriends.push(friend)
     })
     return almostAllFriends
   }
- 
+
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -81,17 +84,6 @@ function PostCompose () {
     }
     else setImageUrls([]);
   }
-
-  // TODO: change default state if needed
-  // const [reactions, setReactions] = useState(['smile']);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const writer = useSelector(state => state.session.user);
-  let { postId } = useParams();
-  let post = useSelector(store => {
-    return Object.values(store.posts.all).find(obj => obj._id === postId);
-  })
 
   const formType = postId ? 'Update' : 'Create';
   if (formType === 'Create') {
@@ -139,6 +131,7 @@ function PostCompose () {
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
+    if (friendsError) return <></>
 
     if (formType === 'Create'){
       post = {
@@ -155,7 +148,7 @@ function PostCompose () {
         subject,
         body
       }
-     
+
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -180,7 +173,7 @@ function PostCompose () {
     // TODO: CLEAR OTHER FIELDS (not just body)?
     setBody('');
   };
- 
+
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
@@ -200,15 +193,17 @@ function PostCompose () {
               </div>
             </div>
             <div className="text-editor">
-              <div className='compose-heading'>
-                <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                  <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
-                    <option disabled selected>recipient</option>
-                    {findFriend()?.map((friend, index) => { 
-                      return <option key={index} value={friend._id}>{friend.username}</option>
-                    })}
-                  </select>
-              </div>
+                <p>{friendsError}</p>
+                <div className='compose-heading'>
+
+                  <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
+                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                      <option disabled selected>recipient</option>
+                      {findFriend()?.map((friend, index) => {
+                        return <option key={index} value={friend._id}>{friend.username}</option>
+                      })}
+                    </select>
+                </div>
 
               <Input
                 className="post-subject"
@@ -267,5 +262,3 @@ function PostCompose () {
 }
 
 export default PostCompose;
-
-
