@@ -13,7 +13,7 @@ import PostsIndex from './components/PostsIndex/PostsIndex';
 import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
-import UserProfile from './components/Profile/UsersProfile';
+import UserProfile from './components/Profile/UserProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);

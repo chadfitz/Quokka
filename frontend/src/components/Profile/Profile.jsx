@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import { fetchFriends } from '../../store/friends';
-import PostBox from '../Posts/PostBox';
-import PostsIndexItem from '../PostsIndex/PostsIndexItem';
 import PostsIndexItem2 from '../PostsIndex/PostsIndexItem2';
 import "./Profile.css"
-import UserTile from '../Friends/UserTile';
 import SingleFriend from '../Friends/SingleFriend';
 
 function Profile () {
@@ -15,7 +12,7 @@ function Profile () {
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
   const userFriends = useSelector(state => Object.values(state.friends));
- 
+
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     dispatch(fetchFriends(currentUser));
