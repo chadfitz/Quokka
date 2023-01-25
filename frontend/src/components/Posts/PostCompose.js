@@ -42,19 +42,20 @@ function PostCompose () {
     dispatch(fetchUserPosts(currentUser._id));
   }, [])
 
-  useEffect(()=>{
-    if (oldPosts[0]) {
-      const postCreationTime = new Date(oldPosts[0].createdAt);
-      const currentTime = new Date();
-      const difference = (currentTime - postCreationTime)/(1000*60)
-      if (difference >= 5) {
-        setShowCreate(true)
-      } else {
-        setShowCreate(false)
-        setTimeDifference(5 - difference)
-      }
-    }
-  },[oldPosts[0]])
+  // ----- comment back in and update math + hour/day logic when ready to deploy -----
+  // useEffect(()=>{
+  //   if (oldPosts[0]) {
+  //     const postCreationTime = new Date(oldPosts[0].createdAt);
+  //     const currentTime = new Date();
+  //     const difference = (currentTime - postCreationTime)/(1000*60)
+  //     if (difference >= 5) {
+  //       setShowCreate(true)
+  //     } else {
+  //       setShowCreate(false)
+  //       setTimeDifference(5 - difference)
+  //     }
+  //   }
+  // },[oldPosts[0]])
 
   const findFriend= () => {
     const almostAllFriends = []
@@ -179,11 +180,18 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
+  let friendsError;
+  if (Object.entries(friends).length == 0 ) {
+    console.log("condition is true")
+    friendsError = "You won't be able to write a message until you add friends."
+  }
+
   return (
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
         <div className='compose-container'>
-          {showCreate && (
+          {/* DO NOT DELETE -- Comment back in and update math above when ready to deploy */}
+          {/* {showCreate && ( */}
           <>
           <div className="compose-top">
             <div className='compose-map'>
@@ -249,12 +257,13 @@ function PostCompose () {
             <div className="errors">{errors && errors.body}</div>
           </div>
         </>
-        )}
-        {!showCreate && (
-        <div className='compose-too-soon'>
+        {/* DO NOT DELETE */}
+        {/* )} */}
+        {/* {!showCreate && ( */}
+        {/* <div className='compose-too-soon'>
           Please wait {Math.round(timeDifference)} more minutes until your next post.
-        </div>
-        )}
+        </div> */}
+        {/* )} */}
         </div>
       </div>
     </div>
