@@ -77,6 +77,14 @@ router.delete('/deleteReaction/:id', async (req, res, next) => {
 //   }
 // });
 
+router.get('/:postId', async (req, res, next) => {
+  let reactions = await Reaction.find({postId: req.params.postId});
+  let formatted = reactions.reduce((prev, cur)=>{
+    return { ...prev, [cur._id]: cur};
+  }, {});
+  return res.json(formatted);
+});
+
 router.get('/', async (req, res, next) => {
   let reactions = await Reaction.find()
   let formatted = reactions.reduce((prev, cur)=>{

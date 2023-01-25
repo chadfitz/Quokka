@@ -17,18 +17,23 @@ import { fetchFriends } from '../../store/friends';
 
 
 function PostCompose () {
-  const [reactions, setReactions] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
+  const writer = useSelector(state => state.session.user);
+  let { postId } = useParams();
+  let post = useSelector(store => {
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
+  })
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
   const friends = useSelector(state => state.friends);
-  const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
 
-
-    useEffect(()=> {
+  useEffect(()=> {
     dispatch(fetchUsers());
     dispatch(fetchFriends(currentUser))
   }, [])
@@ -61,17 +66,6 @@ function PostCompose () {
     }
     else setImageUrls([]);
   }
-
-  // TODO: change default state if needed
-  // const [reactions, setReactions] = useState(['smile']);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const writer = useSelector(state => state.session.user);
-  let { postId } = useParams();
-  let post = useSelector(store => {
-    return Object.values(store.posts.all).find(obj => obj._id === postId);
-  })
 
   const formType = postId ? 'Update' : 'Create';
   if (formType === 'Create') {
@@ -171,11 +165,6 @@ function PostCompose () {
   //   setRecipient(friend._id)
   // }
 
-  let friendsError;
-  if (Object.entries(friends).length == 0 ) {
-    console.log("condition is true")
-    friendsError = " You won't be able to write a message until you add friends."
-  }
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>

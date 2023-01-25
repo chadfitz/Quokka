@@ -89,11 +89,9 @@ router.delete('/:friendId', requireUser, async (req, res, next) => {
   // TODO: add && relationtype here or in search
   let deletedFriend;
   if (relation1) {
-    console.log('deleting relation 1');
     deletedFriend = await relation1.delete();
     return res.status(200).json(deletedFriend);
   } else if (relation2) {
-    console.log('deleting relation 2');
     deletedFriend = await relation2.delete();
     return res.status(200).json(deletedFriend);
   } else {
