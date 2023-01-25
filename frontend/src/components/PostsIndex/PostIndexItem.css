@@ -161,3 +161,11 @@
   justify-content: space-between;
 }
 
+.post-show { 
+  padding: 20px;
+}
+
+#single-pin-map-show { 
+  height: 80%;
+}
+

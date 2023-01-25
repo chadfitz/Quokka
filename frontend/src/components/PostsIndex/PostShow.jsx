@@ -23,6 +23,8 @@ import { composeReply, fetchReplies } from '../../store/replies';
 import ReplyBox from '../Replies/ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
 import { useState } from 'react';
+import "./PostIndexItem.css"
+import { fetchReactions } from '../../store/reactions';
 
 
 const PostShow = () => {
@@ -43,6 +45,7 @@ const PostShow = () => {
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchReplies(postId));
+    dispatch(fetchReactions())
   }, [dispatch, postId])
 
   const handleDelete = (e) => {
@@ -94,12 +97,13 @@ const PostShow = () => {
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
             <div className='post-show'>
+              <div className='post-show-top'>
                 <div className="post-index-item">
                     <div className='post-item-top'>
                         <div className="post-index-map">
                             {/* {loading ? <Loader/> : mapPlaceholder} */}
                             {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
-                            <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
+                            <SinglePinMap id="single-pin-map-show" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
                         </div>
                         <div className='post-item-middle'>
                             <h2>{post.subject}</h2>
@@ -145,10 +149,13 @@ const PostShow = () => {
                                 <Reactions user={sessionUser} post={post}></Reactions>
                                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
                             </div>
+                          </div>
                     </div>
+                    
                 </div>
               
             </div>
+
             <div className='test-bottom-bar'>
               <p>{post.reactions.length} reactions</p>
               <button>React</button> 
