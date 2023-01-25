@@ -17,31 +17,37 @@ import { fetchFriends } from '../../store/friends';
 
 
 function PostCompose () {
-  const [reactions, setReactions] = useState('');
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
+  const writer = useSelector(state => state.session.user);
+  let { postId } = useParams();
+  let post = useSelector(store => {
+    return Object.values(store.posts.all).find(obj => obj._id === postId);
+  })
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [, setImageUrls] = useState([]);
   const [lat, setLat] = useState(37.776392)
   const [lng, setLng] = useState(-122.4194)
   const friends = useSelector(state => state.friends);
-  const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
- 
 
-    useEffect(()=> { 
+
+  useEffect(()=> {
     dispatch(fetchUsers());
     dispatch(fetchFriends(currentUser))
   }, [])
 
   const findFriend= () => {
     const almostAllFriends = []
-    if (!Object.values(friends).length) return null 
-    Object.values(friends).map(friend => { 
+    if (!Object.values(friends).length) return null
+    Object.values(friends).map(friend => {
       if (friend._id !== badRecipient) almostAllFriends.push(friend)
     })
     return almostAllFriends
   }
- 
+
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -61,17 +67,6 @@ function PostCompose () {
     }
     else setImageUrls([]);
   }
-
-  // TODO: change default state if needed
-  // const [reactions, setReactions] = useState(['smile']);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const writer = useSelector(state => state.session.user);
-  let { postId } = useParams();
-  let post = useSelector(store => {
-    return Object.values(store.posts.all).find(obj => obj._id === postId);
-  })
 
   const formType = postId ? 'Update' : 'Create';
   if (formType === 'Create') {
@@ -135,7 +130,7 @@ function PostCompose () {
         subject,
         body
       }
-     
+
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -160,16 +155,16 @@ function PostCompose () {
     // TODO: CLEAR OTHER FIELDS (not just body)?
     setBody('');
   };
- 
+
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  // const changeRecipient = (friend) => { 
+  // const changeRecipient = (friend) => {
   //   setRecipient(friend._id)
   // }
- 
+
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
@@ -187,7 +182,7 @@ function PostCompose () {
                   <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
                     <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
                       <option disabled selected>recipient</option>
-                      {findFriend()?.map((friend, index) => { 
+                      {findFriend()?.map((friend, index) => {
                         return <option key={index} value={friend._id}>{friend.username}</option>
                       })}
                     </select>

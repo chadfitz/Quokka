@@ -14,10 +14,9 @@ import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
 function PostEdit () {
-  const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
- 
+
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
@@ -43,7 +42,7 @@ function PostEdit () {
     else setImageUrls([]);
   }
 
-  
+
   let post = useSelector(store => {
     return Object.values(store.posts.all).find(obj => obj._id === postId);
   })
@@ -97,30 +96,28 @@ function PostEdit () {
 
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
-        console.log(postId)
-      post = { _id: postId, 
-                writer, 
-                recipient, 
+      post = { _id: postId,
+                writer,
+                recipient,
                 location: {
                   "type": "Point",
                   "coordinates": [
                     lng,
                     lat
                   ]
-                }, 
+                },
                 subject,
-                images, 
+                images,
                 body
               }
       // dispatch(updatePost(post))
       dispatch(updatePost(post))
-      .then(
-      history.push("/posts?update"))
-     
+      .then(history.push("/posts?update"))
+
     }
     // TODO: CLEAR OTHER FIELDS (not just body)?
     // setBody('');
-  
+
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
@@ -136,7 +133,7 @@ function PostEdit () {
             <div className='compose-heading'>
               <h2>Compose Post</h2>
             </div>
-            
+
             <Input
               // label="Subject"
               className="post-subject"
@@ -154,7 +151,7 @@ function PostEdit () {
                           value={body}
                           onChange={setBody}
                           id="reactquill">
-                          
+
               </ReactQuill>
             </div>
             <div className='submit-compose-buttons'>
@@ -179,13 +176,13 @@ function PostEdit () {
       </div>
       <div className='compose-bottom'>
         <div className="errors">{errors && errors.body}</div>
-       
-          
-      
+
+
+
      </div>
       <div>
         {/* {body && <Markup content={body} />} */}
-    
+
       </div>
     </div>
   )

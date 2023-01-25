@@ -72,7 +72,6 @@ function PostsIndexItem ({ postId }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
-                {/* {console.log('post', post)} */}
 
                 <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
