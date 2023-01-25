@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createReaction, removeReaction, selectPost, selectReactions } from "../../store/posts";
+import { createReaction, deleteReaction } from "../../store/reactions";
 import angry from '../../assets/quokka-angry.png';
 import button from '../../assets/quokka-button.png';
 import happy from '../../assets/quokka-happy.png';
@@ -9,15 +9,16 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png';
-
-
 import './Reactions.css'
+import { selectPost } from "../../store/posts";
 
-const Reactions = ({ user, postId }) => {
+const Reactions = ({ user, postId, sessionUserReactions }) => {
   const sessionUser = useSelector(state => state.session.user);
   const post = useSelector(selectPost(postId));
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
+
+
 
 
   const openMenu = () => {
@@ -37,25 +38,58 @@ const Reactions = ({ user, postId }) => {
   const handleReaction = (e, newEmotion) => {
     e.preventDefault();
 
-    const userReactionObject = post.reactions.find((reaction) => {
-      return reaction.user == sessionUser._id
+    // find all user reactions for the post
+    // -> sessionUserReactions, passed in as prop
+
+    // compare existing reaction styles, generating a boolean as a test condition
+    // -> newEmotion vs styles in sessionUserReaction
+
+    console.log('sessionUserReactions',sessionUserReactions)
+
+    let reactionIdToDelete;
+    const userHasReacted = sessionUserReactions.find((entry) => {
+      if (entry[1].style == newEmotion) {
+        reactionIdToDelete = entry[0]
+      }
+      return entry[1].style == newEmotion
     })
 
-    const userAlreadyReacted = userReactionObject?.emotions.some((oldEmotion) => {
-      return oldEmotion == newEmotion
-    })
-
-    console.log("User Already Reacted:", userAlreadyReacted)
-
-    if ( !(userAlreadyReacted) ) {
-      // If no user reaction object exists, send the reaction to the backend
-      // if the user raection object exists but doesn't have the emotion
-      dispatch(createReaction(sessionUser._id, post._id, newEmotion))
+    if (userHasReacted) {
+      dispatch(deleteReaction(reactionIdToDelete))
     } else {
-      // if the user reaction object has the target emotion, remove it
-      console.log("about to remove reaction")
-      dispatch(removeReaction(sessionUser._id, post._id, newEmotion))
+      dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     }
+
+    // array of entries where first item is reaction id and second is reaction object
+
+
+    // if no reactions or type not included, then create.
+    // else delete
+
+
+
+
+
+
+    // const userReactionObject = post.reactions.find((reaction) => {
+    //   return reaction.user == sessionUser._id
+    // })
+
+    // const userAlreadyReacted = userReactionObject?.emotions.some((oldEmotion) => {
+    //   return oldEmotion == newEmotion
+    // })
+
+    // console.log("User Already Reacted:", userAlreadyReacted)
+
+    // if ( !(userAlreadyReacted) ) {
+    //   // If no user reaction object exists, send the reaction to the backend
+    //   // if the user raection object exists but doesn't have the emotion
+    //   dispatch(createReaction(sessionUser._id, post._id, newEmotion))
+    // } else {
+    //   // if the user reaction object has the target emotion, remove it
+    //   console.log("about to remove reaction")
+    //   dispatch(deleteReaction(1))
+    // }
 
   }
 

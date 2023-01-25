@@ -28,6 +28,7 @@ function PostsIndexItem ({ postId }) {
     const history = useHistory();
     const errors = useSelector(state => state.errors.posts);
     const sessionUser = useSelector(state => state.session.user);
+    const allReactions = useSelector(state => state.reactions)
     const post = useSelector(store => {
         return Object.values(store.posts.all).find(obj => obj._id === postId);
     });
@@ -55,7 +56,14 @@ function PostsIndexItem ({ postId }) {
     const reactionObject = post.reactions?.find((reaction) => {
         return reaction.user == sessionUser._id
       })
-    let emotions = reactionObject ? reactionObject.emotions : null
+
+    //    // the next few lines of code should stay in the post index item, but are going here for testing
+    // const sessionUserReactions = Object.entries(allReactions).filter(item=>(item[1].postId == postId && item[1].userId == sessionUser._id))
+
+    const postReactions = Object.entries(allReactions).filter(item => item[1].postId == postId)
+
+    const sessionUserReactions = postReactions.filter(item => item[1].userId == sessionUser._id)
+
 
     return (
     <div className="post-index-item">
@@ -91,24 +99,24 @@ function PostsIndexItem ({ postId }) {
         </div>
         <div className='post-item-bottom-container'>
             <div className='post-item-bottom'>
+                <p>{postReactions.length} reactions</p>
                 <ul className="reaction-bar">
-                    {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li className='reaction'>
+                    {sessionUserReactions?.map(emotion=>{
+                        if (emotion[1].style === "like") return <li className='reaction'>
                                 <img src={happy} className='reaction-image'/>
                             </li>
-                        if (emotion == "remember") return <li className='reaction'>
+                        if (emotion[1].style == "remember") return <li className='reaction'>
                                 <img src={hungry} className='reaction-image'/>
                             </li>
-                        if (emotion == "tom") return <li className='reaction'>
+                        if (emotion[1].style == "tom") return <li className='reaction'>
                                 <img src={laughing} className='reaction-image'/>
                             </li>
-                        if (emotion == "NERD!") return <li className='reaction'>
+                        if (emotion[1].style == "NERD!") return <li className='reaction'>
                                 <img src={love} className='reaction-image'/>
                             </li>
                     })}
                 </ul>
-                {/* <button>🤔</button> */}
-                <Reactions user={sessionUser} post={post} postId={post._id}></Reactions>
+                <Reactions user={sessionUser} post={post} postId={post._id} sessionUserReactions={sessionUserReactions}></Reactions>
                 <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
             </div>
         </div>

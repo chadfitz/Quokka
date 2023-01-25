@@ -35,11 +35,12 @@ function UserProfile () {
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
           <div className='profile-container'>
-            <div id='welcome-corner'>
-              <h2 className='profile-header'>All of {user?.username}'s Posts</h2>
-              <img src={user?.profileImageUrl} alt="profile-pic"/>
+          <div id='welcome-corner'>
+              <h1>Welcome to {user.username}'s profile</h1>
+              <img src={user.profileImageUrl}/>
             </div>
-            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
+            <h2>{user.bio}</h2>
+            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6} center={{lat: 38, lng: -122}}/></div>
             {userPosts.map((post, i) => (
               <>
                 <PostsIndexItem postId={post._id}/>
@@ -53,10 +54,3 @@ function UserProfile () {
 }
 
 export default UserProfile;
-
-// const FindUser = () => { 
-//     const { userId } = useParams()
-//     const user = useSelector(store => { 
-//     return Object.values(store.users).find(user => user._id === userId )
-//     })
-//   }
