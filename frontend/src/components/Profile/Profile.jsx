@@ -49,19 +49,20 @@ function Profile () {
               <h1>Welcome, {currentUser.username}</h1>
               <img src={currentUser.profileImageUrl}/>
             </div>
+            <h2>{currentUser.bio}</h2>
             <h2 id='friend-click-button' onClick={handleFriendClick}>All your friends</h2>
             <div id="all-friends-container">
                 {userFriends.map((friend, i) => (
                   <div id="single-friend">
                     {/* {friend} */}
-                    <SingleFriend friend={friend} key={friend.uniqueId}/>
+                    <SingleFriend friend={friend} key={friend.uniqueId} />
                     {/* <UserTile recipient={friend}/> */}
                   </div>
                  ))}
             </div>
             <h2>All your posts</h2>
             <div id='all-pins-map-container'>
-              <AllPinsMap userPosts={userPosts} zoom={8}/>
+              <AllPinsMap userPosts={userPosts} zoom={8} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
             </div>
             {userPosts.map((post, i) => (
               <>

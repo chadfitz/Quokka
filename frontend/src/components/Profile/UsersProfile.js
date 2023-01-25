@@ -9,7 +9,7 @@ import "./Profile.css"
 
 function UserProfile () {
   const { userId } = useParams()
-  const user = useSelector(store => { 
+  const user = useSelector(store => {
     console.log(store.users)
     return Object.values(store.users).find(user => user._id === userId )
   })
@@ -32,8 +32,12 @@ function UserProfile () {
       <div className='whole-page-styling'>
         <div className='inner-page-styling'>
           <div className='profile-container'>
-            <h2 className='profile-header'>All of {user.username}'s Posts</h2>
-            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6}/></div>
+          <div id='welcome-corner'>
+              <h1>Welcome to {user.username}'s profile</h1>
+              <img src={user.profileImageUrl}/>
+            </div>
+            <h2>{user.bio}</h2>
+            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6} center={{lat: 38, lng: -122}}/></div>
             {userPosts.map((post, i) => (
               <>
                 {/* {console.log(post)} */}
