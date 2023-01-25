@@ -85,6 +85,11 @@
     margin: 8px;
 }
 
+.stat-container { 
+    display: flex;
+    margin: auto;
+}
+
 #main-title { 
     font-size: 40px;
     margin: 10px;
