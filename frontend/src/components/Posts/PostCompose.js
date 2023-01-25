@@ -25,7 +25,7 @@ function PostCompose () {
   const friends = useSelector(state => state.friends);
   const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
-  const badRecipient = useSelector(state => state.posts.user[0].recipient._id)
+  const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
  
 
     useEffect(()=> { 
