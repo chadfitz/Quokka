@@ -22,6 +22,7 @@ import sleepy from '../../assets/quokka-sleepy.png'
 import { composeReply, fetchReplies } from '../../store/replies';
 import ReplyBox from '../Replies/ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
+import { useState } from 'react';
 
 
 const PostShow = () => {
@@ -36,7 +37,8 @@ const PostShow = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const errors = useSelector(state => state.errors.posts);
-//   console.log(post.reactions[0].emotions.length);
+  const [replyBox, setReplyBox] = useState(false)
+  const [showReply, setShowReply] = useState(false)
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -61,7 +63,15 @@ const PostShow = () => {
         body: reply
     };
     dispatch(composeReply(replyObject));
-    document.getElementById('reply-input').innerHTML = ""
+    setReplyBox(false)
+  }
+
+  const replyToggle = () => { 
+    replyBox ? setReplyBox(false) : setReplyBox(true)
+  }
+
+  const repliesToggle = () => { 
+    showReply ? setShowReply(false) : setShowReply(true)
   }
 
 //   useEffect(()=>{
@@ -137,45 +147,54 @@ const PostShow = () => {
                             </div>
                     </div>
                 </div>
-                {/* <div className='reply-index-container'>
-                    <ReplyIndex post={post} />
-                </div> */}
+              
             </div>
+            <div className='test-bottom-bar'>
+              <p>{post.reactions.length} reactions</p>
+              <button>React</button> 
+              <button onClick={replyToggle}>Reply</button>
+              { (Object.values(replies).length) ? <p onClick={repliesToggle}>{replies.length} Replies</p> : 
+              <p>0 Replies</p> }
+            </div>
+            { replyBox ? 
+              <div className='replies-show'>
+                  <textarea label=""
+                    id="reply-input"
+                    className="reply-input"
+                    value={reply}
+                    onChange={replyChange}
+                    wrap="hard"
+                    rows="2"
+                  />
+                  <Button className="reply-btn" label="Reply"
+                    type="submit" onClick={handleReply}/>
+              </div>
+               : 
+              "" }
+            { showReply ? 
             <div className='replies-show'>
-              <textarea label=""
-                id="reply-input"
-                className="reply-input"
-                value={reply}
-                onChange={replyChange}
-                wrap="hard"
-                rows="2"
-              />
-              <Button className="reply-btn" label="Reply"
-                type="submit" onClick={handleReply}
-              />
               {replies.map(reply => {return (
                 <ReplyBox key={reply._id} replyId={reply._id} />
               )})}
-
             </div>
-            {/* <div className='replies-show'>
-              {replies.map(reply => {return (
-                <ReplyBox key={reply._id} replyId={reply._id}/>
-              )})},
-              <Input label=""
-                className="reply-input"
-                type="textarea"
-                value={reply}
-                onChange={replyChange}
-              />
-
-              <Button className="reply-btn" label="Reply"
-                type="submit" onClick={handleReply}
-              />
-            </div> */}
+            :
+            "" }
+          
         </div>
     </div>
   );
 }
 
 export default PostShow;
+
+//  <textarea label=""
+//                 id="reply-input"
+//                 className="reply-input"
+//                 value={reply}
+//                 onChange={replyChange}
+//                 wrap="hard"
+//                 rows="2"
+//               />
+//               <Button className="reply-btn" label="Reply"
+//                 type="submit" onClick={handleReply}
+//               />

@@ -5,6 +5,7 @@ import { deleteReply } from '../../store/replies';
 import { FiEdit3 } from 'react-icons/fi'
 import { FiTrash2 } from 'react-icons/fi'
 import './Reply.css';
+import moment from 'moment';
 
 const ReplyBox = ({ replyId }) => {
   const dispatch = useDispatch();
@@ -33,15 +34,20 @@ const ReplyBox = ({ replyId }) => {
           <img src={reply.user.profileImageUrl} alt="reply-profile-image" id="reply-profile-image" />
           <p id="reply-username">{reply.user.username}</p>
         </div>
-        <div className='reply-body'>
+        <div className='reply-body2'>
           {reply.body}
         </div>
       </div>
        {sessionUser?._id === reply.user._id &&
+      <div className='reply-right'>
         <div className='reply-edit-delete'>
               <div className='reply-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
               <div className='reply-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
         </div>
+        <div className='reply-time-ago'>
+
+        </div>
+      </div>
           }
       {/* <Button className='reply-delete-btn' label="delete" onClick={handleDelete} /> */}
     </div>

@@ -45,6 +45,16 @@
 
 }
 
+#reply-username { 
+  margin-left: 10px;
+}
+
+.reply-body { 
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
 .reply-delete-btn{
   margin-top: 5px;
   width: 60px;
@@ -67,6 +77,7 @@
 
 .reply-edit-delete { 
   display: flex;
+  width: 20%;
   /* padding: 10px;
   margin-bottom: 10px */
 }

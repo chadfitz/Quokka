@@ -156,3 +156,8 @@
   text-align: right;
 }
 
+.test-bottom-bar { 
+  display: flex;
+  justify-content: space-between;
+}
+
