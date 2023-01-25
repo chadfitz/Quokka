@@ -83,6 +83,10 @@ body {
     color: white;
 }
 
+.filter-buttons.selected {
+    background-color: var(--secondary-color)
+ }
+
 #post-google-map {
     width: 100%;
     box-shadow: 0 5px 15px #9f9e9e;
