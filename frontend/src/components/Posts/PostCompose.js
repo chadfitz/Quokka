@@ -26,7 +26,7 @@ function PostCompose () {
   const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0].recipient._id)
-  console.log(badRecipient)
+ 
 
     useEffect(()=> { 
     dispatch(fetchUsers());
@@ -185,8 +185,8 @@ function PostCompose () {
             <div className="text-editor">
                 <div className='compose-heading'>
                   <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                    <select name="recipient" id="recipient" onChange={e => setRecipient(e.target.value)}>
-                      <option>recipient</option>
+                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                      <option disabled selected>recipient</option>
                       {findFriend()?.map((friend, index) => { 
                         return <option key={index} value={friend._id}>{friend.username}</option>
                       })}

@@ -15,6 +15,7 @@ function Profile () {
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
   const userFriends = useSelector(state => Object.values(state.friends));
+ 
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     dispatch(fetchFriends(currentUser));
