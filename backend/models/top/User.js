@@ -44,7 +44,11 @@ const userSchema = new Schema({
   },
   gender: {
     type: String
-  }
+  },
+  posts: [{ 
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 }, {
   timestamps: true
 });
