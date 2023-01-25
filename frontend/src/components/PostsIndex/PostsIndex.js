@@ -31,7 +31,7 @@ function PostsIndex () {
   }, [])
 
   const friendsFilter = posts.filter(post => { 
-    return (post.writer._id === currentUser._id || Object.keys(friends).includes(post.writer._id) )
+    return (post.writer._id === currentUser._id || Object.keys(friends).includes(post.writer._id) || Object.keys(friends).includes(post.recipient._id) )
   })
 
   const toggleFilter = () => { 
