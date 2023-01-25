@@ -37,7 +37,10 @@ function UserProfile () {
               <img src={user.profileImageUrl}/>
             </div>
             <h2>{user.bio}</h2>
-            <div id='all-pins-map-container'><AllPinsMap userPosts={userPosts} zoom={6} center={{lat: 38, lng: -122}}/></div>
+            {console.log('userposts',userPosts[0].location)}
+            <div id='all-pins-map-container'>
+              <AllPinsMap userPosts={userPosts} zoom={6} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
+            </div>
             {userPosts.map((post, i) => (
               <>
                 {/* {console.log(post)} */}
