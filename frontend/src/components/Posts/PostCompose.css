@@ -54,6 +54,15 @@
   margin: 0 0;
 }
 
+.compose-heading > label { 
+  margin-left: 10px;
+}
+
+.compose-heading { 
+  display: flex;
+}
+
+
 .post-subject{
   margin: 0;
 }
@@ -104,6 +113,11 @@
 
 .ql-editor{
   height: 250px;
+}
+
+.compose-too-soon{
+  text-align: center;
+  font-size: 25px;
 }
 
 @media(max-width: 1200px){

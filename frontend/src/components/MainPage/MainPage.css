@@ -59,7 +59,8 @@
 }
 
 #signup-quokka-photo{
-    width: 320px;
+    width: 390px;
+    margin-right: 10px
 }
 
 .box-left-up,
@@ -83,6 +84,11 @@
 .splash-lists { 
     font-size: 20px;
     margin: 8px;
+}
+
+.stat-container { 
+    display: flex;
+    margin: auto;
 }
 
 #main-title { 

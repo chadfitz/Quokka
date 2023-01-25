@@ -40,6 +40,19 @@
   padding: 10px;
   background-color: var(--offwhite-color);
   box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: space-between;
+
+}
+
+#reply-username { 
+  margin-left: 10px;
+}
+
+.reply-body { 
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
 }
 
 .reply-delete-btn{
@@ -60,4 +73,35 @@
   background-color: var(--primary-hover);
   transition: 0.3s;
   /* color: var(--primary-color); */
+}
+
+.reply-edit-delete { 
+  display: flex;
+  width: 20%;
+  /* padding: 10px;
+  margin-bottom: 10px */
+}
+
+.reply-index-icon { 
+  margin: 10px;
+  font-size: 20px;
+}
+
+.reply-index-icon:hover { 
+  cursor: pointer;
+}
+
+#reply-profile-image { 
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+#reply-username { 
+  font-weight: bold;
+}
+
+.reply-profile-image { 
+  display: flex;
+  align-items: center;
 }

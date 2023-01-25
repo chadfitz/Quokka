@@ -26,7 +26,8 @@
     padding: 14px 16px;
     width: 90%;
     border: 1px solid black;
-    border-radius: 6px
+    border-radius: 6px;
+    font-family: proxima-nova, sans-serif;
 }
 
 #login-input:hover {

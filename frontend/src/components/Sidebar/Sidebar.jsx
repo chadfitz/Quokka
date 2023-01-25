@@ -1,7 +1,6 @@
 import "./Sidebar.css"
 import {BsBookFill, BsFillPencilFill} from 'react-icons/bs';
 import {FaUser, FaUserFriends} from 'react-icons/fa';
-
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {

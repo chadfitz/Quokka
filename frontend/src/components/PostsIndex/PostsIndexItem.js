@@ -18,7 +18,6 @@ import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
 import sad from '../../assets/quokka-sad.png';
 import sleepy from '../../assets/quokka-sleepy.png';
-
 // import { useState } from 'react';
 import './PostIndexItem.css';
 import './PostsIndex.css';
@@ -73,7 +72,6 @@ function PostsIndexItem ({ postId }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
             </div>
             <div className='post-item-middle'>
-                {/* {console.log('post', post)} */}
 
                 <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
@@ -83,8 +81,6 @@ function PostsIndexItem ({ postId }) {
                         return <img id="post-item-photo" src={image} alt=""/>
                     }) :
                     ""}
-                    {/* {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                "" } */}
                 </div>
                 <h3 className='signature'>From, <br/>{post.writer.username}</h3>
             </div>

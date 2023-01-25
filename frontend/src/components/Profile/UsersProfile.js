@@ -5,28 +5,31 @@ import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostBox from '../Posts/PostBox';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
+import PostsIndexItem2 from '../PostsIndex/PostsIndexItem2';
 import "./Profile.css"
 
 function UserProfile () {
   const { userId } = useParams()
-  const user = useSelector(store => {
-    console.log(store.users)
+  const user = useSelector(store => { 
     return Object.values(store.users).find(user => user._id === userId )
   })
-  console.log("USER")
-  console.log(user)
+
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
 
+    
 
-  useEffect(() => {
+  useEffect(() => {  
+    //this should be userId
     dispatch(fetchUserPosts(user._id));
     return () => dispatch(clearPostErrors());
-  }, [user, dispatch]);
+  }, [user, userId, dispatch]);
+
+  if (!user) return null
 
   if (userPosts.length === 0) {
-    return <div>{user.username} has no Posts</div>;
+    return <div>{user?.username} has no Posts</div>;
   } else {
     return (
       <div className='whole-page-styling'>
@@ -43,13 +46,7 @@ function UserProfile () {
             </div>
             {userPosts.map((post, i) => (
               <>
-                {/* {console.log(post)} */}
-                {/* <PostBox
-                  key={post._id}
-                  body={post.body}
-                /> */}
                 <PostsIndexItem postId={post._id}/>
-                {/* <Map key={i} postId={i}/> */}
               </>
             ))}
           </div>

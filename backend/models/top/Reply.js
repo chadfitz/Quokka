@@ -12,7 +12,7 @@ const replySchema = new Schema({
     ref: 'User'
   },
 
-  body: String
+  body: {type: String}
 });
 
 module.exports = mongoose.model('Reply', replySchema);

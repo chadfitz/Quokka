@@ -3,6 +3,7 @@ import jwtFetch from './jwt';
 // ACTIONS
 const RECEIVE_REPLIES = "replies/RECEIVE_REPLIES";
 const RECEIVE_REPLY = "replies/RECEIVE_REPLY";
+// const RECEIVE_REPLY = "replies/RECEIVE_REPLY";
 const REMOVE_REPLY = "replies/REMOVE_REPLY";
 
 // ACTION CREATORS
@@ -37,8 +38,6 @@ export const fetchReplies = (postId) => async dispatch => {
   }
 
   const replies = await res.json();
-  // console.log('replies');
-  // console.log(replies);
   dispatch(receiveReplies(replies));
 }
 
@@ -79,6 +78,38 @@ export const deleteReply = replyId => async dispatch => {
   } catch (err) {
     // TODO
   }
+}
+
+export const updateReply = reply => async dispatch => {
+  // TODO - DELETE PRINT
+  console.log('in store updateReply');
+  // TODO - DELETE PRINT ^^^^^
+  const { replyId, body } = reply;
+  const formData = new FormData();
+  formData.append("body", body);
+  console.log('formData');
+  console.log(formData);
+
+  let res;
+  try {
+    res = await jwtFetch(`/api/replies/${replyId}`, {
+      method: "PATCH",
+      body: formData
+    })
+    if (res.ok) {
+      console.log('store updateReply res ok');
+      console.log('res');
+      console.log(res);
+      const newReply = await res.json();
+      console.log('newReply');
+      console.log(newReply);
+      dispatch(receiveReply(newReply));
+    }
+  } catch (err) {
+    // TODO: UPDATE?
+    return err;
+  }
+
 }
 
 const repliesReducer = (state = {}, action) => {

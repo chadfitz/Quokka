@@ -10,6 +10,14 @@ body {
     margin-left: var(--sidebar-width);
 }
 
+.show-toggler { 
+    cursor: pointer;
+}
+
+.show-toggler:hover { 
+    font-size: 18px;
+}
+
 .posts-index-header {
     /* margin-top: 120px; */
     margin-top: var(--margin-top);
@@ -91,6 +99,7 @@ body {
 #post-item-photo {
     height: 100px;
     width: auto;
+    margin-right: 15px;
 }
 
 #post-index-compose {
