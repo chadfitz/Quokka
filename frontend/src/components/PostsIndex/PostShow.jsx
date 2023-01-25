@@ -42,6 +42,7 @@ const PostShow = () => {
   const [replyBox, setReplyBox] = useState(false)
   const [showReply, setShowReply] = useState(false)
 
+
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchReplies(postId));
@@ -157,11 +158,11 @@ const PostShow = () => {
             </div>
 
             <div className='test-bottom-bar'>
-              <p>{post.reactions.length} reactions</p>
+              <p className='show-toggler'>{post.reactions.length} reactions</p>
               <button>React</button> 
               <button onClick={replyToggle}>Reply</button>
-              { (Object.values(replies).length) ? <p onClick={repliesToggle}>{replies.length} Replies</p> : 
-              <p>0 Replies</p> }
+              { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{replies.length} Replies</p> : 
+              <p className='show-toggler'>0 Replies</p> }
             </div>
             { replyBox ? 
               <div className='replies-show'>
