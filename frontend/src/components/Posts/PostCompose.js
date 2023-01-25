@@ -33,7 +33,6 @@ function PostCompose () {
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
 
-
   useEffect(()=> {
     dispatch(fetchUsers());
     dispatch(fetchFriends(currentUser))
@@ -114,6 +113,7 @@ function PostCompose () {
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
+    if (friendsError) return <></>
 
     if (formType === 'Create'){
       post = {
@@ -169,6 +169,7 @@ function PostCompose () {
     // <div className='compose-window'>
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
+
         <div className='compose-container'>
           <div className="compose-top">
             <div className='compose-map'>
@@ -178,7 +179,9 @@ function PostCompose () {
               </div>
             </div>
             <div className="text-editor">
+                <p>{friendsError}</p>
                 <div className='compose-heading'>
+
                   <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
                     <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
                       <option disabled selected>recipient</option>
@@ -237,5 +240,3 @@ function PostCompose () {
 }
 
 export default PostCompose;
-
-
