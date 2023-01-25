@@ -1,13 +1,9 @@
 import "./Sidebar.css"
 import {BsBookFill, BsFillPencilFill} from 'react-icons/bs';
 import {FaUser, FaUserFriends} from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const sessionUser = useSelector(state => state.session.user);
-  console.log(sessionUser);
-
   return (
     <div className="sidebar">
         <div><Link to={"/profile"} className='sidebar-link'><FaUser/>&nbsp;&nbsp;Profile</Link></div>

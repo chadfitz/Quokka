@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { clearPostErrors, composePost, updatePost } from '../../store/posts';
+import { clearPostErrors, composePost, fetchUserPosts, updatePost } from '../../store/posts';
 import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
@@ -15,7 +15,6 @@ import MapCoordinates from '../GoogleMap/EvgeniiMap';
 import { fetchUsers } from '../../store/users';
 import { fetchFriends } from '../../store/friends';
 
-
 function PostCompose () {
   const [reactions, setReactions] = useState('');
   const [images, setImages] = useState([]);
@@ -26,12 +25,33 @@ function PostCompose () {
   const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
+  const oldPosts = useSelector(state => Object.values(state.posts.user));
  
+  const [showCreate, setShowCreate] = useState(false);
+  const [timeDifference, setTimeDifference] = useState(null);
 
-    useEffect(()=> { 
+  useEffect(()=> { 
     dispatch(fetchUsers());
-    dispatch(fetchFriends(currentUser))
+    dispatch(fetchFriends(currentUser));
+    dispatch(fetchUserPosts(currentUser._id));
   }, [])
+
+  // if a user has old posts, check to see if 5 minutes have passed since
+  // their last post. If so, set showCreate to false and timeDifference
+  // to the time until they can make their next post.
+  useEffect(()=>{
+    if (oldPosts[0]) {
+      const postCreationTime = new Date(oldPosts[0].createdAt);
+      const currentTime = new Date();
+      const difference = (currentTime - postCreationTime)/(1000*60)
+      if (difference >= 5) {
+        setShowCreate(true)
+      } else {
+        setShowCreate(false)
+        setTimeDifference(5 - difference)
+      }
+    }
+  },[oldPosts[0]])
 
   const findFriend= () => {
     const almostAllFriends = []
@@ -166,15 +186,12 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  // const changeRecipient = (friend) => { 
-  //   setRecipient(friend._id)
-  // }
- 
   return (
-    // <div className='compose-window'>
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
         <div className='compose-container'>
+          {showCreate && (
+          <>
           <div className="compose-top">
             <div className='compose-map'>
               <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
@@ -183,58 +200,66 @@ function PostCompose () {
               </div>
             </div>
             <div className="text-editor">
-                <div className='compose-heading'>
-                  <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
-                      <option disabled selected>recipient</option>
-                      {findFriend()?.map((friend, index) => { 
-                        return <option key={index} value={friend._id}>{friend.username}</option>
-                      })}
-                    </select>
-                </div>
+              <div className='compose-heading'>
+                <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
+                  <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                    <option disabled selected>recipient</option>
+                    {findFriend()?.map((friend, index) => { 
+                      return <option key={index} value={friend._id}>{friend.username}</option>
+                    })}
+                  </select>
+              </div>
 
-                <Input
-                  className="post-subject"
-                  type="text"
-                  value={subject}
-                  onChange={handleSubjectChange}
-                  placeholder="Subject"
-                  required
-                  id="subject-compose"
-                />
-                  <div className='quill-editor-compose'>
-                    <ReactQuill theme="snow"
-                                modules={modules}
-                                formats={formats}
-                                value={body}
-                                onChange={setBody}
-                                id="reactquill">
+              <Input
+                className="post-subject"
+                type="text"
+                value={subject}
+                onChange={handleSubjectChange}
+                placeholder="Subject"
+                required
+                id="subject-compose"
+              />
+              <div className='quill-editor-compose'>
+                <ReactQuill theme="snow"
+                            modules={modules}
+                            formats={formats}
+                            value={body}
+                            onChange={setBody}
+                            id="reactquill">
 
-                    </ReactQuill>
-                  </div>
-                  <div className='submit-compose-buttons'>
-                    <div className='upload-images'>
-                    <label>
-                    Images to Upload</label>
-                    <input
+                </ReactQuill>
+              </div>
+              <div className='submit-compose-buttons'>
+                <div className='upload-images'>
+                  <label>
+                  Images to Upload</label>
+                  <input
                     type="file"
                     accept=".jpg, .jpeg, .png"
                     multiple
                     onChange={updateFiles}
-                    id="choose-files" />
-                    </div>
-                  <Button
-                      containername="submit-btn-ctnr"
-                      className="submit-btn"
-                      label="Submit Post"
-                      onClick={handleSubmit}
-                    />
-                  </div>
+                    id="choose-files" 
+                  />
+                </div>
+                <Button
+                  containername="submit-btn-ctnr"
+                  className="submit-btn"
+                  label="Submit Post"
+                  onClick={handleSubmit}
+                />
               </div>
             </div>
-            <div className='compose-bottom'>
-              <div className="errors">{errors && errors.body}</div>
-            </div>
+          </div>
+          <div className='compose-bottom'>
+            <div className="errors">{errors && errors.body}</div>
+          </div>
+        </>
+        )}
+        {!showCreate && (
+        <div className='compose-too-soon'>
+          Please wait {Math.round(timeDifference)} more minutes until your next post.
+        </div>
+        )}
         </div>
       </div>
     </div>
