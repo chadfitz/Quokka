@@ -26,22 +26,22 @@ function PostCompose () {
   const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
- 
 
-    useEffect(()=> { 
+
+    useEffect(()=> {
     dispatch(fetchUsers());
     dispatch(fetchFriends(currentUser))
   }, [])
 
   const findFriend= () => {
     const almostAllFriends = []
-    if (!Object.values(friends).length) return null 
-    Object.values(friends).map(friend => { 
+    if (!Object.values(friends).length) return null
+    Object.values(friends).map(friend => {
       if (friend._id !== badRecipient) almostAllFriends.push(friend)
     })
     return almostAllFriends
   }
- 
+
 
   const updateFiles = async e => {
     const files = e.target.files;
@@ -119,6 +119,7 @@ function PostCompose () {
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
+    if (friendsError) return <></>
 
     if (formType === 'Create'){
       post = {
@@ -135,7 +136,7 @@ function PostCompose () {
         subject,
         body
       }
-     
+
       const newPost = await dispatch(composePost(post));
       history.push("/posts")
     } else {
@@ -160,20 +161,26 @@ function PostCompose () {
     // TODO: CLEAR OTHER FIELDS (not just body)?
     setBody('');
   };
- 
+
 
   useEffect(() => {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  // const changeRecipient = (friend) => { 
+  // const changeRecipient = (friend) => {
   //   setRecipient(friend._id)
   // }
- 
+
+  let friendsError;
+  if (Object.entries(friends).length == 0 ) {
+    console.log("condition is true")
+    friendsError = " You won't be able to write a message until you add friends."
+  }
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
+
         <div className='compose-container'>
           <div className="compose-top">
             <div className='compose-map'>
@@ -183,11 +190,13 @@ function PostCompose () {
               </div>
             </div>
             <div className="text-editor">
+                <p>{friendsError}</p>
                 <div className='compose-heading'>
+
                   <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
                     <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
                       <option disabled selected>recipient</option>
-                      {findFriend()?.map((friend, index) => { 
+                      {findFriend()?.map((friend, index) => {
                         return <option key={index} value={friend._id}>{friend.username}</option>
                       })}
                     </select>
@@ -242,5 +251,3 @@ function PostCompose () {
 }
 
 export default PostCompose;
-
-
