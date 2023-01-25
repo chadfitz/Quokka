@@ -5,6 +5,7 @@ import './MainPage.css'
 function Statistics() {
   return (
     <div className='box' data-aos="fade-right" id="splash-statistics">
+        <div className='stat-container'>
         <div className='box-left-stat'>
             <div className='box-left-up'>
                 <h2 id="statistics">Over 15 users</h2>
@@ -34,6 +35,7 @@ function Statistics() {
                 <li className='splash-lists'>Users have written over 20 replies</li>
                 <li className='splash-lists'>Users have reacted over 40 times to posts!</li>
             </ul>
+        </div>
         </div>
     </div>
   )

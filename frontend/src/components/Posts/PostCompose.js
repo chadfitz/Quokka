@@ -25,6 +25,8 @@ function PostCompose () {
   const friends = useSelector(state => state.friends);
   const users = useSelector(state => Object.values(state.users));
   const currentUser = useSelector(state => state.session.user);
+  const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
+ 
 
     useEffect(()=> { 
     dispatch(fetchUsers());
@@ -32,12 +34,12 @@ function PostCompose () {
   }, [])
 
   const findFriend= () => {
+    const almostAllFriends = []
     if (!Object.values(friends).length) return null 
-    const allFriends = Object.values(friends)
-    
-    
-    // setRecipient(friends[index])
-    return allFriends
+    Object.values(friends).map(friend => { 
+      if (friend._id !== badRecipient) almostAllFriends.push(friend)
+    })
+    return almostAllFriends
   }
  
 
@@ -164,12 +166,10 @@ function PostCompose () {
     return () => dispatch(clearPostErrors());
   }, [dispatch]);
 
-  const changeRecipient = (friend) => { 
-    console.log(friend)
-    setRecipient(friend._id)
-  }
-  console.log("recipient")
-  console.log(recipient)
+  // const changeRecipient = (friend) => { 
+  //   setRecipient(friend._id)
+  // }
+ 
   return (
     // <div className='compose-window'>
     <div className='whole-page-styling'>
@@ -185,16 +185,15 @@ function PostCompose () {
             <div className="text-editor">
                 <div className='compose-heading'>
                   <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                    <select name="recipient" id="recipient" onChange={e => setRecipient(e.target.value)}>
+                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                      <option disabled selected>recipient</option>
                       {findFriend()?.map((friend, index) => { 
-                        // {console.log(friend)}
                         return <option key={index} value={friend._id}>{friend.username}</option>
                       })}
                     </select>
                 </div>
 
                 <Input
-                  // label="Subject"
                   className="post-subject"
                   type="text"
                   value={subject}

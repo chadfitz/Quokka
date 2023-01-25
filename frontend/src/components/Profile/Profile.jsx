@@ -15,6 +15,7 @@ function Profile () {
   const currentUser = useSelector(state => state.session.user);
   const userPosts = useSelector(state => Object.values(state.posts.user))
   const userFriends = useSelector(state => Object.values(state.friends));
+ 
   useEffect(() => {
     dispatch(fetchUserPosts(currentUser._id));
     dispatch(fetchFriends(currentUser));
@@ -39,7 +40,7 @@ function Profile () {
   if(!currentUser) return null;
 
   if (userPosts.length === 0) {
-    return <div>{currentUser.username} has no Posts</div>;
+    return <div className="no-posts">{currentUser.username} has no Posts</div>;
   } else {
     return (
       <div className='whole-page-styling'>

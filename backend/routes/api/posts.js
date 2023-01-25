@@ -132,6 +132,7 @@ router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res
       body: req.body.body,
       imageUrls
     })
+    
     return res.json(updatedPost);
   }
   catch(err) {

@@ -23,6 +23,7 @@ import { composeReply, fetchReplies } from '../../store/replies';
 import ReplyBox from '../Replies/ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
 
+
 const PostShow = () => {
   const [reply, replyChange] = useInput('');
   const { postId } = useParams();
@@ -59,10 +60,8 @@ const PostShow = () => {
         post: post._id,
         body: reply
     };
-    console.log('replyObject');
-    console.log(replyObject);
     dispatch(composeReply(replyObject));
-    console.log('in handle reply');
+    document.getElementById('reply-input').innerHTML = ""
   }
 
 //   useEffect(()=>{
@@ -144,6 +143,7 @@ const PostShow = () => {
             </div>
             <div className='replies-show'>
               <textarea label=""
+                id="reply-input"
                 className="reply-input"
                 value={reply}
                 onChange={replyChange}
