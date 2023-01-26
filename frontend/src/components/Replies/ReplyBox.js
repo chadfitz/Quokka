@@ -8,6 +8,7 @@ import './Reply.css';
 import moment from 'moment';
 import { useState } from 'react';
 import useInput from '../../hooks/useInput';
+import ReplyEdit from './ReplyEdit';
 
 const ReplyBox = ({ replyId }) => {
   const dispatch = useDispatch();
@@ -71,18 +72,8 @@ const ReplyBox = ({ replyId }) => {
       </div>
       <div className='reply-edit-box'>
         { edit ?
-              <div className='replies-show'>
-                  <textarea label=""
-                    id="reply-input"
-                    className="reply-input"
-                    value={replyChange}
-                    onChange={setReplyChange}
-                    wrap="hard"
-                    rows="2"
-                  />
-                  <Button className="reply-btn" label="Reply"
-                    type="submit" onClick={handleEdit}/>
-              </div>
+              // <
+              <ReplyEdit reply={reply} setEdit={setEdit} />
                :
               "" }
       </div>
