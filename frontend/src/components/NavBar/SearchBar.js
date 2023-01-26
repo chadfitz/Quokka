@@ -71,18 +71,18 @@ function SearchBar() {
           </div>
           {search &&
             <div className='search-results'>
-              <div className='users'>
+              <div className='search-users'>
                 <h4>Users</h4>
                   {filteredUsers()?.map(user =>  (
-                    <div key={user._id} onClick={goToUser(user._id)}>
+                    <div className='search-user' key={user._id} onClick={goToUser(user._id)}>
                       {user.username}
                     </div>
                   ))}
               </div>
-              <div className='posts'>
+              <div className='search-posts'>
                 <h4>Posts</h4>
                   {filteredPosts()?.map(post =>  (
-                    <div key={post._id} onClick={goToPost(post._id)}>
+                    <div className='search-post' key={post._id} onClick={goToPost(post._id)}>
                       {post.subject}
                     </div>
                   ))}
