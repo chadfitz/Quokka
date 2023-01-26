@@ -29,6 +29,13 @@
   align-items: center;
 }
 
+#friend-container-stripped{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 #single-friend-container{
   width: 25vw;
   height: fit-content;
@@ -42,7 +49,7 @@
   font-size: x-large;
 }
 
-#friend-username:hover { 
+#friend-username:hover {
   cursor: pointer;
 }
 
@@ -52,7 +59,7 @@
   border-radius: 75px;
 }
 
-#user-profile-image:hover { 
+#user-profile-image:hover {
   cursor: pointer;
 }
 

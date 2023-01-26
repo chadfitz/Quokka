@@ -8,7 +8,7 @@
   /* margin-top: 125px; */
   margin-top: var(--margin-top);
   width: var(--width);
-  height: 550px;
+  height: 890px;
   border: 1px solid rgb(184, 183, 183);
   box-shadow: 0px 12px 18px 6px rgb(166, 165, 166);
   padding: 30px 60px;
@@ -20,13 +20,20 @@
   flex-direction: column;
 }
 
+.top-of-compose-post{
+  display: flex;
+  justify-content: space-between;
+}
+
 .compose-top {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
 
 .compose-map{
+  padding-top: 15px;
   align-self: flex-start;
   display: flex;
   flex-direction: column;
@@ -39,7 +46,8 @@
   align-items: center;
   height: 20px;
   font-size: 17px;
-  padding-top: 35px;
+  padding-top: 15px;
+  padding-bottom: 35px;
 }
 
 .text-editor {
@@ -54,11 +62,11 @@
   margin: 0 0;
 }
 
-.compose-heading > label { 
+.compose-heading > label {
   margin-left: 10px;
 }
 
-.compose-heading { 
+.compose-heading {
   display: flex;
 }
 
@@ -113,6 +121,11 @@
 
 .ql-editor{
   height: 250px;
+}
+
+.compose-too-soon{
+  text-align: center;
+  font-size: 25px;
 }
 
 @media(max-width: 1200px){

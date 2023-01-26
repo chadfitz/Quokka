@@ -25,7 +25,8 @@ router.get('/current', restoreUser, (req, res) => {
     _id: req.user._id,
     username: req.user.username,
     profileImageUrl: req.user.profileImageUrl,
-    email: req.user.email
+    email: req.user.email,
+    bio: req.user.bio
   });
 });
 

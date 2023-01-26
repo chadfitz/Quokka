@@ -50,6 +50,8 @@ export const fetchReactions = () => async dispatch => {
   }
 }
 
+
+
 export const createReaction = (userId, postId, style) => async dispatch => {
   try {
     const res = await jwtFetch(`/api/reactions/createReaction`,{

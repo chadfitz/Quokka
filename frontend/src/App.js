@@ -5,9 +5,6 @@ import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
 import PostEdit from './components/Posts/PostsEdit';
 import MainPage from './components/MainPage/MainPage';
-import LoginForm from './components/SessionForms/LoginForm';
-import SignupForm from './components/SessionForms/SignupForm';
-import Posts from './components/Posts/Posts';
 import Profile from './components/Profile/Profile';
 import PostCompose from './components/Posts/PostCompose';
 import { getCurrentUser } from './store/session';
@@ -16,19 +13,22 @@ import PostsIndex from './components/PostsIndex/PostsIndex';
 import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
-import UserProfile from './components/Profile/UsersProfile';
+import UserProfile from './components/Profile/UserProfile';
+import ResetScroll from './blocks/ResetScroll';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  
+
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
 
   return loaded && (
     <>
+      <ResetScroll />
       {sessionUser && (
         <>
           <NavBar />

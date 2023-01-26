@@ -40,6 +40,14 @@ router.post('/:postId', requireUser, upload.none(), async (req, res, next) => {
   return res.json(replyObject);
 });
 
+router.patch('/:replyId', requireUser, upload.none(), async (req, res, next) => {
+  await Reply.findByIdAndUpdate({_id: req.params.replyId},{body: req.body.body});
+  const newReply = await Reply.findOne({_id: req.params.replyId})
+                              .populate("user", "_id, username profileImageUrl");
+  const replyObject = {[newReply._id]: newReply};
+  return res.json(replyObject);
+})
+
 router.delete('/:replyId', requireUser, async (req, res, next) => {
   try {
     const reply = await Reply.findById(req.params.replyId);
