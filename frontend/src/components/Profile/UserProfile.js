@@ -13,11 +13,7 @@ function UserProfile () {
   const user = useSelector(store => {
     return Object.values(store.users).find(user => user._id === userId )
   })
-
   const userPosts = useSelector(state => Object.values(state.posts.user))
-  console.log(userPosts)
-  console.log(user)
-
 
   useEffect(() => {
     //this should be userId

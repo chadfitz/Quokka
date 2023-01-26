@@ -19,21 +19,6 @@ nav {
     justify-content: space-between;
 }
 
-#search-bar {
-    border-color: var(--offwhite-color);
-    fill-opacity: 100%;
-    border-style: none;
-}
-
-.search-form {
-  position: relative;
-}
-
-.search-results {
-  position: absolute;
-}
-
-
 .navbar-container{
     width: 100%;
     max-width: 80vw;
@@ -80,16 +65,41 @@ nav {
 }
 
 #search-box {
-    /* margin: auto; */
+    /* border: 2px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     width: 30vw;
     /* flex: 1; */
-    /* border-radius: 20px; */
+    border-radius: 20px;
+}
+
+.search-form {
+  /* border: 1px solid black; */
+  width: 100%;
+  position: relative;
+  border-radius: 20px;
+}
+
+.search-results {
+  position: absolute;
+}
+
+.search-search{
+    /* border: 1px solid purple; */
+    border: 1px solid rgb(184, 183, 183);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    padding: 0 8px;
+    border-radius: 20px;
+    display: flex;
 }
 
 #search-bar {
+    border-color: var(--offwhite-color);
+    fill-opacity: 100%;
+    border-style: none;
     font-size: 22px;
     outline: none;
     border-radius: 20px;
@@ -101,15 +111,49 @@ nav {
 #search-button {
     border: none;
     background-color: transparent;
-    margin-left: -30px
-}
-
-#search-button:hover {
-    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 50px;
 }
 
 #search-bar:focus {
     outline: none;
+}
+
+.search-results{
+    width: 100%;
+    background-color: rgba(255, 255, 255);
+    padding: 10px 21px;
+    box-shadow: var(--box-shadow);
+    border-radius: 0 0 20px 20px;
+    z-index: 1;
+}
+
+.search-users > h4{
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.search-user{
+    margin-bottom: 5px;
+}
+.search-user:hover{
+    cursor: pointer;
+    background-color: var(--link-hover);
+}
+
+.search-posts > h4{
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.search-post{
+    margin-bottom: 5px;
+}
+.search-post:hover{
+    cursor: pointer;
+    background-color: var(--link-hover);
 }
 
 .nav-right {
@@ -127,7 +171,7 @@ nav {
 }
 
 #profile-button {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 80px;
     padding: 8px;
     border-radius: 30px;
