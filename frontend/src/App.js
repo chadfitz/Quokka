@@ -16,6 +16,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import UserProfile from './components/Profile/UsersProfile';
 import ResetScroll from './blocks/ResetScroll';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
