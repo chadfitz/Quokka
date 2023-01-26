@@ -13,7 +13,9 @@ import PostsIndex from './components/PostsIndex/PostsIndex';
 import UserIndex from './components/Friends/UserIndex';
 import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
-import UserProfile from './components/Profile/UserProfile';
+import UserProfile from './components/Profile/UsersProfile';
+import ResetScroll from './blocks/ResetScroll';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,6 +28,7 @@ function App() {
 
   return loaded && (
     <>
+      <ResetScroll />
       {sessionUser && (
         <>
           <NavBar />
