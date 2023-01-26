@@ -49,13 +49,13 @@ function PostsIndex () {
 
   return (
     <div className='whole-page-styling'>
-      <div className='inner-page-styling'> 
+      <div className='inner-page-styling'>
           <div className='posts-index-header'>
             { (Object.values(friends).length) ?
             <div className='write-cta-wrapper'>
               <p>You haven't written to anyone in awhile. </p>
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
-            </div> : 
+            </div> :
             <div className='write-cta-wrapper'>
               <p>Let's start by adding some friends </p>
               <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Add Friend</button></Link>
@@ -71,7 +71,7 @@ function PostsIndex () {
           </div>
 
         {posts.map(post => (
-          <PostsIndexItem key={post._id} postId={post._id} />
+          <PostsIndexItem key={post._id} post={post} />
         ))}
       </div>
     </div>

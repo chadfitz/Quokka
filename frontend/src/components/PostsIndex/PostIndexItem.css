@@ -2,20 +2,7 @@
   --post-index-height: 500px;
 }
 
-.post-index-item {
-  background: var(--offwhite-color);
-  width: 100%;
-  margin-top: 30px;
-  height: var(--post-index-height);
-  /* background-color: white; */
 
-  padding: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 20px;
-  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
-  box-shadow: var(--box-shadow);
-}
 
 
 
@@ -27,11 +14,12 @@
 }
 
 .post-index-map {
-  min-width: 50%;
-  width: 50%;
+  min-width: calc(50% - 20px);
   height: calc(-58px + var(--post-index-height));
-  padding-right: 20px;
-  border-right: 1px solid gray;
+  border-radius: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* border-right: 1px solid #848484; */
 }
 
 .post-item-middle {
@@ -156,16 +144,143 @@
   text-align: right;
 }
 
-.test-bottom-bar { 
+.test-bottom-bar {
   display: flex;
   justify-content: space-between;
 }
 
-.post-show { 
+.post-show {
   padding: 20px;
 }
 
-#single-pin-map-show { 
+#single-pin-map-show {
   height: 80%;
 }
 
+/* REFACTORED */
+
+.post-index-item {
+  background: var(--offwhite-color);
+  margin-top: 30px;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.post-content-box {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.post-interactions-box {
+  margin-top: 10px;
+  padding-right: 10px;
+  border-top: 1px solid #848484;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post-meta {
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  color:  #848484;
+}
+
+.post-people {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.post-text {
+  /* padding-left: 80px; */
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.read-more {
+  color:  #848484;
+  font-size: 20px;
+  width: 100%;
+  text-align: right;
+  margin-top: 30px;
+}
+
+.post-text h1 {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.post-preview {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 25px;
+  width: 70%;
+  min-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-preview span {
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 1.5;
+}
+
+.post-person {
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+.post-person.left {
+  border-right: 1px solid #848484;
+  padding-right: 40px;
+}
+
+.post-person-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 20px;
+  position: absolute;
+  left: 80px;
+}
+.post-person-img.right {
+  left: 100px;
+}
+
+.from-or-to {
+  text-align: left;
+  padding-right: 10px;
+  color:  #848484;
+  font-size: 20px;
+}
+
+.time-since {
+  color: #848484;
+  font-size: 20px;
+  padding-left: 100px;
+}
+
+.post-title {
+  margin-bottom: 40px;
+}
+
+.participants {
+  padding: 0px;
+  margin: 0px;
+}
+
+.post-person-profile-wrapper {
+  position: relative;
+  width: 200px;
+}

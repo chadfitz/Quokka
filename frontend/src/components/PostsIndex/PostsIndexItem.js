@@ -22,30 +22,29 @@ import sleepy from '../../assets/quokka-sleepy.png';
 import './PostIndexItem.css';
 import './PostsIndex.css';
 import Reactions from './Reactions';
+import { fetchReplies } from '../../store/replies';
 
-function PostsIndexItem ({ postId }) {
+function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const errors = useSelector(state => state.errors.posts);
     const sessionUser = useSelector(state => state.session.user);
     const allReactions = useSelector(state => state.reactions)
-    const post = useSelector(store => {
-        return Object.values(store.posts.all).find(obj => obj._id === postId);
-    });
+    const replies = useSelector(state => Object.values(state.replies));
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deletePost(postId))
+        dispatch(deletePost(post._id))
     }
 
     const handleEdit = e => {
         e.preventDefault();
-        history.push(`/posts/${postId}/edit`);
+        history.push(`/posts/${post._id}/edit`);
     }
 
     const handleShow = e => {
         e.preventDefault();
-        history.push(`/posts/${postId}`);
+        history.push(`/posts/${post._id}`);
     }
 
     const handleProfile = e => {
@@ -57,15 +56,14 @@ function PostsIndexItem ({ postId }) {
         return reaction.user == sessionUser._id
       })
 
-    //    // the next few lines of code should stay in the post index item, but are going here for testing
-    // const sessionUserReactions = Object.entries(allReactions).filter(item=>(item[1].postId == postId && item[1].userId == sessionUser._id))
-
-    const postReactions = Object.entries(allReactions).filter(item => item[1].postId == postId)
+    const postReactions = Object.entries(allReactions).filter(item => item[1].postId == post._id)
 
     const sessionUserReactions = postReactions.filter(item => item[1].userId == sessionUser._id)
 
+    const bodyPreview = post.body.slice(0,200)
+    console.log(bodyPreview)
 
-    return (
+    return (<>
     <div className="post-index-item">
         <div className='post-item-top'>
             <div className="post-index-map">
@@ -121,7 +119,44 @@ function PostsIndexItem ({ postId }) {
             </div>
         </div>
     </div>
-  );
+    <div className="post-index-item">
+        <div className="post-content-box">
+            <div className="post-index-map">
+                <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={'new' + post._id} />
+            </div>
+            <div className="post-text">
+                <div className="post-people">
+                    <div className="post-person">
+                        <div className="post-person-profile-wrapper">
+                            <img className="post-person-img" src={post.writer.profileImageUrl} alt="profile"/>
+                            <img className="post-person-img right" src={post.writer.profileImageUrl} alt="profile"/>
+                        </div>
+                        <div className="participants">
+                            <p className="participants"><span className="from-or-to">From:</span>{post.recipient.username}</p>
+                            <p className="participants"><span className="from-or-to">To:</span>{post.writer.username}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div className="time-since">
+                    <p><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></p>
+                </div>
+                <div className="post-preview">
+                    <h1 className="post-title">{post.subject}</h1>
+                    <Markup content={bodyPreview + "..."} noHtml="true"/>
+                    <p className="read-more">Read More</p>
+                </div>
+            </div>
+        </div>
+        <div className="post-interactions-wrapper">
+            <div className="post-interactions-box">
+                <p className="post-meta">{postReactions.length} reactions</p>
+                <p className="post-meta">{replies.length} replies</p>
+            </div>
+        </div>
+    </div>
+    </>);
 }
 
 export default PostsIndexItem;
