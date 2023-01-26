@@ -198,7 +198,8 @@ const postsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
       return { ...state, new: action.post};
     case REMOVE_POST:
       return { ...state,
-        all: state.all.filter((post) => post._id !== action.postId)
+        all: state.all.filter((post) => post._id !== action.postId),
+        user: state.user.filter((post) => post._id !== action.postId)
       };
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
