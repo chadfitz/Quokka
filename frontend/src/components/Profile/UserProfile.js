@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import { fetchUsers } from '../../store/users';
+import UserTileStripped from '../Friends/UserTileStripped';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostsIndexItem2 from '../PostsIndex/PostsIndexItem2';
 import "./Profile.css"
@@ -38,9 +39,10 @@ function UserProfile () {
           <div className='profile-container'>
             <div id='welcome-corner'>
               <h1>Welcome to {user?.username}'s profile</h1>
-              <img src={user?.profileImageUrl}/>
+              <UserTileStripped recipient={user}/>
             </div>
             <h2>{user?.bio}</h2>
+
             {console.log('userposts',userPosts[0].location)}
             <div id='all-pins-map-container'>
               <AllPinsMap userPosts={userPosts} zoom={6} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
