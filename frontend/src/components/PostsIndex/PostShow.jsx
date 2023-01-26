@@ -86,14 +86,12 @@ const PostShow = () => {
   if (!post) return null;
   return (
     <div className='whole-page-styling'>
-      <div className='inner-page-styling'>
+      <div className='inner-page-styling' id="inner-page-styling">
           <div className='post-show'>
             <div className='post-show-top'>
-              <div className="post-index-item">
-                  <div className='post-item-top'>
-                      <div className="post-index-map">
-                          {/* {loading ? <Loader/> : mapPlaceholder} */}
-                          {/* <img src={gmaps} alt="google maps location" id="post-google-map" /> */}
+              <div className="post-index-item" id="post-index-item">
+                  <div className='post-item-top'id="post-item-top">
+                      <div className="post-index-map" id="post-index-map">
                           <SinglePinMap id="single-pin-map-show" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
                       </div>
                       <div className='post-item-middle'>
@@ -101,55 +99,42 @@ const PostShow = () => {
                           <h3 className='dear'>Dear {post.recipient.username},</h3>
                           {post.body && <Markup content={post.body} />}
                           <div className='post-item-photos'>
-                              {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :
-                          "" }
+                            {post.imageUrls ? post.imageUrls.map(image => {
+                               return <img id="post-item-photo" src={image} alt=""/>
+                               }) :
+                               ""}
                           </div>
-                          <h3 className='signature'>From, <br/>{post.writer.username}</h3>
+                          <div className='post-show-from'>
+                            <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
+                            <h3 className='signature'>From, <br/>{post.writer.username}</h3>
+                          </div>
                       </div>
                       <div className='post-index-date'>
-                          <div>
-                              <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
-                          </div>
+                         
                               {sessionUser?._id === post.writer._id &&
                               <div className='post-index-date-lower'>
-                                  <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
-                                  <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
+                                  <div className='edit-buttons-show'>
+                                    <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
+                                    <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
+                                  </div>
+                                  <div className='running-out-names'>
+                                    <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
+                                  </div>
                               </div>
                               }
                       </div>
                   </div>
                   <div className='post-item-bottom-container'>
-                      <div className='post-item-bottom'>
-                              <ul className="reaction-bar">
-                                  {emotions?.map(emotion=>{
-                                      if (emotion == "like") return <li className='reaction'>
-                                              <img src={happy} className='reaction-image'/>
-                                          </li>
-                                      if (emotion == "remember") return <li className='reaction'>
-                                              <img src={hungry} className='reaction-image'/>
-                                          </li>
-                                      if (emotion == "tom") return <li className='reaction'>
-                                              <img src={laughing} className='reaction-image'/>
-                                          </li>
-                                      if (emotion == "NERD!") return <li className='reaction'>
-                                              <img src={love} className='reaction-image'/>
-                                          </li>
-                                  })}
-                              </ul>
-                              <Reactions user={sessionUser} post={post}></Reactions>
-                              <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
-                          </div>
-                        </div>
+                        <p className='show-toggler'>{post.reactions.length} reactions</p>
+                        <button id="react-button">React</button>
+                        <button id="repl-button" onClick={replyToggle}>Reply</button>
+                        { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{replies.length} Replies</p> :
+                        <p className='show-toggler'>Replies </p> }                  
                   </div>
+                </div>
               </div>
           </div>
-          <div className='test-bottom-bar'>
-            <p className='show-toggler'>{post.reactions.length} reactions</p>
-            <button>React</button>
-            <button onClick={replyToggle}>Reply</button>
-            { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{replies.length} Replies</p> :
-            <p className='show-toggler'>Replies </p> }
-          </div>
+          
           { replyBox ?
             <div className='replies-show'>
                 <textarea label=""

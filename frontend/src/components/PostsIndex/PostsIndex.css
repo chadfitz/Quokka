@@ -132,3 +132,60 @@ body {
     cursor: pointer;
 }
 
+#post-item-top { 
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+#post-index-item { 
+    height: auto;
+}
+
+#post-index-map { 
+    width: 70vw;
+}
+
+.post-show-from { 
+    display: flex;
+}
+
+.post-index-date-lower { 
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-buttons-show { 
+    display: flex;
+    width: 400px;
+    justify-content: flex-end;
+}
+
+.running-out-names { 
+    display: flex;
+    justify-content: flex-end;
+    width: 400px;
+}
+
+.test-bottom-bar { 
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.post-item-bottom-container { 
+    display: flex;
+    justify-content: space-between;
+}
+
+#react-button, #repl-button { 
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all ease-in 500ms;
+}
+
+#react-button:hover, #repl-button:hover { 
+    font-size: 18px
+}
+
