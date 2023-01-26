@@ -197,14 +197,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 40px;
+  padding-top: 20px;
 }
 
 .post-text {
   /* padding-left: 80px; */
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 .read-more {
@@ -223,7 +224,7 @@
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin-top: 25px;
+  margin-top: 10px;
   width: 70%;
   min-width: 70%;
   margin-left: auto;
@@ -250,12 +251,11 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-left: 20px;
   position: absolute;
-  left: 80px;
+  left: 0px;
 }
 .post-person-img.right {
-  left: 100px;
+  left: 20px;
 }
 
 .from-or-to {
@@ -268,11 +268,11 @@
 .time-since {
   color: #848484;
   font-size: 20px;
-  padding-left: 100px;
+  padding-left: 120px;
 }
 
 .post-title {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .participants {
@@ -282,5 +282,24 @@
 
 .post-person-profile-wrapper {
   position: relative;
-  width: 200px;
+  width: 120px;
+  margin-left: 120px;
+}
+
+.post-index-author-toolbar {
+  position: relative;
+}
+
+.post-index-icon {
+  position: absolute;
+  right: 0;
+}
+
+.post-index-icon.edit {
+  right: 40px;
+}
+
+.index-item-post-link {
+  color: black;
+  text-decoration: none;
 }
