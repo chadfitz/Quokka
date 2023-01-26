@@ -54,6 +54,8 @@ const PostShow = () => {
     dispatch(deletePost(postId))
   }
 
+  console.log('reactions', reactions)
+
   const handleEdit = e => {
     e.preventDefault();
     history.push(`/posts/${postId}/edit`);
@@ -68,6 +70,7 @@ const PostShow = () => {
     };
     dispatch(composeReply(replyObject));
     setReplyBox(false)
+    replyChange("")
   }
 
   const replyToggle = () => {
@@ -78,11 +81,18 @@ const PostShow = () => {
     showReply ? setShowReply(false) : setShowReply(true)
   }
 
-  const reactionObject = reactions?.find((reaction) => {
-    return reaction.user == sessionUser._id;
+  // need session user reaction
+
+  const sessionUserReactions = Object.values(reactions).filter((entry)=>{
+    // converting k /v pairs of object to array of arrays, filtering for matches based on user id, then passing to Reactions component below
+    // console.log(entry.postId)
+    // console.log(post._id)
+    return entry.postId == postId
   })
 
-  let emotions = reactionObject ? reactionObject.emotions : null
+  console.log('sessionUserReactions', sessionUserReactions)
+
+
 
   if (!post) return null;
   return (
@@ -127,11 +137,16 @@ const PostShow = () => {
                   <div className='post-item-bottom-container'>
                         <p className='show-toggler'>{post.reactions.length} reactions</p>
                         <Reactions />
+
+                  </div>
+                  <div className='post-item-bottom-container'>
+                        <p className='show-toggler'>{reactions.length} reactions</p>
+                        <Reactions postId={postId} sessionUserReactions={sessionUserReactions} user={sessionUser}></Reactions>
                         <button id="repl-button" onClick={replyToggle}>Reply</button>
                         { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{Object.values(replies).length} Replies</p> :
-                        <p className='show-toggler'>{Object.values(replies).length} Replies </p> }                  
+                        <p className='show-toggler'>{Object.values(replies).length} Replies </p> }
                   </div>
-                  { replyBox ?
+                   { replyBox ?
             <div className='replies-show'>
                 <textarea label=""
                   id="reply-input"
@@ -146,7 +161,7 @@ const PostShow = () => {
             </div>
               :
             "" }
-          { showReply ?
+             { showReply ?
           <div className='replies-showy'>
           {replies.map(reply => {return (
             <ReplyBox key={reply._id} replyId={reply._id}/>
@@ -157,10 +172,16 @@ const PostShow = () => {
                 </div>
               </div>
           </div>
+
+         
+         
+                </div>
+              </div>
+    //       </div>
           
          
-      </div>
-    </div>
+    //   </div>
+    // </div>
   );
 }
 

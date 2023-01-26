@@ -9,6 +9,7 @@ import { fetchFriends } from '../../store/friends';
 import { fetchUsers } from '../../store/users';
 import { fetchReactions } from '../../store/reactions';
 import { useState } from 'react';
+import { fetchReplies } from '../../store/replies';
 
 
 function PostsIndex () {
