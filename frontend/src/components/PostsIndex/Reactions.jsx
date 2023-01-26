@@ -48,15 +48,19 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
 
     let reactionIdToDelete;
     const userHasReacted = sessionUserReactions.find((entry) => {
-      if (entry[1].style == newEmotion) {
-        reactionIdToDelete = entry[0]
+      if (entry.style == newEmotion) {
+        console.log(entry)
+        reactionIdToDelete = entry._id
       }
-      return entry[1].style == newEmotion
+      return entry.style == newEmotion
     })
 
     if (userHasReacted) {
       dispatch(deleteReaction(reactionIdToDelete))
     } else {
+      console.log('sessionUserId', sessionUser._id)
+      console.log('postId', post._id)
+      console.log('new emotion', newEmotion)
       dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     }
 

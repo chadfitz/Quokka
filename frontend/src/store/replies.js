@@ -1,12 +1,17 @@
 import jwtFetch from './jwt';
 
 // ACTIONS
+const CLEAR_REPLIES = "replies/CLEAR_REPLIES"
 const RECEIVE_REPLIES = "replies/RECEIVE_REPLIES";
 const RECEIVE_REPLY = "replies/RECEIVE_REPLY";
 // const RECEIVE_REPLY = "replies/RECEIVE_REPLY";
 const REMOVE_REPLY = "replies/REMOVE_REPLY";
 
 // ACTION CREATORS
+export const clearReplies = (_) => ({
+  type: CLEAR_REPLIES
+})
+
 export const receiveReplies = (replies) => ({
   type: RECEIVE_REPLIES,
   replies
@@ -116,8 +121,10 @@ const repliesReducer = (state = {}, action) => {
   Object.freeze(state);
   let newState;
   switch(action.type) {
+    case CLEAR_REPLIES:
+      return {};
     case RECEIVE_REPLIES:
-      return { ...action.replies };
+      return { ...state, ...action.replies };
     case RECEIVE_REPLY:
       return { ...state, ...action.reply };
     case REMOVE_REPLY:
