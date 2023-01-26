@@ -231,4 +231,14 @@ body {
     font-size: 30px;;
 }
 
+.replies-show { 
+    display: flex;
+    align-items: center;
+}
+
+#reply-btn { 
+    margin-top: 40px;
+    
+}
+
 
