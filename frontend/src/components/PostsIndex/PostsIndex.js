@@ -57,6 +57,7 @@ function PostsIndex () {
   return (
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
+      <div className='inner-page-styling'>
           <div className='posts-index-header'>
             { (Object.values(friends).length) ?
             <div className='write-cta-wrapper'>
