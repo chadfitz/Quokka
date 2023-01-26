@@ -22,7 +22,9 @@ import sleepy from '../../assets/quokka-sleepy.png';
 import './PostIndexItem.css';
 import './PostsIndex.css';
 import Reactions from './Reactions';
-import { fetchReplies } from '../../store/replies';
+import { clearReplies, fetchReplies } from '../../store/replies';
+
+// Need to grab replies from the store. Previous replies overwrite themselves. Need to filter them.
 
 function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
@@ -50,12 +52,23 @@ function PostsIndexItem ({ post }) {
     const handleProfile = e => {
         e.preventDefault()
         history.push(`/profile/${post.writer._id}`)
-  }
+    }
+
+    useEffect(()=>{
+        console.log('postId', post._id)
+        dispatch(fetchReplies(post._id));
+
+     
+
+    }, [dispatch])
+
 
     const postReactions = Object.values(allReactions).filter(item => item.postId == post._id)
     const bodyPreview = post.body.slice(0,200)
 
-    console.log(replies)
+    const postReplies = replies.filter((reply)=>{
+        return reply.post == post._id
+    })
 
 
     return (<>
@@ -101,7 +114,7 @@ function PostsIndexItem ({ post }) {
             <a href={`posts/${post._id}`} className="index-item-post-link">
                 <div className="post-interactions-box">
                     <p className="post-meta">{postReactions.length} reactions</p>
-                    <p className="post-meta">{replies.length} replies</p>
+                    <p className="post-meta">{postReplies.length} replies</p>
                 </div>
             </a>
         </div>
