@@ -94,9 +94,9 @@ const PostShow = () => {
                       <div className="post-index-map" id="post-index-map">
                           <SinglePinMap id="single-pin-map-show" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={post._id} />
                       </div>
-                      <div className='post-item-middle'>
-                          <h2>{post.subject}</h2>
-                          <h3 className='dear'>Dear {post.recipient.username},</h3>
+                      <div className='post-item-middle' id="post-item-middle">
+                          <h2 id="postshow-subject">{post.subject}</h2>
+                          <h3 className='dear' id="dear">Dear {post.recipient.username},</h3>
                           {post.body && <Markup content={post.body} />}
                           <div className='post-item-photos'>
                             {post.imageUrls ? post.imageUrls.map(image => {
@@ -104,32 +104,32 @@ const PostShow = () => {
                                }) :
                                ""}
                           </div>
-                          <div className='post-show-from'>
-                            <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
-                            <h3 className='signature'>From, <br/>{post.writer.username}</h3>
-                          </div>
-                      </div>
-                      <div className='post-index-date'>
-                         
-                              {sessionUser?._id === post.writer._id &&
+                          <div className='post-show-styling'>
+                            <div className='post-show-from'>
+                              <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
+                              <h3 className='signature' id="signature">From, <br/>{post.writer.username}</h3>
+                            </div>
+                               {sessionUser?._id === post.writer._id &&
                               <div className='post-index-date-lower'>
-                                  <div className='edit-buttons-show'>
-                                    <div className='post-index-icon' onClick={handleEdit}>< FiEdit3 /></div>
-                                    <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
+                                  <div className='edit-buttons-show' id="edit-buttons-show">
+                                    <div className='post-index-icons' id="edit-show" onClick={handleEdit}>< FiEdit3 /></div>
+                                    <div className='post-index-icons' id="delete-show" onClick={handleDelete}>< FiTrash2 /></div>
                                   </div>
                                   <div className='running-out-names'>
-                                    <h4 id="time-ago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
+                                    <h4 id="time-lago"><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></h4>
                                   </div>
                               </div>
                               }
+                          </div>
                       </div>
+                    
                   </div>
                   <div className='post-item-bottom-container'>
                         <p className='show-toggler'>{post.reactions.length} reactions</p>
                         <button id="react-button">React</button>
                         <button id="repl-button" onClick={replyToggle}>Reply</button>
-                        { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{replies.length} Replies</p> :
-                        <p className='show-toggler'>Replies </p> }                  
+                        { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{Object.values(replies).length} Replies</p> :
+                        <p className='show-toggler'>{Object.values(replies).length} Replies </p> }                  
                   </div>
                 </div>
               </div>

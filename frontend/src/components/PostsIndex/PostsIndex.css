@@ -148,6 +148,14 @@ body {
 
 .post-show-from { 
     display: flex;
+    width: 200px;
+}
+
+#signature { 
+    margin-left: 20px;
+    margin-top: 25px;
+    width: 200px;
+    font-size: 20px;
 }
 
 .post-index-date-lower { 
@@ -155,26 +163,39 @@ body {
     justify-content: flex-end;
 }
 
-.edit-buttons-show { 
+#edit-buttons-show { 
     display: flex;
-    width: 400px;
     justify-content: flex-end;
 }
 
 .running-out-names { 
     display: flex;
     justify-content: flex-end;
-    width: 400px;
+    
+}
+
+#post-item-middle { 
+    margin-top: 20px;;
+}
+
+.post-index-icons { 
+    display: flex;
+    justify-content: flex-end;
 }
 
 .test-bottom-bar { 
     display: flex;
     justify-content: space-evenly;
 }
+.post-index-date-lower { 
+    display: flex;
+    flex-direction: column;
+}
 
 .post-item-bottom-container { 
     display: flex;
     justify-content: space-between;
+    height: 50px;
 }
 
 #react-button, #repl-button { 
@@ -188,4 +209,26 @@ body {
 #react-button:hover, #repl-button:hover { 
     font-size: 18px
 }
+
+#time-lago { 
+    width: auto;
+}
+
+#edit-show { 
+    margin-right: 20px
+}
+
+#edit-show, #delete-show, #dear { 
+    font-size: 24px;
+}
+
+.post-show-styling { 
+    display: flex;
+    width: auto;
+}
+
+#postshow-subject { 
+    font-size: 30px;;
+}
+
 
