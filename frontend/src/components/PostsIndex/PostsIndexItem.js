@@ -52,16 +52,11 @@ function PostsIndexItem ({ post }) {
         history.push(`/profile/${post.writer._id}`)
   }
 
-    const reactionObject = post.reactions?.find((reaction) => {
-        return reaction.user == sessionUser._id
-      })
-
-    const postReactions = Object.entries(allReactions).filter(item => item[1].postId == post._id)
-
-    const sessionUserReactions = postReactions.filter(item => item[1].userId == sessionUser._id)
-
+    const postReactions = Object.values(allReactions).filter(item => item.postId == post._id)
     const bodyPreview = post.body.slice(0,200)
-    console.log(bodyPreview)
+
+    console.log(replies)
+
 
     return (<>
     <div className="post-index-item">

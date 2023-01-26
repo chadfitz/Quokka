@@ -78,14 +78,15 @@ function PostsIndex () {
           </div>
         {friendsPost ?
         friendsFilter.map(post => (
-          <PostsIndexItem key={post._id} postId={post._id} />
+          <PostsIndexItem key={post._id} post={post} />
         ))
         :
         posts.map(post => (
-          <PostsIndexItem key={post._id} postId={post._id} />
+          <PostsIndexItem key={post._id} post={post} />
         ))
         }
       </div>
+    </div>
     </div>
   );
 }
