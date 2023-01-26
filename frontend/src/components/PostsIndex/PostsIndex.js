@@ -16,44 +16,35 @@ function PostsIndex () {
   const posts = useSelector(state => Object.values(state.posts.all));
   const friends = useSelector(state => state.friends)
   const currentUser = useSelector(state => state.session.user);
-  const userPosts = useSelector(state => Object.values(state.posts.user))
+
   const [friendsPost, setFriendsPost] = useState(false)
 
-    useEffect(() => {
-    dispatch(fetchUserPosts(currentUser._id));
+  useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(fetchPosts());
+    dispatch(fetchFriends(currentUser));
+    dispatch(fetchReactions());
     return () => dispatch(clearPostErrors());
   }, [currentUser, dispatch]);
 
-  useEffect(()=> {
-    dispatch(fetchUsers());
-    dispatch(fetchFriends(currentUser));
-    dispatch(fetchReactions());
-  }, [])
-
-  const friendsFilter = posts.filter(post => { 
+  const friendsFilter = posts.filter(post => {
     return (post.writer._id === currentUser._id || Object.keys(friends).includes(post.writer._id) || Object.keys(friends).includes(post.recipient._id) )
   })
 
-  const toggleFilter = () => { 
+  const toggleFriends = () => {
     setFriendsPost(true)
   }
 
-  const toggleallPosts = () => { 
+  const toggleAll = () => {
     setFriendsPost(false)
   }
 
-  const friendClass = () => { 
+  const friendClass = () => {
     return friendsPost ? 'filter-buttons selected' : 'filter-buttons'
   }
 
-  const allClass=()=> { 
+  const allClass=()=> {
     return !friendsPost ? 'filter-buttons selected' : 'filter-buttons'
-  }
-
-  const findFriend= () => {
-    if (!friends.length) return null
-    const index = Math.floor(Math.random() * friends.length)
-    return friends[index]
   }
 
   useEffect(() => {
@@ -61,21 +52,17 @@ function PostsIndex () {
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
 
-       // need to get just reactions per post, so must turn obj to array
-    // console.log("all reactions", allReactions)
-
 
   if (posts.length === 0) return <div>There are no Posts</div>;
-
   return (
     <div className='whole-page-styling'>
-      <div className='inner-page-styling'> 
+      <div className='inner-page-styling'>
           <div className='posts-index-header'>
             { (Object.values(friends).length) ?
             <div className='write-cta-wrapper'>
               <p>You haven't written to anyone in awhile. </p>
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
-            </div> : 
+            </div> :
             <div className='write-cta-wrapper'>
               <p>Let's start by adding some friends </p>
               <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Add Friend</button></Link>
@@ -84,11 +71,11 @@ function PostsIndex () {
           <div className='posts-index-filter'>
             <div className='posts-index-filter-bar' >
               <h5 id="filter-by">Filter by: </h5>
-              <button className={allClass()} onClick={toggleallPosts}>All Posts</button>
-              <button className={friendClass()} onClick={toggleFilter}>Friends</button>
+              <button className={allClass()} onClick={toggleAll}>All Posts</button>
+              <button className={friendClass()} onClick={toggleFriends}>Friends</button>
             </div>
           </div>
-        {friendsPost ? 
+        {friendsPost ?
         friendsFilter.map(post => (
           <PostsIndexItem key={post._id} postId={post._id} />
         ))

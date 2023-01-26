@@ -25,6 +25,15 @@ nav {
     border-style: none;
 }
 
+.search-form {
+  position: relative;
+}
+
+.search-results {
+  position: absolute;
+}
+
+
 .navbar-container{
     width: 100%;
     max-width: 80vw;
