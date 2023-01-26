@@ -25,6 +25,7 @@ import ReplyIndex from '../Replies/ReplyIndex';
 import { useState } from 'react';
 import "./PostIndexItem.css"
 import { fetchReaction, fetchReactions } from '../../store/reactions';
+// import Reactions from './Reactions';
 
 
 const PostShow = () => {
@@ -69,6 +70,7 @@ const PostShow = () => {
     };
     dispatch(composeReply(replyObject));
     setReplyBox(false)
+    replyChange("")
   }
 
   const replyToggle = () => {
@@ -131,6 +133,10 @@ const PostShow = () => {
                               }
                           </div>
                       </div>
+                  </div>
+                  <div className='post-item-bottom-container'>
+                        <p className='show-toggler'>{post.reactions.length} reactions</p>
+                        <Reactions />
 
                   </div>
                   <div className='post-item-bottom-container'>
@@ -140,11 +146,7 @@ const PostShow = () => {
                         { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{Object.values(replies).length} Replies</p> :
                         <p className='show-toggler'>{Object.values(replies).length} Replies </p> }
                   </div>
-                </div>
-              </div>
-          </div>
-
-          { replyBox ?
+                   { replyBox ?
             <div className='replies-show'>
                 <textarea label=""
                   id="reply-input"
@@ -154,21 +156,32 @@ const PostShow = () => {
                   wrap="hard"
                   rows="2"
                 />
-                <Button className="reply-btn" label="Reply"
+                <Button className="reply-btn" id="reply-btn" label="Reply"
                   type="submit" onClick={handleReply}/>
             </div>
               :
             "" }
-          { showReply ?
-          <div className='replies-show'>
+             { showReply ?
+          <div className='replies-showy'>
           {replies.map(reply => {return (
             <ReplyBox key={reply._id} replyId={reply._id}/>
-          )})},
+          )})}
           </div>
           :
           "" }
-      </div>
-    </div>
+                </div>
+              </div>
+          </div>
+
+         
+         
+                </div>
+              </div>
+    //       </div>
+          
+         
+    //   </div>
+    // </div>
   );
 }
 
