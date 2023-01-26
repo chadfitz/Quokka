@@ -45,7 +45,7 @@ function SignupForm () {
       default:
         throw Error('Unknown field in Signup Form');
     }
-    
+
     return e => setState(e.currentTarget.value);
   }
 
@@ -59,10 +59,10 @@ function SignupForm () {
       bio
     };
     console.log(user)
-    dispatch(signup(user)); 
+    dispatch(signup(user));
   }
 
-   const demoLogin = e => { 
+   const demoLogin = e => {
     e.preventDefault()
     return dispatch(login({email:'demo-user@appacademy.io', password:'starwars'}))
     .then(()=> history.push('/posts'))
@@ -86,7 +86,7 @@ function SignupForm () {
         <input type="text"
           value={username}
           onChange={update('username')}
-          placeholder="First Name"
+          placeholder="Username"
           id='login-input'
         />
       </label>
@@ -121,9 +121,9 @@ function SignupForm () {
       </label>
       <label>
         <h3 id="profile-image-input">Profile image</h3>
-        <input 
+        <input
          type="file"
-         accept=".jpg, .jpeg, .png" 
+         accept=".jpg, .jpeg, .png"
          onChange={updateFile}
          id="login-input" />
       </label>
