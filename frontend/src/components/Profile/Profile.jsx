@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import { fetchFriends } from '../../store/friends';
-import PostsIndexItem2 from '../PostsIndex/PostsIndexItem2';
+import PostsIndexItem from '../PostsIndex/PostsIndexItem';
 import "./Profile.css"
 import SingleFriend from '../Friends/SingleFriend';
 
@@ -47,7 +47,8 @@ function Profile () {
               <h1>Welcome, {currentUser.username}</h1>
               <img src={currentUser.profileImageUrl}/>
             </div>
-            <h2>{currentUser.bio}</h2>
+            <h2>Bio</h2>
+            <h3>{currentUser.bio}</h3>
             <h2 id='friend-click-button' onClick={handleFriendClick}>All your friends</h2>
             <div id="all-friends-container">
                 {userFriends.map((friend, i) => (
@@ -64,7 +65,7 @@ function Profile () {
             </div>
             {userPosts.map((post, i) => (
               <>
-                <PostsIndexItem2 post={post} key={post.uniqueId}/>
+                <PostsIndexItem post={post} key={post.uniqueId}/>
               </>
             ))}
           </div>

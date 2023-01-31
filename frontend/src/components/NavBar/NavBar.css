@@ -65,35 +65,32 @@ nav {
 }
 
 #search-box {
-    /* border: 2px solid red; */
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     width: 30vw;
     /* flex: 1; */
-    border-radius: 20px;
 }
 
 .search-form {
-  /* border: 1px solid black; */
   width: 100%;
   position: relative;
-  border-radius: 20px;
-}
-
-.search-results {
-  position: absolute;
 }
 
 .search-search{
-    /* border: 1px solid purple; */
     border: 1px solid rgb(184, 183, 183);
     box-shadow: var(--box-shadow);
     width: 100%;
     padding: 0 8px;
     border-radius: 20px;
     display: flex;
+}
+
+.search-results {
+  position: absolute;
+  border: 1px solid rgb(184, 183, 183);
+  border-top: none;
 }
 
 #search-bar {
