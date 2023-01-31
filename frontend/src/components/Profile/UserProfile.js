@@ -30,7 +30,6 @@ function UserProfile () {
   } else {
     return (
       <div className='whole-page-styling'>
-        {/* {console.log('user',user)} */}
         <div className='inner-page-styling'>
           <div className='profile-container'>
             <div id='welcome-corner'>
@@ -38,8 +37,6 @@ function UserProfile () {
               <UserTileStripped recipient={user}/>
             </div>
             <h2>{user?.bio}</h2>
-
-            {console.log('userposts',userPosts[0].location)}
             <div id='all-pins-map-container'>
               <AllPinsMap userPosts={userPosts} zoom={6} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
             </div>

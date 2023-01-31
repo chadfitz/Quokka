@@ -30,9 +30,6 @@ const ReplyBox = ({ replyId }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log('in edit');
-    console.log('replyChange');
-    console.log(replyChange);
     dispatch(updateReply({
       replyId,
       body: replyChange

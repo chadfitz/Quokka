@@ -45,7 +45,6 @@ function SearchBar() {
 
   const handleSubmit = (e) => {
       e.preventDefault()
-      console.log('in submit now');
       //fetch search listings here
     }
 

@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { clearPostErrors, composePost, fetchUserPosts, updatePost } from '../../store/posts';
-import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
-import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
 import { fetchUsers } from '../../store/users';
 import { fetchFriends } from '../../store/friends';
@@ -107,10 +104,7 @@ function PostCompose () {
 
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
-  // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState("");
-  // TODO: connect me to google maps api
-  const [location, setLocation] = useState(post.location);
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
@@ -118,15 +112,13 @@ function PostCompose () {
       [{ 'header': [1, 2, false] }],
       ['bold', 'italic', 'underline','strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
       ['clean']
     ],
   };
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
+    'list', 'bullet', 'indent'
   ];
 
   const handleSubmit = async e => {
@@ -182,7 +174,6 @@ function PostCompose () {
 
   let friendsError;
   if (Object.entries(friends).length == 0 ) {
-    console.log("condition is true")
     friendsError = "You won't be able to write a message until you add friends."
   }
 

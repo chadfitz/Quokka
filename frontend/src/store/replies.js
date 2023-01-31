@@ -29,17 +29,11 @@ export const removeReply = (replyId) => ({
 
 // EXPRESS ACTION MIDDLEWARE
 export const fetchReplies = (postId) => async dispatch => {
-  console.log('in fetchReplies middleware');
   let res;
   try {
     res = await jwtFetch(`/api/replies/${postId}`);
   } catch (err) {
     const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      // TODO
-      console.log("frontend/src/store/replies.js#fetchReplies Replies not found");
-      // dispatch(receiveErrors(resBody.errors));
-    }
   }
 
   const replies = await res.json();
@@ -67,9 +61,6 @@ export const composeReply = data => async dispatch => {
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
-      // TODO
-      console.log("frontend/src/store/replies.js#composeReply compose reply unsuccessful");
-      // dispatch(receiveErrors(resBody.errors));
     }
   }
 };
@@ -80,20 +71,13 @@ export const deleteReply = replyId => async dispatch => {
       method: 'DELETE'
     });
     dispatch(removeReply(replyId));
-  } catch (err) {
-    // TODO
-  }
+  } catch (err) {}
 }
 
 export const updateReply = reply => async dispatch => {
-  // TODO - DELETE PRINT
-  console.log('in store updateReply');
-  // TODO - DELETE PRINT ^^^^^
   const { replyId, body } = reply;
   const formData = new FormData();
   formData.append("body", body);
-  console.log('formData');
-  console.log(formData);
 
   let res;
   try {
@@ -102,12 +86,7 @@ export const updateReply = reply => async dispatch => {
       body: formData
     })
     if (res.ok) {
-      console.log('store updateReply res ok');
-      console.log('res');
-      console.log(res);
       const newReply = await res.json();
-      console.log('newReply');
-      console.log(newReply);
       dispatch(receiveReply(newReply));
     }
   } catch (err) {
@@ -129,15 +108,7 @@ const repliesReducer = (state = {}, action) => {
       return { ...state, ...action.reply };
     case REMOVE_REPLY:
       newState = { ...state };
-      // // newState = state.filter(reply => reply._id !== action.replyId);
-      console.log('delete newState[action.replyId]');
       delete newState[action.replyId];
-      // console.log('newState');
-      // console.log(newState);
-      // const index = newState.indexOf(action.replyId);
-      // if (index > -1) { // only splice array when item is found
-      //   newState.splice(index, 1); // 2nd parameter means remove one item only
-      // }
       return newState;
     default:
       return state;
