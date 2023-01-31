@@ -59,7 +59,7 @@
   height: 0px;
 }
 
-.compose-heading > h2{
+.compose-heading > h3{
   margin: 0 0;
 }
 
@@ -69,6 +69,8 @@
 
 .compose-heading {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -83,6 +85,8 @@
 .upload-images {
   display: flex;
   flex-direction: column;
+  font-weight: bold;
+  width: 200px;
 }
 
 #subject-compose {
