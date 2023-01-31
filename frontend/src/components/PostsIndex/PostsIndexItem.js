@@ -44,10 +44,10 @@ function PostsIndexItem ({ post }) {
         history.push(`/posts/${post._id}/edit`);
     }
 
-    const handleShow = e => {
-        e.preventDefault();
-        history.push(`/posts/${post._id}`);
-    }
+    // const handleShow = e => {
+    //     e.preventDefault();
+    //     history.push(`./posts/${post._id}`);
+    // }
 
     const handleProfile = e => {
         e.preventDefault()
@@ -100,7 +100,7 @@ function PostsIndexItem ({ post }) {
                     <p><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></p>
                 </div>
                 <div className="post-preview">
-                    <a href={`posts/${post._id}`} className="index-item-post-link">
+                    <a href={`/posts/${post._id}`} className="index-item-post-link">
                         <h1 className="post-title">{post.subject}</h1>
                         <Markup content={bodyPreview + "..."} noHtml="true"/>
                         <p className="read-more">Read More →</p>
@@ -109,7 +109,7 @@ function PostsIndexItem ({ post }) {
             </div>
         </div>
         <div className="post-interactions-wrapper">
-            <a href={`posts/${post._id}`} className="index-item-post-link">
+            <a href={`/posts/${post._id}`} className="index-item-post-link">
                 <div className="post-interactions-box">
                     <p className="post-meta">{postReactions.length} reactions</p>
                     <p className="post-meta">{postReplies.length} replies</p>
