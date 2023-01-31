@@ -76,10 +76,12 @@ function PostsIndexItem ({ post }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={'new' + post._id} />
             </div>
             <div className="post-text">
+                {sessionUser?._id === post.writer._id &&
                 <div className='post-index-author-toolbar'>
                     <div className='post-index-icon edit' onClick={handleEdit}>< FiEdit3 /></div>
                     <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
                 </div>
+                }
                 <div className="post-people">
                     <div className="post-person">
                         <div className="post-person-profile-wrapper">
