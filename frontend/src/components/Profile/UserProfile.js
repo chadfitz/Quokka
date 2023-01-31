@@ -5,7 +5,7 @@ import { fetchUserPosts, clearPostErrors } from '../../store/posts';
 import { fetchUsers } from '../../store/users';
 import UserTileStripped from '../Friends/UserTileStripped';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
-import PostsIndexItem2 from '../PostsIndex/PostsIndexItem2';
+import PostsIndexItem from '../PostsIndex/PostsIndexItem';
 import "./Profile.css"
 
 function UserProfile () {
@@ -37,7 +37,8 @@ function UserProfile () {
               <h1>Welcome to {user?.username}'s profile</h1>
               <UserTileStripped recipient={user}/>
             </div>
-            <h2>{user?.bio}</h2>
+            <h2>Bio</h2>
+            <h3>{user?.bio}</h3>
 
             {console.log('userposts',userPosts[0].location)}
             <div id='all-pins-map-container'>
@@ -45,7 +46,7 @@ function UserProfile () {
             </div>
             {userPosts.map((post, i) => (
               <>
-                <PostsIndexItem2 post={post} key={post._id}/>
+                <PostsIndexItem post={post} key={post._id}/>
               </>
             ))}
           </div>
