@@ -58,7 +58,6 @@ function SignupForm () {
       password,
       bio
     };
-    console.log(user)
     dispatch(signup(user));
   }
 

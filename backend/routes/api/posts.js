@@ -44,40 +44,6 @@ router.delete('/:postId', async (req, res, next) => {
   return res.json(deletedPost);
 });
 
-// router.patch('/:postId', async (req, res, next) => {
-//   try {
-//     const filter = { _id: req.params.postId };
-//     const update = { recipient: req.body.recipient,
-//       location: req.body.location,
-//       subject: req.body.subject,
-//       body: req.body.body,
-//       reactions: req.body.reactions,
-//     }
-
-//     const updatedPost = await Post.updateOne(filter, {
-//       recipient: req.body.recipient,
-//       location: req.body.location,
-//       subject: req.body.subject,
-//       body: req.body.body,
-//       reactions: req.body.reactions,
-//     }, function (err, docs) {
-//         if (err){
-//           console.log('updatedPost erorrrrrrrr');
-//           console.log(err)
-//         } else {
-//           console.log("Updated Docs : ", docs);
-//       }}
-//     )
-//   }
-
-//   catch(err) {
-//     const error = new Error('Post not found');
-//     error.statusCode = 404;
-//     error.errors = { message: "No post found with that id" };
-//     return next(error);
-//   }
-// });
-
 router.get('/:id', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
@@ -132,7 +98,7 @@ router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res
       body: req.body.body,
       imageUrls
     })
-    
+
     return res.json(updatedPost);
   }
   catch(err) {
@@ -143,7 +109,6 @@ router.patch('/:id', multipleMulterUpload('images'),requireUser, async (req, res
   }
 });
 
-// IN PROGRESS --- Creates a reaction to a post
 router.patch('/createReaction/:postId', async (req, res, next) => {
   try {
     const { postId } = req.params
@@ -174,9 +139,7 @@ router.patch('/createReaction/:postId', async (req, res, next) => {
 })
 
 
-// IN PROGRESS -- Removes reaction to a post
 router.patch('/removeReaction/:postId', async (req, res, next) => {
-  console.log(req.body)
   try {
     const { postId } = req.params
     const { reactorId, emotionToRemove } = req.body

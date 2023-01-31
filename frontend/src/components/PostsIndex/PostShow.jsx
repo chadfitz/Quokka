@@ -54,8 +54,6 @@ const PostShow = () => {
     dispatch(deletePost(postId))
   }
 
-  console.log('reactions', reactions)
-
   const handleEdit = e => {
     e.preventDefault();
     history.push(`/posts/${postId}/edit`);
@@ -83,16 +81,12 @@ const PostShow = () => {
 
   // need session user reaction
 
+  // converting key val pairs of object to array of arrays,
+  // filtering for matches based on user id,
+  // then passing to Reactions component below
   const sessionUserReactions = Object.values(reactions).filter((entry)=>{
-    // converting k /v pairs of object to array of arrays, filtering for matches based on user id, then passing to Reactions component below
-    // console.log(entry.postId)
-    // console.log(post._id)
     return entry.postId == postId
   })
-
-  console.log('sessionUserReactions', sessionUserReactions)
-
-
 
   if (!post) return null;
   return (
@@ -173,13 +167,13 @@ const PostShow = () => {
               </div>
           </div>
 
-         
-         
+
+
                 </div>
               </div>
     //       </div>
-          
-         
+
+
     //   </div>
     // </div>
   );

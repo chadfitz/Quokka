@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Markup } from 'interweave';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { clearPostErrors, composePost, fetchUserPosts, updatePost } from '../../store/posts';
-import PostBox from '../Posts/PostBox';
 import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
 import { useHistory, useParams } from 'react-router-dom';
-import Map from '../GoogleMap/Map.js (NOT USED)';
 import MapCoordinates from '../GoogleMap/EvgeniiMap';
 import { fetchUsers } from '../../store/users';
 import { fetchFriends } from '../../store/friends';
@@ -32,8 +29,10 @@ function PostCompose () {
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
   const oldPosts = useSelector(state => Object.values(state.posts.user));
+  console.log(oldPosts)
+  console.log(oldPosts[0])
 
-  const [showCreate, setShowCreate] = useState(false);
+  const [showCreate, setShowCreate] = useState(true);
   const [timeDifference, setTimeDifference] = useState(null);
 
   useEffect(()=> {
@@ -42,20 +41,20 @@ function PostCompose () {
     dispatch(fetchUserPosts(currentUser._id));
   }, [])
 
-  // ----- comment back in and update math + hour/day logic when ready to deploy -----
-  // useEffect(()=>{
-  //   if (oldPosts[0]) {
-  //     const postCreationTime = new Date(oldPosts[0].createdAt);
-  //     const currentTime = new Date();
-  //     const difference = (currentTime - postCreationTime)/(1000*60)
-  //     if (difference >= 5) {
-  //       setShowCreate(true)
-  //     } else {
-  //       setShowCreate(false)
-  //       setTimeDifference(5 - difference)
-  //     }
-  //   }
-  // },[oldPosts[0]])
+  // ----- update math + hour/day logic for creation timeout here -----
+  useEffect(()=>{
+    if (oldPosts[0]) {
+      const postCreationTime = new Date(oldPosts[0].createdAt);
+      const currentTime = new Date();
+      const difference = (currentTime - postCreationTime)/(1000*60)
+      if (difference >= 5) {
+        setShowCreate(true)
+      } else {
+        setShowCreate(false)
+        setTimeDifference(5 - difference)
+      }
+    }
+  },[oldPosts[0]])
 
   const findFriend= () => {
     const almostAllFriends = []
@@ -107,10 +106,7 @@ function PostCompose () {
 
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
-  // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState("");
-  // TODO: connect me to google maps api
-  const [location, setLocation] = useState(post.location);
   const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
@@ -118,15 +114,13 @@ function PostCompose () {
       [{ 'header': [1, 2, false] }],
       ['bold', 'italic', 'underline','strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
       ['clean']
     ],
   };
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
+    'list', 'bullet', 'indent'
   ];
 
   const handleSubmit = async e => {
@@ -182,7 +176,6 @@ function PostCompose () {
 
   let friendsError;
   if (Object.entries(friends).length == 0 ) {
-    console.log("condition is true")
     friendsError = "You won't be able to write a message until you add friends."
   }
 
@@ -190,35 +183,33 @@ function PostCompose () {
     <div className='whole-page-styling'>
       <div className='inner-page-styling'>
         <div className='compose-container'>
-          {/* DO NOT DELETE -- Comment back in and update math above when ready to deploy */}
-          {/* {showCreate && ( */}
+          {showCreate && (
           <>
           <div className="compose-top">
             <div className="text-editor">
-                {friendsError}
-                <div className='top-of-compose-post'>
-                  <div className='compose-heading'>
-                    <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                      <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
-                        <option disabled selected>recipient</option>
-                        {findFriend()?.map((friend, index) => {
-                          return <option key={index} value={friend._id}>{friend.username}</option>
-                        })}
-                      </select>
-                  </div>
-                  <div className='upload-images'>
-                      <label>
-                      Images to Upload</label>
-                      <input
-                        type="file"
-                        accept=".jpg, .jpeg, .png"
-                        multiple
-                        onChange={updateFiles}
-                        id="choose-files"
-                      />
-                  </div>
+              {friendsError}
+              <div className='top-of-compose-post'>
+                <div className='compose-heading'>
+                  <h3>Compose Post to </h3> <label htmlFor={recipient}></label>
+                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                      <option disabled selected>recipient</option>
+                      {findFriend()?.map((friend, index) => {
+                        return <option key={index} value={friend._id}>{friend.username}</option>
+                      })}
+                    </select>
                 </div>
-
+                <div className='upload-images'>
+                    <label>
+                    Images to Upload</label>
+                    <input
+                      type="file"
+                      accept=".jpg, .jpeg, .png"
+                      multiple
+                      onChange={updateFiles}
+                      id="choose-files"
+                    />
+                </div>
+              </div>
               <Input
                 className="post-subject"
                 type="text"
@@ -238,14 +229,13 @@ function PostCompose () {
 
                 </ReactQuill>
               </div>
-              <div className='submit-compose-buttons'>
-
-                <div className='compose-map'>
-                  <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
-                  <div id='choose-your-location'>
-                    Click on the map to choose your location
-                  </div>
+              <div className='compose-map'>
+                <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+                <div id='choose-your-location'>
+                  Click on the map to choose your location
                 </div>
+              </div>
+              <div className='submit-compose-buttons'>
                 <Button
                   containername="submit-btn-ctnr"
                   className="submit-btn"
@@ -259,13 +249,19 @@ function PostCompose () {
             <div className="errors">{errors && errors.body}</div>
           </div>
         </>
-        {/* DO NOT DELETE */}
-        {/* )} */}
-        {/* {!showCreate && ( */}
-        {/* <div className='compose-too-soon'>
-          Please wait {Math.round(timeDifference)} more minutes until your next post.
-        </div> */}
-        {/* )} */}
+        )}
+        {!showCreate && (
+        <div className='compose-too-soon'>
+          <h1>
+            Please wait {Math.round(timeDifference)} more minutes until your next post.
+          </h1>
+          <p>
+            DISCLAIMER: The intended time-out period longer is longer than 5 minutes.
+            It has been shortened to 5 minutes to enable smooth user experience for all who wish
+            to navigate Quokka via the demo-user.
+          </p>
+        </div>
+        )}
         </div>
       </div>
     </div>

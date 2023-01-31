@@ -30,7 +30,6 @@ function UserProfile () {
   } else {
     return (
       <div className='whole-page-styling'>
-        {/* {console.log('user',user)} */}
         <div className='inner-page-styling'>
           <div className='profile-container'>
             <div id='welcome-corner'>
