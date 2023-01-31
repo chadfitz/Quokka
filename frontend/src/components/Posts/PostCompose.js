@@ -192,33 +192,31 @@ function PostCompose () {
         <div className='compose-container'>
           {/* DO NOT DELETE -- Comment back in and update math above when ready to deploy */}
           {/* {showCreate && ( */}
-          <>
           <div className="compose-top">
             <div className="text-editor">
-                {friendsError}
-                <div className='top-of-compose-post'>
-                  <div className='compose-heading'>
-                    <h2>Compose Post to </h2> <label htmlFor={recipient}></label>
-                      <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
-                        <option disabled selected>recipient</option>
-                        {findFriend()?.map((friend, index) => {
-                          return <option key={index} value={friend._id}>{friend.username}</option>
-                        })}
-                      </select>
-                  </div>
-                  <div className='upload-images'>
-                      <label>
-                      Images to Upload</label>
-                      <input
-                        type="file"
-                        accept=".jpg, .jpeg, .png"
-                        multiple
-                        onChange={updateFiles}
-                        id="choose-files"
-                      />
-                  </div>
+              {friendsError}
+              <div className='top-of-compose-post'>
+                <div className='compose-heading'>
+                  <h3>Compose Post to </h3> <label htmlFor={recipient}></label>
+                    <select name="recipient" id="recipient" required onChange={e => setRecipient(e.target.value)}>
+                      <option disabled selected>recipient</option>
+                      {findFriend()?.map((friend, index) => {
+                        return <option key={index} value={friend._id}>{friend.username}</option>
+                      })}
+                    </select>
                 </div>
-
+                <div className='upload-images'>
+                    <label>
+                    Images to Upload</label>
+                    <input
+                      type="file"
+                      accept=".jpg, .jpeg, .png"
+                      multiple
+                      onChange={updateFiles}
+                      id="choose-files"
+                    />
+                </div>
+              </div>
               <Input
                 className="post-subject"
                 type="text"
@@ -238,14 +236,13 @@ function PostCompose () {
 
                 </ReactQuill>
               </div>
-              <div className='submit-compose-buttons'>
-
-                <div className='compose-map'>
-                  <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
-                  <div id='choose-your-location'>
-                    Click on the map to choose your location
-                  </div>
+              <div className='compose-map'>
+                <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+                <div id='choose-your-location'>
+                  Click on the map to choose your location
                 </div>
+              </div>
+              <div className='submit-compose-buttons'>
                 <Button
                   containername="submit-btn-ctnr"
                   className="submit-btn"
@@ -258,7 +255,6 @@ function PostCompose () {
           <div className='compose-bottom'>
             <div className="errors">{errors && errors.body}</div>
           </div>
-        </>
         {/* DO NOT DELETE */}
         {/* )} */}
         {/* {!showCreate && ( */}

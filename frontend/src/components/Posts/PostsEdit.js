@@ -124,65 +124,65 @@ function PostEdit () {
   }, [dispatch]);
 
   return (
-    <div className='compose-container'>
-      <div className="compose-top">
-        <div className='compose-map'>
-          <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: lat, lng: lng}}/>
+     <div className='whole-page-styling'>
+      <div className='inner-page-styling'>
+        <div className='compose-container'>
+          <div className="compose-top">
+            <div className="text-editor">
+                <div className='top-of-compose-post'>
+                  <div className='compose-heading'>
+                    <h3>Compose Post</h3>
+                  </div>
+                  <div className='upload-images'>
+                    <label>
+                    Images to Upload</label>
+                    <input
+                    type="file"
+                    accept=".jpg, .jpeg, .png"
+                    multiple
+                    onChange={updateFiles}
+                    id="choose-files" />
+                  </div>
+                </div>
+                <Input
+                  // label="Subject"
+                  className="post-subject"
+                  type="text"
+                  value={subject}
+                  onChange={handleSubjectChange}
+                  placeholder="Subject"
+                  required
+                  id="subject-compose"
+                />
+                <div className='quill-editor-compose'>
+                  <ReactQuill theme="snow"
+                              modules={modules}
+                              formats={formats}
+                              value={body}
+                              onChange={setBody}
+                              id="reactquill">
+                  </ReactQuill>
+                </div>
+                <div className='compose-map'>
+                  <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: lat, lng: lng}}/>
+                  <div id='choose-your-location'>
+                    Click on the map to choose your location
+                  </div>
+                </div>
+              <div className='submit-compose-buttons'>
+                <Button
+                    containername="submit-btn-ctnr"
+                    className="submit-btn"
+                    label="Submit Post"
+                    onClick={handleSubmit}
+                  />
+                </div>
+            </div>
+          </div>
+          <div className='compose-bottom'>
+            <div className="errors">{errors && errors.body}</div>
+          </div>
         </div>
-        <div className="text-editor">
-            <div className='compose-heading'>
-              <h2>Compose Post</h2>
-            </div>
-
-            <Input
-              // label="Subject"
-              className="post-subject"
-              type="text"
-              value={subject}
-              onChange={handleSubjectChange}
-              placeholder="Subject"
-              required
-              id="subject-compose"
-            />
-            <div className='quill-editor-compose'>
-              <ReactQuill theme="snow"
-                          modules={modules}
-                          formats={formats}
-                          value={body}
-                          onChange={setBody}
-                          id="reactquill">
-
-              </ReactQuill>
-            </div>
-            <div className='submit-compose-buttons'>
-              <div className='upload-images'>
-              <label>
-              Images to Upload</label>
-              <input
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              multiple
-              onChange={updateFiles}
-              id="choose-files" />
-              </div>
-             <Button
-                containername="submit-btn-ctnr"
-                className="submit-btn"
-                label="Submit Post"
-                onClick={handleSubmit}
-              />
-            </div>
-        </div>
-      </div>
-      <div className='compose-bottom'>
-        <div className="errors">{errors && errors.body}</div>
-
-
-
-     </div>
-      <div>
-        {/* {body && <Markup content={body} />} */}
-
       </div>
     </div>
   )
