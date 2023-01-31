@@ -40,12 +40,19 @@ function SearchBar() {
 
   const handleChange = (e) => {
       e.preventDefault()
+      let searchBar = document.getElementsByClassName('search-search');
+      if (e.target.value) {
+        searchBar[0].style.borderRadius = '20px 20px 0 0';
+        searchBar[0].style.borderBottom = 'none';
+      } else {
+        searchBar[0].style.borderRadius = '20px';
+        searchBar[0].style.borderBottom = '1px solid rgb(184, 183, 183)';
+      }
       setSearch(e.target.value)
   }
 
   const handleSubmit = (e) => {
       e.preventDefault()
-      console.log('in submit now');
       //fetch search listings here
     }
 

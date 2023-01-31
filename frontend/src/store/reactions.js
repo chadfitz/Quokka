@@ -31,9 +31,6 @@ export const fetchReaction = (postId) => async dispatch => {
     res = await jwtFetch(`/api/reactions/${postId}`);
   } catch (err) {
     const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      console.log("frontend/src/store/replies.js#fetchReactions Reactions not found");
-    }
   }
 
   const reactions = await res.json();
@@ -41,7 +38,6 @@ export const fetchReaction = (postId) => async dispatch => {
 }
 
 export const fetchReactions = () => async dispatch => {
-  console.log('in fetch reactions')
   let res;
   res = await jwtFetch('/api/reactions')
   const data = await res.json();
@@ -66,9 +62,7 @@ export const createReaction = (userId, postId, style) => async dispatch => {
     if (res.ok) {
       dispatch(receiveReaction(reaction))
     }
-  } catch {
-    console.error("CREATE REACTION FAILED")
-  }
+  } catch {}
 }
 
 // REFACTORING --
@@ -81,9 +75,7 @@ export const deleteReaction = (reactionId) => async dispatch => {
       dispatch(removeReaction(reactionId))
     }
 
-  } catch {
-    console.error("DELETE REACTION FAILED")
-  }
+  } catch {}
 }
 
 const initialState = {

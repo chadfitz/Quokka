@@ -69,7 +69,6 @@ router.post('/', upload.none(), async (req, res, next) => {
   }
   catch (err) {
     err.statusCode = 404;
-    console.log('in err');
     return res.status(404).json({ message: err.message });
   }
 });

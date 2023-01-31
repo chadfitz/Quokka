@@ -15,7 +15,7 @@ import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
 function PostEdit () {
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [, setImageUrls] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -69,25 +69,22 @@ function PostEdit () {
   // TODO: convert recipient to props / etc. (not useState)
   const [recipient, setRecipient] = useState(post.recipient);
   // TODO: connect me to google maps api
-  const [location, setLocation] = useState(post.location);
+  const [location,] = useState(post.location);
    const [lat, setLat] = useState(location.coordinates[1])
   const [lng, setLng] = useState(location.coordinates[0])
-  const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
       ['bold', 'italic', 'underline','strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
       ['clean']
     ],
   };
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
+    'list', 'bullet', 'indent'
   ];
 
   const handleSubmit = async e => {

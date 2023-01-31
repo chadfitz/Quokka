@@ -55,11 +55,7 @@ function PostsIndexItem ({ post }) {
     }
 
     useEffect(()=>{
-        console.log('postId', post._id)
         dispatch(fetchReplies(post._id));
-
-     
-
     }, [dispatch])
 
 

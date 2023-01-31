@@ -27,7 +27,6 @@ const UserTile = ({recipient, backgroundColor}) => {
   }
 
   const handleDeleteFriend = () => {
-    console.log('Delete Friend Clicked');
     dispatch(deleteFriend(recipient._id));
   }
 
