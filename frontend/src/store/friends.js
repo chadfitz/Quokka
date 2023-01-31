@@ -86,9 +86,6 @@ export const deleteFriend = friendId => async dispatch => {
     method: "DELETE"
   })
 
-  console.log('friend store #deleteFriend');
-  console.log('friendId');
-  console.log(friendId);
   if (res.ok) {
     dispatch(removeFriend(friendId));
   }
@@ -132,8 +129,6 @@ const friendsReducer = (state = {}, action) => {
       // newState = { ...state };
       // newState.friends = { ...state.friends, ...action.friend };
       // delete newState.nonFriends[action.friendId];
-      console.log('action.friend');
-      console.log(action.friend);
       return { ...state, ...action.friend }
     case REMOVE_FRIEND:
       newState = { ...state };

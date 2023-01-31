@@ -55,8 +55,6 @@ function PostsIndexItem2 ({ post }) {
             <div className='post-item-middle'>
                 <h2 onClick={handleShow} className='post-item-subject'>{post.subject}</h2>
                 <h3 className='dear'>Dear {post.recipient.username},</h3>
-                {/* {console.log('post', post)} */}
-                {/* <h4>{post.recipient}</h4> */}
                 {post.body && <Markup content={post.body} />}
                 <div className='post-item-photos'>
                     {post.imageUrls ? <img id="post-item-photo" src={post.imageUrls[0]} alt=""/> :

@@ -37,19 +37,11 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
 
   const handleReaction = (e, newEmotion) => {
     e.preventDefault();
-
-    // find all user reactions for the post
-    // -> sessionUserReactions, passed in as prop
-
     // compare existing reaction styles, generating a boolean as a test condition
     // -> newEmotion vs styles in sessionUserReaction
-
-    console.log('sessionUserReactions',sessionUserReactions)
-
     let reactionIdToDelete;
     const userHasReacted = sessionUserReactions.find((entry) => {
       if (entry.style == newEmotion) {
-        console.log(entry)
         reactionIdToDelete = entry._id
       }
       return entry.style == newEmotion
@@ -58,9 +50,6 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
     if (userHasReacted) {
       dispatch(deleteReaction(reactionIdToDelete))
     } else {
-      console.log('sessionUserId', sessionUser._id)
-      console.log('postId', post._id)
-      console.log('new emotion', newEmotion)
       dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     }
 
@@ -83,15 +72,12 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
     //   return oldEmotion == newEmotion
     // })
 
-    // console.log("User Already Reacted:", userAlreadyReacted)
-
     // if ( !(userAlreadyReacted) ) {
     //   // If no user reaction object exists, send the reaction to the backend
     //   // if the user raection object exists but doesn't have the emotion
     //   dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     // } else {
     //   // if the user reaction object has the target emotion, remove it
-    //   console.log("about to remove reaction")
     //   dispatch(deleteReaction(1))
     // }
 
