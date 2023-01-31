@@ -91,8 +91,8 @@ function PostsIndexItem ({ post }) {
                             <img className="post-person-img right" src={post.writer.profileImageUrl} alt="profile"/>
                         </div>
                         <div className="participants">
-                            <p className="participants"><span className="from-or-to">From:</span>{post.recipient.username}</p>
-                            <p className="participants"><span className="from-or-to">To:</span>{post.writer.username}</p>
+                            <p className="participants"><span className="from-or-to">To:</span>{post.recipient.username}</p>
+                            <p className="participants"><span className="from-or-to">From:</span>{post.writer.username}</p>
                         </div>
 
                     </div>
