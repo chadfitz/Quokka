@@ -94,7 +94,7 @@ function SignupForm () {
         <textarea type="text"
           value={bio}
           onChange={update('bio')}
-          placeholder="Bio"
+          placeholder="Bio(Optional)"
           id='login-textarea'
         />
       </label>
