@@ -2,10 +2,6 @@
   --post-index-height: 500px;
 }
 
-
-
-
-
 .post-item-top {
   height: 84%;
   display: flex;
@@ -197,15 +193,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 20px;
+  margin-top: 40px;
 }
 
 .post-text {
   /* padding-left: 80px; */
   position: relative;
-  width: 100%;
-  /* margin-left: auto;
-  margin-right: auto; */
+  /* width: 100%; */
+  /* margin-left: auto; */
+  max-width: 100%;
 }
 
 .read-more {
@@ -225,10 +221,15 @@
   flex-direction: column;
   align-self: center;
   margin-top: 10px;
-  width: 70%;
-  min-width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  /* /* width: 70%; */
+  max-width: 400px;
+  margin-left: 40px;
+  margin-right: 40px;
+  overflow-wrap: break-word;
+}
+.post-preview span {
+  max-width: 725px;
+  overflow-wrap: break-word;
 }
 
 .post-preview span {
@@ -268,7 +269,7 @@
 .time-since {
   color: #848484;
   font-size: 20px;
-  padding-left: 120px;
+  padding-left: 160px;
 }
 
 .post-title {
@@ -283,7 +284,7 @@
 .post-person-profile-wrapper {
   position: relative;
   width: 120px;
-  margin-left: 120px;
+  margin-left: 40px;
 }
 
 .post-index-author-toolbar {
