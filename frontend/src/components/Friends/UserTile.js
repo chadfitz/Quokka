@@ -45,9 +45,9 @@ const UserTile = ({recipient, backgroundColor}) => {
       <div>{recipient.bio}</div>
       <div id='friend-button'>
         {isFriend
-        ? (<Button label="Delete Friend"
+        ? (<Button label="Unfollow"
                     onClick={handleDeleteFriend} />)
-        : (<Button label="Add Friend"
+        : (<Button label="Follow"
                 onClick={handleAddFriend}/>)
         }
       </div>

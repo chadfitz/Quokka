@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "dotenv nodemon ./bin/www --inspect",
-    "seed": "dotenv node seeders/seeds.js"
+    "seed": "dotenv node seeders/seeds2.js"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",

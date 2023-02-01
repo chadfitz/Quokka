@@ -3,13 +3,15 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/top/User');
 const Post = require('../models/top/Post');
 const Friend = require('../models/top/Friend');
+const Reply = require('../models/top/Reply');
+const Reaction = require('../models/top/Reaction');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 const { bulkSave } = require("../models/top/User");
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_POSTS = 10;
-const NUM_SEED_FRIENDS = 2;
+const NUM_SEED_FRIENDS = 4;
 
 const users = []
 
@@ -264,14 +266,14 @@ const subjects = ["Seeing the Pyramids", "Snorkeling with the turtles", "GOOD PI
 //different locations
 const locations = [[32.67225666049477, 31.01805709841769], [21.39022587990223, -158.13741418220852], [41.88268393155588, -87.62339536116774],
  [48.85850419523782, 2.294449111568094], [51.555041908030454, -0.1084701883444511], [38.34986293910855, 145.35716315011166],
-  [-63.55513899662103, -58.4164176183333], [26.328271354528884, 28.012616963341397], [13.758576678566724, 100.49302450591419], 
+  [-63.55513899662103, -58.4164176183333], [26.328271354528884, 28.012616963341397], [13.758576678566724, 100.49302450591419],
  [-22.95166899825556, -43.21049793120693] ]
 //different posts
 const postsArray = ["<h1>What a time! </h1><p>I can't believe that it's already been <s>2</s> 3 years. </p><p><u>We have got to go back!</u></p><p>I miss you! Let's get together soon</p>",
                     "<h2>I can't stop thinking about snorkeling.</h2><p><strong>We got to see: </strong></p><ol><li><em>Sea Turtles</em></li><li><em>Humuhumunukunukuāpuaʻa</em></li><li><em>Dolphins</em></li><li><em>Whales</em></li><li><em>And my favorite, an Octopus</em></li></ol><p><br></p><p>There is so much more to explore. We have to go back!</p>",
-                    "<p>What a trip, I guess we know why they call it the Windy City now!</p><p>I haven't stopped thinking about <a href='http://www.georgesdeepdish.com/' rel='noopener noreferrer' target='_blank'>George's Deep Dish</a>. Theres so much </p><p>more that I want to do!</p><h2>Next Time: </h2><ul><li>Go to a Cubs Game </li><li>See the Bean</li><li>Go to Crushed by Giants Brewing</li></ul><p><br></p><h1>Miss you tons!</h1>", 
-                    "<p>Do you remember when we first met? </p><h2>We were in Paris!!!</h2><p>I wish we could go back there was so much that we didn't get to do. </p><p>I want to see the Louvre and drink good wine!</p><p>Maybe for the time being we can just settle for getting together for some wine.</p>", 
-                    "<h1>It's our Year!</h1><p>Come on you gunners, 50 points at the halfway point and a win against Manchester United!</p><p class='ql-indent-1'><em>Oooh to, oooh to be,</em></p><p class='ql-indent-1'><em>Oooh to, oooh to be,</em></p><p class='ql-indent-1'><em>Oooh to, ooh to be,</em></p><p class='ql-indent-1'><em>Oooh to be a Goo-ner!</em></p><p><u>This is the YEAR.</u> Please, we have to see a game again soon!</p><p><br></p>", 
+                    "<p>What a trip, I guess we know why they call it the Windy City now!</p><p>I haven't stopped thinking about <a href='http://www.georgesdeepdish.com/' rel='noopener noreferrer' target='_blank'>George's Deep Dish</a>. Theres so much </p><p>more that I want to do!</p><h2>Next Time: </h2><ul><li>Go to a Cubs Game </li><li>See the Bean</li><li>Go to Crushed by Giants Brewing</li></ul><p><br></p><h1>Miss you tons!</h1>",
+                    "<p>Do you remember when we first met? </p><h2>We were in Paris!!!</h2><p>I wish we could go back there was so much that we didn't get to do. </p><p>I want to see the Louvre and drink good wine!</p><p>Maybe for the time being we can just settle for getting together for some wine.</p>",
+                    "<h1>It's our Year!</h1><p>Come on you gunners, 50 points at the halfway point and a win against Manchester United!</p><p class='ql-indent-1'><em>Oooh to, oooh to be,</em></p><p class='ql-indent-1'><em>Oooh to, oooh to be,</em></p><p class='ql-indent-1'><em>Oooh to, ooh to be,</em></p><p class='ql-indent-1'><em>Oooh to be a Goo-ner!</em></p><p><u>This is the YEAR.</u> Please, we have to see a game again soon!</p><p><br></p>",
                     "<p>Everyone says you should go to Australia for the Kangaroos.</p><h2>But THEY ARE WRONG!</h2><h1><u>Quokkas are the best animal ever</u></h1><p>Do you remember the one we named Antonio. I miss you </p><p>and Antonio dearly. We all need to get together soon. </p><p><br></p><p><br></p>",
                     "<p>Less than 0.005% of the global population has been to Antartica, </p><p><strong>BUT WE HAVE!</strong></p><p>I'm so glad that we got a chance to do that. I think one time was </p><p>probably enough for me, let's go somewhere warmer next time!</p><p><s>St. Kitts </s></p><p><strong><u>Nevis? </u></strong></p>",
                     "<p>I can't believe we both just happened to be in Africa at the same time together.</p><p><strong>Can we please get together soon? </strong></p><h1>I loved that trip!</h1><p>Give me a call soon so we can reminisce about the Safari!</p>",
@@ -314,7 +316,7 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
         ]
       },
       subject: subjects[i],
-      body: postsArray[i], 
+      body: postsArray[i],
       imageUrls: imageUrlsArray[i]
     })
   )
@@ -348,6 +350,8 @@ const insertSeeds = () => {
   User.collection.drop()
                   .then(() => Post.collection.drop())
                   .then(() => Friend.collection.drop())
+                  .then(() => Reply.collection.drop())
+                  .then(() => Reaction.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Post.insertMany(posts))
                   // .then(() => Friend.insertMany(friends))
