@@ -10,11 +10,11 @@ body {
     margin-left: var(--sidebar-width);
 }
 
-.show-toggler { 
+.show-toggler {
     cursor: pointer;
 }
 
-.show-toggler:hover { 
+.show-toggler:hover {
     font-size: 18px;
 }
 
@@ -106,6 +106,12 @@ body {
     margin-right: 15px;
 }
 
+#post-item-photo:hover{
+    transform: scale(2.5);
+    transition: 0.5s;
+    position: absolute;
+}
+
 #post-index-compose {
     text-decoration: none;
     color: inherit;
@@ -128,77 +134,77 @@ body {
     font-size: 22px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   }
-#to-profile-page:hover { 
+#to-profile-page:hover {
     cursor: pointer;
 }
 
-#post-item-top { 
+#post-item-top {
     display: flex;
     flex-direction: column;
     margin: auto;
 }
 
-#post-index-item { 
+#post-index-item {
     height: auto;
 }
 
-#post-index-map { 
+#post-index-map {
     width: 70vw;
 }
 
-.post-show-from { 
+.post-show-from {
     display: flex;
     width: 200px;
 }
 
-#signature { 
+#signature {
     margin-left: 20px;
     margin-top: 25px;
     width: 200px;
     font-size: 20px;
 }
 
-.post-index-date-lower { 
+.post-index-date-lower {
     display: flex;
     justify-content: flex-end;
 }
 
-#edit-buttons-show { 
+#edit-buttons-show {
     display: flex;
     justify-content: flex-end;
 }
 
-.running-out-names { 
+.running-out-names {
     display: flex;
     justify-content: flex-end;
-    
+
 }
 
-#post-item-middle { 
+#post-item-middle {
     margin-top: 20px;;
 }
 
-.post-index-icons { 
+.post-index-icons {
     display: flex;
     justify-content: flex-end;
 }
 
-.test-bottom-bar { 
+.test-bottom-bar {
     display: flex;
     justify-content: space-evenly;
 }
-.post-index-date-lower { 
+.post-index-date-lower {
     display: flex;
     flex-direction: column;
 }
 
-.post-item-bottom-container { 
+.post-item-bottom-container {
     display: flex;
     justify-content: space-between;
     height: 50px;
 }
 
-#react-button, #repl-button { 
+#react-button, #repl-button {
     border: none;
     background-color: transparent;
     font-family: inherit;
@@ -206,39 +212,37 @@ body {
     transition: all ease-in 500ms;
 }
 
-#react-button:hover, #repl-button:hover { 
+#react-button:hover, #repl-button:hover {
     font-size: 18px
 }
 
-#time-lago { 
+#time-lago {
     width: auto;
 }
 
-#edit-show { 
+#edit-show {
     margin-right: 20px
 }
 
-#edit-show, #delete-show, #dear { 
+#edit-show, #delete-show, #dear {
     font-size: 24px;
 }
 
-.post-show-styling { 
+.post-show-styling {
     display: flex;
     width: auto;
 }
 
-#postshow-subject { 
+#postshow-subject {
     font-size: 30px;;
 }
 
-.replies-show { 
+.replies-show {
     display: flex;
     align-items: center;
 }
 
-#reply-btn { 
+#reply-btn {
     margin-top: 40px;
-    
+
 }
-
-
