@@ -1,32 +1,23 @@
-import { useEffect } from 'react';
-import { useHistory, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useHistory, useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, deletePost } from '../../store/posts';
-import useInput from '../../hooks/useInput';
-import Button from '../../blocks/Button';
-import Input from '../../blocks/Input';
-import Reactions from './Reactions';
-import moment from 'moment';
-import SinglePinMap from '../GoogleMap/SinglePinMap';
 import { Markup } from 'interweave';
-import { FiEdit3 } from 'react-icons/fi';
-import { FiTrash2 } from 'react-icons/fi';
-import angry from '../../assets/quokka-angry.png';
-import button from '../../assets/quokka-button.png';
+import { FiEdit3, FiTrash2 } from 'react-icons/fi';
+import { fetchPosts, deletePost } from '../../store/posts';
+import { composeReply, fetchReplies } from '../../store/replies';
+import { fetchReaction } from '../../store/reactions';
+import useInput from '../../hooks/useInput';
+import SinglePinMap from '../GoogleMap/SinglePinMap';
+import Button from '../../blocks/Button';
+import Reactions from './Reactions';
+import ReplyBox from '../Replies/ReplyBox';
+import moment from 'moment';
 import happy from '../../assets/quokka-happy.png';
 import hungry from '../../assets/quokka-hungry.png';
 import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
-import sad from '../../assets/quokka-sad.png';
-import sleepy from '../../assets/quokka-sleepy.png'
-import { composeReply, fetchReplies } from '../../store/replies';
-import ReplyBox from '../Replies/ReplyBox';
-import ReplyIndex from '../Replies/ReplyIndex';
-import { useState } from 'react';
 import "./PostIndexItem.css"
 import "./PostShow.css"
-import { fetchReaction, fetchReactions } from '../../store/reactions';
-import { Link } from 'react-router-dom';
 // import Reactions from './Reactions';
 
 // 1. Get dropdown to appear
@@ -62,18 +53,6 @@ const PostShow = () => {
     setShowReactions(!showReactions);
     console.log('showReactions', showReactions)
   };
-
-  const closeReactions = () => {
-    setShowReactions(false);
-  };
-
-  // useEffect(() => {
-  //   console.log("show reactions", showReactions)
-  //   if (!showReactions) return;
-
-  //   document.addEventListener('click', closeReactions);
-  //   return () => document.removeEventListener("click", closeReactions);
-  // }, [showReactions]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -112,7 +91,7 @@ const PostShow = () => {
   // then passing to Reactions component below
   const sessionUserReactions = Object.values(reactions).filter((entry)=>{
     console.log('entry', entry)
-    return (entry.postId == postId) && (entry.userId == sessionUser._id )
+    return (entry.postId === postId) && (entry.userId === sessionUser._id )
   })
 
   if (!post) return null;
@@ -180,29 +159,32 @@ const PostShow = () => {
                         <ul className="reaction-list">
                           {Object.entries(formattedReactions).map(reaction => {
                             console.log('reaction in mapping', reaction)
-                            if (reaction[0] == "like") {
+                            if (reaction[0] === "like") {
                               return (<li key="a" className='reaction'>
-                                        <img src={happy} className='reaction-image'/>
+                                        <img src={happy} alt="happy" className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                     </li>)}
-                            if (reaction[0] == "remember") {
+                            if (reaction[0] === "remember") {
                               return (<li key="b" className='reaction'>
-                                        <img src={hungry} className='reaction-image'/>
+                                        <img src={hungry} alt="hungry" className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
-                            if (reaction[0] == "tom") {
+                            if (reaction[0] === "tom") {
                               return (<li key="c" className='reaction'>
-                                        <img src={laughing} className='reaction-image'/>
+                                        <img src={laughing} alt="laughing" className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
-                            if (reaction[0] == "NERD!") {
+                            if (reaction[0] === "NERD!") {
                               return (<li key="d" className='reaction'>
-                                        <img src={love} className='reaction-image'/>
+                                        <img src={love} alt="love" className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                       </li>)
-                            }})}
+                            }
+                            else {return <></>};
+                            })}
+
                         </ul>
                       </div>)
                       }

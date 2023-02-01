@@ -1,36 +1,21 @@
 // import gmaps from './gmaps.png'
 import moment from 'moment';
 import SinglePinMap from '../GoogleMap/SinglePinMap';
+import { useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost, fetchPosts } from '../../store/posts';
+import { fetchReplies } from '../../store/replies';
+import { deletePost } from '../../store/posts';
 import { Markup } from 'interweave';
-import { FiEdit3 } from 'react-icons/fi'
-import { FiTrash2 } from 'react-icons/fi'
-import { useEffect, useState } from 'react';
-import Loader from '../GoogleMap/Loader';
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import angry from '../../assets/quokka-angry.png';
-import button from '../../assets/quokka-button.png';
-import happy from '../../assets/quokka-happy.png';
-import hungry from '../../assets/quokka-hungry.png';
-import laughing from '../../assets/quokka-laughing.png';
-import love from '../../assets/quokka-love.png';
-import sad from '../../assets/quokka-sad.png';
-import sleepy from '../../assets/quokka-sleepy.png';
-// import { useState } from 'react';
+import { FiEdit3, FiTrash2 } from 'react-icons/fi'
 import './PostIndexItem.css';
 import './PostsIndex.css';
-import Reactions from './Reactions';
-import { clearReplies, fetchReplies } from '../../store/replies';
-import { Link } from 'react-router-dom';
 
 // Need to grab replies from the store. Previous replies overwrite themselves. Need to filter them.
 
 function PostsIndexItem ({ post }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const errors = useSelector(state => state.errors.posts);
     const sessionUser = useSelector(state => state.session.user);
     const allReactions = useSelector(state => state.reactions)
     const replies = useSelector(state => Object.values(state.replies));
@@ -45,26 +30,16 @@ function PostsIndexItem ({ post }) {
         history.push(`/posts/${post._id}/edit`);
     }
 
-    // const handleShow = e => {
-    //     e.preventDefault();
-    //     history.push(`./posts/${post._id}`);
-    // }
-
-    const handleProfile = e => {
-        e.preventDefault()
-        history.push(`/profile/${post.writer._id}`)
-    }
-
     useEffect(()=>{
         dispatch(fetchReplies(post._id));
-    }, [dispatch])
+    }, [dispatch, post])
 
 
-    const postReactions = Object.values(allReactions).filter(item => item.postId == post._id)
+    const postReactions = Object.values(allReactions).filter(item => item.postId === post._id)
     const bodyPreview = post.body.slice(0,200)
 
     const postReplies = replies.filter((reply)=>{
-        return reply.post == post._id
+        return reply.post === post._id
     })
 
 

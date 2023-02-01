@@ -40,7 +40,7 @@ function PostsIndexItem2 ({ post }) {
     }
 
     const reactionObject = post.reactions?.find((reaction) => {
-        return reaction.user == sessionUser._id
+        return reaction.user === sessionUser._id
       })
     const emotions = reactionObject ? reactionObject.emotions : null
 
@@ -78,10 +78,10 @@ function PostsIndexItem2 ({ post }) {
             <div className='post-item-bottom'>
                 <ul className="reaction-bar">
                     {emotions?.map(emotion=>{
-                        if (emotion == "like") return <li className='reaction'>😀</li>
-                        if (emotion == "remember") return <li className='reaction'>🥲</li>
-                        if (emotion == "tom") return <li className='reaction'>😎</li>
-                        if (emotion == "NERD!") return <li className='reaction'>🤓</li>
+                        if (emotion === "like") return <li className='reaction'>😀</li>
+                        if (emotion === "remember") return <li className='reaction'>🥲</li>
+                        if (emotion === "tom") return <li className='reaction'>😎</li>
+                        if (emotion === "NERD!") return <li className='reaction'>🤓</li>
                     })}
                 </ul>
                 {/* <button>🤔</button> */}

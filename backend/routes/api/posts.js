@@ -115,13 +115,13 @@ router.patch('/createReaction/:postId', async (req, res, next) => {
     const { reactorId, newEmotion } = req.body
 
     const post = await Post.findById(postId)
-    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user === reactorId) )
 
     // AN INVALID USER ID WILL THROW AN ERROR
     if (!userReactionObject) {
       // CREATE NEW USER REACTION OBJECT IF IT DOESN'T EXIST
       post.reactions.push({user: reactorId, emotions: newEmotion})
-    } else if (!userReactionObject.emotions.some( oldEmotion => (oldEmotion == newEmotion))) {
+    } else if (!userReactionObject.emotions.some( oldEmotion => (oldEmotion === newEmotion))) {
       // ADD --NEW EMOTION-- TO EMOTION ARRAY
       userReactionObject.emotions.push(newEmotion)
     }
@@ -145,11 +145,11 @@ router.patch('/removeReaction/:postId', async (req, res, next) => {
     const { reactorId, emotionToRemove } = req.body
 
     const post = await Post.findById(postId)
-    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user == reactorId) )
+    const userReactionObject = post.reactions.find( (reactionObject) => (reactionObject.user === reactorId) )
 
     if (!userReactionObject) {
       // If no user reaction object, user cannot remove reaction so no operation is done
-    } else if (userReactionObject.emotions.some( oldEmotion => (oldEmotion == emotionToRemove))) {
+    } else if (userReactionObject.emotions.some( oldEmotion => (oldEmotion === emotionToRemove))) {
       // If user reaction object exists and includes the emotion to remove, remove it
       userReactionObject.emotions.pull(emotionToRemove)
     }
