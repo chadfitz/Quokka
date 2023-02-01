@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createReaction, deleteReaction } from "../../store/reactions";
-import angry from '../../assets/quokka-angry.png';
-import button from '../../assets/quokka-button.png';
 import happy from '../../assets/quokka-happy.png';
 import hungry from '../../assets/quokka-hungry.png';
 import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
-import sad from '../../assets/quokka-sad.png';
-import sleepy from '../../assets/quokka-sleepy.png';
 import './Reactions.css'
 import { selectPost } from "../../store/posts";
 
@@ -41,10 +37,10 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
     // -> newEmotion vs styles in sessionUserReaction
     let reactionIdToDelete;
     const userHasReacted = sessionUserReactions.find((entry) => {
-      if (entry.style == newEmotion) {
+      if (entry.style === newEmotion) {
         reactionIdToDelete = entry._id
       }
-      return entry.style == newEmotion
+      return entry.style === newEmotion
     })
 
     if (userHasReacted) {
@@ -63,16 +59,16 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
       <div className="dropdown-menu">
         {showMenu && (
           <div className="reaction-wrapper">
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "like")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "happy")}>
                 <img src={happy} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "remember")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "hungry")}>
                 <img src={hungry} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "tom")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "laughing")}>
                 <img src={laughing} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "NERD!")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "love")}>
                 <img src={love} className='reaction-image'/>
               </button>
           </div>

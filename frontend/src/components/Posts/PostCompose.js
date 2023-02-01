@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { clearPostErrors, composePost, fetchUserPosts, updatePost } from '../../store/posts';
-import './PostCompose.css';
 import Button from '../../blocks/Button';
 import Input from '../../blocks/Input';
 import useInput from '../../hooks/useInput';
-import { useHistory, useParams } from 'react-router-dom';
-import MapCoordinates from '../GoogleMap/EvgeniiMap';
+import { clearPostErrors, composePost, fetchUserPosts, updatePost } from '../../store/posts';
 import { fetchUsers } from '../../store/users';
 import { fetchFriends } from '../../store/friends';
+import './PostCompose.css';
+import MapCoordinates from '../GoogleMap/EvgeniiMap';
 
 function PostCompose () {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function PostCompose () {
     dispatch(fetchUsers());
     dispatch(fetchFriends(currentUser));
     dispatch(fetchUserPosts(currentUser._id));
-  }, [])
+  }, [dispatch, currentUser])
 
   // ----- update math + hour/day logic for creation timeout here -----
   useEffect(()=>{
@@ -52,12 +52,12 @@ function PostCompose () {
         setTimeDifference(5 - difference)
       }
     }
-  },[oldPosts[0]])
+  },[oldPosts])
 
   const findFriend= () => {
     const almostAllFriends = []
     if (!Object.values(friends).length) return null
-    Object.values(friends).map(friend => {
+    Object.values(friends).forEach(friend => {
       if (friend._id !== badRecipient) almostAllFriends.push(friend)
     })
     return almostAllFriends
@@ -105,7 +105,6 @@ function PostCompose () {
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
   const [recipient, setRecipient] = useState("");
-  const newPost = useSelector(state => state.posts.new);
   const errors = useSelector(state => state.errors.posts);
   const modules = {
     toolbar: [
@@ -142,7 +141,7 @@ function PostCompose () {
         body
       }
 
-      const newPost = await dispatch(composePost(post));
+      await dispatch(composePost(post));
       history.push("/posts")
     } else {
       post = { ...post,
@@ -173,7 +172,7 @@ function PostCompose () {
   }, [dispatch]);
 
   let friendsError;
-  if (Object.entries(friends).length == 0 ) {
+  if (Object.entries(friends).length === 0 ) {
     history.push('/users')
     // friendsError = "You won't be able to write a message until you add friends."
   }
