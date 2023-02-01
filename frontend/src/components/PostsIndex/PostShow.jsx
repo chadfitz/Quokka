@@ -25,6 +25,7 @@ import ReplyIndex from '../Replies/ReplyIndex';
 import { useState } from 'react';
 import "./PostIndexItem.css"
 import { fetchReaction, fetchReactions } from '../../store/reactions';
+import { Link } from 'react-router-dom';
 // import Reactions from './Reactions';
 
 
@@ -111,7 +112,7 @@ const PostShow = () => {
                           </div>
                           <div className='post-show-styling'>
                             <div className='post-show-from'>
-                              <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
+                               <Link to={`/profile/${post.writer._id}`}><img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/></Link>
                               <h3 className='signature' id="signature">From, <br/>{post.writer.username}</h3>
                             </div>
                                {sessionUser?._id === post.writer._id &&

@@ -95,6 +95,7 @@ body {
 #profile-image-item {
     height: 75px;
     min-width: 75px;
+    max-width: 75px;
     /* margin-bottom: 10px; */
     object-fit: cover;
     border: 1px solid black;
