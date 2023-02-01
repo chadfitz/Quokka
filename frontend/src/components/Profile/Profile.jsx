@@ -45,10 +45,11 @@ function Profile () {
           <div className='profile-container'>
             <div id='welcome-corner'>
               <h1>Welcome, {currentUser.username}</h1>
-              <img src={currentUser.profileImageUrl}/>
+              
             </div>
+            <img id="welcome-corner-img" src={currentUser.profileImageUrl}/>
             <h2>Bio</h2>
-            <h3>{currentUser.bio}</h3>
+            <h3 id="currentuser-bio">{currentUser.bio}</h3>
             <h2 id='friend-click-button' onClick={handleFriendClick}>All your friends</h2>
             <div id="all-friends-container">
                 {userFriends.map((friend, i) => (
