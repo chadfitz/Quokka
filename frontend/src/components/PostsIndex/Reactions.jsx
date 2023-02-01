@@ -59,17 +59,17 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
       <div className="dropdown-menu">
         {showMenu && (
           <div className="reaction-wrapper">
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "like")}>
-                <img src={happy} alt="happy" className='reaction-image'/>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "happy")}>
+                <img src={happy} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "remember")}>
-                <img src={hungry} alt="hungry" className='reaction-image'/>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "hungry")}>
+                <img src={hungry} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "tom")}>
-                <img src={laughing} alt="laughing" className='reaction-image'/>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "laughing")}>
+                <img src={laughing} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "NERD!")}>
-                <img src={love} alt="love" className='reaction-image'/>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "love")}>
+                <img src={love} className='reaction-image'/>
               </button>
           </div>
 

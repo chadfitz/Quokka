@@ -159,7 +159,7 @@ const PostShow = () => {
                         <ul className="reaction-list">
                           {Object.entries(formattedReactions).map(reaction => {
                             console.log('reaction in mapping', reaction)
-                            if (reaction[0] === "like") {
+                            if (reaction[0] === "happy") {
                               return (<li key="a" className='reaction'>
                                         <img src={happy} alt="happy" className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
