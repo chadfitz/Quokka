@@ -24,10 +24,15 @@ import ReplyBox from '../Replies/ReplyBox';
 import ReplyIndex from '../Replies/ReplyIndex';
 import { useState } from 'react';
 import "./PostIndexItem.css"
+import "./PostShow.css"
 import { fetchReaction, fetchReactions } from '../../store/reactions';
 import { Link } from 'react-router-dom';
 // import Reactions from './Reactions';
 
+// 1. Get dropdown to appear
+  // get dropdown to appear and dissapear on click
+// 2. Get reactions made for a post to appear with counts
+// 3. h
 
 const PostShow = () => {
   const dispatch = useDispatch();
@@ -41,6 +46,7 @@ const PostShow = () => {
   const replies = useSelector(state => Object.values(state.replies));
   const [replyBox, setReplyBox] = useState(false)
   const [showReply, setShowReply] = useState(true)
+  const [showReactions, setShowReactions] = useState(false);
   const reactions = useSelector(state => Object.values(state.reactions))
 
 
@@ -49,6 +55,25 @@ const PostShow = () => {
     dispatch(fetchReplies(postId));
     dispatch(fetchReaction(postId))
   }, [dispatch, postId])
+
+  const toggleReactions = () => {
+    console.log('showReactions', showReactions)
+    // if (showReactions) return;
+    setShowReactions(!showReactions);
+    console.log('showReactions', showReactions)
+  };
+
+  const closeReactions = () => {
+    setShowReactions(false);
+  };
+
+  // useEffect(() => {
+  //   console.log("show reactions", showReactions)
+  //   if (!showReactions) return;
+
+  //   document.addEventListener('click', closeReactions);
+  //   return () => document.removeEventListener("click", closeReactions);
+  // }, [showReactions]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -86,10 +111,26 @@ const PostShow = () => {
   // filtering for matches based on user id,
   // then passing to Reactions component below
   const sessionUserReactions = Object.values(reactions).filter((entry)=>{
-    return entry.postId == postId
+    console.log('entry', entry)
+    return (entry.postId == postId) && (entry.userId == sessionUser._id )
   })
 
   if (!post) return null;
+
+  // create a new reaction object with summary data, including types, and if user has reacted
+
+  const formattedReactions = Object.values(reactions).reduce((acc, cv) => {
+    if (acc[cv.style]) {
+      return {...acc, [cv.style]: acc[cv.style] + 1}
+    } else {
+      return {...acc, [cv.style]: 1}
+    }
+  }, {})
+
+  console.log('formatted reactions', formattedReactions)
+
+
+
   return (
     <div className='whole-page-styling'>
       <div className='inner-page-styling' id="inner-page-styling">
@@ -130,16 +171,46 @@ const PostShow = () => {
                       </div>
                   </div>
                   <div className='post-item-bottom-container'>
-                        <p className='show-toggler'>{post.reactions.length} reactions</p>
-                        <Reactions />
-
-                  </div>
-                  <div className='post-item-bottom-container'>
-                        <p className='show-toggler'>{reactions.length} reactions</p>
-                        <Reactions postId={postId} sessionUserReactions={sessionUserReactions} user={sessionUser}></Reactions>
-                        <button id="repl-button" onClick={replyToggle}>Reply</button>
-                        { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{Object.values(replies).length} Replies</p> :
-                        <p className='show-toggler'>{Object.values(replies).length} Replies </p> }
+                    <div className="reaction-count-wrapper">
+                      <p className='show-toggler' onClick={toggleReactions}>
+                        {reactions.length} reactions
+                      </p>
+                      { showReactions &&
+                      (<div className='reaction-box' onClick={toggleReactions}>
+                        <ul className="reaction-list">
+                          {Object.entries(formattedReactions).map(reaction => {
+                            console.log('reaction in mapping', reaction)
+                            if (reaction[0] == "like") {
+                              return (<li key="a" className='reaction'>
+                                        <img src={happy} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
+                                    </li>)}
+                            if (reaction[0] == "remember") {
+                              return (<li key="b" className='reaction'>
+                                        <img src={hungry} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
+                                      </li>)
+                            }
+                            if (reaction[0] == "tom") {
+                              return (<li key="c" className='reaction'>
+                                        <img src={laughing} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
+                                      </li>)
+                            }
+                            if (reaction[0] == "NERD!") {
+                              return (<li key="d" className='reaction'>
+                                        <img src={love} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
+                                      </li>)
+                            }})}
+                        </ul>
+                      </div>)
+                      }
+                    </div>
+                    <Reactions postId={postId} sessionUserReactions={sessionUserReactions} user={sessionUser}></Reactions>
+                    <button id="repl-button" onClick={replyToggle}>Reply</button>
+                    { (Object.values(replies).length) ? <p className="show-toggler" onClick={repliesToggle}>{Object.values(replies).length} Replies</p> :
+                      <p className='show-toggler'>{Object.values(replies).length} Replies </p> }
                   </div>
                    { replyBox ?
             <div className='replies-show'>
@@ -172,11 +243,6 @@ const PostShow = () => {
 
                 </div>
               </div>
-    //       </div>
-
-
-    //   </div>
-    // </div>
   );
 }
 
