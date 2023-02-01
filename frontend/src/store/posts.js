@@ -95,7 +95,8 @@ export const composePost = data => async dispatch => {
   formData.append("subject", subject);
   formData.append("writer", writer);
 
-  Array.from(images).forEach(image => formData.append("images", image));
+  Array.from(images).forEach((image, index) => { 
+    if (index < 5) formData.append("images", image)});
   try {
     const res = await jwtFetch('/api/posts/', {
       method: 'POST',
