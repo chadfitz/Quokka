@@ -44,10 +44,10 @@ function PostsIndexItem ({ post }) {
         history.push(`/posts/${post._id}/edit`);
     }
 
-    const handleShow = e => {
-        e.preventDefault();
-        history.push(`/posts/${post._id}`);
-    }
+    // const handleShow = e => {
+    //     e.preventDefault();
+    //     history.push(`./posts/${post._id}`);
+    // }
 
     const handleProfile = e => {
         e.preventDefault()
@@ -76,10 +76,12 @@ function PostsIndexItem ({ post }) {
                 <SinglePinMap id="single-pin-map" lat={post.location?.coordinates[1]} lng={post.location?.coordinates[0]} key={'new' + post._id} />
             </div>
             <div className="post-text">
+                {sessionUser?._id === post.writer._id &&
                 <div className='post-index-author-toolbar'>
                     <div className='post-index-icon edit' onClick={handleEdit}>< FiEdit3 /></div>
                     <div className='post-index-icon' onClick={handleDelete}>< FiTrash2 /></div>
                 </div>
+                }
                 <div className="post-people">
                     <div className="post-person">
                         <div className="post-person-profile-wrapper">
@@ -98,7 +100,7 @@ function PostsIndexItem ({ post }) {
                     <p><time title={new Date(post.createdAt).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) }>{moment(post.createdAt).fromNow()}</time></p>
                 </div>
                 <div className="post-preview">
-                    <a href={`posts/${post._id}`} className="index-item-post-link">
+                    <a href={`/posts/${post._id}`} className="index-item-post-link">
                         <h1 className="post-title">{post.subject}</h1>
                         <Markup content={bodyPreview + "..."} noHtml="true"/>
                         <p className="read-more">Read More →</p>
@@ -107,7 +109,7 @@ function PostsIndexItem ({ post }) {
             </div>
         </div>
         <div className="post-interactions-wrapper">
-            <a href={`posts/${post._id}`} className="index-item-post-link">
+            <a href={`/posts/${post._id}`} className="index-item-post-link">
                 <div className="post-interactions-box">
                     <p className="post-meta">{postReactions.length} reactions</p>
                     <p className="post-meta">{postReplies.length} replies</p>
