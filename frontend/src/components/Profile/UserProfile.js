@@ -6,6 +6,7 @@ import { fetchUsers } from '../../store/users';
 import UserTileStripped from '../Friends/UserTileStripped';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
+import { Link } from 'react-router-dom';
 import "./Profile.css"
 
 function UserProfile () {
@@ -26,7 +27,12 @@ function UserProfile () {
   if (!user) return null;
 
   if (userPosts.length === 0) {
-    return <div className="no-posts">{user?.username} has no Posts</div>;
+    return (
+        <div className='no-post-wrapper'>
+          <div className="posts-link">{user?.username} has no Posts</div>
+          <Link to="/posts" className="posts-link"><button className='secondary-button'>Go to Feed</button></Link>
+        </div>
+    )
   } else {
     return (
       <div className='whole-page-styling'>
