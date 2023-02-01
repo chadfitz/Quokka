@@ -95,7 +95,7 @@ nav {
 
 #search-bar {
     border-color: var(--offwhite-color);
-    fill-opacity: 100%;
+    fill-opacity: 90%;
     border-style: none;
     font-size: 22px;
     outline: none;

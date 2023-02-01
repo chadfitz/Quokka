@@ -11,7 +11,7 @@ const SingleFriend = ({friend}) => {
   return (
     <div id='single-friend-container' onClick={handleProfile}>
       <div id='friend-username'>{friend.username}</div>
-      <div><img id='user-profile-image' src={friend.profileImageUrl}></img></div>
+      <div><img id='user-profile-image' alt="profile" src={friend.profileImageUrl}></img></div>
     </div>
   );
 };

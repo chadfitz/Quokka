@@ -45,9 +45,9 @@ function Profile () {
           <div className='profile-container'>
             <div id='welcome-corner'>
               <h1>Welcome, {currentUser.username}</h1>
-              
+
             </div>
-            <img id="welcome-corner-img" src={currentUser.profileImageUrl}/>
+            <img id="welcome-corner-img" alt="user profile" src={currentUser.profileImageUrl}/>
             <h2>Bio</h2>
             <h3 id="currentuser-bio">{currentUser.bio}</h3>
             <h2 id='friend-click-button' onClick={handleFriendClick}>All your friends</h2>

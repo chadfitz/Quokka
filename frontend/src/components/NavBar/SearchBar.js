@@ -7,7 +7,6 @@ import './NavBar.css'
 import { useEffect } from 'react'
 import { fetchUsers } from '../../store/users'
 import { fetchPosts } from '../../store/posts'
-import Button from '../../blocks/Button'
 
 
 function SearchBar() {
