@@ -39,7 +39,6 @@ function UserProfile () {
             <h2>Bio</h2>
             <h3>{user?.bio}</h3>
 
-            {console.log('userposts',userPosts[0].location)}
             <div id='all-pins-map-container'>
               <AllPinsMap userPosts={userPosts} zoom={6} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
             </div>

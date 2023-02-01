@@ -29,8 +29,6 @@ function PostCompose () {
   const currentUser = useSelector(state => state.session.user);
   const badRecipient = useSelector(state => state.posts.user[0]?.recipient._id)
   const oldPosts = useSelector(state => Object.values(state.posts.user));
-  console.log(oldPosts)
-  console.log(oldPosts[0])
 
   const [showCreate, setShowCreate] = useState(true);
   const [timeDifference, setTimeDifference] = useState(null);
