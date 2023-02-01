@@ -248,3 +248,14 @@ body {
     margin-top: 40px;
 
 }
+
+.show-toggler, #repl-button { 
+    transition: 0.3s;
+    width: 90px;
+
+}
+
+.show-toggler:hover, #repl-button:hover { 
+    font-weight: bold;
+    cursor: pointer;
+}
