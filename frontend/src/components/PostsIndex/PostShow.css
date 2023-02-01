@@ -4,7 +4,28 @@
 
 .reaction-box {
   position: absolute;
-  width: 200px;
-  background-color: whitesmoke;
+  width: 300px;
+  background-color: #F0F6FF;
+  border-radius: 20px;
+  padding: 20px;
   bottom: 0px;
+}
+
+.reaction {
+  list-style: none;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.reaction-list {
+  display: flex;
+  flex-direction: column;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.reaction-image {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
 }

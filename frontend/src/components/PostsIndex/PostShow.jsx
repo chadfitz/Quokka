@@ -175,26 +175,30 @@ const PostShow = () => {
                       </p>
                       { showReactions &&
                       (<div className='reaction-box' onClick={toggleReactions}>
-                        <ul>
+                        <ul className="reaction-list">
                           {Object.entries(formattedReactions).map(reaction => {
                             console.log('reaction in mapping', reaction)
                             if (reaction[0] == "like") {
-                              return (<li key="a" className='reaction'>{reaction[1]}
+                              return (<li key="a" className='reaction'>
                                         <img src={happy} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
                                     </li>)}
                             if (reaction[0] == "remember") {
-                              return (<li key="b" className='reaction'>{reaction[1]}
+                              return (<li key="b" className='reaction'>
                                         <img src={hungry} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
                             if (reaction[0] == "tom") {
-                              return (<li key="c" className='reaction'>{reaction[1]}
+                              return (<li key="c" className='reaction'>
                                         <img src={laughing} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
                             if (reaction[0] == "NERD!") {
-                              return (<li key="d" className='reaction'>{reaction[1]}
+                              return (<li key="d" className='reaction'>
                                         <img src={love} className='reaction-image'/>
+                                        {reaction[1]} {reaction[0]}s
                                       </li>)
                             }})}
                         </ul>
