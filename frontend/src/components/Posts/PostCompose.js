@@ -176,7 +176,8 @@ function PostCompose () {
 
   let friendsError;
   if (Object.entries(friends).length == 0 ) {
-    friendsError = "You won't be able to write a message until you add friends."
+    history.push('/users')
+    // friendsError = "You won't be able to write a message until you add friends."
   }
 
   return (

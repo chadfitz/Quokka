@@ -5,6 +5,7 @@ import { fetchUsers } from '../../store/users';
 import UserTile from './UserTile';
 import './UserIndex.css';
 import { fetchFriends } from '../../store/friends';
+import { Link } from 'react-router-dom';
 
 const UserIndex = () => {
   const dispatch = useDispatch();
@@ -35,16 +36,24 @@ const UserIndex = () => {
       <div className='inner-page-styling'>
         <div id="already-friends">
           <div id='friends-welcome-sign'>
-            <h1>Friends</h1>
+            <h1>Following</h1>
           </div>
-            <div className='user-index'>
-              {friends?.map(user => (
-                <UserTile key={user._id} recipient={user} backgroundColor={user.backgroundColor}/>
-              ))}
-            </div>
+
+              {friends && friends.length > 0
+              ? <div className='user-index'>
+                  {friends.map(user => (
+                    <UserTile key={user._id} recipient={user} backgroundColor={user.backgroundColor}/>
+                  ))}
+                </div>
+              : <div className='write-cta-wrapper'>
+                  <p>Let's start by adding some friends </p>
+                  <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Add Friend</button></Link>
+                </div>
+              }
+
         </div>
         <div id='friends-welcome-sign'>
-          <h1>Available Friends</h1>
+          <h1>Available Users</h1>
         </div>
         <div className='user-index'>
             {findStrangers()?.map(user => (
