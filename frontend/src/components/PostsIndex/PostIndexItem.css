@@ -249,8 +249,8 @@
 }
 
 .post-person-img {
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   object-fit: cover;
   border-radius: 50%;
   border: 1px solid black;
@@ -258,7 +258,7 @@
   left: 0px;
 }
 .post-person-img.right {
-  left: 20px;
+  left: 40px;
 }
 
 .from-or-to {
@@ -271,7 +271,7 @@
 .time-since {
   color: #848484;
   font-size: 20px;
-  padding-left: 160px;
+  padding-left: 180px;
 }
 
 .post-title {
@@ -281,6 +281,7 @@
 .participants {
   padding: 0px;
   margin: 0px;
+  margin-left: 10px;
 }
 
 .post-person-profile-wrapper {
