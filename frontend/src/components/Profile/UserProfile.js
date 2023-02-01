@@ -34,10 +34,11 @@ function UserProfile () {
           <div className='profile-container'>
             <div id='welcome-corner'>
               <h1>Welcome to {user?.username}'s profile</h1>
-              <UserTileStripped recipient={user}/>
+              
             </div>
+            <UserTileStripped recipient={user}/>
             <h2>Bio</h2>
-            <h3>{user?.bio}</h3>
+            <h3 className='user-profile-bio'>{user?.bio}</h3>
 
             {console.log('userposts',userPosts[0].location)}
             <div id='all-pins-map-container'>
