@@ -13,7 +13,7 @@ function PostsIndex () {
   const posts = useSelector(state => Object.values(state.posts.all));
   const friends = useSelector(state => state.friends)
   const currentUser = useSelector(state => state.session.user);
-
+  const [rules, setRules] = useState(false)
   const [friendsPost, setFriendsPost] = useState(false)
 
   useEffect(() => {
@@ -30,6 +30,10 @@ function PostsIndex () {
 
   const toggleFriends = () => {
     setFriendsPost(true)
+  }
+
+  const toggleRules = () => { 
+    rules ? setRules(false) : setRules(true)
   }
 
   const toggleAll = () => {
@@ -58,6 +62,18 @@ function PostsIndex () {
             { (Object.values(friends).length) ?
             <div className='write-cta-wrapper'>
               <p>You haven't written to anyone in awhile. </p>
+              <button className='secondary-button' id="rules" onClick={toggleRules}>Rules</button>
+              { rules ? 
+              <>
+               <div className='rules'>
+                  <p>1. Users can only write to followers once per week***</p>
+                  <p>2. Users can not post to the same user twice in a row</p>
+                  <p>3. You will need more than 1 follower to consistently make posts</p>
+                  <p>***Once every 5 minutes for Demo purposes</p>
+               </div>
+                  <Link to="/users" className='posts-index-compose-link'><button className='secondary-button' id='follow-users'>Follow Users</button></Link>
+              </>: 
+               ""}
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
             </div> :
             <div className='write-cta-wrapper'>

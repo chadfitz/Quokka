@@ -230,7 +230,7 @@ function PostCompose () {
                 </ReactQuill>
               </div>
               <div className='compose-map'>
-                <MapCoordinates lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
+                <MapCoordinates id="compose-map" lat={lat} setLat = {setLat} lng={lng} setLng={setLng} center={{lat: 37.776392, lng: -122.4194} }/>
                 <div id='choose-your-location'>
                   Click on the map to choose your location
                 </div>
