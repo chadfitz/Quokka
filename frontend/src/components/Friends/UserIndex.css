@@ -23,7 +23,19 @@
 
 #friend-container{
   width: 25vw;
-  height: 200px;
+  height: auto;
+  padding: 10px 15px;
+  background-color: var(--offwhite-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#friend-container-top{
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
