@@ -53,34 +53,6 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
       dispatch(createReaction(sessionUser._id, post._id, newEmotion))
     }
 
-    // array of entries where first item is reaction id and second is reaction object
-
-
-    // if no reactions or type not included, then create.
-    // else delete
-
-
-
-
-
-
-    // const userReactionObject = post.reactions.find((reaction) => {
-    //   return reaction.user == sessionUser._id
-    // })
-
-    // const userAlreadyReacted = userReactionObject?.emotions.some((oldEmotion) => {
-    //   return oldEmotion == newEmotion
-    // })
-
-    // if ( !(userAlreadyReacted) ) {
-    //   // If no user reaction object exists, send the reaction to the backend
-    //   // if the user raection object exists but doesn't have the emotion
-    //   dispatch(createReaction(sessionUser._id, post._id, newEmotion))
-    // } else {
-    //   // if the user reaction object has the target emotion, remove it
-    //   dispatch(deleteReaction(1))
-    // }
-
   }
 
   return(<>
@@ -91,11 +63,6 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
       <div className="dropdown-menu">
         {showMenu && (
           <div className="reaction-wrapper">
-
-              {/* <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "like")}> 😀 </button> */}
-              {/* <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "remember")}> 🥲 </button> */}
-              {/* <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "tom")}> 😎 </button> */}
-              {/* <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "NERD!")}> 🤓 </button> */}
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "like")}>
                 <img src={happy} className='reaction-image'/>
               </button>
