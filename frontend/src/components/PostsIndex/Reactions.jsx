@@ -63,16 +63,16 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
       <div className="dropdown-menu">
         {showMenu && (
           <div className="reaction-wrapper">
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "like")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "happy")}>
                 <img src={happy} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "remember")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "hungry")}>
                 <img src={hungry} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "tom")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "laughing")}>
                 <img src={laughing} className='reaction-image'/>
               </button>
-              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "NERD!")}>
+              <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "love")}>
                 <img src={love} className='reaction-image'/>
               </button>
           </div>

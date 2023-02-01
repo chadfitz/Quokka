@@ -180,24 +180,24 @@ const PostShow = () => {
                         <ul className="reaction-list">
                           {Object.entries(formattedReactions).map(reaction => {
                             console.log('reaction in mapping', reaction)
-                            if (reaction[0] == "like") {
+                            if (reaction[0] == "happy") {
                               return (<li key="a" className='reaction'>
                                         <img src={happy} className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                     </li>)}
-                            if (reaction[0] == "remember") {
+                            if (reaction[0] == "hungry") {
                               return (<li key="b" className='reaction'>
                                         <img src={hungry} className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
-                            if (reaction[0] == "tom") {
+                            if (reaction[0] == "laughing") {
                               return (<li key="c" className='reaction'>
                                         <img src={laughing} className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
                                       </li>)
                             }
-                            if (reaction[0] == "NERD!") {
+                            if (reaction[0] == "love") {
                               return (<li key="d" className='reaction'>
                                         <img src={love} className='reaction-image'/>
                                         {reaction[1]} {reaction[0]}s
