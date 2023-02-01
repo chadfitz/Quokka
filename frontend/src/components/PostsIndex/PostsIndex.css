@@ -250,7 +250,7 @@ body {
 }
 
 .show-toggler, #repl-button { 
-    transition: 0.3s;
+    transition: 0.5s;
     width: 90px;
 
 }

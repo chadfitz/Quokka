@@ -165,6 +165,11 @@
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
+  transition: 0.5s;
+}
+
+.post-index-item:hover { 
+  box-shadow: 0px 8px 8px rgb(171, 171, 171);
 }
 
 .post-content-box {

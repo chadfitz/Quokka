@@ -111,7 +111,7 @@ const PostShow = () => {
                           </div>
                           <div className='post-show-styling'>
                             <div className='post-show-from'>
-                              <img id="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
+                              <img className="profile-image-item" src={post.writer.profileImageUrl} alt="profile" id="profile-image-item"/>
                               <h3 className='signature' id="signature">From, <br/>{post.writer.username}</h3>
                             </div>
                                {sessionUser?._id === post.writer._id &&
