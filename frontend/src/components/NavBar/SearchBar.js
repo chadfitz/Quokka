@@ -58,14 +58,24 @@ function SearchBar() {
 
   const goToUser = userId => e => {
     e.preventDefault();
+    let searchInput = document.getElementsByClassName("search-field");
+    searchInput[0].value = '';
     setSearch('');
-    history.push(`/profile/${userId}`)
+    history.push(`/profile/${userId}`);
+    let searchBar = document.getElementsByClassName('search-search');
+    searchBar[0].style.borderRadius = '20px';
+    searchBar[0].style.borderBottom = '1px solid rgb(184, 183, 183)';
   }
 
   const goToPost = postId => e => {
     e.preventDefault();
+    let searchInput = document.getElementsByClassName("search-field");
+    searchInput[0].value = '';
     setSearch('');
     history.push(`/posts/${postId}`)
+    let searchBar = document.getElementsByClassName('search-search');
+    searchBar[0].style.borderRadius = '20px';
+    searchBar[0].style.borderBottom = '1px solid rgb(184, 183, 183)';
   }
 
 
