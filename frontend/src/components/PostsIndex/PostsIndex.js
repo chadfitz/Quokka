@@ -61,7 +61,7 @@ function PostsIndex () {
           <div className='posts-index-header'>
             { (Object.values(friends).length) ?
             <div className='write-cta-wrapper'>
-              <p>You haven't written to anyone in awhile. </p>
+              <p>You haven't written to anyone in a while. </p>
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
             </div> :
             <div className='write-cta-wrapper'>

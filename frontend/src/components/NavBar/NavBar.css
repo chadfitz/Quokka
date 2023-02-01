@@ -225,7 +225,7 @@ nav {
 }
 
 #logout-dropdown-button{
-    width: 300px;
+    width: 92%;
     transition: all ease-in 500ms;
     background-color: var(--primary-color);
     border: 2px solid var(--primary-color);
