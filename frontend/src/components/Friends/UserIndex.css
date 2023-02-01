@@ -32,6 +32,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  transition: 0.4s;
+}
+
+#friend-container:hover { 
+  box-shadow: 0px 6px 6px rgb(171, 171, 171);
 }
 
 #friend-container-top{
@@ -68,7 +73,9 @@
 #user-profile-image{
   height: 75px;
   width: 75px;
-  border-radius: 75px;
+  border-radius: 50%;
+  border: 1px solid black;
+  object-fit: cover;
 }
 
 #user-profile-image:hover {

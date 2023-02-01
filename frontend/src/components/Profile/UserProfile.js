@@ -6,6 +6,7 @@ import { fetchUsers } from '../../store/users';
 import UserTileStripped from '../Friends/UserTileStripped';
 import AllPinsMap from '../GoogleMap/AllPinsMap';
 import PostsIndexItem from '../PostsIndex/PostsIndexItem';
+import { Link } from 'react-router-dom';
 import "./Profile.css"
 
 function UserProfile () {
@@ -26,7 +27,12 @@ function UserProfile () {
   if (!user) return null;
 
   if (userPosts.length === 0) {
-    return <div className="no-posts">{user?.username} has no Posts</div>;
+    return (
+        <div className='no-post-wrapper'>
+          <div className="posts-link">{user?.username} has no Posts</div>
+          <Link to="/posts" className="posts-link"><button className='secondary-button'>Go to Feed</button></Link>
+        </div>
+    )
   } else {
     return (
       <div className='whole-page-styling'>
@@ -34,10 +40,11 @@ function UserProfile () {
           <div className='profile-container'>
             <div id='welcome-corner'>
               <h1>Welcome to {user?.username}'s profile</h1>
-              <UserTileStripped recipient={user}/>
+              
             </div>
+            <UserTileStripped recipient={user}/>
             <h2>Bio</h2>
-            <h3>{user?.bio}</h3>
+            <h3 className='user-profile-bio'>{user?.bio}</h3>
 
             <div id='all-pins-map-container'>
               <AllPinsMap userPosts={userPosts} zoom={6} center={{lat: userPosts[0].location.coordinates[1], lng: userPosts[0].location.coordinates[0]}}/>
