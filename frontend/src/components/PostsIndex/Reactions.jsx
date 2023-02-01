@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createReaction, deleteReaction } from "../../store/reactions";
-import angry from '../../assets/quokka-angry.png';
-import button from '../../assets/quokka-button.png';
 import happy from '../../assets/quokka-happy.png';
 import hungry from '../../assets/quokka-hungry.png';
 import laughing from '../../assets/quokka-laughing.png';
 import love from '../../assets/quokka-love.png';
-import sad from '../../assets/quokka-sad.png';
-import sleepy from '../../assets/quokka-sleepy.png';
 import './Reactions.css'
 import { selectPost } from "../../store/posts";
 
@@ -41,10 +37,10 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
     // -> newEmotion vs styles in sessionUserReaction
     let reactionIdToDelete;
     const userHasReacted = sessionUserReactions.find((entry) => {
-      if (entry.style == newEmotion) {
+      if (entry.style === newEmotion) {
         reactionIdToDelete = entry._id
       }
-      return entry.style == newEmotion
+      return entry.style === newEmotion
     })
 
     if (userHasReacted) {

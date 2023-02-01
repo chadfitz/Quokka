@@ -41,7 +41,7 @@ const UserTile = ({recipient, backgroundColor}) => {
       <div id='friend-container-top'>
         <div id='friend-username' onClick={handleProfile}>{recipient.username}</div>
 
-        <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
+        <div onClick={handleProfile}><img id='user-profile-image' alt="profile" src={recipient.profileImageUrl}></img></div>
       </div>
       {/* <div id='friend-button' onClick={handleProfile}><button>VISIT</button></div> */}
       <div>{recipient.bio}</div>
