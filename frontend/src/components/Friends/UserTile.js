@@ -38,9 +38,11 @@ const UserTile = ({recipient, backgroundColor}) => {
   return (
     // <div id='friend-container' style={{backgroundColor: backgroundColor, opacity: 0.1}}>
     <div id='friend-container'>
-      <div id='friend-username' onClick={handleProfile}>{recipient.username}</div>
+      <div id='friend-container-top'>
+        <div id='friend-username' onClick={handleProfile}>{recipient.username}</div>
 
-      <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
+        <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
+      </div>
       {/* <div id='friend-button' onClick={handleProfile}><button>VISIT</button></div> */}
       <div>{recipient.bio}</div>
       <div id='friend-button'>
