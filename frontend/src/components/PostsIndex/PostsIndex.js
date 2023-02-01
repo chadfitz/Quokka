@@ -49,7 +49,6 @@ function PostsIndex () {
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
 
-
   if (posts.length === 0) return <div>There are no Posts</div>;
   return (
     <div className='whole-page-styling'>
