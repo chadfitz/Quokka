@@ -37,9 +37,9 @@ const UserTileStripped = ({recipient, backgroundColor}) => {
       <div onClick={handleProfile}><img id='user-profile-image' src={recipient.profileImageUrl}></img></div>
       <div id='friend-button'>
         {isFriend
-        ? (<Button label="Delete Friend"
+        ? (<Button label="Unfollow"
                     onClick={handleDeleteFriend} />)
-        : (<Button label="Add Friend"
+        : (<Button label="Follow"
                 onClick={handleAddFriend}/>)
         }
       </div>

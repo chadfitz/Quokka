@@ -13,7 +13,7 @@ const SingleFriend = ({friend}) => {
       <div id='friend-username'>{friend.username}</div>
       <div><img id='user-profile-image' src={friend.profileImageUrl}></img></div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleFriend
+export default SingleFriend;

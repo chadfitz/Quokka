@@ -65,15 +65,15 @@ function PostsIndex () {
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
             </div> :
             <div className='write-cta-wrapper'>
-              <p>Let's start by adding some friends </p>
-              <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Add Friend</button></Link>
+              <p>Let's start by following some friends </p>
+              <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Follow</button></Link>
             </div> }
           </div>
           <div className='posts-index-filter'>
             <div className='posts-index-filter-bar' >
               <h5 id="filter-by">Filter by: </h5>
               <button className={allClass()} onClick={toggleAll}>All Posts</button>
-              <button className={friendClass()} onClick={toggleFriends}>Friends</button>
+              <button className={friendClass()} onClick={toggleFriends}>Following</button>
             </div>
           </div>
         {friendsPost ?

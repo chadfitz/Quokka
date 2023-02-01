@@ -99,60 +99,6 @@ router.delete('/:friendId', requireUser, async (req, res, next) => {
 });
 
 
-
-/*
-router.post('/acceptFriend', requireUser, async (req, res, next) => {
-  // TODO: confirm that friendship does not already exist
-  try {
-    // const filter =
-    let relation1 = await Friend.findOne({
-      $and: [{ requester: req.body.requester }, { recipient: req.body.recipient }]
-    });
-    let relation2 = await Friend.findOne({
-      $and: [{ recipient: req.body.requester }, { requester: req.body.recipient }]
-    });
-
-    // TODO: add && relationtype here or in search
-    if (relation1) {
-      await relation1.update({relation: 3})
-    } else if (relation2) {
-      await relation2.update({relation: 3})
-    } else {
-      throw new Error("Friend request not found");
-    }
-  } catch(err) {
-    const error = new Error("Relation Create Error");
-    error.statusCode = 404;
-    error.errors = { message: "backend routes | post('/addFriend')" };
-    return next(error);
-  }
-})
-*/
-
-// TODO: DELETE
-  // let friend;
-  // try {
-  //   const docA = await Friend.findOneAndUpdate(
-  //     { requester: UserA, recipient: UserB },
-  //     { $set: { status: 1 }},
-  //     { upsert: true, new: true}
-  //   );
-  //   const docB = await Friend.findOneAndUpdate(
-  //     { requester: UserA, recipient: UserB },
-  //     { $set: { status: 2 }},
-  //     { upsert: true, new: true}
-  //   );
-  //   const updateUserA = await User.findOneAndUpdate(
-  //     { _id: UserA },
-  //     { $push: { friends: docA._id }}
-  //   );
-  //   const updateUserB = await User.findOneAndUpdate(
-  //     { _id: UserB },
-  //     { $push: { friends: docB._id }}
-  //   );
-
-
-
 module.exports = router;
 
 

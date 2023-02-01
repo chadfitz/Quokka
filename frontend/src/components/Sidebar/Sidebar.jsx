@@ -9,7 +9,7 @@ const Sidebar = () => {
         <div><Link to={"/profile"} className='sidebar-link'><FaUser/>&nbsp;&nbsp;Profile</Link></div>
         <div><Link to={"/"} className='sidebar-link'><BsBookFill/>&nbsp;&nbsp;Feed</Link></div>
         <div><Link to={"/posts/new"} className='sidebar-link'><BsFillPencilFill/>&nbsp;&nbsp;Create</Link></div>
-        <div><Link to={"/users"} className='sidebar-link'><FaUserFriends/>&nbsp;&nbsp;Friends</Link></div>
+        <div><Link to={"/users"} className='sidebar-link'><FaUserFriends/>&nbsp;&nbsp;Following</Link></div>
     </div>
   )
 }
