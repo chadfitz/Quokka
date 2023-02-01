@@ -68,7 +68,9 @@
 #user-profile-image{
   height: 75px;
   width: 75px;
-  border-radius: 75px;
+  border-radius: 50%;
+  border: 1px solid black;
+  object-fit: cover;
 }
 
 #user-profile-image:hover {
