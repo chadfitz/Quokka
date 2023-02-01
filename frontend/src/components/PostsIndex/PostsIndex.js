@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearPostErrors, fetchPosts, fetchUserPosts } from '../../store/posts';
+import { fetchUsers } from '../../store/users';
+import { fetchFriends } from '../../store/friends';
+import { clearPostErrors, fetchPosts } from '../../store/posts';
+import { fetchReactions } from '../../store/reactions';
 import PostsIndexItem from './PostsIndexItem';
 import { Link } from 'react-router-dom';
-import AllPinsMap from '../GoogleMap/AllPinsMap';
 import './PostsIndex.css';
-import { fetchFriends } from '../../store/friends';
-import { fetchUsers } from '../../store/users';
-import { fetchReactions } from '../../store/reactions';
-import { useState } from 'react';
-import { fetchReplies } from '../../store/replies';
-
 
 function PostsIndex () {
   const dispatch = useDispatch();
