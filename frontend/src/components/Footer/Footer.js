@@ -18,7 +18,7 @@ function Footer() {
         </div>
         <div className='footer-child'>
             <h3>Will Bannister</h3>
-            <a href="https://github.com/3anni" target="_blank" rel="noopener noreferrer"><img id="github" src={github} alt="github link" /></a>
+            <a href="https://github.com/1banni" target="_blank" rel="noopener noreferrer"><img id="github" src={github} alt="github link" /></a>
             <a href="https://www.linkedin.com/in/will-bannister/" target="_blank" rel="noopener noreferrer"><img id ="linkedin" src={linkedIn} alt="linkedin link" /></a>
         </div>
         <div className='footer-child'>
