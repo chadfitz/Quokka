@@ -8,7 +8,9 @@ import leaf from '../../assets/quokka-hungry.png'
 
 
 import laugh from '../../assets/quokka-laughing.png' // HERETOFORTH CLAIMED BY WILL
+import sleepy from '../../assets/quokka-sleepy.png' // DIBS (Chad)
 import love from '../../assets/quokka-love.png'
+
 
 export default function Team() {
 
@@ -28,7 +30,7 @@ export default function Team() {
   const willLinkedIn = 'https://www.linkedin.com/in/will-bannister/'
   const willGithub = 'https://github.com/1banni'
 
-  const chadBio = 'Chad was the team lead for this project. He is a great guy. Please give him a job. He will shake your hand. '
+  const chadBio = 'Chad was the GitHub lead for this project. He set up the overall project, establishing user authentication, server security, and identity protection. He worked on both back and frontend where necessary, and implemented the template for the site-wide styling. '
   const chadLinkedIn = 'https://www.linkedin.com/in/chad-fitzgerald-956981ab/'
   const chadGithub = 'https://github.com/chadfitz'
 
@@ -67,7 +69,7 @@ export default function Team() {
           <TeamMember
             name='Chad Fitzgerald'
             bio={chadBio}
-            profileImg={angry}
+            profileImg={sleepy}
             linkedIn={chadLinkedIn}
             gitHub={chadGithub}>
           </TeamMember>
