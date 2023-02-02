@@ -12,7 +12,7 @@
 
 .box {
     margin: 30px;
-    margin-top: 150px;
+    margin-top: 80px;
     overflow: hidden;
     height: 500px;
     display: flex;
@@ -134,4 +134,16 @@
 #splash-quokka{
     height: 100%;
     width: auto;
+}
+
+#loginlink, #signuplink { 
+    text-decoration: none;
+    color: inherit;
+    font-family: proxima-nova, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#loginlink { 
+    margin-right: 50px;
 }
