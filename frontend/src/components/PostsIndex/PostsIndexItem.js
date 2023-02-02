@@ -42,6 +42,13 @@ function PostsIndexItem ({ post }) {
         return reply.post === post._id
     })
 
+    function transform (node, children) {
+        console.log('node tagName', node.tagName)
+        if (node.tagName !== 'P') {
+            return <p>{children}</p>
+        }
+    }
+
 
     return (<>
     <div className="post-index-item">
@@ -78,7 +85,13 @@ function PostsIndexItem ({ post }) {
                 <div className="post-preview">
                     <a href={`/posts/${post._id}`} className="index-item-post-link">
                         <h1 className="post-title">{post.subject}</h1>
-                        <Markup content={bodyPreview + "..."} noHtml="true"/>
+                        <div className="post-content-preview">
+                            <Markup content={bodyPreview + "..."}
+                                    transform={transform}
+                                    allowList={['p']}
+                                    />
+
+                        </div>
                         <p className="read-more">Read More →</p>
                     </a>
                 </div>

@@ -231,11 +231,9 @@
   margin-left: 40px;
   margin-right: 40px;
   overflow-wrap: break-word;
-  text-align: justify;
 }
 .post-preview span {
   max-width: 725px;
-  text-align: justify;
   overflow-wrap: break-word;
 }
 
@@ -316,4 +314,17 @@
   color: black;
   text-decoration: none;
   max-width: 100%;
+}
+
+/* .index-item-post-link p {
+  display: inline;
+  margin-left: */
+/* } */
+
+.post-content-preview p {
+  display: inline;
+}
+
+.post-content-preview p:nth-child(n+2) {
+  padding-left: 7px;
 }
