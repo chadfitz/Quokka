@@ -4,6 +4,9 @@ import TeamMember from './TeamMember'
 import githubIcon from '../../assets/github.png'
 import linkedinIcon from '../../assets/linkedin.png'
 import angry from '../../assets/quokka-angry.png'
+import leaf from '../../assets/quokka-hungry.png'
+
+
 
 export default function Team() {
 
@@ -11,7 +14,7 @@ export default function Team() {
   const tomLinkedIn = 'https://www.linkedin.com/in/thomasconger/'
   const tomGithub = 'https://github.com/thomasconger'
 
-  const noamBio = 'Noam was the team lead for this project. He is a great guy. Please give him a job. He will shake your hand. '
+  const noamBio = 'Noam was the API integration lead for the project. He was a former mechanical engineer at Ford as well as a high school math and computer science teacher before transitioning into software development. '
   const noamLinkedIn = 'https://www.linkedin.com/in/noam-zimet-4114a594'
   const noamGithub = 'https://github.com/nzoam93'
 
@@ -41,7 +44,7 @@ export default function Team() {
           <TeamMember
             name='Noam Zimet'
             bio={noamBio}
-            profileImg={angry}
+            profileImg={leaf}
             linkedIn={noamLinkedIn}
             gitHub={noamGithub}>
           </TeamMember>
