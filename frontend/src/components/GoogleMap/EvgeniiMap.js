@@ -29,7 +29,7 @@ const MapCoordinates = ({lat, setLat, lng, setLng, center}) => {
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: '300px', width: '920px' }}>
+    <div style={{ height: '300px', width: '100%' }}>
       <GoogleMapReact onClick={getCoordinates}
         bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_API_KEY }}
         defaultCenter={center}

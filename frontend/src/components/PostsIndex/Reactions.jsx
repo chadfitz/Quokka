@@ -14,8 +14,10 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
 
-
-
+  const [showHappy, setShowHappy] = useState(false);
+  const [showHungry, setShowHungry] = useState(false);
+  const [showLaugh, setShowLaugh] = useState(false);
+  const [showLove, setShowLove] = useState(false);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -60,16 +62,40 @@ const Reactions = ({ user, postId, sessionUserReactions }) => {
         {showMenu && (
           <div className="reaction-wrapper">
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "happy")}>
-                <img src={happy} className='reaction-image'/>
+                <img 
+                  src={happy} 
+                  className='reaction-image'
+                  onMouseEnter={()=>setShowHappy(true)}
+                  onMouseLeave={()=>setShowHappy(false)}
+                />
+                {showHappy && <p>Happy</p>}
               </button>
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "hungry")}>
-                <img src={hungry} className='reaction-image'/>
+                <img 
+                  src={hungry} 
+                  className='reaction-image'
+                  onMouseEnter={()=>setShowHungry(true)}
+                  onMouseLeave={()=>setShowHungry(false)}
+                />
+                {showHungry && <p>Hungry</p>}
               </button>
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "laughing")}>
-                <img src={laughing} className='reaction-image'/>
+                <img 
+                  src={laughing} 
+                  className='reaction-image'
+                  onMouseEnter={()=>setShowLaugh(true)}
+                  onMouseLeave={()=>setShowLaugh(false)}
+                />
+                {showLaugh && <p>Laugh</p>}
               </button>
               <button className="reaction-icon toolbar" onClick={(e) => handleReaction(e, "love")}>
-                <img src={love} className='reaction-image'/>
+                <img 
+                  src={love} 
+                  className='reaction-image'
+                  onMouseEnter={()=>setShowLove(true)}
+                  onMouseLeave={()=>setShowLove(false)}
+                />
+                {showLove && <p>Love</p>}
               </button>
           </div>
 
