@@ -168,7 +168,7 @@
   transition: 0.5s;
 }
 
-.post-index-item:hover { 
+.post-index-item:hover {
   box-shadow: 0px 8px 8px rgb(171, 171, 171);
 }
 
@@ -227,13 +227,15 @@
   align-self: center;
   margin-top: 10px;
   /* /* width: 70%; */
-  max-width: 400px;
+  /* max-width: 400px; */
   margin-left: 40px;
   margin-right: 40px;
   overflow-wrap: break-word;
+  text-align: justify;
 }
 .post-preview span {
   max-width: 725px;
+  text-align: justify;
   overflow-wrap: break-word;
 }
 
@@ -313,4 +315,5 @@
 .index-item-post-link {
   color: black;
   text-decoration: none;
+  max-width: 100%;
 }

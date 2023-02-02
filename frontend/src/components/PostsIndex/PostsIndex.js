@@ -32,7 +32,7 @@ function PostsIndex () {
     setFriendsPost(true)
   }
 
-  const toggleRules = () => { 
+  const toggleRules = () => {
     rules ? setRules(false) : setRules(true)
   }
 
@@ -53,7 +53,6 @@ function PostsIndex () {
     return () => dispatch(clearPostErrors());
   }, [dispatch, posts.length])
 
-
   if (posts.length === 0) return <div>There are no Posts</div>;
   return (
     <div className='whole-page-styling'>
@@ -63,7 +62,7 @@ function PostsIndex () {
             <div className='write-cta-wrapper'>
               <p>You haven't written to anyone in awhile. </p>
               <button className='secondary-button' id="rules" onClick={toggleRules}>Rules</button>
-              { rules ? 
+              { rules ?
               <>
                <div className='rules'>
                   <p>1. Users can only write to followers once per week***</p>
@@ -72,7 +71,7 @@ function PostsIndex () {
                   <p>***Once every 5 minutes for Demo purposes</p>
                </div>
                   <Link to="/users" className='posts-index-compose-link'><button className='secondary-button' id='follow-users'>Follow Users</button></Link>
-              </>: 
+              </>:
                ""}
               <Link to="/posts/new" className='posts-index-compose-link'><button className='secondary-button'>Send a postcard now?</button></Link>
             </div> :
