@@ -8,6 +8,7 @@ import "aos/dist/aos.css"
 import { useEffect } from "react";
 import Footer from "../Footer/Footer";
 import quokka from './quokkas2.png';
+import MainNavBar from "./NavMainPage";
  
 
 function MainPageSignup() {
@@ -17,6 +18,8 @@ function MainPageSignup() {
   }, [])
   
   return (
+    <>
+    <MainNavBar />
     <div className="splash-container">
       <div className="splash-login-container">
         <div className="splash-login-top">
@@ -38,6 +41,7 @@ function MainPageSignup() {
       <p>Our Own Idividual App</p>
       <Footer/>
     </div>
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import quokka from './quokka_leaf.jpg';
 import './MainPage.css'
 import "aos/dist/aos.css"
+import MainNavBar from "./NavMainPage";
 
 
 function MainPage() {
@@ -16,7 +17,10 @@ function MainPage() {
   }, [])
   
   return (
+    <>
+    <MainNavBar/>
     <div className="splash-container">
+  
       <div className="splash-login-container">
         <div className="splash-login-top">
           <div className="splash-login-left">
@@ -37,6 +41,7 @@ function MainPage() {
       <p>Our Own Idividual App</p>
       <Footer/>
     </div>
+    </>
   );
 }
 
