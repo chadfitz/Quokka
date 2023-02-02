@@ -43,8 +43,12 @@ function PostsIndexItem ({ post }) {
     })
 
     function transform (node, children) {
-        console.log('node tagName', node.tagName)
-        if (node.tagName !== 'P') {
+
+        if (node.tagName === 'OL' || node.tagName === 'UL') {
+            console.log('list')
+            console.log('node', node)
+            return ;
+        } else if (node.tagName !== 'P') {
             return <p>{children}</p>
         }
     }

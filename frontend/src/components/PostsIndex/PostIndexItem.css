@@ -204,9 +204,8 @@
 .post-text {
   /* padding-left: 80px; */
   position: relative;
-  width: 100%;
+  width: 50%;
   /* margin-left: auto; */
-  max-width: 100%;
 }
 
 .read-more {
@@ -233,8 +232,8 @@
   overflow-wrap: break-word;
 }
 .post-preview span {
-  max-width: 725px;
   overflow-wrap: break-word;
+  width: 100%;
 }
 
 .post-preview span {
@@ -313,13 +312,16 @@
 .index-item-post-link {
   color: black;
   text-decoration: none;
-  max-width: 100%;
 }
 
 /* .index-item-post-link p {
   display: inline;
   margin-left: */
 /* } */
+
+.post-content-preview {
+  width: 100%;
+}
 
 .post-content-preview p {
   display: inline;
