@@ -42,7 +42,6 @@ function PostsIndexItem ({ post }) {
         return reply.post === post._id
     })
 
-
     return (<>
     <div className="post-index-item">
 
@@ -78,7 +77,7 @@ function PostsIndexItem ({ post }) {
                 <div className="post-preview">
                     <a href={`/posts/${post._id}`} className="index-item-post-link">
                         <h1 className="post-title">{post.subject}</h1>
-                        <Markup content={bodyPreview + "..."} noHtml="true"/>
+                        <Markup tagName="div" className="sickkk" content={bodyPreview + "..."} allowList={['p']}/>
                         <p className="read-more">Read More →</p>
                     </a>
                 </div>

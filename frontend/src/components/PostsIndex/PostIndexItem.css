@@ -231,7 +231,7 @@
   margin-left: 40px;
   margin-right: 40px;
   overflow-wrap: break-word;
-  text-align: justify;
+  /* text-align: justify; */
 }
 .post-preview span {
   max-width: 725px;
