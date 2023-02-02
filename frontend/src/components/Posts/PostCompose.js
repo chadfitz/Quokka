@@ -52,7 +52,7 @@ function PostCompose () {
         setTimeDifference(5 - difference)
       }
     }
-  },[oldPosts])
+  },[oldPosts[0]])
 
   const findFriend= () => {
     const almostAllFriends = []
