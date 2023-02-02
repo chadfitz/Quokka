@@ -4,14 +4,11 @@ import TeamMember from './TeamMember'
 import githubIcon from '../../assets/github.png'
 import linkedinIcon from '../../assets/linkedin.png'
 import angry from '../../assets/quokka-angry.png'
-<<<<<<< HEAD
 import leaf from '../../assets/quokka-hungry.png'
 
 
-=======
 import laugh from '../../assets/quokka-laughing.png' // HERETOFORTH CLAIMED BY WILL
 import love from '../../assets/quokka-love.png'
->>>>>>> main
 
 export default function Team() {
 
