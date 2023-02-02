@@ -5,6 +5,7 @@ import githubIcon from '../../assets/github.png'
 import linkedinIcon from '../../assets/linkedin.png'
 import angry from '../../assets/quokka-angry.png'
 import laugh from '../../assets/quokka-laughing.png' // HERETOFORTH CLAIMED BY WILL
+import love from '../../assets/quokka-love.png'
 
 export default function Team() {
 
@@ -16,7 +17,7 @@ export default function Team() {
   const noamLinkedIn = 'https://www.linkedin.com/in/noam-zimet-4114a594'
   const noamGithub = 'https://github.com/nzoam93'
 
-  const dylanBio = 'Dylan was the team lead for this project. He is a great guy. Please give him a job. He will shake your hand. '
+  const dylanBio = 'Dylan was the team\'s frontend lead. He set up a React frontend and utilized AWS S3 to implement user image uploads for profile images and posts, reducing server load and allowing for scalability of image service.'
   const dylanLinkedIn = 'https://www.linkedin.com/in/dylan-gavin-a9595150/'
   const dylanGithub = 'https://github.com/scgavin1219'
 
@@ -49,7 +50,7 @@ export default function Team() {
           <TeamMember
             name='Dylan Gavin'
             bio={dylanBio}
-            profileImg={angry}
+            profileImg={love}
             linkedIn={dylanLinkedIn}
             gitHub={dylanGithub}>
           </TeamMember>
