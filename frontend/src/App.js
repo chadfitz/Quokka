@@ -15,7 +15,7 @@ import PostShow from './components/PostsIndex/PostShow';
 import Sidebar from './components/Sidebar/Sidebar';
 import UserProfile from './components/Profile/UserProfile';
 import ResetScroll from './blocks/ResetScroll';
-
+import Team from './components/Team/Team';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +47,7 @@ function App() {
         <ProtectedRoute exact path="/posts/new" component={PostCompose} />
         <ProtectedRoute exact path="/posts/:postId/edit" component={PostEdit} />
         <ProtectedRoute exact path="/posts/:postId" component={PostShow} />
+        <ProtectedRoute exact path="/team" component={Team} />
       </Switch>
     </>
   );
