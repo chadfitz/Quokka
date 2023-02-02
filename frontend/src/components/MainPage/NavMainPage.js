@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import quokka from './quokka1.png'
+import './MainPage.css'
 
 
 
@@ -31,7 +32,7 @@ function MainNavBar () {
           <div className='nav-right'>
             <div className='profile-settings'>
               <Link to="/login" id="loginlink">Login</Link>
-              <Link to="/signup" id="loginlink">Signup</Link>
+              <Link to="/signup" id="signuplink">Signup</Link>
             </div>
           </div>
 
