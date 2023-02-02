@@ -29,6 +29,7 @@
 .reaction-button.create-reaction:hover {
   cursor: pointer;
   background-color: var(--primary-color);
+  transition: 0.5s;
 }
 
 .reaction-icon.toolbar {
@@ -40,6 +41,7 @@
   border-radius: 25px;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 .reaction-icon.toolbar:hover {
@@ -49,6 +51,16 @@
   width: auto;
   padding: 5px;
   font-size: 35px;
+}
+
+.reaction-icon.toolbar > p{
+  position: absolute;
+  top: 35px;
+  font-size: 17px;
+  /* color: white; */
+  background-color: lightgray;
+  padding: 0 5px;
+  border: 1px solid black;
 }
 
 .reaction-image{
