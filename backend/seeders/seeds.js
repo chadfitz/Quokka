@@ -12,6 +12,7 @@ const { bulkSave } = require("../models/top/User");
 const NUM_SEED_USERS = 10;
 const NUM_SEED_POSTS = 10;
 const NUM_SEED_FRIENDS = 4;
+const NUM_SEED_REACTIONS = 27;
 
 const users = []
 
@@ -293,6 +294,39 @@ const imageUrlsArray = [ ["https://quokka-pro.s3.us-west-2.amazonaws.com/public/
                          ["https://quokka-pro.s3.us-west-2.amazonaws.com/public/post-brazil.png", "https://quokka-pro.s3.us-west-2.amazonaws.com/public/post-brazil2.png"]
 
 ]
+
+const repliesArray = ["Great post!",
+                      "Love this!",
+                      "So true!",
+                      "This made my day!",
+                      "So glad to see this!",
+                      "Absolutely!",
+                      "You're amazing!",
+                      "This is fantastic!",
+                      "Love the positivity!",
+                      "What a great message!",
+                      "This is so inspiring!",
+                      "This is exactly what I needed to hear!",
+                      "Thanks for sharing this!",
+                      "You rock!",
+                      "This is amazing!",
+                      "This is so important!",
+                      "Love this post!",
+                      "This is a such a good post!",
+                      "So glad you shared this!",
+                      "This is so powerful!",
+                      "You're a star!",
+                      "So proud of you!",
+                      "This is so beautiful!",
+                      "You're a blessing!",
+                      "This is a must-read for everyone here!",
+                      "You're amazing!",
+                      "This is exactly what we need!",
+                      "WOW!",
+                      "You're a true inspiration!",
+                      "So happy to see this!"
+                      ]
+
 // const longRange = [-122.52, -122.09];
 // const latRange = [37.67, 37.83];``
 const longRange = [-122.52, -120.09];
@@ -322,6 +356,17 @@ for (let i = 0; i < NUM_SEED_POSTS; i++) {
   )
 }
 
+const replies = [];
+for (let i = 0; i < repliesArray.length; i++) {
+  replies.push(
+    new Reply ({
+      post: posts[Math.floor(Math.random() * NUM_SEED_POSTS)]._id,
+      user: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+      body: repliesArray[Math.floor(Math.random() * repliesArray.length)]
+    })
+  )
+}
+
 const friends = [];
 for (let i = 0; i < NUM_SEED_FRIENDS; i++) {
   friends.push(new Friend ({
@@ -329,6 +374,16 @@ for (let i = 0; i < NUM_SEED_FRIENDS; i++) {
     recipient: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     relation: 3
   }));
+}
+
+const reactions = [];
+const styles = ["happy", "hungry", "laughing", "love"];
+for (let i = 0; i < NUM_SEED_REACTIONS; i++){
+  reactions.push(new Reaction ({
+    postId: posts[Math.floor(Math.random() * NUM_SEED_POSTS)]._id,
+    userId: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    style: styles[Math.floor(Math.random() * styles.length)]
+  }))
 }
 
 
@@ -354,6 +409,8 @@ const insertSeeds = () => {
                   .then(() => Reaction.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Post.insertMany(posts))
+                  .then(() => Reply.insertMany(replies))
+                  .then(() => Reaction.insertMany(reactions))
                   // .then(() => Friend.insertMany(friends))
                   .then(() => {
                     console.log("Done!");
