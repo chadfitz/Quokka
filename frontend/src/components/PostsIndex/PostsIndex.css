@@ -167,6 +167,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: auto;
+    width: 100%;
 }
 
 #post-index-item {
@@ -174,7 +175,9 @@ body {
 }
 
 #post-index-map {
-    width: 70vw;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .post-show-from {
