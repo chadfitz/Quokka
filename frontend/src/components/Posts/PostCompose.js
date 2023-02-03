@@ -105,7 +105,7 @@ function PostCompose () {
   const [subject, handleSubjectChange] = useInput(post.subject);
   const [body, setBody] = useState(post.body);
   const [recipient, setRecipient] = useState("");
-  const errors = useSelector(state => state.errors.posts);
+  const [errors, setErrors] = useState("");
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -120,10 +120,26 @@ function PostCompose () {
     'list', 'bullet', 'indent'
   ];
 
+   useEffect(()=>{
+    console.log('search for this')
+    console.log('recipient', recipient)
+    console.log('subject', subject)
+    console.log('body', body)
+   }, [recipient, subject, body])
+
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
-    if (friendsError) return <></>
+    // if (friendsError) return <></>
+
+
+
+
+
+    // Error Handling
+    if (recipient === "") return setErrors("To make a post, select a recipient.")
+    if (subject === "") return setErrors("To make a post, write a subject.")
+    if (body === "<p><br></p>" ) return setErrors("To make a post, be sure to write at least one character in the body of the message.")
 
     if (formType === 'Create'){
       post = {
@@ -244,7 +260,7 @@ function PostCompose () {
             </div>
           </div>
           <div className='compose-bottom'>
-            <div className="errors">{errors && errors.body}</div>
+             <p className="errors">{errors ? errors : ""}</p>
           </div>
         </>
         )}

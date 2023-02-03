@@ -9,7 +9,7 @@
   margin-top: var(--margin-top);
   /* width: var(--width); */
   background-color: white;
-  height: 890px;
+  height: 920px;
   /* height: auto; */
   border: 1px solid rgb(184, 183, 183);
   box-shadow: 0px 6px 9px 3px rgb(166, 165, 166);
@@ -108,7 +108,7 @@
 }
 
 
-#compose-map { 
+#compose-map {
   width: 100px;
 }
 
@@ -154,4 +154,13 @@
   .compose-map{
     align-self: center;
   }
+}
+
+.compose-bottom {
+  text-align: center;
+}
+
+.errors {
+  text-align: middle;
+  color: red;
 }
