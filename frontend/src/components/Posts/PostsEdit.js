@@ -64,15 +64,16 @@ function PostEdit () {
 //       body: ""
 //     }
 //   }
-  const [subject, handleSubjectChange] = useInput(post.subject);
-  const [body, setBody] = useState(post.body);
+  const [subject, handleSubjectChange] = useInput(post?.subject);
+  const [body, setBody] = useState(post?.body);
   // TODO: convert recipient to props / etc. (not useState)
-  const [recipient, setRecipient] = useState(post.recipient);
+  const [recipient, setRecipient] = useState(post?.recipient);
   // TODO: connect me to google maps api
-  const [location,] = useState(post.location);
-   const [lat, setLat] = useState(location.coordinates[1])
-  const [lng, setLng] = useState(location.coordinates[0])
-  const errors = useSelector(state => state.errors.posts);
+  const [location,] = useState(post?.location);
+   const [lat, setLat] = useState(location?.coordinates[1])
+  const [lng, setLng] = useState(location?.coordinates[0])
+  const [errors, setErrors] = useState("")
+  // const errors = useSelector(state => state.errors.posts);
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -100,9 +101,9 @@ function PostEdit () {
     if (!sessionUser) history.push('/login');
 
        // Error Handling
-    if (recipient === "") return <></>
-    if (subject === "") return <></>
-    if (body === "<p><br></p>" ) return <></>
+    if (recipient === "") return setErrors("To make a post, select a recipient.")
+    if (subject === "") return setErrors("To make a post, write a subject.")
+    if (body === "<p><br></p>" ) return setErrors("To make a post, be sure to write at least one character in the body of the message.")
 
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
@@ -180,6 +181,7 @@ function PostEdit () {
                   </div>
                 </div>
               <div className='submit-compose-buttons'>
+
                 <Button
                     containername="submit-btn-ctnr"
                     className="submit-btn"
@@ -190,7 +192,7 @@ function PostEdit () {
             </div>
           </div>
           <div className='compose-bottom'>
-            <div className="errors">{errors && errors.body}</div>
+            <p className="errors">{errors ? errors : ""}</p>
           </div>
         </div>
       </div>
