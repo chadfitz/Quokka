@@ -47,7 +47,6 @@ const UserIndex = () => {
                 </div>
               : <div className='write-cta-wrapper'>
                   <p>Let's start by following some friends</p>
-                  <Link to="/users" className='posts-index-compose-link'><button className='secondary-button'>Follow</button></Link>
                 </div>
               }
 
