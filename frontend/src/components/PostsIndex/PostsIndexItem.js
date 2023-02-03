@@ -43,7 +43,6 @@ function PostsIndexItem ({ post }) {
     })
 
     function transform (node, children) {
-        console.log('node', node)
         if (node.tagName === 'OL' || node.tagName === 'UL') {
             return ;
         } else if (node.tagName !== 'P') {

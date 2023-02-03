@@ -1,6 +1,6 @@
 nav {
     display: flex;
-    background-color: rgba(256, 256, 256,0.9);
+    background-color: rgba(256, 256, 256, 0.9);
     width: 100vw;
     height: 80px;
     justify-content: space-between;
@@ -81,6 +81,7 @@ nav {
 .search-search{
     border: 1px solid rgb(184, 183, 183);
     box-shadow: var(--box-shadow);
+    background-color: rgba(256, 256, 256, 0.9);
     width: 100%;
     padding: 0 8px;
     border-radius: 20px;

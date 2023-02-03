@@ -48,10 +48,8 @@ const PostShow = () => {
   }, [dispatch, postId])
 
   const toggleReactions = () => {
-    console.log('showReactions', showReactions)
     // if (showReactions) return;
     setShowReactions(!showReactions);
-    console.log('showReactions', showReactions)
   };
 
   const handleDelete = (e) => {
@@ -90,7 +88,6 @@ const PostShow = () => {
   // filtering for matches based on user id,
   // then passing to Reactions component below
   const sessionUserReactions = Object.values(reactions).filter((entry)=>{
-    console.log('entry', entry)
     return (entry.postId === postId) && (entry.userId === sessionUser._id )
   })
 
@@ -105,10 +102,6 @@ const PostShow = () => {
       return {...acc, [cv.style]: 1}
     }
   }, {})
-
-  console.log('formatted reactions', formattedReactions)
-
-
 
   return (
     <div className='whole-page-styling'>
@@ -158,7 +151,6 @@ const PostShow = () => {
                       (<div className='reaction-box' onClick={toggleReactions}>
                         <ul className="reaction-list">
                           {Object.entries(formattedReactions).map(reaction => {
-                            console.log('reaction in mapping', reaction)
                             if (reaction[0] === "happy") {
                               return (<li key="a" className='reaction'>
                                         <img src={happy} alt="happy" className='reaction-image'/>
