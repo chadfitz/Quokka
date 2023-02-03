@@ -82,7 +82,7 @@ function SearchBar() {
     <>
         <form onSubmit={handleSubmit} className="search-form">
           <div className='search-search'>
-            <input className="search-field" placeholder='Search...' id="search-bar" type="search" onChange={handleChange} />
+            <input placeholder='Search...' id="search-bar" type="search" onChange={handleChange} />
             <button id="search-button">< GoSearch id='search-icon' /></button>
           </div>
           {search &&
