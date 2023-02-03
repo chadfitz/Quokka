@@ -43,9 +43,11 @@ function PostsIndexItem ({ post }) {
     })
 
     function transform (node, children) {
-        console.log('node tagName', node.tagName)
-        if (node.tagName !== 'P') {
-            return <p>{children}</p>
+        console.log('node', node)
+        if (node.tagName === 'OL' || node.tagName === 'UL') {
+            return ;
+        } else if (node.tagName !== 'P') {
+            return <p>{node.innerText + ' ' }</p>
         }
     }
 
@@ -88,7 +90,7 @@ function PostsIndexItem ({ post }) {
                         <div className="post-content-preview">
                             <Markup content={bodyPreview + "..."}
                                     transform={transform}
-                                    allowList={['p']}
+                                    noHtml={true}
                                     />
 
                         </div>

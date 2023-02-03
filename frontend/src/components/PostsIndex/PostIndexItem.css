@@ -204,9 +204,8 @@
 .post-text {
   /* padding-left: 80px; */
   position: relative;
-  width: 100%;
+  width: 50%;
   /* margin-left: auto; */
-  max-width: 100%;
 }
 
 .read-more {
@@ -230,11 +229,9 @@
   /* max-width: 400px; */
   margin-left: 40px;
   margin-right: 40px;
-  overflow-wrap: break-word;
+  /* overflow-wrap: break-word; */
 }
 .post-preview span {
-  max-width: 725px;
-  overflow-wrap: break-word;
 }
 
 .post-preview span {
@@ -313,7 +310,6 @@
 .index-item-post-link {
   color: black;
   text-decoration: none;
-  max-width: 100%;
 }
 
 /* .index-item-post-link p {
@@ -321,10 +317,17 @@
   margin-left: */
 /* } */
 
+.post-content-preview {
+  width: 100%;
+}
+
 .post-content-preview p {
   display: inline;
+  margin-right: 6px;
+  padding-left: 6px;
+  white-space: normal;
 }
 
 .post-content-preview p:nth-child(n+2) {
-  padding-left: 7px;
+  padding-left: 2px;
 }
