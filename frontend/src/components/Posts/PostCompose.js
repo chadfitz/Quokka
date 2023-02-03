@@ -139,7 +139,7 @@ function PostCompose () {
     // Error Handling
     if (recipient === "") return setErrors("To make a post, select a recipient.")
     if (subject === "") return setErrors("To make a post, write a subject.")
-    if (body === "<p><br></p>" ) return setErrors("To make a post, be sure to write at least one character in the body of the message.")
+    if (body === "<p><br></p>" || body === "") return setErrors("To make a post, be sure to write at least one character in the body of the message.")
 
     if (formType === 'Create'){
       post = {
