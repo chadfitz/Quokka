@@ -87,9 +87,22 @@ function PostEdit () {
     'list', 'bullet', 'indent'
   ];
 
+     useEffect(()=>{
+    console.log('search for this')
+    console.log('recipient', recipient)
+    console.log('subject', subject)
+    console.log('body', body)
+   }, [recipient, subject, body])
+
+
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
+
+       // Error Handling
+    if (recipient === "") return <></>
+    if (subject === "") return <></>
+    if (body === "<p><br></p>" ) return <></>
 
       // TODO: Update path to go to posts#show (instead of #index)
       // if (newPost._id) history.push(`/posts`);
@@ -128,7 +141,7 @@ function PostEdit () {
             <div className="text-editor">
                 <div className='top-of-compose-post'>
                   <div className='compose-heading'>
-                    <h3>Compose Post</h3>
+                    <h3>Edit Your Post</h3>
                   </div>
                   <div className='upload-images'>
                     <label>
@@ -170,7 +183,7 @@ function PostEdit () {
                 <Button
                     containername="submit-btn-ctnr"
                     className="submit-btn"
-                    label="Submit Post"
+                    label="Update Post"
                     onClick={handleSubmit}
                   />
                 </div>

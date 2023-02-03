@@ -120,10 +120,26 @@ function PostCompose () {
     'list', 'bullet', 'indent'
   ];
 
+   useEffect(()=>{
+    console.log('search for this')
+    console.log('recipient', recipient)
+    console.log('subject', subject)
+    console.log('body', body)
+   }, [recipient, subject, body])
+
   const handleSubmit = async e => {
     e.preventDefault();
     if (!sessionUser) history.push('/login');
-    if (friendsError) return <></>
+    // if (friendsError) return <></>
+
+
+
+
+
+    // Error Handling
+    if (recipient === "") return <></>
+    if (subject === "") return <></>
+    if (body === "") return <></>
 
     if (formType === 'Create'){
       post = {
