@@ -89,7 +89,7 @@ body {
 }
 
 .filter-buttons.selected {
-    background-color: var(--secondary-color)
+    background-color: #f0f6ff
  }
 
 #post-google-map {
