@@ -94,7 +94,9 @@
 #reply-profile-image { 
   height: 40px;
   width: 40px;
+  border: 1px solid black;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 #reply-username { 
