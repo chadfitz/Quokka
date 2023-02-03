@@ -162,24 +162,24 @@ const PostShow = () => {
                             if (reaction[0] === "happy") {
                               return (<li key="a" className='reaction'>
                                         <img src={happy} alt="happy" className='reaction-image'/>
-                                        {reaction[1]} {reaction[0]}s
+                                        {reaction[1] > 1 ?  reaction[1] + " " + reaction[0]+ 's' : reaction[1] + " " + reaction[0] }
                                     </li>)}
                             if (reaction[0] === "hungry") {
                               return (<li key="b" className='reaction'>
                                         <img src={hungry} alt="hungry" className='reaction-image'/>
-                                        {reaction[1]} {reaction[0]}s
+                                        {reaction[1] > 1 ?  reaction[1] + " " + reaction[0]+ 's' : reaction[1] + " " + reaction[0] }
                                       </li>)
                             }
                             if (reaction[0] === "laughing") {
                               return (<li key="c" className='reaction'>
                                         <img src={laughing} alt="laughing" className='reaction-image'/>
-                                        {reaction[1]} {reaction[0]}s
+                                        {reaction[1] > 1 ?  reaction[1] + " " + reaction[0]+ 's' : reaction[1] + " " + reaction[0] }
                                       </li>)
                             }
                             if (reaction[0] === "love") {
                               return (<li key="d" className='reaction'>
                                         <img src={love} alt="love" className='reaction-image'/>
-                                        {reaction[1]} {reaction[0]}s
+                                       {reaction[1] > 1 ?  reaction[1] + " " + reaction[0]+ 's' : reaction[1] + " " + reaction[0] }
                                       </li>)
                             }
                             else {return <></>};
